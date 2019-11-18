@@ -1,0 +1,55 @@
+.box-container {
+    display: flex;
+}
+.box {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    background: rgba(255, 255, 0, 0.7)
+}
+.box:hover {
+    /* 크기변화: scale */
+    /* 
+        크기가 변한다
+        기준점이 기본으로 중앙에 생긴다
+        그냥 width, height 바꾸는 거랑은 다름
+        인자로 소수점 전달도 가능하다 ex) 1.2
+    */
+    transform: scale(1.5);
+
+
+    /* 회전: rotate */
+    /* 
+        각도를 틀어줄 수 있다
+        모양 그대로 유지한 채로 시계 방향으로 돌려준다.
+        음수로 만들면 반대로 돌아간다.
+    */
+    /* transform: rotate(15deg); */
+
+
+    /* 비틀기: skew */
+    /* 
+        수평 방향으로 비틀어버린다.
+        수직으로 비틀고 싶으면 Y를 써준다 (skewY)
+        음수로 만들면 반대로 뒤틀린다.
+     */
+     /* transform: skew(10deg); */
+
+
+     /* 이동: translate */
+     /* 
+        이동이 가능하다
+        축을 따로 쓸 수도 있다. (translateX, translateY)
+        Z축도 사용 가능하다. (3D 사용할 때 사용)
+     */
+     /* transform: translate(10px, 30px); */
+
+
+     /* 기준점 바꾸기: transform-origin */
+     /* 
+        기준점을 뒤틀어줄 수 있다.
+        키워드로도 지정 가능 (transform-origin: left top)
+        %가 더 선호됨
+     */
+     transform-origin: 70% 10%;
+}
