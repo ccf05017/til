@@ -41,3 +41,19 @@ doAsyncTask().then(
     () => { // failure handler }
 )
 ```
+
+# Quiz 1.
+- 콜백으로 처리하던 파일 읽기를 프로미스 버전으로 전환해보자
+
+```js
+const fs = require("fs");
+
+function readFile(filename, encoding) {
+  fs.readFile(filename, encoding, (err, data) => {
+    //TODO
+  });
+}
+readFile("./files/demofile.txt", "utf-8")
+    .then(...)
+});
+```
