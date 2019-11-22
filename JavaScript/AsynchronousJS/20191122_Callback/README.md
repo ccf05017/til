@@ -4,7 +4,7 @@
 - 현재는 메시지가 정의 되어 있지 않다고 나올 것
 - let message = "Callback Called"; <- 이 구문 위치는 바꿀 수 없다. 
 
-```
+```javascript
 function doAsyncTask(cb) {
   cb();
 }
