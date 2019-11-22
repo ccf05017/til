@@ -19,6 +19,25 @@ let message = "Callback Called";
 - 그래서 이벤트 틱에 등록해주면 아래 message 변수까지 다 읽고 정상적으로 실행된다.(반추측)
 
 # 에러 처리 방법
-- 1. throw를 통해 던지고 그냥 끝내는 방법
-- 2. 콘솔에 로그를 남기고 return으로 함수를 종료시키는 방법
-- 3. next()를 통해 다음 함수 체인으로 전달하는 방법
+1. throw를 통해 던지고 그냥 끝내는 방법
+2. 콘솔에 로그를 남기고 return으로 함수를 종료시키는 방법
+3. 또 다른 콜백을 통해 다음 함수 체인으로 전달하는 방법
+
+# Quiz 2.
+## 문제
+- 아래 코드는 에러를 그냥 숨긴다.
+- 에러 숨기지 않고 다음 콜백이 출력할 수 있도록 변경해보자.
+
+```javascript
+const fs = require("fs");
+
+function readFileThenDo(next) {
+  fs.readFile("./blah.nofile", (err, data) => {
+    next(data);
+  });
+}
+
+readFileThenDo(data => {
+  console.log(data);
+});
+```
