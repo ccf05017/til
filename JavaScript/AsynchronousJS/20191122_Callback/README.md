@@ -45,3 +45,27 @@ readFileThenDo(data => {
 ## 해답(quiz2Answer.js)
 - 그냥 다음 콜백이 받아서 처리하도록 하면 된다.
 - 에러 케이스를 좀 더 명확하게 다루고 싶다면, if구문 통해서 구분해서 보내주면 됨
+
+# Quiz 3.
+## 문제
+- 아래 코드에서 trace 터지지 않고 잡아서 처리할 수 있도록 바꿀 것
+
+```javascript
+const fs = require("fs");
+
+function readFileThenDo(next) {
+  fs.readFile("./blah.nofile", (err, data) => {
+    if (err) throw err;
+    next(data);
+  });
+}
+// Hint use try..catch
+readFileThenDo(data => {
+  console.log(data);
+});
+```
+
+## 해답(quiz3Answer.js)
+- try-catch로 잡으려 해도 기본적으로 자바스크립트 함수는 비동기이기 때문에 잡을 수 없다.
+- readFileThenDo() 함수 전체를 try로 감싸도, 비동기 함수이기 때문에 throw가 나오기 전에 그냥 스쳐 지나간다.
+- 결론은 비동기 함수에 쓸데 없이 try-catch 걸지 말고, blocking 함수에만 걸어라
