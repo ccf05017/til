@@ -13,12 +13,12 @@ doAsyncTask(_ => console.log(message));
 let message = "Callback Called";
 ```
 
-## 해답
+## 해답(quiz1Answer.js)
 - 콜백은 기본적으로 블로킹 동작이다(비동기 처리 안함)
 - 함수가 완료될 때까지 멍하고 기다리기 때문에 아래 있는 message 변수를 못 갖고 와서 에러가 난다.
 - 그래서 이벤트 틱에 등록해주면 아래 message 변수까지 다 읽고 정상적으로 실행된다.(반추측)
 
-# 에러 처리 방법
+# 에러 처리 방법(howToHandleError.js)
 1. throw를 통해 던지고 그냥 끝내는 방법
 2. 콘솔에 로그를 남기고 return으로 함수를 종료시키는 방법
 3. 또 다른 콜백을 통해 다음 함수 체인으로 전달하는 방법
@@ -41,3 +41,7 @@ readFileThenDo(data => {
   console.log(data);
 });
 ```
+
+## 해답(quiz2Answer.js)
+- 그냥 다음 콜백이 받아서 처리하도록 하면 된다.
+- 에러 케이스를 좀 더 명확하게 다루고 싶다면, if구문 통해서 구분해서 보내주면 됨
