@@ -65,3 +65,32 @@ readFile("./files/demofile.txt", "utf-8")
 
 ### 의문점
 - 근데 이렇게 계속 짜면 에러 처리는 쉬운 거 같은데, 콜백보다 진짜 편하긴 한건가..?
+
+# 즉시 실행
+- 너무 뻔하게 결과가 보이는 경우에는 즉시 프로미스가 resolve(), reject() 할 수 있다.
+
+```js
+let promise = Promise.resolve("done");
+promise.then(val => console.log(val)); // done
+```
+
+# 콜백과의 차이점(promiseIsAsync.js)
+- Promise는 언제나 비동기로 처리가 된다.
+- 콜백은 내부 함수 실행되는 동안 블록 걸림
+- 아래는 Callback예제의 첫 퀴즈와 다른 상황을 보여줌.
+
+```js
+function doAsyncTask() {
+    return Promise.resolve();
+}
+
+doAsyncTask().then(_ => console.log(message));
+
+const message = "This is message";
+```
+
+# 체이닝(chaining.js)
+- then을 이어서 사용할 수 있다.
+- 단, then으로 넘겨줄 때 반드시 *return*이 있어야 한다.
+- 포킹(forking.js)와 전혀 다른 개념이다.
+- 포킹은 그냥 새로운 then을 실행할 뿐이다. (말로 설명하기 어려움. 코드 참고할 것)
