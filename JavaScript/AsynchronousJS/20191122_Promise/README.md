@@ -94,3 +94,33 @@ const message = "This is message";
 - 단, then으로 넘겨줄 때 반드시 *return*이 있어야 한다.
 - 포킹(forking.js)와 전혀 다른 개념이다.
 - 포킹은 그냥 새로운 then을 실행할 뿐이다. (말로 설명하기 어려움. 코드 참고할 것)
+
+# Quiz2.
+## 문제
+- 체이닝을 통해 아래 코드에서 파일을 불러온 뒤 압축해서 결과를 출력해보자
+
+```js
+const fs = require("fs");
+const zlib = require("zlib");
+
+function zlibPromise(data) {
+  zlib.gzip(data, (error, result) => {
+    //TODO
+  });
+}
+
+function readFile(filename, encoding) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  });
+}
+
+readFile("./files/demofile.txt", "utf-8")
+    .then(...) // --> Load it then zip it and then print it to screen
+});
+```
+
+## 해답
