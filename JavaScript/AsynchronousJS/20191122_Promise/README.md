@@ -124,3 +124,40 @@ readFile("./files/demofile.txt", "utf-8")
 ```
 
 ## 해답
+- 프로미스 뒤에 then을 걸고 다시 프로미스를 부르고 then을 걸고 또 걸고...
+- 성공, 에러 핸들러 하나씩 달아주고..
+- 어째 콜백 지옥과 비슷한 형상이 보이기 시작함
+
+# Promise return을 통해 콜백 헬 해결
+```js
+Promise.resolve("done")
+  .then(val => {
+    console.log(val); // done
+
+    return new Promise(resovle => {
+      setTimeout(() => resolve("done2"), 1000);
+    });
+  }).then(val => console.log(val)); // done2
+```
+
+#  Quiz3.
+## 문제
+- Quiz2를 Promise return 해서 체이닝 하는 방식으로 변경해볼 것
+
+## 해답
+- return을 다시 Promise로 보내서 계속해서 then()을 이어나갈 수 있도록 변경
+- quiz2 스타일은 거의 안쓰는 게 좋을듯
+
+# Error Handling(errorHandling.js)
+- Promise 에러는 핸들러를 찾을 때까지 계속 체이닝 된다.
+
+```js
+Promise.reject("fail")
+  .then(val => console.log(val)) // 에러 핸들러가 없기 때문에 그냥 통과
+  .then(val => console.log(val), err => console.log(err)); // 내려온 에러가 여기서 처리됨.
+```
+
+- Promise에서 throw가 발생하면 진행중이던 걸 멈추고 무조건 에러 핸들러를 찾는다.
+- throw가 resolve에서 발생하건 reject에서 발생하건 에러 발생으로 처리된다.
+- Promise 체인의 마지막에 catch를 then의 reject 핸들러와 같은 용도로 사용 가능하다.
+- catch는 throw 외의 Promise의 reject에도 반응한다.
