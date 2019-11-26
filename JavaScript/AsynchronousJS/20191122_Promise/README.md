@@ -168,3 +168,21 @@ Promise.reject("fail")
 
 ## 해답(quiz4Answer.js)
 - 그냥 제일 마지막에 catch 달아주면 된다.
+
+# Finally(finally.js)
+- 정상, 에러에 상관없이 가장 마지막에 반드시 처리하는 부분
+```js
+Promise.resolev("done")
+  .then(val => {
+    throw new Error("fail");
+  })
+  .then(val => console.log(val)) // 에러 발생해서 무시됨.
+  .catch(val => console.log(err)) // 위에서 던진 에러를 출력
+  .finally(_ => console.log("this part must excute") // 이 부분은 무조건 실행됨.
+);
+```
+
+# Promise.all(promiseAll.js)
+- Java에서 stream() 처리 하듯이 Promise를 처리할 수 있음.
+- 좀 더 보기 직관적임
+- 반복되는 각각의 promise에 핸들러를 달아줄 수 있음
