@@ -144,7 +144,7 @@ Promise.resolve("done")
 ## 문제
 - Quiz2를 Promise return 해서 체이닝 하는 방식으로 변경해볼 것
 
-## 해답
+## 해답(quiz3Answer.js)
 - return을 다시 Promise로 보내서 계속해서 then()을 이어나갈 수 있도록 변경
 - quiz2 스타일은 거의 안쓰는 게 좋을듯
 
@@ -161,3 +161,10 @@ Promise.reject("fail")
 - throw가 resolve에서 발생하건 reject에서 발생하건 에러 발생으로 처리된다.
 - Promise 체인의 마지막에 catch를 then의 reject 핸들러와 같은 용도로 사용 가능하다.
 - catch는 throw 외의 Promise의 reject에도 반응한다.
+
+# Quiz4.
+## 문제
+- Quiz3의 에러를 catch를 통해 처리해볼 것
+
+## 해답(quiz4Answer.js)
+- 그냥 제일 마지막에 catch 달아주면 된다.
