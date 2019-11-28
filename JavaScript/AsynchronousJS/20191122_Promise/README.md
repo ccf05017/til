@@ -239,7 +239,7 @@ readFileFake(5000); // This resolves a promise after 5 seconds, pretend it's a l
 
 # Quiz6.
 ## 문제
-- '서버에서 파일 배포를 시도 -> 실패 -> 로그인 시도' 하는 프로세스를 만들어라
+- '서버에서 파일 배포를 시도 -> 실패 -> 로그인 시도' 하는 프로세스를 만들어라
 - 위의 전체 프로세스는 3초 안에 실행될 때만 성공한다.
 
 ```js
