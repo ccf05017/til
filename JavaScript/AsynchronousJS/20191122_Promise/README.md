@@ -236,3 +236,35 @@ readFileFake(5000); // This resolves a promise after 5 seconds, pretend it's a l
 - 새로 생성된 timeout 함수의 timeout을 1초로 설정해준다.
 - 같이 race를 돌리면 끗.
 - 꾀나 많이 유용할 거 같은데 왜 별로 쓸 일 없다고 소개했을까..? 보통 timeout을 기본으로 제공해서?
+
+# Quiz6.
+## 문제
+- '서버에서 파일 배포를 시도 -> 실패 -> 로그인 시도' 하는 프로세스를 만들어라
+- 위의 전체 프로세스는 3초 안에 실행될 때만 성공한다.
+
+```js
+function authenticate() {
+  console.log("Authenticating");
+  return new Promise(resolve => setTimeout(resolve, 2000, { status: 200 }));
+}
+
+function publish() {
+  console.log("Publishing");
+  return new Promise(resolve => setTimeout(resolve, 2000, { status: 403 }));
+}
+
+function timeout(sleep) {
+  return new Promise((resolve, reject) => setTimeout(reject, sleep, "timeout"));
+}
+
+Promise.race( [publish(), timeout(3000)])
+  .then(...)
+  .then(...)
+  .catch(...);
+```
+
+## 해답(quiz6Answer.js)
+- 그냥 then으로 이어나가면 실패한다.
+- 이미 먼저 resolve나 reject 된 promise가 있다면, timeout은 소용 없다.
+- 이를 방지하기 위해 publish와 authenticate를 실행하는 새로운 함수를 만들어 준다.
+- 이 함수와 timout을 경쟁시키면 해결
