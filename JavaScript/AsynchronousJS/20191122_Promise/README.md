@@ -204,3 +204,18 @@ Promise.all(promises)
         console.log(value);
     })
 ```
+
+# Promise.Race(promiseRace.js)
+- 강의자(Ahim)는 별로 쓸 일 없는 기능이라 생각한다고 한다.(강의자 개인 의견)
+- array 중 가장 먼저 실행되는 프로미스의 resolve나 reject를 실행한다.
+
+```js
+const car1 = new Promise(resolve => setTimeout(resolve, 2000, "car1"));
+const car2 = new Promise(resolve => setTimeout(resolve, 1000, "car2"));
+const car3 = new Promise(resolve => setTimeout(resolve, 3000, "car3"));
+
+Promise.race([car1, car2, car3]).then(value => {
+    console.log(value);
+});
+```
+
