@@ -219,3 +219,20 @@ Promise.race([car1, car2, car3]).then(value => {
 });
 ```
 
+# Quiz5.
+## 문제
+- Promise.race를 사용해서 파일 읽기가 1초 미만으로 실행되는 경우에만 파일을 읽도록 구현하라.
+
+```js
+function readFileFake(sleep) {
+  return new Promise(resolve => setTimeout(resolve, sleep));
+}
+
+readFileFake(5000); // This resolves a promise after 5 seconds, pretend it's a large file being read from disk
+```
+
+## 해답(quiz5Answer.js)
+- timeout을 걸어줄 함수를 새로 생성한다.
+- 새로 생성된 timeout 함수의 timeout을 1초로 설정해준다.
+- 같이 race를 돌리면 끗.
+- 꾀나 많이 유용할 거 같은데 왜 별로 쓸 일 없다고 소개했을까..? 보통 timeout을 기본으로 제공해서?
