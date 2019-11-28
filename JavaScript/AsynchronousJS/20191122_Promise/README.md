@@ -184,5 +184,23 @@ Promise.resolev("done")
 
 # Promise.all(promiseAll.js)
 - Java에서 stream() 처리 하듯이 Promise를 처리할 수 있음.
-- 좀 더 보기 직관적임
-- 반복되는 각각의 promise에 핸들러를 달아줄 수 있음
+- 좀 더 보기 직관적임.
+- 반복되는 각각의 promise에 성공, 에러 핸들러를 달아줄 수 있음.
+- catch를 통해 한번에 잡는 것도 가능함. (물론 에러가 하나라도 있는 경우 바로 터져나간다.)
+
+```js
+const fs = require("fs");
+const util = require("util");
+
+const readFile = util.promisify(fs.readFile);
+const fileNames = ["./files/demofile.txt", "./files/demofile.other.txt"];
+
+// readFile Prmoise가 반환되어 promises에 하나씩 저장됨.
+let promises = fileNames.map(fileName => readFile(fileName, "utf8"));
+
+// then의 결과값을 모아서 array로 저장된다
+Promise.all(promises)
+    .then(value => {
+        console.log(value);
+    })
+```
