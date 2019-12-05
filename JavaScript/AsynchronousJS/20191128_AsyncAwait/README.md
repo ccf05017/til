@@ -134,4 +134,4 @@ const main = async () => {
 main(); // 2 -> finished -> 1 순으로 출력
 ```
 
-# 6. Async Iterators
+# 6. Async Iterator
