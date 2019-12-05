@@ -70,3 +70,25 @@ asyncFunction();
 
 // 'error' 출력
 ```
+
+# 4. Quiz1
+## 문제
+- 아래의 코드를 aysnc/await 버전으로 변경해보기
+```js
+const util = require("util");
+const fs = require("fs");
+const readFile = util.promisify(fs.readFile);
+
+const files = ["./files/demofile.txt", "./files/demofile.other.txt"];
+
+let promises = files.map(name => readFile(name, { encoding: "utf8" }));
+Promise.all(promises).then(values => {
+  // <-- Uses .all
+  console.log(values);
+});
+```
+
+## 풀이(quiz1Answer.js)
+- async/await만을 사용해서 블로킹 방식으로 구현할 수 있다.
+- Promise.all()과 결합하여 논블로킹 방식의 parallel을 구현할 수 있다.
+- 순서가 정해진 프로세스가 아니라면, Promise.all()과 결합 사용을 통해 더 효율적인 코드를 구현할 수 있다.
