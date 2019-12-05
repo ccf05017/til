@@ -92,3 +92,46 @@ Promise.all(promises).then(values => {
 - async/await만을 사용해서 블로킹 방식으로 구현할 수 있다.
 - Promise.all()과 결합하여 논블로킹 방식의 parallel을 구현할 수 있다.
 - 순서가 정해진 프로세스가 아니라면, Promise.all()과 결합 사용을 통해 더 효율적인 코드를 구현할 수 있다.
+
+# 5. await는 꼭 필요할 때만 사용하자. (noAwait.js)
+- async는 흑마법이 아니다. 당연하게도.
+- async를 사용하기만 한다고 함수가 갑자기 비동기로 바뀌거나 그러지 않는다.
+
+```js
+const printFunc1 = async () => {
+    console.log("1");
+}
+
+const printFunc2 = async () => {
+    console.log("2");
+}
+
+const main = async () => {
+    printFunc1();
+    printFunc2();
+    console.log("finished");
+}
+
+main(); // 1 -> 2 -> finished 순으로 출력
+```
+
+- 내부 구현 자체가 비동기로 구현되어 있어야 제대로 동작한다.
+```js
+const printFunc1 = async () => {
+    setImmediate(_ => console.log("1"));
+}
+
+const printFunc2 = async () => {
+    console.log("2");
+}
+
+const main = async () => {
+    printFunc1();
+    printFunc2();
+    console.log("finished");
+}
+
+main(); // 2 -> finished -> 1 순으로 출력
+```
+
+# 6. Async Iterators
