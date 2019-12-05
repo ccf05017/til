@@ -135,3 +135,51 @@ main(); // 2 -> finished -> 1 순으로 출력
 ```
 
 # 6. Async Iterator
+## 개요
+- Node 10부터 추가된 기능
+- for - await - of 형태로 prmoise 뭉치를 사용할 수 있다.
+- 블로킹 방식으로 처리된다.
+
+```js
+(async () => {
+    const util = require("util");
+    const fs = require("fs");
+    const readFile = util.promisify(fs.readFile);
+
+    const files = ["./files/demofile.txt", "./files/demofile.other.txt"];
+    const promises = files.map(name => readFile(name, "utf8"));
+    for await (const promise of promises) {
+        console.log(file);
+    }
+})();
+```
+
+## 이터레이터?(iteratorExample.js)
+- Symbol.iterator 속성을 갖고 있는 객체
+- next() 함수를 통해 '{done: false, value: ?}'를 값으로 반환한다.
+- 이터레이터를 종료하고 싶을 때는 done: true로 설정해주면 된다.
+
+### arrow function의 특별한 용법
+- () => ({})를 통해 대괄호 안의 내용 그 자체를 값으로 전달한다.
+- 클로저랑 유사해 보이는데..? (확인 필요)
+
+```js
+// Custom Iterator Example
+const customIterator = () => ({
+    [Symbol.iterator]: () => ({
+        x: 0,
+        next() {
+            if (this.x > 100) {
+                return {
+                    done: true,
+                    value: this.x
+                };
+            }
+            return {
+                done: false,
+                value: this.x++
+            };
+        }
+    })
+});
+```
