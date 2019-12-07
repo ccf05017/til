@@ -207,3 +207,28 @@ const asyncCustomIterator = () => ({
     })
 });
 ```
+
+# 7. Quiz2
+## 문제
+- 파일 읽기 예제를 custom async iterator 형태로 바꾸기
+```js
+const fileIterator = files => ({
+  [Symbol.asyncIterator]: () => ({
+    x: 0,
+    next() {
+      // TODO
+    }
+  })
+});
+
+(async () => {
+  for await (let x of fileIterator([
+    "./files/demofile.txt",
+    "./files/demofile.other.txt"
+  ])) {
+    console.log(x);
+  }
+})();
+```
+
+## 풀이(quiz2Answer.js)
