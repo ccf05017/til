@@ -158,6 +158,7 @@ main(); // 2 -> finished -> 1 순으로 출력
 - Symbol.iterator 속성을 갖고 있는 객체
 - next() 함수를 통해 '{done: false, value: ?}'를 값으로 반환한다.
 - 이터레이터를 종료하고 싶을 때는 done: true로 설정해주면 된다.
+- 비동기 이터레이터도 생성 가능하다. (Promise를 리턴함)
 
 ### arrow function의 특별한 용법
 - () => ({})를 통해 대괄호 안의 내용 그 자체를 값으로 전달한다.
@@ -179,6 +180,29 @@ const customIterator = () => ({
                 done: false,
                 value: this.x++
             };
+        }
+    })
+});
+
+// Custom Async Iterator Example
+const asyncCustomIterator = () => ({
+    [Symbol.asyncIterator]: () => ({
+        x: 0,
+
+        next() {
+            if(this.x > 100) {
+                return Promise.resolve({
+                    done: true,
+                    value: this.x
+                });
+            }
+
+            let y = this.x++;
+
+            return Promise.resolve({
+                done: false,
+                value: y
+            });
         }
     })
 });
