@@ -101,3 +101,26 @@ function* range() {
     }
 })();
 ```
+
+# 4. Quiz1
+## 문제
+- 아래 코드를 완성해보자
+
+```js
+const util = require("util");
+const fs = require("fs");
+const readFile = util.promisify(fs.readFile);
+
+function* fileLoader(files) {...}
+
+(async () => {
+  for await (let contents of fileLoader([
+    "./files/demofile.txt",
+    "./files/demofile.other.txt"
+  ])) {
+    console.log(contents);
+  }
+})();
+```
+
+## 풀이(quiz1Answer.js)
