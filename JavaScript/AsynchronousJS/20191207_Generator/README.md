@@ -22,3 +22,58 @@ console.log("after iterate");
 // start -> before iterate -> 1 -> {value: undefined, done: false} -> 2 ->
 // {value: undefined, done: true} -> {value: undefined, done: true} -> "after iterate"
 ```
+
+# 2. 사용 예시
+## 2.1 yield를 통한 데이터 출력 제어
+- yield를 통해 필요할 때마다 데이터를 하나씩 꺼낼 수 있다.
+
+```js
+function* range() {
+    for (let i = 0; i < 4; i ++) {
+        yield i;
+    }
+    yield "moo";
+}
+
+const it = range();
+console.log(it.next()); // { value: 0, done: false }
+console.log(it.next()); // { value: 1, done: false }
+console.log(it.next()); // { value: 2, done: false }
+console.log(it.next()); // { value: 3, done: false }
+console.log(it.next()); // { value: 'moo', done: false }
+console.log(it.next()); // { value: undefined, done: true }
+```
+
+## 2.2 이터레이터처럼 사용하기
+- 아예 이터레이터처럼 사용할 수 있다.
+- for ... of 구분 적용이 가능하다는 의미
+```js
+function* range() {
+    for(let i = 0; i < 10; i++) {
+        yield i;
+    }
+}
+
+for (let x of range()) {
+    console.log(x);
+}
+
+// 1, 2, 3, 4, 5, 6, 7, 8, 9
+```
+
+## 2.3 yield는 양방향으로 사용할 수 있다.(bothYield.js)
+- 제어권을 주고 받으면서 외부에서 사용할 수 있다.
+- 사실 아직 잘 모르겠음 이게 왜 되지..?
+
+```js
+function* hello() {
+    console.log(yield);
+    console.log("World");   // 3. World 출력하면서 종료됨
+}
+
+const it = hello();
+it.next();                  // 1. yield 이전까지만 실행됨
+it.next("Hello");           // 2. yield에 Hello를 넘기면서 실행됨
+
+// Hello -> World 로 출력된다.
+```
