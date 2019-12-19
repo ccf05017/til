@@ -117,7 +117,7 @@ console.log(
 )
 ```
 - 이 예시에서 시작값을 안주는 경우는 현재 제대로 동작하지 않는다.
-- 이 경우 시작하는 totalPrice가 객체로 넘어오기 때문이다.
+- totalPrice에 product 이터러블의 첫번째 요소 전체가 넘어오기 때문이다.(안 풀려 있어서 +연산이 안됨)
 ```js
 console.log(
     reduce(
