@@ -16,10 +16,10 @@ const iterator = gen();
 console.log(iterator[Symbol.iterator]());
 console.log(iterator[Symbol.iterator]() == iterator);
 
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.next());
+console.log(iterator.next());   // 1
+console.log(iterator.next());   // 2
+console.log(iterator.next());   // 3
+console.log(iterator.next());   // 100
 
 for (const a of gen()) console.log(a);  // 순회에서는 return 값 반환은 안함.
 ```
@@ -46,7 +46,7 @@ function* odds(limit) {
 ```
 - 이터러블/이터레이터 프로토콜을 준수한다면 어떤 것이든 순회할 수 있다.
 ```js
-// 위와 같은 동작을 하는 코드
+// 위의 예시와 같은 동작을 하는 코드
 
 // 제한 가능한 무한수열 제너레이터(이터러블/이터레이터 프로토콜 준수)
 function* limit(l, iter) {
