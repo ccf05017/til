@@ -1,6 +1,6 @@
 # 이터러블/이터레이터
 
-## array, set, map for ... of 알아보기(forOfExample.js)
+## array, set, map의 for ... of 알아보기(forOfExample.js)
 ### 각각의 for ... of 를 활용한 순회
 - 셋 모두 for ... of를 통해 순회가 가능하다
 ```js
@@ -16,13 +16,14 @@ console.log('Map ----------------')
 const map = new Map([['a', 1], ['b', 2], ['c', 3]]);
 for (const a of map) console.log(a);
 ```
-### 차이점?
+### Array와 Set의 차이점?
 - Array는 a[index] 등의 용법으로 바로 접근이 가능하다.
 - Set은 위처럼 인덱스 방식으로 직접 접근이 되지 않는다.
 - 일반적인 명령형에서 제공되는 for 순회를 통해 index를 돌리면서 접근하는 건 아니라는 걸 알 수 있음
 
-### 그렇다면 어떻게?(symbolIterator.js)
-- Array, Map, Set은 내부에 Symbol.iterator라는 키로 접근할 수 있는 함수가 존재한다.
+### Set은 어떻게 반복문이 가능했나? (symbolIterator.js)
+- Set은 내부에 Symbol.iterator라는 키로 접근할 수 있는 함수가 존재한다.
+- 이는 Set이 이터러블이라는 의미이며, 이터러블/이터레이터 프로토콜이 적용 가능하다는 의미
 ```js
 // 이런 방법으로 확인할 수 있다.
 console.log(array[Symbol.iterator]); // f values() { [native code] }
@@ -32,7 +33,7 @@ console.log(array[Symbol.iterator]); // f values() { [native code] }
 ```js
 console.log('Not Iterable Array ----------------');
 const arr = [1, 2, 3];
-arr[Symbol.iterator] = null;
+arr[Symbol.iterator] = null;         // 이터러블이 아니게 파괴
 for (const a of arr) console.log(a); // 에러 발생(arr is not iterable)
 ```
 
@@ -43,7 +44,7 @@ for (const a of arr) console.log(a); // 에러 발생(arr is not iterable)
 // Array, Map, Set은 각각 이렇게 생긴 '값'들을 갖고 있음
 console.log(arr[Symbol.iterator]);   // [Function: values]
 console.log(set[Symbol.iterator]);   // [Function: values]
-console.log(map[Symbol.iterator]);   // [Function: entires] <- Map은 여러 종류의 이터레이터를 반환하기 때문(프로토콜 설명 참조)
+console.log(map[Symbol.iterator]);   // [Function: entires] <- Map은 여러 종류의 이터레이터를 반환하기 때문
 
 // 실행하면 이터레이터를 반환한다.
 console.log(arr[Symbol.iterator]());    // Object [Array Iterator] {}
@@ -62,12 +63,11 @@ const arr = [1, 2, 3];
 
 const arrIterator = arr[Symbol.iterator]();
 
-console.log(arrIterator.next());
-console.log(arrIterator.next());
-console.log(arrIterator.next());
-console.log(arrIterator.next());
-console.log(arrIterator.next());
-
+console.log(arrIterator.next());    // { value: 1, done: false }
+console.log(arrIterator.next());    // { value: 2, done: false }
+console.log(arrIterator.next());    // { value: 3, done: false }
+console.log(arrIterator.next());    // { value: undefined, done: true }
+console.log(arrIterator.next());    // { value: undefined, done: true }
 ```
 
 ### 이터러블/이터레이터 프로토콜의 정의?
