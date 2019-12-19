@@ -136,7 +136,7 @@ const iterable = {
 const a = [1, 2];
 const arr = [3, 4, 5, 6];
 
-a[Symbol.iterator]
+// a[Symbol.iterator] = null; <- 이런 식으로 이터러블을 파괴하면 전개 연산자 사용 불가능
 
 log([...a, ...arr]);    // [1, 2, 3, 4, 5, 6]
 ```
