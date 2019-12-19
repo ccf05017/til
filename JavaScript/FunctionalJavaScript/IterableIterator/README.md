@@ -109,3 +109,34 @@ const iter2 = iter[Symbol.iterator]();  // 이터레이터는 또 이터레이�
 console.log(iter2);
 console.log(iter2.next());
 ```
+
+## 3. 사용자 정의 이터러블
+- 기본적으로 [Symbol.iterator]()를 통해 이터레이터를 반환하도록 구현하기만 하면 된다.(customIterable.js)
+```js
+const iterable = {
+    [Symbol.iterator]() {
+        let i = 3;
+        return {
+            next() {
+                return i == 0 ? { done: true } : { value: i--, done: false }
+            }
+        }
+    }
+};
+```
+- 하지만 제대로 된 구현을 위해서는 추가적인 기능이 필요하다.
+- 이터레이터는 소모되다가 중간에 멈추고 나중에 다시 사용할 수 있어야 한다.
+- 이터레이터는 자신을 반환하는 이터러블이어야 한다.
+- 위의 조건을 모두 갖춘 이터러블/이터레이터를 'well-formed'라고 지칭한다. (wellFormedCustomIterable.js)
+- node뿐 아니라 일반 브라우저 JS도 메서드들도 이터러블/이터레이터 프로토콜을 지원한다. (ex. querySelectorAll())
+
+## 4. 전개 연산자
+- 이 또한 이터러블/이터레이터 프로토콜을 지원한다.
+```js
+const a = [1, 2];
+const arr = [3, 4, 5, 6];
+
+a[Symbol.iterator]
+
+log([...a, ...arr]);    // [1, 2, 3, 4, 5, 6]
+```
