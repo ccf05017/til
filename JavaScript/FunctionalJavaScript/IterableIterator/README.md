@@ -1,7 +1,7 @@
 # 이터러블/이터레이터
 
-## array, set, map의 for ... of 알아보기(forOfExample.js)
-### 각각의 for ... of 를 활용한 순회
+## 1. array, set, map의 for ... of 알아보기(forOfExample.js)
+### 1.1 각각의 for ... of 를 활용한 순회
 - 셋 모두 for ... of를 통해 순회가 가능하다
 ```js
 console.log('Array ----------------');
@@ -16,12 +16,12 @@ console.log('Map ----------------')
 const map = new Map([['a', 1], ['b', 2], ['c', 3]]);
 for (const a of map) console.log(a);
 ```
-### Array와 Set의 차이점?
+### 1.2 Array와 Set의 차이점?
 - Array는 a[index] 등의 용법으로 바로 접근이 가능하다.
 - Set은 위처럼 인덱스 방식으로 직접 접근이 되지 않는다.
 - 일반적인 명령형에서 제공되는 for 순회를 통해 index를 돌리면서 접근하는 건 아니라는 걸 알 수 있음
 
-### Set은 어떻게 반복문이 가능했나? (symbolIterator.js)
+### 1.3 Set은 어떻게 반복문이 가능했나? (symbolIterator.js)
 - Set은 내부에 Symbol.iterator라는 키로 접근할 수 있는 함수가 존재한다.
 - 이는 Set이 이터러블이라는 의미이며, 이터러블/이터레이터 프로토콜이 적용 가능하다는 의미
 ```js
@@ -37,8 +37,8 @@ arr[Symbol.iterator] = null;         // 이터러블이 아니게 파괴
 for (const a of arr) console.log(a); // 에러 발생(arr is not iterable)
 ```
 
-## 이터러블/이터레이터 프로토콜
-### 이터러블?(iterable.js)
+## 2. 이터러블/이터레이터 프로토콜
+### 2.1 이터러블?(iterable.js)
 - 이터레이터를 리턴하는 [Symbol.iterator]() 를 가진 '값'
 ```js
 // Array, Map, Set은 각각 이렇게 생긴 '값'들을 갖고 있음
@@ -52,7 +52,7 @@ console.log(set[Symbol.iterator]());    // [Set Iterator] { 1, 2, 3 }
 console.log(map[Symbol.iterator]());    // [Map Iterator] { [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ] }
 ```
 
-### 이터레이터?(iterator.js)
+### 2.2 이터레이터?(iterator.js)
 - { value, done } 객체를 리턴하는 next() 를 가진 '값'
 - 이터레이터의 next()를 호출할 때마다 위의 객체를 리턴한다.
 - done이 true가 될 때까지 계속 반복된다.
@@ -70,7 +70,7 @@ console.log(arrIterator.next());    // { value: undefined, done: true }
 console.log(arrIterator.next());    // { value: undefined, done: true }
 ```
 
-### 이터러블/이터레이터 프로토콜의 정의?
+### 2.3 이터러블/이터레이터 프로토콜의 정의?
 - '이터러블'을 for ... of, 전개 연산자 등과 함께 동작하도록 한 '규약'
 - 말 그대로 규약이기 때문에 이터러블을 정상적으로 구현한 어떤 객체든 for ... of, 전개 연산자 사용이 가능하다.
 - 규약을 지키는 함수를 정의하여 모든 이터러블에 대해 사용하도록 만드는 것도 가능하다.
