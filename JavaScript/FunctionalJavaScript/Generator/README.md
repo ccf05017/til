@@ -1,5 +1,4 @@
 # 제너레이터
-
 ## 1. 정의 및 사용법
 - 이터러블을 생성하는 이터레이터 함수
 - well-formed 이터레이터를 리턴하는 함수
@@ -53,7 +52,7 @@ function* odds(limit) {
 function* limit(l, iter) {
     for (const a of iter) {
         yield a;
-        if (a == limit) return;
+        if (a == l) return;
     }
 }
 
@@ -69,3 +68,23 @@ function* odds(l) {
 // 100 이하의 짝수만 반환한다.
 for (const a of odds(100)) console.log(a);
 ```
+
+## 3. 전개 연산자, 구조분해, 나머지 연산자(otherFunctions.js)
+- 세개 모두 이터러블/이터레이터 프로토콜을 지원한다.
+- 사용 예시
+```js
+console.log("전개 연산자");
+console.log(...odds(10));               // 1 3 5 7 9
+
+console.log("구조 분해");
+const [head, ...tail] = odds(10);       // 1    [3, 5, 7, 9]
+console.log(head);
+console.log(tail);
+
+console.log("나머지 연산자");
+const [a, b, ...rest] = odds(10);       // 1    3   [5, 7, 9]
+console.log(a);
+console.log(b);
+console.log(rest);
+```
+- 이 조합들을 사용하면 좀 더 표현이 풍성한 개발이 가능해짐
