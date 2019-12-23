@@ -1,5 +1,5 @@
 const rx = require('../rx/index.js');
-const sampleData = require('./sampleData.js');
+const sampleData = require('../sampleData.js');
 
 console.log("이름만 출력------------");
 console.log(rx.map(product => product.name, sampleData.data));

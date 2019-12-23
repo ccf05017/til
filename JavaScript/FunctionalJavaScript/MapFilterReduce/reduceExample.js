@@ -1,5 +1,5 @@
 const rx = require('../rx/index.js');
-const sampleData = require('./sampleData.js');
+const sampleData = require('../sampleData.js');
 
 // 명령형에서의 처리
 const nums = [1, 2, 3, 4, 5];

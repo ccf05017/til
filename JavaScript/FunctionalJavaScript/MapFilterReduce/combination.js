@@ -1,5 +1,5 @@
 const rx = require('../rx/index.js');
-const sampleData = require('./sampleData.js');
+const sampleData = require('../sampleData.js');
 
 const add = (a, b) => a + b;
 

@@ -29,3 +29,5 @@ exports.reduce = (f, acc, iter) => {
 };
 
 exports.go = (...args) => this.reduce((a, f) => f(a), args);
+
+exports.pipe = (f, ...fs) => (...as) => this.go(f(...as), ...fs);

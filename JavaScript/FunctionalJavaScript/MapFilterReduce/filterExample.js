@@ -1,5 +1,5 @@
 const rx = require('../rx/index.js');
-const sampleData = require('./sampleData.js');
+const sampleData = require('../sampleData.js');
 
 // 일반적인 명령형에서의 필터
 // map 때와 마찬가지로 매우 제한적인 사용만 가능하다.
