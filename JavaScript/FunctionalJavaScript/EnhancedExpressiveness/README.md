@@ -86,3 +86,57 @@ rx.go(
     console.log
 );
 ```
+
+## 4. 함수 조합 (functionCombination.js)
+- 파이프라인 함수의 중복을 제거할 수 있다.
+```js
+const add = (a, b) => a + b;
+// 중복되는 부분을 파이프 함수로 빼냄
+const total_price = rx.pipe(
+    rx.map(p => p.price),
+    rx.reduce(add),
+);
+
+console.log("20000원 미만인 상품의 가격 총합 구하기");
+rx.go(
+    sampleData.data,
+    rx.filter(p => p.price < 20000),
+    total_price,
+    console.log
+);
+
+console.log("20000원 이상인 상품의 가격 총합 구하기");
+rx.go(
+    sampleData.data,
+    rx.filter(p => p.price >= 20000),
+    total_price,
+    console.log
+);
+```
+
+- 한 술 더 떠서 추상화하기
+```js
+const add = (a, b) => a + b;
+const total_price = rx.pipe(
+    rx.map(p => p.price),
+    rx.reduce(add),
+);
+const base_total_price = predicate => rx.pipe(
+    rx.filter(predicate),
+    total_price
+)
+
+console.log("20000원 미만인 상품의 가격 총합 구하기");
+rx.go(
+    sampleData.data,
+    base_total_price(p => p.price < 20000),
+    console.log
+);
+
+console.log("20000원 이상인 상품의 가격 총합 구하기");
+rx.go(
+    sampleData.data,
+    base_total_price(p => p.price >= 20000),
+    console.log
+);
+```
