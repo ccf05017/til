@@ -18,4 +18,4 @@ rx.go(
     products => rx.map(p => p.price, products),
     prices => rx.reduce(add, prices),
     console.log
-)
+);
