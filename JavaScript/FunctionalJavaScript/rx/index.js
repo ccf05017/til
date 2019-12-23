@@ -27,3 +27,5 @@ exports.reduce = (f, acc, iter) => {
     }
     return acc;
 };
+
+exports.go = (...args) => this.reduce((a, f) => f(a), args);
