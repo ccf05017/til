@@ -2,7 +2,7 @@ GET http://localhost:8080/customers
 
 ###
 
-GET http://localhost:8080/customers/3
+GET http://localhost:8080/customers/1
 
 ###
 
@@ -10,8 +10,7 @@ POST http://localhost:8080/customers
 Content-Type: application/json
 
 {
-  "id": 4,
-  "name": "Tom"
+  "name": "Saul"
 }
 
 ###
@@ -20,11 +19,10 @@ DELETE http://localhost:8080/customers/1
 
 ###
 
-PATCH http://localhost:8080/customers/1
+PATCH http://localhost:8080/customers/2
 Content-Type: application/json
 
 {
-  "id": 6,
   "name": "updated"
 }
 
