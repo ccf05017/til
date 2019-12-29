@@ -15,13 +15,13 @@ curl http://localhost:8080/customers
 curl http://localhost:8080/customers/3
 
 # POST
-curl -d '{"id": 4,"name": "Tom"}' -H "Content-Type: application/json" -X POST http://localhost:8080/customers
+curl -d '{"name": "Tom"}' -H "Content-Type: application/json" -X POST http://localhost:8080/customers
 
 # DELETE
 curl -X DELETE http://localhost:8080/customers/1
 
 # UPDATE
-curl -d '{"id": 4,"name": "Updated"}' -H "Content-Type: application/json" -X PATCH http://localhost:8080/customers/4
+curl -d '{"name": "Updated"}' -H "Content-Type: application/json" -X PATCH http://localhost:8080/customers/4
 ```
 
 ## 배운점
