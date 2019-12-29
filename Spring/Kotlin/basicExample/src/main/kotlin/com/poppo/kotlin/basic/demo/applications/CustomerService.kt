@@ -2,7 +2,6 @@ package com.poppo.kotlin.basic.demo.applications
 
 import com.poppo.kotlin.basic.demo.domain.Customer
 import com.poppo.kotlin.basic.demo.domain.CustomerRepository
-import com.poppo.kotlin.basic.demo.exceptions.CustomerIdDuplicatedException
 import com.poppo.kotlin.basic.demo.exceptions.CustomerNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -15,32 +14,27 @@ class CustomerService(@Autowired val customerRepository: CustomerRepository) {
         return customerRepository.findAll()
     }
 
-    fun getCustomer(id: Int): Customer? {
+    fun getCustomer(id: Long): Customer? {
 
-        return customerRepository.findById(id) ?: throw CustomerNotFoundException("Customer Not Found")
+        return customerRepository.findCustomerById(id) ?: throw CustomerNotFoundException("Customer Not Found")
     }
 
-    fun createCustomer(customerId: Int, customerName: String): Customer {
+    fun createCustomer(customerName: String): Customer {
 
-        if (customerRepository.findById(customerId) != null)
-            throw CustomerIdDuplicatedException("Customer Id Duplicated")
-
-        val saved = Customer(customerId, customerName)
-        customerRepository.createCustomer(saved)
-
-        return saved
+        return customerRepository.save(Customer(customerName))
     }
 
-    fun deleteCustomer(customerId: Int) {
+    fun deleteCustomer(customerId: Long) {
 
         this.getCustomer(customerId)
 
-        customerRepository.deleteCustomer(customerId)
+        customerRepository.deleteById(customerId)
     }
 
-    fun updateCustomer(targetId: Int, inputId: Int, inputName: String) {
+    fun updateCustomer(customerId: Long, customerName: String) {
 
-        this.getCustomer(targetId)
-        customerRepository.updateCustomer(targetId, Customer(inputId, inputName))
+        val customer = this.getCustomer(customerId)
+        customer?.name = customerName
+        customerRepository.save(customer!!)
     }
 }

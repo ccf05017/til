@@ -2,7 +2,6 @@ package com.poppo.kotlin.basic.demo.controllers
 
 import com.poppo.kotlin.basic.demo.applications.CustomerService
 import com.poppo.kotlin.basic.demo.domain.Customer
-import com.poppo.kotlin.basic.demo.exceptions.CustomerIdDuplicatedException
 import com.poppo.kotlin.basic.demo.exceptions.CustomerNotFoundException
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
@@ -38,7 +37,7 @@ internal class CustomerControllerTests(@Autowired val mockMvc: MockMvc) {
     @Test
     fun `Get one exist customer`() {
 
-        given(customerService.getCustomer(1)).willReturn(Customer(1, "testUser"))
+        given(customerService.getCustomer(1)).willReturn((Customer(1, "testUser")))
 
         mockMvc.perform(get("/customers/1"))
                 .andExpect(status().isOk)
@@ -60,33 +59,16 @@ internal class CustomerControllerTests(@Autowired val mockMvc: MockMvc) {
     @Test
     fun `Create one customer which is not exist`() {
 
-        given(customerService.createCustomer(1, "testUser"))
+        given(customerService.createCustomer("testUser"))
                 .willReturn(Customer(1, "testUser"))
 
         mockMvc.perform(post("/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
-                        "  \"id\": 1,\n" +
                         "  \"name\": \"testUser\"\n" +
                         "}"))
                 .andExpect(status().isCreated)
                 .andExpect(header().stringValues("Location", "/customers/1"))
-    }
-
-    @Test
-    fun `Create one customer which is already exist`() {
-
-        given(customerService.createCustomer(333, "exist"))
-                .willAnswer { throw CustomerIdDuplicatedException("Customer Id Duplicated") }
-
-        mockMvc.perform(post("/customers")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\n" +
-                        "  \"id\": 333,\n" +
-                        "  \"name\": \"exist\"\n" +
-                        "}"))
-                .andExpect(status().isBadRequest)
-                .andExpect(content().string(containsString("Customer Id Duplicated")))
     }
 
     @Test
@@ -115,24 +97,22 @@ internal class CustomerControllerTests(@Autowired val mockMvc: MockMvc) {
         mockMvc.perform(patch("/customers/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
-                        "  \"id\": 333,\n" +
                         "  \"name\": \"updated\"\n" +
                         "}"))
                 .andExpect(status().isOk)
 
-        verify(customerService).updateCustomer(1, 333, "updated")
+        verify(customerService).updateCustomer(1,"updated")
     }
 
     @Test
     fun `Update one customer which is not existed`() {
 
-        given(customerService.updateCustomer(4, 333, "updated"))
+        given(customerService.updateCustomer(4, "updated"))
                 .willAnswer { throw CustomerNotFoundException("Customer Not Found") }
 
         mockMvc.perform(patch("/customers/4")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
-                        "  \"id\": 333,\n" +
                         "  \"name\": \"updated\"\n" +
                         "}"))
                 .andExpect(status().isNotFound)
