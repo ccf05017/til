@@ -101,13 +101,13 @@ internal class CustomerControllerTests(@Autowired val mockMvc: MockMvc) {
                         "}"))
                 .andExpect(status().isOk)
 
-        verify(customerService).updateCustomer(1,"updated")
+        verify(customerService).updateCustomerName(1, "updated")
     }
 
     @Test
     fun `Update one customer which is not existed`() {
 
-        given(customerService.updateCustomer(4, "updated"))
+        given(customerService.updateCustomerName(4, "updated"))
                 .willAnswer { throw CustomerNotFoundException("Customer Not Found") }
 
         mockMvc.perform(patch("/customers/4")

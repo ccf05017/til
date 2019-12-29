@@ -11,16 +11,14 @@ import javax.servlet.http.HttpServletRequest
 class ExceptionController {
 
     @ExceptionHandler(CustomerNotFoundException::class)
-    fun customerNotFoundExceptionHandler(servletRequest: HttpServletRequest,
-                                         exception: Exception)
-    : ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse("Customer Not Found", exception.message!!), HttpStatus.NOT_FOUND)
-    }
+    fun customerNotFoundExceptionHandler(
+            servletRequest: HttpServletRequest,
+            exception: Exception
+    ) = ResponseEntity(ErrorResponse("Customer Not Found", exception.message!!), HttpStatus.NOT_FOUND)
 
     @ExceptionHandler(CustomerIdDuplicatedException::class)
-    fun customerIdDuplicatedExceptionHandler(servletRequest: HttpServletRequest,
-                                         exception: Exception)
-            : ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse("Customer Id Duplicated", exception.message!!), HttpStatus.BAD_REQUEST)
-    }
+    fun customerIdDuplicatedExceptionHandler(
+            servletRequest: HttpServletRequest,
+            exception: Exception
+    ) = ResponseEntity(ErrorResponse("Customer Id Duplicated", exception.message!!), HttpStatus.BAD_REQUEST)
 }

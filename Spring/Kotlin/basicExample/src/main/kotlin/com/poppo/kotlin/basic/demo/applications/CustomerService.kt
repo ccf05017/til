@@ -7,22 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class CustomerService(@Autowired val customerRepository: CustomerRepository) {
+class CustomerService(@Autowired private val customerRepository: CustomerRepository) {
 
-    fun getCustomers(): List<Customer> {
+    fun getCustomers() = customerRepository.findAll()
 
-        return customerRepository.findAll()
-    }
+    fun getCustomer(id: Long) =
+            customerRepository.findCustomerById(id)
+                    ?: throw CustomerNotFoundException("Customer Not Found")
 
-    fun getCustomer(id: Long): Customer? {
-
-        return customerRepository.findCustomerById(id) ?: throw CustomerNotFoundException("Customer Not Found")
-    }
-
-    fun createCustomer(customerName: String): Customer {
-
-        return customerRepository.save(Customer(0, customerName))
-    }
+    fun createCustomer(customerName: String) =
+            customerRepository.save(Customer(0, customerName))
 
     fun deleteCustomer(customerId: Long) {
 
@@ -31,10 +25,10 @@ class CustomerService(@Autowired val customerRepository: CustomerRepository) {
         customerRepository.deleteById(customerId)
     }
 
-    fun updateCustomer(customerId: Long, customerName: String) {
+    fun updateCustomerName(customerId: Long, customerName: String) {
 
         val customer = this.getCustomer(customerId)
-        customer?.name = customerName
-        customerRepository.save(customer!!)
+        customer.name = customerName
+        customerRepository.save(customer)
     }
 }
