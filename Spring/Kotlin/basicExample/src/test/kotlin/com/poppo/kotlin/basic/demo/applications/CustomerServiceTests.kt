@@ -44,7 +44,7 @@ internal class CustomerServiceTests {
 
         val customer = customerService.getCustomer(1)
 
-        assertThat(customer?.name).isEqualTo("testUser")
+        assertThat(customer.name).isEqualTo("testUser")
     }
 
     @Test
@@ -87,7 +87,7 @@ internal class CustomerServiceTests {
 
         given(customerRepository.findCustomerById(1)).willReturn((Customer(1, "testUser")))
 
-        customerService.updateCustomer(1,"updated")
+        customerService.updateCustomerName(1, "updated")
 
         verify(customerRepository).save(any(Customer::class.java))
     }
@@ -96,7 +96,7 @@ internal class CustomerServiceTests {
     fun `Update one customer which is not existed`() {
 
         Assertions.assertThrows(CustomerNotFoundException::class.java) {
-            customerService.updateCustomer(4,"invalidTarget")
+            customerService.updateCustomerName(4, "invalidTarget")
         }
     }
 }
