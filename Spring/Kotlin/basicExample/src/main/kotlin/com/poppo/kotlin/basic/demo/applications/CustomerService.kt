@@ -21,7 +21,7 @@ class CustomerService(@Autowired val customerRepository: CustomerRepository) {
 
     fun createCustomer(customerName: String): Customer {
 
-        return customerRepository.save(Customer(customerName))
+        return customerRepository.save(Customer(0, customerName))
     }
 
     fun deleteCustomer(customerId: Long) {
