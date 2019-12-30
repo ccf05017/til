@@ -4,9 +4,10 @@ import com.poppo.kotlin.basic.demo.domain.Customer
 import com.poppo.kotlin.basic.demo.domain.CustomerRepository
 import com.poppo.kotlin.basic.demo.exceptions.CustomerNotFoundException
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.ArgumentMatchers.any
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
@@ -40,7 +41,7 @@ internal class CustomerServiceTests {
     @Test
     fun `Get one exist customer by id`() {
 
-        given(customerRepository.findCustomerById(1)).willReturn((Customer(1, "testUser")))
+        given(customerRepository.getOne(1)).willReturn((Customer(1, "testUser")))
 
         val customer = customerService.getCustomer(1)
 
@@ -50,9 +51,12 @@ internal class CustomerServiceTests {
     @Test
     fun `Get one not exist customer by id`() {
 
-        Assertions.assertThrows(CustomerNotFoundException::class.java) {
+        given(customerRepository.getOne(4)).willAnswer { throw CustomerNotFoundException("") }
+
+        val exception = assertThrows<CustomerNotFoundException> {
             customerService.getCustomer(4)
         }
+        assertEquals("Customer Not Found", exception.message)
     }
 
     @Test
@@ -68,7 +72,7 @@ internal class CustomerServiceTests {
     @Test
     fun `Delete one customer which is existed`() {
 
-        given(customerRepository.findCustomerById(1)).willReturn((Customer(1, "testUser")))
+        given(customerRepository.getOne(1)).willReturn((Customer(1, "testUser")))
 
         customerService.deleteCustomer(1)
         verify(customerRepository).deleteById(1)
@@ -77,17 +81,20 @@ internal class CustomerServiceTests {
     @Test
     fun `Delete one customer which is not existed`() {
 
-        Assertions.assertThrows(CustomerNotFoundException::class.java) {
-            customerService.deleteCustomer(4)
+        given(customerRepository.getOne(4)).willAnswer { throw CustomerNotFoundException("") }
+
+        val exception = assertThrows<CustomerNotFoundException> {
+            customerService.getCustomer(4)
         }
+        assertEquals("Customer Not Found", exception.message)
     }
 
     @Test
     fun `Update one customer which is existed`() {
 
-        given(customerRepository.findCustomerById(1)).willReturn((Customer(1, "testUser")))
+        given(customerRepository.getOne(1)).willReturn(Customer(1, "testUser"))
 
-        customerService.updateCustomerName(1, "updated")
+        customerService.changeName(1, "updated")
 
         verify(customerRepository).save(any(Customer::class.java))
     }
@@ -95,8 +102,11 @@ internal class CustomerServiceTests {
     @Test
     fun `Update one customer which is not existed`() {
 
-        Assertions.assertThrows(CustomerNotFoundException::class.java) {
-            customerService.updateCustomerName(4, "invalidTarget")
+        given(customerRepository.getOne(4)).willAnswer { throw CustomerNotFoundException("") }
+
+        val exception = assertThrows<CustomerNotFoundException> {
+            customerService.getCustomer(4)
         }
+        assertEquals("Customer Not Found", exception.message)
     }
 }

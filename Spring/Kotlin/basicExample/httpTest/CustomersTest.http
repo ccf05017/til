@@ -2,7 +2,11 @@ GET http://localhost:8080/customers
 
 ###
 
-GET http://localhost:8080/customers/3
+GET http://localhost:8080/customers/1
+
+###
+
+GET http://localhost:8080/customers/5
 
 ###
 
@@ -15,11 +19,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/customers/3
+DELETE http://localhost:8080/customers/5
 
 ###
 
-PATCH http://localhost:8080/customers/4
+PATCH http://localhost:8080/customers/6
 Content-Type: application/json
 
 {
