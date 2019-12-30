@@ -1,24 +1,21 @@
 package com.poppo.kotlin.basic.demo.exceptions
 
-import com.poppo.kotlin.basic.demo.dtos.ErrorResponse
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import javax.servlet.http.HttpServletRequest
+import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.ResponseStatus
 
 @ControllerAdvice
 class ExceptionController {
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(CustomerNotFoundException::class)
-    fun customerNotFoundExceptionHandler(
-            servletRequest: HttpServletRequest,
-            exception: Exception
-    ) = ResponseEntity(ErrorResponse("Customer Not Found", exception.message!!), HttpStatus.NOT_FOUND)
+    fun customerNotFoundExceptionHandler() = "Customer Not Found"
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(CustomerIdDuplicatedException::class)
-    fun customerIdDuplicatedExceptionHandler(
-            servletRequest: HttpServletRequest,
-            exception: Exception
-    ) = ResponseEntity(ErrorResponse("Customer Id Duplicated", exception.message!!), HttpStatus.BAD_REQUEST)
+    fun customerIdDuplicatedExceptionHandler() = "Customer Id Duplicated"
 }

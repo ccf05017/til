@@ -3,20 +3,20 @@ package com.poppo.kotlin.basic.demo.applications
 import com.poppo.kotlin.basic.demo.domain.Customer
 import com.poppo.kotlin.basic.demo.domain.CustomerRepository
 import com.poppo.kotlin.basic.demo.exceptions.CustomerNotFoundException
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import javax.transaction.Transactional
 
 @Service
-class CustomerService(@Autowired private val customerRepository: CustomerRepository) {
+@Transactional
+class CustomerService(private val customerRepository: CustomerRepository) {
 
-    fun getCustomers() = customerRepository.findAll()
+    fun getCustomers(): List<Customer> = customerRepository.findAll()
 
-    fun getCustomer(id: Long) =
-            customerRepository.findCustomerById(id)
-                    ?: throw CustomerNotFoundException("Customer Not Found")
+    fun getCustomer(id: Long) = customerRepository.runCatching { getOne(id) }
+            .onFailure { throw CustomerNotFoundException("Customer Not Found") }
+            .getOrThrow()
 
-    fun createCustomer(customerName: String) =
-            customerRepository.save(Customer(0, customerName))
+    fun createCustomer(customerName: String) = customerRepository.save(Customer(0, customerName))
 
     fun deleteCustomer(customerId: Long) {
 
@@ -25,7 +25,7 @@ class CustomerService(@Autowired private val customerRepository: CustomerReposit
         customerRepository.deleteById(customerId)
     }
 
-    fun updateCustomerName(customerId: Long, customerName: String) {
+    fun changeName(customerId: Long, customerName: String) {
 
         val customer = this.getCustomer(customerId)
         customer.name = customerName
