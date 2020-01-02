@@ -78,3 +78,37 @@ rx.go(
 );
 console.timeEnd('');
 ```
+
+## 지연 평가
+- '제때 계산법', '느긋한 계산법'이라 불리기도 한다.
+- 제너레이터 / 이터레이터 프로토콜을 기반으로 구현된다.
+- 컬렉션(리스트) 중심의 프로그래밍과 같은 말
+
+## 게으른 map (lazyMap.js)
+- 지연성을 갖고 있는 map
+- 이터러블 프로토콜 기반의 제너레이터 함수
+- 평가를 미룰 수 있기 때문에 평가 순서를 조작할 수 있는 이터레이터를 반환.
+```js
+const L = {};
+
+const add3 = a => a + 3;
+
+L.map = function* (f, iter) {
+    for (const a of iter) yield f(a);
+};
+
+var it = L.map(add3, [1, 2, 3]);
+console.log(it.next());
+```
+
+## 게으른 filter(lazyFilter.js)
+- 기존과 거의 유사함
+```js
+const L = {};
+
+L.filter = function* (f, iter) {
+    for (const a of iter) if (f(a)) yield a;
+};
+
+var it = L.filter(a => a % 2, [1, 2, 3, 4]);
+```
