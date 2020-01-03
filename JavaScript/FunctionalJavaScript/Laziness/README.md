@@ -112,3 +112,19 @@ L.filter = function* (f, iter) {
 
 var it = L.filter(a => a % 2, [1, 2, 3, 4]);
 ```
+
+## range, map, filter, take, reduce의 중첩 사용
+### 기본 함수(평가지연 없음)
+- 결과는 차이가 없다.
+- 동작 방식에 차이가 있을 뿐
+```js
+console.log("지연 평가 없는 버전");
+rx.go(
+    rx.range(10),
+    rx.map(n => n + 10),
+    rx.filter(n => n % 2),
+    rx.take(2),
+    console.log
+);
+```
+- 다음 함수로 넘어가기 전에 이미 평가가 모두 완료된 상태로 넘어간다.

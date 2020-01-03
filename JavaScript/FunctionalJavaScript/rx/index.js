@@ -1,10 +1,34 @@
 exports.curry = f => 
     (a, ..._) => _.length ? f (a, ..._) : (..._) => f(a, ..._);
 
+exports.L = {};
+
+this.L.range = function* (size) {
+    let i = -1;
+    while(++i < size) {
+        yield i;
+    }
+};
+
+this.L.map = this.curry(function* (f, iter) {
+    for (const a of iter) yield f(a);
+});
+
+this.L.filter = this.curry(function* (f, iter) {
+    for (const a of iter) if (f(a)) yield a;
+});
+
 exports.map = this.curry((f, iter) => {
     const result = [];
     // 예외 없이 모든 이터러블 요소에 적용됨
-    for (const a of iter) {
+    // for (const a of iter) {
+    //     result.push(f(a));
+    // }
+    // 위의 반복문 명령형으로 전환한 코드 -> 아래 다른 코드들도 이렇게 구현할 수 있다.
+    iter = iter[Symbol.iterator]();
+    let cur;
+    while(!(cur = iter.next()).done) {
+        const a = cur.value;
         result.push(f(a));
     }
     return result;
@@ -30,6 +54,24 @@ exports.reduce = this.curry((f, acc, iter) => {
     }
     return acc;
 });
+
+exports.take = this.curry((limit, iter) => {
+    let res = [];
+    for (const a of iter) {
+        res.push(a);
+        if (res.length == limit) return res;
+    }
+    return res;
+});
+
+exports.range = size => {
+    let i = -1;
+    let res = [];
+    while(++i < size) {
+        res.push(i);
+    }
+    return res;
+};
 
 exports.go = (...args) => this.reduce((a, f) => f(a), args);
 
