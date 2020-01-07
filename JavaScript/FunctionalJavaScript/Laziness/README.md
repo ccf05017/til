@@ -154,3 +154,17 @@ rx.go(
     console.log
 );
 ```
+
+## map, filter 결합법칙
+- 평가 순서를 일반적인 함수와 다르게 가져가도 똑같은 결과를 반환한다.
+- 사용하는 데이터가 무엇이건 사용하는 보조 함수가 순수 함수라면 아래의 결합은 늘 결과가 같다.
+```js
+[[mapping, mapping], [filtering, filtering], [mapping, mapping]]
+=
+[[mapping, mapping, filtering], [filtering, mapping, mapping]]
+```
+
+## 지연성에서 ES6의 장점?
+- 흑마법이 아니라 공식적인 언어 기능을 통해 지연 평가를 구현할 수 있다.
+- 안전하다.
+- 조합성이 높다.
