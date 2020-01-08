@@ -229,3 +229,17 @@ const queryStr = rx.pipe(
 
 console.log(queryStr({ limit: 10, offset: 10, type: 'notice' }));
 ```
+
+## 게으른 map, filter로 다시 map, filter 만들기..?
+### 왜?
+- 더 간단하고 성능이 좋아서..?
+- 게으른 map을 통해 한방에 반환하는 map 재구현
+```js
+exports.map = this.curry(pipe(this.L.map, take(Infinity)));
+```
+
+- 게으른 filter을 통해 한방에 반환하는 filter 재구현
+```js
+exports.filter = this.curry(this.pipe(this.L.filter), take(Infinity));
+```
+
