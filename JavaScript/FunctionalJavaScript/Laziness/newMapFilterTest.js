@@ -1,3 +1,3 @@
-const fx = require("../fx/index.js")
+const rx = require("../rx/index.js")
 
-console.log(fx.map(a => a + 10, fx.L.range(10)));
+console.log(rx.map(a => a + 10, rx.L.range(10)));

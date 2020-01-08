@@ -3,6 +3,15 @@ exports.curry = f =>
 
 exports.L = {};
 
+exports.take = this.curry((limit, iter) => {
+    let res = [];
+    for (const a of iter) {
+        res.push(a);
+        if (res.length == limit) return res;
+    }
+    return res;
+});
+
 this.L.range = function* (size) {
     let i = -1;
     while(++i < size) {
@@ -34,13 +43,11 @@ this.L.filter = this.curry(function* (f, iter) {
 //     return result;
 // });
 
-const takeAll = this.take(Infinity);
-
 // 게으른 map을 통한 map 재구현
 exports.map = this.curry((f, iter) => this.go(
     iter,
     this.L.map(f),
-    this.takeAll
+    this.take(Infinity)
 ));
 
 // 이거 왜 안돌아가지..?
@@ -65,15 +72,6 @@ exports.reduce = this.curry((f, acc, iter) => {
         acc = f(acc, a);
     }
     return acc;
-});
-
-exports.take = this.curry((limit, iter) => {
-    let res = [];
-    for (const a of iter) {
-        res.push(a);
-        if (res.length == limit) return res;
-    }
-    return res;
 });
 
 exports.range = size => {
