@@ -168,3 +168,64 @@ rx.go(
 - 흑마법이 아니라 공식적인 언어 기능을 통해 지연 평가를 구현할 수 있다.
 - 안전하다.
 - 조합성이 높다.
+
+## 결과를 만드는 함수
+- reduce, take 함수를 지칭
+- 연산의 시작점
+
+### reduce
+- 예시를 통해 알아보자 (queryStrExample.js)
+```js
+const queryStr = rx.pipe(
+    Object.entries,
+    rx.map(([k, v]) => `${k}=${v}`),
+    rx.reduce((a, b) => `${a}&${b}`)    // 마지막에 실질적으로 결과를 만들어냄
+);
+
+console.log(queryStr({ limit: 10, offset: 10, type: 'notice' }));
+```
+- curry와 reduce를 통해 좀 더 다형성이 높은 join을 만들어보자
+```js
+const join = rx.curry((sep = ',', iter) => 
+    rx.reduce((a, b) => `${a}${sep}${b}`, iter));
+
+const queryStr = rx.pipe(
+    Object.entries,
+    rx.map(([k, v]) => `${k}=${v}`),
+    join('&')
+);
+
+console.log(queryStr({ limit: 10, offset: 10, type: 'notice' }));
+```
+
+- 이터러블/이터레이터 프로토콜만 지킨다면 무엇이든 가능
+```js
+function* a() {
+    yield 10;
+    yield 11;
+    yield 12;
+    yield 13;
+}
+
+console.log(join(' - ', a()));
+```
+
+- 이터러블/이터레이터 프로토콜을 지키기 때문에 지연 연산도 가능하다.
+```js
+const L = {};
+
+L.entries = function* (obj) {
+    for (const k in obj) yield [k, obj[k]];
+}
+
+const join = rx.curry((sep = ',', iter) => 
+    rx.reduce((a, b) => `${a}${sep}${b}`, iter));
+
+const queryStr = rx.pipe(
+    L.entries,
+    rx.L.map(([k, v]) => `${k}=${v}`),
+    join('&')
+);
+
+console.log(queryStr({ limit: 10, offset: 10, type: 'notice' }));
+```
