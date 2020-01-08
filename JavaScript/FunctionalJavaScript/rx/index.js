@@ -12,6 +12,12 @@ exports.take = this.curry((limit, iter) => {
     return res;
 });
 
+exports.go = (...args) => this.reduce((a, f) => f(a), args);
+
+exports.pipe = (f, ...fs) => (...as) => this.go(f(...as), ...fs);
+
+const takeAll = this.take(Infinity);
+
 this.L.range = function* (size) {
     let i = -1;
     while(++i < size) {
@@ -44,23 +50,19 @@ this.L.filter = this.curry(function* (f, iter) {
 // });
 
 // 게으른 map을 통한 map 재구현
-exports.map = this.curry((f, iter) => this.go(
-    iter,
-    this.L.map(f),
-    this.take(Infinity)
-));
+exports.map = this.curry(this.pipe(this.L.map, takeAll));
 
-// 이거 왜 안돌아가지..?
-// exports.map = this.curry(this.pipe(this.L.map, this.take(Infinity)));
+// exports.filter = this.curry((f, iter) => {
+//     const result = [];
+//     // 조건에 맞는 이터러블 요소에만 적용됨.
+//     for (const a of iter) {
+//         if (f(a)) result.push(a);
+//     }
+//     return result;
+// });
 
-exports.filter = this.curry((f, iter) => {
-    const result = [];
-    // 조건에 맞는 이터러블 요소에만 적용됨.
-    for (const a of iter) {
-        if (f(a)) result.push(a);
-    }
-    return result;
-});
+// 게으른 filter을 통한 filter 재구현
+exports.filter = this.curry(this.pipe(this.L.filter, takeAll));
 
 exports.reduce = this.curry((f, acc, iter) => {
     if (!iter) {
@@ -82,7 +84,3 @@ exports.range = size => {
     }
     return res;
 };
-
-exports.go = (...args) => this.reduce((a, f) => f(a), args);
-
-exports.pipe = (f, ...fs) => (...as) => this.go(f(...as), ...fs);

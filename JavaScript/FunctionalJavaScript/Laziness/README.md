@@ -242,4 +242,3 @@ exports.map = this.curry(pipe(this.L.map, take(Infinity)));
 ```js
 exports.filter = this.curry(this.pipe(this.L.filter), take(Infinity));
 ```
-
