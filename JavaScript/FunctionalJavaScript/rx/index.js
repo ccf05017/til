@@ -18,21 +18,33 @@ this.L.filter = this.curry(function* (f, iter) {
     for (const a of iter) if (f(a)) yield a;
 });
 
-exports.map = this.curry((f, iter) => {
-    const result = [];
-    // 예외 없이 모든 이터러블 요소에 적용됨
-    // for (const a of iter) {
-    //     result.push(f(a));
-    // }
-    // 위의 반복문 명령형으로 전환한 코드 -> 아래 다른 코드들도 이렇게 구현할 수 있다.
-    iter = iter[Symbol.iterator]();
-    let cur;
-    while(!(cur = iter.next()).done) {
-        const a = cur.value;
-        result.push(f(a));
-    }
-    return result;
-});
+// exports.map = this.curry((f, iter) => {
+//     const result = [];
+//     // 예외 없이 모든 이터러블 요소에 적용됨
+//     // for (const a of iter) {
+//     //     result.push(f(a));
+//     // }
+//     // 위의 반복문 명령형으로 전환한 코드 -> 아래 다른 코드들도 이렇게 구현할 수 있다.
+//     iter = iter[Symbol.iterator]();
+//     let cur;
+//     while(!(cur = iter.next()).done) {
+//         const a = cur.value;
+//         result.push(f(a));
+//     }
+//     return result;
+// });
+
+const takeAll = this.take(Infinity);
+
+// 게으른 map을 통한 map 재구현
+exports.map = this.curry((f, iter) => this.go(
+    iter,
+    this.L.map(f),
+    this.takeAll
+));
+
+// 이거 왜 안돌아가지..?
+// exports.map = this.curry(this.pipe(this.L.map, this.take(Infinity)));
 
 exports.filter = this.curry((f, iter) => {
     const result = [];
