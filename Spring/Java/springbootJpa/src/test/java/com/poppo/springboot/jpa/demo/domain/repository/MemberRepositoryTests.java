@@ -276,6 +276,37 @@ public class MemberRepositoryTests {
 
     @Test
     public void queryHint() {
+
+        // 그렇다고 막 쓰라는 게 아니다
+        // 이걸로 성능 최적화 별로 되지도 않음
+        // 최적화는 꼭 필요할 때만 해라 그리고 그 경우에는 대부분 redis를 깔고 캐시를 고려해야 될 때일걸?
+        Member member1 = Member.builder().username("member1").build();
+        memberRepository.save(member1);
+        entityManager.flush();      // 영속성 컨텍스트 반영
+        entityManager.clear();      // 영속성 컨텍스트 초기화
+
+//        Member foundMember = memberRepository.findById(member1.getId()).get();
+//        foundMember.changeName("member2");      // 이거 되는 순간 바로 DB의 상태까지 다 바뀐다.(update 나가버림)
+
+        Member readOnlyMember = memberRepository.findReadOnlyByUsername("member1");
+        readOnlyMember.changeName("member3");       // update 쿼리 안 나가고 객체만 바뀐다.
+    }
+
+    @Test
+    public void lock() {
+
+        Member member1 = Member.builder().username("member1").build();
+        memberRepository.save(member1);
+        entityManager.flush();      // 영속성 컨텍스트 반영
+        entityManager.clear();      // 영속성 컨텍스트 초기화
+
+        List<Member> result = memberRepository.findLockByUsername("member1");
         
+        // select member0_.member_id as member_i1_0_,
+        // member0_.age as age2_0_,
+        // member0_.team_id as team_id4_0_,
+        // member0_.username as username3_0_
+        // from member member0_
+        // where member0_.username='member1' for update;
     }
 }
