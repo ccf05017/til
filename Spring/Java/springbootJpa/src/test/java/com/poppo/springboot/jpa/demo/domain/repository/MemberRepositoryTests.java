@@ -2,6 +2,7 @@ package com.poppo.springboot.jpa.demo.domain.repository;
 
 import com.poppo.springboot.jpa.demo.domain.Member;
 import com.poppo.springboot.jpa.demo.domain.Team;
+import com.poppo.springboot.jpa.demo.domain.repository.member.MemberRepository;
 import com.poppo.springboot.jpa.demo.dto.MemberDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -308,5 +309,19 @@ public class MemberRepositoryTests {
         // member0_.username as username3_0_
         // from member member0_
         // where member0_.username='member1' for update;
+    }
+
+    @Test
+    public void customRepoTest() {
+
+        // QueryDSL 같은 거랑 연동할 때 사용 많이 한다.
+        // 간단한 쿼리 -> JPA 기능 / 복잡한 동적 쿼리 -> QueryDSL
+
+        Member member1 = Member.builder().username("member1").build();
+        memberRepository.save(member1);
+
+        List<Member> members = memberRepository.findMemberCustom();
+
+        assertThat(members.get(0).getUsername()).isEqualTo("member1");
     }
 }

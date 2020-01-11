@@ -1,4 +1,4 @@
-package com.poppo.springboot.jpa.demo.domain.repository;
+package com.poppo.springboot.jpa.demo.domain.repository.member;
 
 import com.poppo.springboot.jpa.demo.domain.Member;
 import com.poppo.springboot.jpa.demo.dto.MemberDto;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 // 이 인터페이스 설정을 보고 실제 구현체를 내부에서 만들어준다.
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
 
     // 쿼리 메서드 기능 (앵간한 걸 이게 다 해준다)
     // 단점: 딱 정해진 것만 사용해야 함, 조건이 많으면 더럽게 길어짐

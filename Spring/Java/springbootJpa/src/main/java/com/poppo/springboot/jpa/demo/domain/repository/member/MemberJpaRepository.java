@@ -1,4 +1,4 @@
-package com.poppo.springboot.jpa.demo.domain.repository;
+package com.poppo.springboot.jpa.demo.domain.repository.member;
 
 import com.poppo.springboot.jpa.demo.domain.Member;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,7 @@
 package com.poppo.springboot.jpa.demo.domain.repository;
 
 import com.poppo.springboot.jpa.demo.domain.Member;
+import com.poppo.springboot.jpa.demo.domain.repository.member.MemberJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
