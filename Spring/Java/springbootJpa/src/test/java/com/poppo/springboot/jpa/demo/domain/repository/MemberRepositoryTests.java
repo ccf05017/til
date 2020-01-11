@@ -324,4 +324,21 @@ public class MemberRepositoryTests {
 
         assertThat(members.get(0).getUsername()).isEqualTo("member1");
     }
+
+    @Test
+    public void jpaEventBaseEntity() {
+
+        Member member = Member.builder().username("member1").build();
+        memberRepository.save(member);      // @PrePersist
+
+        member.changeName("member2");
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Member foundMember = memberRepository.findById(member.getId()).get();
+
+        assertThat(foundMember.getCreatedDate().toString()).isEqualTo("hello");
+        assertThat(foundMember.getLastModifiedDate().toString()).isEqualTo("hello");
+    }
 }
