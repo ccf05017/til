@@ -69,7 +69,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
 
     @Override
     @EntityGraph(attributePaths = {"team"})     // 더 추가된다면 dict 안에 쭉쭉 추가해라
-    List<Member> findAll();
+    Page<Member> findAll(Pageable pageable);
 
     @QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
     Member findReadOnlyByUsername(String username);
