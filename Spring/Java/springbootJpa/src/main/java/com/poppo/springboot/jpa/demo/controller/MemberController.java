@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import java.util.stream.IntStream;
 
 @RestController
@@ -53,7 +52,7 @@ public class MemberController {
                 );
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
 
         Team teamA = teamRepository.save(Team.builder().name("teamA").build());
