@@ -11,6 +11,6 @@
 - Explorer에 '/actuator' 입력 후 endpoint 탐색
 
 ## 주의 사항
-- 이렇게 보안, 기타 설저 없이 운영단에 던지면 큰일난다. 혼난다.
+- 이렇게 보안, 기타 설정 없이 운영단에 던지면 큰일난다. 혼난다.
 - 공식 문서 참고해서 꼭 보안 설정하고 필요한 것만 노출시키자.
 - https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html
