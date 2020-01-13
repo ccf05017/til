@@ -10,6 +10,9 @@ git add -A .
 git commit -m "limits-service config"
 ```
 
+## 확인
+- GET http://localhost:8888/limits-service/default
+
 ## 설정 사항
 - @EnableConfigServer 설정
 - application.yml 설정 파일에 git 경로 설정 및 서버 포트 변경(tcp/8888)
