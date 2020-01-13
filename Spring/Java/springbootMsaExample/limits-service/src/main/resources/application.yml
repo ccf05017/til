@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: limits-service
-
-# Config Server가 죽었을 때 작동하는 설정
-limits-service:
-  minimum: 9
-  maximum: 999

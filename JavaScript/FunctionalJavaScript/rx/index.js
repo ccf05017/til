@@ -18,6 +18,8 @@ exports.pipe = (f, ...fs) => (...as) => this.go(f(...as), ...fs);
 
 const takeAll = this.take(Infinity);
 
+const isIterable = a => a && a[Symbol.iterator];
+
 this.L.range = function* (size) {
     let i = -1;
     while(++i < size) {
@@ -32,6 +34,13 @@ this.L.map = this.curry(function* (f, iter) {
 this.L.filter = this.curry(function* (f, iter) {
     for (const a of iter) if (f(a)) yield a;
 });
+
+this.L.flatten = function* (iter) {
+    for (const a of iter) {
+        if (isIterable(a)) for (const b of a) yield b;
+        else yield a;
+    }
+}
 
 // exports.map = this.curry((f, iter) => {
 //     const result = [];
@@ -84,3 +93,5 @@ exports.range = size => {
     }
     return res;
 };
+
+exports.flatten = this.pipe(this.L.flatten, takeAll);

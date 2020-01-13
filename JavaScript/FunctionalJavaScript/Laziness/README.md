@@ -242,3 +242,25 @@ exports.map = this.curry(pipe(this.L.map, take(Infinity)));
 ```js
 exports.filter = this.curry(this.pipe(this.L.filter), take(Infinity));
 ```
+
+## Flatten (flatten.js)
+- 요소를 다 펼쳐주는 동작을 수행함.
+```js
+// 게으른 버전
+const isIterable = a => a && a[Symbol.iterator];
+
+L.flatten = function* (iter) {
+    for (const a of iter) {
+        if(isIterable(a)) for (const b of a) yield b;
+        else yield a;
+    }
+}
+
+var it = L.flatten([[1, 2], 3, 4, [5, 6], [7, 8, 9]]);
+console.log(...it);     // 1 2 3 4 5 6 7 8 9
+```
+
+- 즉시 평가도 위의 코드를 응용해서 만들 수 있다.
+```js
+const flatten = rx.pipe(L.flatten, takeAll);
+```
