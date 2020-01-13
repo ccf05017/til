@@ -264,3 +264,28 @@ console.log(...it);     // 1 2 3 4 5 6 7 8 9
 ```js
 const flatten = rx.pipe(L.flatten, takeAll);
 ```
+
+## yield *
+- yield *iterable = for (const val of iterable) yield val;
+- 응용 예시 (위의 L.flatten 개선)
+```js
+L.flatten = function* (iter) {
+    for (const a of iter) {
+        if (isIterable(a)) yield *a;
+        else yield a;
+    }
+}
+```
+
+## deepFlat
+- 이터러블 안의 이터러블까지 모두 펼치는 방법
+```js
+L.deepFlat = function* f(iter) {
+    for (const a of iter) {
+        if (isIterable(a)) yield *f(a);
+        else yield a;
+    }
+}
+
+console.log(...L.deepFlat([1, [2, [3, 4], [5]]]));
+```

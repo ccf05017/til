@@ -42,6 +42,13 @@ this.L.flatten = function* (iter) {
     }
 }
 
+this.L.deepFlat = function* f(iter) {
+    for (const a of iter) {
+        if (isIterable(a)) yield *f(a);
+        else yield a;
+    }
+}
+
 // exports.map = this.curry((f, iter) => {
 //     const result = [];
 //     // 예외 없이 모든 이터러블 요소에 적용됨
