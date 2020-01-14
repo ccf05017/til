@@ -3,6 +3,8 @@ package com.poppo.spring.cloud.microservices.currencyconversionservice.controlle
 import com.poppo.spring.cloud.microservices.currencyconversionservice.applications.CurrencyExchangeServiceProxy;
 import com.poppo.spring.cloud.microservices.currencyconversionservice.domian.CurrencyConversionBean;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import java.util.Map;
 public class CurrencyConversionController {
 
     private final CurrencyExchangeServiceProxy currencyExchangeServiceProxy;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversionBean convertCurrency(
@@ -38,6 +41,7 @@ public class CurrencyConversionController {
                 uriVariables);
 
         CurrencyConversionBean response = responseEntity.getBody();
+        logger.info("{}", response);
 
         return CurrencyConversionBean.builder()
                 .id(response.getId())
@@ -59,6 +63,7 @@ public class CurrencyConversionController {
 
         // feign 버전
         CurrencyConversionBean response = currencyExchangeServiceProxy.retrieveExchangeValue(from, to);
+        logger.info("{}", response);
 
         return CurrencyConversionBean.builder()
                 .id(response.getId())
