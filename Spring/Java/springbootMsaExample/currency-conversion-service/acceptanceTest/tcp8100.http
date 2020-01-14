@@ -5,3 +5,7 @@ GET http://localhost:8100/currency-converter/from/USD/to/KRW/quantity/1000
 GET http://localhost:8100/currency-converter-feign/from/USD/to/KRW/quantity/1000
 
 ###
+
+GET http://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/KRW/quantity/1000
+
+###
