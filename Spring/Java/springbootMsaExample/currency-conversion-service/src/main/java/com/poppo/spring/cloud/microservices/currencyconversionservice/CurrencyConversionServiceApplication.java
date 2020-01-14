@@ -2,8 +2,10 @@ package com.poppo.spring.cloud.microservices.currencyconversionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients("com.poppo.spring.cloud.microservices.currencyconversionservice")
 public class CurrencyConversionServiceApplication {
 
     public static void main(String[] args) {

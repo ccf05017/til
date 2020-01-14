@@ -1,5 +1,6 @@
 package com.poppo.spring.cloud.microservices.currencyconversionservice.controller;
 
+import com.poppo.spring.cloud.microservices.currencyconversionservice.applications.CurrencyExchangeServiceProxy;
 import com.poppo.spring.cloud.microservices.currencyconversionservice.domian.CurrencyConversionBean;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CurrencyConversionController {
 
+    private final CurrencyExchangeServiceProxy currencyExchangeServiceProxy;
+
     @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversionBean convertCurrency(
             @PathVariable String from,
@@ -23,6 +26,8 @@ public class CurrencyConversionController {
             @PathVariable BigDecimal quantity
     ) {
 
+        // REST Template을 활용한 무식한 구현 방법
+        // Feign으로 간단하게 해결 가능하다.
         Map<String, String> uriVariables=  new HashMap<>();
         uriVariables.put("from", from);
         uriVariables.put("to", to);
@@ -33,6 +38,27 @@ public class CurrencyConversionController {
                 uriVariables);
 
         CurrencyConversionBean response = responseEntity.getBody();
+
+        return CurrencyConversionBean.builder()
+                .id(response.getId())
+                .from(from)
+                .to(to)
+                .conversionMultiple(response.getConversionMultiple())
+                .port(response.getPort())
+                .quantity(quantity)
+                .totalCalculatedAmount(quantity.multiply(response.getConversionMultiple()))
+                .build();
+    }
+
+    @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversionBean convertCurrencyFeign(
+            @PathVariable String from,
+            @PathVariable String to,
+            @PathVariable BigDecimal quantity
+    ) {
+
+        // feign 버전
+        CurrencyConversionBean response = currencyExchangeServiceProxy.retrieveExchangeValue(from, to);
 
         return CurrencyConversionBean.builder()
                 .id(response.getId())
