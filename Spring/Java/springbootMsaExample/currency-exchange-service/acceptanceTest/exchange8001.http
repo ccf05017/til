@@ -1,0 +1,11 @@
+GET http://localhost:8001/currency-exchange/from/USD/to/KRW
+
+###
+
+GET http://localhost:8001/currency-exchange/from/USD/to/INR
+
+###
+
+GET http://localhost:8001/currency-exchange/from/USD/to/JPY
+
+###
