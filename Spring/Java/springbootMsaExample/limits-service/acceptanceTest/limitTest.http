@@ -1,3 +1,23 @@
 GET http://localhost:8080/limits
 
 ###
+
+GET http://localhost:8080/fault-tolerance-example
+
+###
+
+POST http://localhost:8080/actuator/refresh
+
+###
+
+POST http://localhost:8080/actuator/bus-refresh
+
+###
+
+GET http://localhost:8081/limits
+
+###
+
+POST http://localhost:8081/actuator/bus-refresh
+
+###

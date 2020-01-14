@@ -4,3 +4,11 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+  profiles:
+    active: qa
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
