@@ -49,6 +49,8 @@ this.L.deepFlat = function* f(iter) {
     }
 }
 
+this.L.flatMap = this.curry(this.pipe(this.L.map, this.L.flatten));
+
 // exports.map = this.curry((f, iter) => {
 //     const result = [];
 //     // 예외 없이 모든 이터러블 요소에 적용됨
@@ -102,3 +104,5 @@ exports.range = size => {
 };
 
 exports.flatten = this.pipe(this.L.flatten, takeAll);
+
+exports.flatMap = this.curry(this.pipe(this.L.map, this.flatten));

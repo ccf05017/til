@@ -289,3 +289,22 @@ L.deepFlat = function* f(iter) {
 
 console.log(...L.deepFlat([1, [2, [3, 4], [5]]]));
 ```
+
+## flatMap(flatMap.js)
+- 자바스크립트가 기본적으로 지연 작동하지 않음
+- 이거 때문에 따로 flatMap을 만들게 됨
+- 사용 예시
+```js
+arr = [[1,2],[3,4],[5,6,7],8,9,[10]];
+
+console.log(arr.flatMap(a => a));
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+- flat을 하면서 map을 통해 변화를 줄 수 있다.
+- 썩 효율적인 동작을 보여주진 않는다.
+- 게으른 flatMap을 만들어보자
+```js
+const L = {};
+
+L.flatMap = rx.curry(rx.pipe(rx.L.map, rx.L.flatten));
+```
