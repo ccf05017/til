@@ -8,7 +8,7 @@ server:
 # 유레카 사용하면 이제 필요없다.
 #currency-exchange-service:
 #  ribbon:
-#    listOfServers: "http://localhost:8000, http://localhost:8001, http://localhost:8002"
+#    listOfServers: "http://localhost:8000, http://localhost:8001"
 
 eureka:
   client:

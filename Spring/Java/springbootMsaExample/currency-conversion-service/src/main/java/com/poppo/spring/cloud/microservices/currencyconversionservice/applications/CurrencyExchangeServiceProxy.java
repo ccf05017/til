@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 // @FeignClient(name="currency-exchange-service", url="localhost:8000")
-// @FeignClient(name="currency-exchange-service") 이 설정을 사용하면 직접 접속하니까 빼버린다.
+//@FeignClient(name="currency-exchange-service")
 @FeignClient(name="netflix-zuul-api-gateway-server")    // API GW를 통해서 간접적으로만 접근하도록 변경
 @RibbonClient(name="currency-exchange-service")
 public interface CurrencyExchangeServiceProxy {
