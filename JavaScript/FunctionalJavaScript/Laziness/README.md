@@ -329,3 +329,38 @@ rx.go(
     console.log
 );
 ```
+
+## 실무적인 예시(realWorldExample.js)
+- 위의 코드와 똑같이 데이터만 바꾼다면? -> 이것만으로도 실무에서 자주 쓸만한 코드가 된다.
+- 가족 중 미성년인 사람들의 이름 목록만 4개 뽑아내는 예시
+```js
+const users = [
+    { name: 'a', age: 21, family: [
+        { name: 'a1', age: 53 }, { name: 'a2', age: 44 },
+        { name: 'a3', age: 12 }, { name: 'a4', age: 22 },
+    ] },
+    { name: 'b', age: 24, family: [
+        { name: 'b1', age: 51 }, { name: 'b2', age: 37 },
+        { name: 'b3', age: 17 }, { name: 'b4', age: 15 },
+    ] },
+    { name: 'c', age: 27, family: [
+        { name: 'c1', age: 57 }, { name: 'c2', age: 47 },
+    ] },
+    { name: 'd', age: 22, family: [
+        { name: 'd1', age: 48 }, { name: 'd2', age: 22 },
+        { name: 'd3', age: 19 }, { name: 'd4', age: 11 },
+    ] },
+];
+
+rx.go(
+    users,
+    rx.L.map(u => u.family),        // user의 가족들만 가져옴
+    rx.L.flatten,                   // 평탄화
+    rx.L.filter(f => f.age < 20),   // 가족 중 미성년만 골라냄
+    rx.L.map(f => f.name),          // 이름만 빼냄
+    rx.take(4),
+    console.log
+);
+```
+- 함수형 프로그래밍은 데이터를 어떻게 구성할 것인지 고민을 먼저하지 않는다.
+- 조합되어 있는 함수에 맞춰 데이터를 구성하는 게 먼저다.
