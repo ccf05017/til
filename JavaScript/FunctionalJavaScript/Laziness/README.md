@@ -308,3 +308,24 @@ const L = {};
 
 L.flatMap = rx.curry(rx.pipe(rx.L.map, rx.L.flatten));
 ```
+
+## 2차원 배열 예시(doLazyArray.js)
+- 지연 평가를 통해 필요한만큼만 펴서 처리할 수 있다.
+```js
+const arr = [
+    [1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [9, 10]
+];
+
+rx.go(
+    arr,
+    rx.L.flatten,
+    rx.L.filter(a => a % 2),
+    rx.L.map(a => a * a),
+    takeAll,
+    rx.reduce((a, b) => a + b),
+    console.log
+);
+```
