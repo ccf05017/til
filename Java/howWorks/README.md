@@ -78,3 +78,6 @@
 - Spring의 컴포넌트 스캔에서도 사용한다. (ASM으로 스캔 후보를 선출함)
 - 프록시를 만들 때도 많이 씀 (AOP, Mockito, JPA 지연 로딩)
 - ASM, Javassist, ByteBuddy 등을 보면 힌트를 얻을 수 있을 것
+
+## 리플렉션
+- 원하는 객체의 class 타입을 받아서 리플렉션 할 수 있다.
