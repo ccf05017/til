@@ -136,3 +136,22 @@ new Promise(resolve =>
     setTimeout(() => resolve(1), 1000)
 ).then(g).then(f).then(r => console.log(r));
 ```
+
+## Kleisli Composition
+- 오류가 발생 가능한 상황에서 함수 합성을 안전하게 처리 가능하게 해주는 규칙
+
+### 3.1 수학적 불변성
+- 일반적으로 수학에선 'f(g(x)) = f(g(x))' 상황이 무조건 참이다.
+- 하지만 프로그래밍에선 g가 참조하던 변수가 변화하면 위의 상황을 참이라고 보장할 수 없다.(mutableExample.js)
+```js
+// 수학적인 상황에서는 아래 함수 실행 결과가 늘 같아야 한다.
+const mutableArray = [1, 2, 3];
+
+const f = a => a.map(r => r + 1);
+const g = a => a.map(r => r * r);
+
+console.log(f(g(mutableArray)));    // [2, 5, 10]
+
+mutableArray.pop();
+console.log(f(g(mutableArray)));    // [2, 5]
+```
