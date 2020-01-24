@@ -1,5 +1,6 @@
 package com.poppo.howworksjava.reflection;
 
+@MyAnnotation
 public class Book {
 
     private String a = "a";

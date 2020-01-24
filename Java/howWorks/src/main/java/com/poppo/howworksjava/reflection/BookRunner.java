@@ -43,5 +43,9 @@ public class BookRunner {
         // 인터페이스를 보자
         System.out.println("인터페이스를 보자");
         Arrays.stream(MyBook.class.getInterfaces()).forEach(System.out::println);
+
+        // 애노테이션을 보자꾸나
+        System.out.println("애노테이션을 보자꾸나");
+        Arrays.stream(bookClass.getAnnotations()).forEach(System.out::println);
     }
 }
