@@ -81,3 +81,58 @@ const go2 = (a, f) => a instanceof Promise ? a.then(f) : f(a);
 const result2 = go2(delay1000(10), add5)
 result2.then(console.log);
 ```
+
+## 3. 함수 합성
+- 함수가 연속적으로 실행되는 것
+- f(g(a)) 상황에서 a를 g가 계산하고 이 결과를 f에 전달해서 계산하는 것
+
+### 3.1 모나드
+- 함수 합성을 안전하게 수행하기 위한 개념이 '모나드'
+- Promise는 비동기 상황을 안전하게 수행하는 모나드 구현체
+- 동적 타입 언어에서는 직접적으로 모나드를 명시해서 사용하진 않는다.
+- 함수 합성은 원하는대로 동작하지 않는 경우가 있다.
+```js
+const g = a => a + 1;
+const f = a => a * a;
+
+// 정상적인 함수 합성
+console.log(f(g(1)));       // 4
+
+// 비정상적인 함수 합성
+// 안전하지 않다.
+console.log(f(g()));        //NaN
+```
+
+- 모나드는 일종의 박스로 그 안에 인자를 담고, 모나드의 함수로 함수 합성을 진행한다.
+```js
+[1].map(g).map(f)                       // 함수 합성(여기서 array가 모나드)
+    .forEach(r => console.log(r));      // 실제 사회에 현상 전달
+```
+
+- 이를 통해 안전하게 함수 합성이 가능하다.
+```js
+[].map(g).map(f)                        // 함수 합성
+    .forEach(r => console.log(r));      // 실제 사회에 현상 전달
+```
+- 모나드는 사용자에게 무언가 값을 전달하기 위해 직접적인 역할을 하진 않는다.
+
+### 3.2 모나드 관점의 Promise
+- Promise의 resolve 함수, then 함수를 통해 함수 합성을 진행한다.
+- 아래는 Array 모나드와 Promise 모나드의 유사성을 보여준다.
+```js
+Array.of(1).map(g).map(f).forEach(r => console.log(r));
+Promise.resolve(1).then(g).then(f).then(r => console.log(r));
+```
+
+- 모나드는 용도별로 보장하는 안정성이 다르다.
+- Promise 모나드는 값에 대한 안정성이 아닌, '비동기 상황'의 안정성을 제공한다.
+```js
+// 이상한 값이 인자로 전달되면 이상하게 작동한다.
+// 값에 대한 건 관심사가 아니기 때문
+Promise.resolve().then(g).then(f).then(r => console.log(r));
+
+// 대신 Promise는 언제 실행되건 안정된 결과를 전달해준다.
+new Promise(resolve => 
+    setTimeout(() => resolve(1), 1000)
+).then(g).then(f).then(r => console.log(r));
+```
