@@ -82,16 +82,37 @@ exports.map = this.curry(this.pipe(this.L.map, takeAll));
 // 게으른 filter을 통한 filter 재구현
 exports.filter = this.curry(this.pipe(this.L.filter, takeAll));
 
+const isPromise = (a, f) => a instanceof Promise ? a.then(f) : f(a);
+
 exports.reduce = this.curry((f, acc, iter) => {
     if (!iter) {
         // 시작값이 주어지지 않았을 때의 처리
         iter = acc[Symbol.iterator]();
         acc = iter.next().value;
+    } else {
+        iter = iter[Symbol.iterator]();
     }
-    for (const a of iter) {
-        acc = f(acc, a);
-    }
-    return acc;
+
+    // isPromise를 통해 첫 인자가 Promise일 경우도 안전하게 처리
+    return isPromise(acc, function recur(acc) {
+        let cur;
+        while (!(cur = iter.next()).done) {
+            const a = cur.value;
+            acc = f(acc, a);
+
+            // 인자로 전달된 함수가 Promise일 경우 재귀 동작
+            if (acc instanceof Promise) return acc.then(recur);
+        }
+        return acc;
+    });
+    // let cur;
+    // while (!(cur = iter.next()).done) {
+    //     const a = cur.value;
+    //     // acc = f(acc, a);
+    //     // 약간 무식한 Promise 해결방법
+    //     // acc = acc instanceof Promise ? acc.then(acc => f(acc, a)) : f(acc, a);
+    // }
+    // return acc;
 });
 
 exports.range = size => {

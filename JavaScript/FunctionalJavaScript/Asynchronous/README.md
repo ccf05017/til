@@ -137,10 +137,10 @@ new Promise(resolve =>
 ).then(g).then(f).then(r => console.log(r));
 ```
 
-## Kleisli Composition
+## 4.Kleisli Composition
 - 오류가 발생 가능한 상황에서 함수 합성을 안전하게 처리 가능하게 해주는 규칙
 
-### 3.1 수학적 불변성
+### 4.1 수학적 불변성
 - 일반적으로 수학에선 'f(g(x)) = f(g(x))' 상황이 무조건 참이다.
 - 하지만 프로그래밍에선 g가 참조하던 변수가 변화하면 위의 상황을 참이라고 보장할 수 없다.(mutableExample.js)
 ```js
@@ -156,7 +156,7 @@ mutableArray.pop();
 console.log(f(g(mutableArray)));    // [2, 5]
 ```
 
-### 3.2 현대 프로그래밍
+### 4.2 현대 프로그래밍
 - 외부 인자로부터 독립적인 함수 작성은 실질적으로 불가능하다.
 - Kleisli Composition은 이러한 현대 프로그래밍 상황을 해결하기 위한 함수 합성의 방법
 - Kleisli Composition은 오류 상황을 한정으로 'f(g(x)) = g(x)'를 성립하도록 하는 규칙이다.
@@ -182,4 +182,34 @@ users.pop();
 users.pop();
 
 safeFg(2).then(console.log);        // f가 실행되지 않고 g의 에러만 나온다.
+```
+
+## 5. go, pipe, reduce에서 비동기 제어
+- 현재의 go 함수는 reduce가 모든 제어권을 갖고 있음
+- pipe 함수도 go 함수가 모든 제어권을 갖고 있음
+- 결론적으로 reduce만 잘 수정해주면 됨
+```js
+const isPromise = (a, f) => a instanceof Promise ? a.then(f) : f(a);
+
+exports.reduce = this.curry((f, acc, iter) => {
+    if (!iter) {
+        // 시작값이 주어지지 않았을 때의 처리
+        iter = acc[Symbol.iterator]();
+        acc = iter.next().value;
+    } else {
+        iter = iter[Symbol.iterator]();
+    }
+
+    return isPromise(acc, function recur(acc) {
+        let cur;
+        while (!(cur = iter.next()).done) {
+            const a = cur.value;
+            acc = f(acc, a);
+
+            // 인자로 전달된 함수가 Promise일 경우 재귀 동작
+            if (acc instanceof Promise) return acc.then(recur);
+        }
+        return acc;
+    });
+});
 ```
