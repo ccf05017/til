@@ -213,3 +213,7 @@ exports.reduce = this.curry((f, acc, iter) => {
     });
 });
 ```
+
+## 6. Promise.then()의 규칙
+- then()을 통해 실행된 Promise는 절대 Promise를 return 해서는 안된다.
+- Promise chain이 얼마나 이어지건 마지막에 then 한방으로 원하는 값을 받아낼 수 있다.
