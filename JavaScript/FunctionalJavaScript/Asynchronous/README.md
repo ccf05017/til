@@ -155,3 +155,31 @@ console.log(f(g(mutableArray)));    // [2, 5, 10]
 mutableArray.pop();
 console.log(f(g(mutableArray)));    // [2, 5]
 ```
+
+### 3.2 현대 프로그래밍
+- 외부 인자로부터 독립적인 함수 작성은 실질적으로 불가능하다.
+- Kleisli Composition은 이러한 현대 프로그래밍 상황을 해결하기 위한 함수 합성의 방법
+- Kleisli Composition은 오류 상황을 한정으로 'f(g(x)) = g(x)'를 성립하도록 하는 규칙이다.
+```js
+const users = [
+    { id: 1, name: 'aa'},
+    { id: 2, name: 'bb'},
+    { id: 3, name: 'cc'},
+]
+
+const getUserById = id => 
+    users.find(u => u.id == id) || Promise.reject("empty!");
+
+const f = ({name}) => name;
+const g = getUserById;
+
+const safeFg = id => Promise.resolve(id).then(g).then(f).catch(a => a);
+
+safeFg(2).then(console.log);        // 이 부분은 원래 실행 가능한데 아래와 똑같이 에러가 발생한다.(불변성 보장)
+
+// 안전하지 못한 상황을 강제로 만들어낸다.
+users.pop();
+users.pop();
+
+safeFg(2).then(console.log);        // f가 실행되지 않고 g의 에러만 나온다.
+```
