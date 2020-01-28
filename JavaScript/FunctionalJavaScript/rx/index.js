@@ -106,11 +106,18 @@ exports.map = this.curry(this.pipe(this.L.map, takeAll));
 // 게으른 filter을 통한 filter 재구현
 exports.filter = this.curry(this.pipe(this.L.filter, takeAll));
 
+const reduceF = (acc, a, f) => 
+    a instanceof Promise ?
+        a.then(
+            a => f(acc, a),
+            e => e == nop ? acc : Promise.reject(e)) :
+        f(acc, a)
+
 exports.reduce = this.curry((f, acc, iter) => {
     if (!iter) {
         // 시작값이 주어지지 않았을 때의 처리
         iter = acc[Symbol.iterator]();
-        acc = iter.next().value;
+        acc = iter.next().value;    // 이 부분도 비동기 상황이 발생하면 위험하다.
     } else {
         iter = iter[Symbol.iterator]();
     }
@@ -119,8 +126,7 @@ exports.reduce = this.curry((f, acc, iter) => {
     return isPromise(acc, function recur(acc) {
         let cur;
         while (!(cur = iter.next()).done) {
-            const a = cur.value;
-            acc = f(acc, a);
+            acc = reduceF(acc, cur.value, f);
 
             // 인자로 전달된 함수가 Promise일 경우 재귀 동작
             if (acc instanceof Promise) return acc.then(recur);

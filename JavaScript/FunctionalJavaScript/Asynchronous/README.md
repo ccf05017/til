@@ -259,7 +259,7 @@ exports.take = this.curry((limit, iter) => {
 });
 ```
 
-### 7.2 L.filter, filter, nop
+### 7.2 L.filter, filter, nop(lazyFilterPromiseExample.js)
 - filter에 Promise 적용을 위해서는 Kleisli Composition을 적용해야 한다.
 - 예시 상황
 ```js
@@ -310,5 +310,45 @@ exports.take = this.curry((limit, iter) => {
         }
         return res;
     }();
+});
+```
+
+### 7.3 reduce에서 nop 지원하기(reduceNopExample.j)
+- take처럼 reduce도 최종적으로 값을 만드는 함수다.
+- 여기도 nop을 지원해야 비동기 상황의 결과를 얻어낼 수 있다.
+- 예시 상황
+```js
+rx.go([1, 2, 3, 4],
+    rx.L.map(a => Promise.resolve(a * a)),
+    rx.L.filter(a => a % 2),
+    rx.reduce(add),
+    console.log);
+``` 
+
+- reduce 코드 전환 + 새로운 함수 작성
+```js
+const reduceF = (acc, a, f) => 
+    a instanceof Promise ?
+        a.then(
+            a => f(acc, a),
+            e => e == nop ? acc : Promise.reject(e)) :
+        f(acc, a)
+
+exports.reduce = this.curry((f, acc, iter) => {
+    if (!iter) {
+        iter = acc[Symbol.iterator]();
+        acc = iter.next().value;
+    } else {
+        iter = iter[Symbol.iterator]();
+    }
+
+    return isPromise(acc, function recur(acc) {
+        let cur;
+        while (!(cur = iter.next()).done) {
+            acc = reduceF(acc, cur.value, f);
+            if (acc instanceof Promise) return acc.then(recur);
+        }
+        return acc;
+    });
 });
 ```
