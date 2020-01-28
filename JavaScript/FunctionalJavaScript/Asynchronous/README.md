@@ -217,3 +217,43 @@ exports.reduce = this.curry((f, acc, iter) => {
 ## 6. Promise.then()의 규칙
 - then()을 통해 실행된 Promise는 절대 Promise를 return 해서는 안된다.
 - Promise chain이 얼마나 이어지건 마지막에 then 한방으로 원하는 값을 받아낼 수 있다.
+
+## 7. 지연평가 + Promise(lazyPromiseExample.js)
+- L.map, map, take를 비동기에 제어할 수 있도록 바꿔보자
+- 아래의 상황에 대응하고 싶다.
+```js
+rx.go([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+    rx.L.map(a => a + 10),
+    rx.take(2),
+    console.log);
+```
+
+- Lazy Map을 아래와 같이 변경
+```js
+L.map = this.curry(function* (f, iter) {
+    // for (const a of iter) yield f(a);
+    for (const a of iter) yield isPromise(a, f);
+});
+```
+
+- take가 Promise를 풀어서 값으로 전달하도록 변경
+- reduce와 비슷하게 유명 함수를 이용한 재귀로 구현 가능하다.
+```js
+exports.take = this.curry((limit, iter) => {
+    let res = [];
+    iter = iter[Symbol.iterator]();
+    return function recur() {
+        let cur;
+        while (!(cur = iter.next()).done) {
+            const a = cur.value;
+            if (a instanceof Promise) return a.then(a => {
+                res.push(a);
+                return res.length == limit ? res : recur();
+            })
+            res.push(a);    // 이 부분은 Promise가 아닌 경우를 처리한다.
+            if (res.length == limit) return res;
+        }
+        return res;
+    }();
+});
+```

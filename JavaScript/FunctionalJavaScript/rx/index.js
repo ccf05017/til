@@ -3,13 +3,26 @@ exports.curry = f =>
 
 exports.L = {};
 
+const isIterable = a => a && a[Symbol.iterator];
+
+const isPromise = (a, f) => a instanceof Promise ? a.then(f) : f(a);
+
 exports.take = this.curry((limit, iter) => {
     let res = [];
-    for (const a of iter) {
-        res.push(a);
-        if (res.length == limit) return res;
-    }
-    return res;
+    iter = iter[Symbol.iterator]();
+    return function recur() {
+        let cur;
+        while (!(cur = iter.next()).done) {
+            const a = cur.value;
+            if (a instanceof Promise) return a.then(a => {
+                res.push(a);
+                return res.length == limit ? res : recur();
+            })
+            res.push(a);    // 이 부분은 Promise가 아닌 경우를 처리한다.
+            if (res.length == limit) return res;
+        }
+        return res;
+    }();
 });
 
 exports.go = (...args) => this.reduce((a, f) => f(a), args);
@@ -17,8 +30,6 @@ exports.go = (...args) => this.reduce((a, f) => f(a), args);
 exports.pipe = (f, ...fs) => (...as) => this.go(f(...as), ...fs);
 
 const takeAll = this.take(Infinity);
-
-const isIterable = a => a && a[Symbol.iterator];
 
 this.L.range = function* (size) {
     let i = -1;
@@ -28,7 +39,8 @@ this.L.range = function* (size) {
 };
 
 this.L.map = this.curry(function* (f, iter) {
-    for (const a of iter) yield f(a);
+    // for (const a of iter) yield f(a);
+    for (const a of iter) yield isPromise(a, f);
 });
 
 this.L.filter = this.curry(function* (f, iter) {
@@ -81,8 +93,6 @@ exports.map = this.curry(this.pipe(this.L.map, takeAll));
 
 // 게으른 filter을 통한 filter 재구현
 exports.filter = this.curry(this.pipe(this.L.filter, takeAll));
-
-const isPromise = (a, f) => a instanceof Promise ? a.then(f) : f(a);
 
 exports.reduce = this.curry((f, acc, iter) => {
     if (!iter) {
