@@ -27,6 +27,13 @@ public class NyPizza extends Pizza {
 
     private NyPizza(Builder builder) {
         super(builder);
-        this.size = builder.size;
+        size = builder.size;
+    }
+
+    @Override
+    public String toString() {
+        return "NyPizza{" +
+                "size=" + size +
+                '}';
     }
 }

@@ -26,4 +26,11 @@ public class Calzone extends Pizza {
         super(builder);
         this.sauceInside = builder.sauceInside;
     }
+
+    @Override
+    public String toString() {
+        return "Calzone{" +
+                "sauceInside=" + sauceInside +
+                '}';
+    }
 }
