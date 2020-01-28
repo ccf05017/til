@@ -3,6 +3,8 @@ exports.curry = f =>
 
 exports.L = {};
 
+const nop = Symbol('nop'); // 아무 동작도 하지 않겠다는 Symbol 생성
+
 const isIterable = a => a && a[Symbol.iterator];
 
 const isPromise = (a, f) => a instanceof Promise ? a.then(f) : f(a);
@@ -14,10 +16,14 @@ exports.take = this.curry((limit, iter) => {
         let cur;
         while (!(cur = iter.next()).done) {
             const a = cur.value;
-            if (a instanceof Promise) return a.then(a => {
+            
+            if (a instanceof Promise) return a
+            .then(a => {
                 res.push(a);
                 return res.length == limit ? res : recur();
             })
+            .catch(e => e == nop ? recur() : Promise.reject(e));
+
             res.push(a);    // 이 부분은 Promise가 아닌 경우를 처리한다.
             if (res.length == limit) return res;
         }
@@ -44,7 +50,13 @@ this.L.map = this.curry(function* (f, iter) {
 });
 
 this.L.filter = this.curry(function* (f, iter) {
-    for (const a of iter) if (f(a)) yield a;
+    // for (const a of iter) if (f(a)) yield a;    // Promise가 해결되서 넘어가야 함
+    for (const a of iter) {
+        const b = isPromise(a, f);
+        // 비동기 상황을 실행하고 값이 있다면 Promise를 그대로 전달, 아니라면 nop 전달
+        if (b instanceof Promise) yield b.then(b => b ? a : Promise.reject(nop));
+        else if (b) yield a;
+    }
 });
 
 this.L.flatten = function* (iter) {

@@ -219,6 +219,7 @@ exports.reduce = this.curry((f, acc, iter) => {
 - Promise chain이 얼마나 이어지건 마지막에 then 한방으로 원하는 값을 받아낼 수 있다.
 
 ## 7. 지연평가 + Promise(lazyPromiseExample.js)
+### 7.1 L.map과 take
 - L.map, map, take를 비동기에 제어할 수 있도록 바꿔보자
 - 아래의 상황에 대응하고 싶다.
 ```js
@@ -250,6 +251,60 @@ exports.take = this.curry((limit, iter) => {
                 res.push(a);
                 return res.length == limit ? res : recur();
             })
+            res.push(a);    // 이 부분은 Promise가 아닌 경우를 처리한다.
+            if (res.length == limit) return res;
+        }
+        return res;
+    }();
+});
+```
+
+### 7.2 L.filter, filter, nop
+- filter에 Promise 적용을 위해서는 Kleisli Composition을 적용해야 한다.
+- 예시 상황
+```js
+go([1, 2, 3, 4, 5, 6],
+    L.map(a => Promise.resolve(a * a)),
+    L.filter(a => a % 2),   // 여기서 Promise를 아예 인식하지 못한다.
+    take(2),
+    console.log);
+```
+
+- 해당 구현을 위해 Kleisli Composition 구현(+ nop)
+- 필터에서는 nop 심볼을 던지기만 하고 처리하지 않는다.
+```js
+const nop = Symbol('nop'); // 아무 동작도 하지 않겠다는 Symbol 생성
+
+this.L.filter = this.curry(function* (f, iter) {
+    // for (const a of iter) if (f(a)) yield a;    // Promise가 해결되서 넘어가야 함
+    for (const a of iter) {
+        const b = isPromise(a, f);
+
+        // 비동기 상황을 실행하고 값이 있다면 Promise를 그대로 전달, 아니라면 nop 전달
+        if (b instanceof Promise) yield b.then(b => b ? a : Promise.reject(nop));
+
+        else if (b) yield a;    // 동기 상황에 대한 처리
+    }
+});
+```
+
+- 해당 에러 상황은 최종적으로 결과를 만드는 함수들이 처리해준다.(이 경우 take)
+```js
+exports.take = this.curry((limit, iter) => {
+    let res = [];
+    iter = iter[Symbol.iterator]();
+    return function recur() {
+        let cur;
+        while (!(cur = iter.next()).done) {
+            const a = cur.value;
+
+            if (a instanceof Promise) return a
+            .then(a => {
+                res.push(a);
+                return res.length == limit ? res : recur();
+            })
+            .catch(e => e == nop ? recur() : Promise.reject(e));    // nop 처리 부분
+
             res.push(a);    // 이 부분은 Promise가 아닌 경우를 처리한다.
             if (res.length == limit) return res;
         }
