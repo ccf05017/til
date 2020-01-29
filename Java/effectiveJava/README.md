@@ -82,3 +82,49 @@ BuilderExample builderExample = BuilderExample.builder(1, 3).calories(2).build()
 - 하지만 보통 매개변수는 날이 갈수록 늘어나고 그때 빌더로 바꾸면 귀찮을 것이다.
 - 그러니 그냥 이것도 시작할 때 앵간하면 빌더 바르면서 시작하는 게 편할거다.
 - 그리고 코틀린에서는 별로 필요 없다. 이미 다 해준다.
+
+### Item 3. 싱글톤
+#### 언제 쓸까?
+- 오직 하나만 객체가 생성되야 하는 모든 경우
+- stateless object나 시스템 컴포넌트 구현이 필요한 경우가 대부분 
+
+#### 방법 1.
+- public static final 필드를 통해 초기화 한다.
+- 아주 단순하게 구현 가능하다.
+- API에 명백하게 싱글톤이라는 게 보인다.
+```java
+public class SingletonExample1 {
+
+    public static final SingletonExample1 INSTANCE = new SingletonExample1();
+    private SingletonExample1() {}
+}
+```
+
+#### 방법 2.
+- 정적 팩토리 메서드를 통해 싱글톤 객체 멤버를 제공한다.
+- 싱글톤이 아니게 바꾸는 게 간단하다.(유연함)
+- 제네릭 싱글턴 팩토리로 변경이 쉽다.
+- 정적 팩토리 메서드를 공급자로 사용 가능하다.
+```java
+public class SingletonExample2 {
+
+    private static final SingletonExample2 INSTANCE = new SingletonExample2();
+    private SingletonExample2() {}   
+    public static SingletonExample2 getInstance() { return INSTANCE; }
+}
+```
+
+#### 문제점?
+- 리플렉션에 대한 대책이 필요하다.
+- 또한 직렬화, 역직렬화를 할 때 새로운 객체를 생성할 위험이 있다.
+
+#### 해결책
+- 리플렉션을 통해 새 객체 생성 시 에러를 던져 버린다.
+- readResolve 메서드 구현을 통해 싱글톤임을 보장한다.
+- 문제는 둘 다 매우 몹시 귀찮다.
+
+#### 가장 추천되는 방안!
+- enum으로 선언해라. 자동으로 싱글톤이 된다.
+
+#### 결론
+- 싱글톤이 필요하세요? 일단 enum 쓰고 안되면 클래스로 구현합시다.
