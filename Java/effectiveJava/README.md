@@ -128,7 +128,8 @@ public class SingletonExample2 {
 - 문제는 둘 다 매우 몹시 귀찮다.
 
 #### 가장 추천되는 방안!
-- enum으로 선언해라. 자동으로 싱글톤이 된다.
+- 속성이 한 개인 enum으로 선언해라. 자동으로 싱글톤이 된다.
 
 #### 결론
 - 싱글톤이 필요하세요? 일단 enum 쓰고 안되면 클래스로 구현합시다.
+- 참고: https://www.baeldung.com/a-guide-to-java-enums
