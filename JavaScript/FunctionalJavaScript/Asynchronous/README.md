@@ -352,3 +352,28 @@ exports.reduce = this.curry((f, acc, iter) => {
     });
 });
 ```
+
+- head 함수를 통한 개선안
+```js
+const head = iter => isPromise(this.take(1, iter), ([h]) => h);
+
+exports.reduce = this.curry((f, acc, iter) => {
+
+    // head를 통한 처리
+    if (!iter) return this.reduce(f, head(iter = acc[Symbol.iterator]()), iter);
+
+    iter = iter[Symbol.iterator]();
+
+    // isPromise를 통해 첫 인자가 Promise일 경우도 안전하게 처리
+    return isPromise(acc, function recur(acc) {
+        let cur;
+        while (!(cur = iter.next()).done) {
+            acc = reduceF(acc, cur.value, f);
+
+            // 인자로 전달된 함수가 Promise일 경우 재귀 동작
+            if (acc instanceof Promise) return acc.then(recur);
+        }
+        return acc;
+    });
+});
+```

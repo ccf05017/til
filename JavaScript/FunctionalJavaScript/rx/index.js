@@ -113,14 +113,14 @@ const reduceF = (acc, a, f) =>
             e => e == nop ? acc : Promise.reject(e)) :
         f(acc, a)
 
+const head = iter => isPromise(this.take(1, iter), ([h]) => h);
+
 exports.reduce = this.curry((f, acc, iter) => {
-    if (!iter) {
-        // 시작값이 주어지지 않았을 때의 처리
-        iter = acc[Symbol.iterator]();
-        acc = iter.next().value;    // 이 부분도 비동기 상황이 발생하면 위험하다.
-    } else {
-        iter = iter[Symbol.iterator]();
-    }
+
+    // head를 통한 처리
+    if (!iter) return this.reduce(f, head(iter = acc[Symbol.iterator]()), iter);
+
+    iter = iter[Symbol.iterator]();
 
     // isPromise를 통해 첫 인자가 Promise일 경우도 안전하게 처리
     return isPromise(acc, function recur(acc) {
