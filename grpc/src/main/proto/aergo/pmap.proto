@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package aergo;
+
+option java_package = "com.proto.aergo";
+option java_multiple_files = true;
+
+import "aergo/node.proto";
+import "aergo/p2p.proto";
+
+// query to polaris
+message MapQuery {
+    Status status = 1;
+    bool addMe = 2;
+    int32 size = 3;
+    repeated bytes excludes = 4;
+}
+
+message MapResponse {
+    ResultStatus status = 1;
+    repeated PeerAddress addresses = 2;
+    string message = 3;
+}

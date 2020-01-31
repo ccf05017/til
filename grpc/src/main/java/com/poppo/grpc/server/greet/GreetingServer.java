@@ -1,4 +1,4 @@
-package com.poppo.grpc.server;
+package com.poppo.grpc.server.greet;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;

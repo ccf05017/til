@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package aergo;
+
+option java_package = "com.proto.aergo";
+option java_multiple_files = true;
+
+import "aergo/node.proto";
+import "aergo/rpc.proto";
+import "aergo/metric.proto";
+
+service PolarisRPCService {
+    // Returns the current state of this node
+    rpc NodeState (NodeReq) returns (SingleBytes) {
+    }
+
+    // Returns node metrics according to request
+    rpc Metric (MetricsRequest) returns (Metrics) {
+    }
+
+    rpc CurrentList (Paginations) returns (PolarisPeerList) {
+    }
+
+    rpc WhiteList (Paginations) returns (PolarisPeerList) {
+    }
+
+    rpc BlackList (Paginations) returns (PolarisPeerList) {
+    }
+
+    rpc ListBLEntries (Empty) returns (BLConfEntries) {
+    }
+
+    rpc AddBLEntry (AddEntryParams) returns (SingleString) {
+    }
+
+    rpc RemoveBLEntry (RmEntryParams) returns (SingleString) {
+    }
+}
+
+message Paginations {
+    bytes ref = 1;
+    uint32 size = 3;
+}
+
+message PolarisPeerList {
+    uint32 total = 1;
+    bool hasNext = 2;
+    repeated PolarisPeer peers = 3;
+}
+
+message PolarisPeer {
+    PeerAddress address = 1;
+    int64 connected = 2;
+    // lastCheck contains unix timestamp with nanoseconds precision
+    int64 lastCheck = 3;
+    string verion = 4;
+}
+
+message BLConfEntries {
+    bool enabled = 1;
+    repeated string entries = 2;
+}
+
+message AddEntryParams {
+    string peerID = 1;
+    string address = 2;
+    string cidr = 3;
+}
+
+message RmEntryParams {
+    uint32 index = 1;
+}

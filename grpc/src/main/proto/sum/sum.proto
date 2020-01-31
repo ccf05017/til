@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package sum;
+
+option java_package = "com.proto.sum";
+option java_multiple_files = true;
+
+// 기본 포맷
+message Params {
+    int32 first_param = 1;
+    int32 second_param = 2;
+}
+
+// 요청 포맷
+message SumRequest {
+    Params params = 1;
+}
+
+// 응답 포맷
+message SumResponse {
+    int32 result = 1;
+}
+
+service SumService {
+    // Unary
+    rpc Sum(SumRequest) returns (SumResponse) {};
+}

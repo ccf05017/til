@@ -1,9 +1,6 @@
-package com.poppo.grpc.server;
+package com.poppo.grpc.server.greet;
 
-import com.proto.greet.GreetRequest;
-import com.proto.greet.GreetResponse;
-import com.proto.greet.GreetServiceGrpc;
-import com.proto.greet.Greeting;
+import com.proto.greet.*;
 import io.grpc.stub.StreamObserver;
 
 public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
@@ -29,5 +26,32 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
 
         // rpc 종료
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<GreetEveryoneRequest> greetEveryone(StreamObserver<GreetEveryoneResponse> responseObserver) {
+
+        StreamObserver<GreetEveryoneRequest> requestObserver = new StreamObserver<GreetEveryoneRequest>() {
+            @Override
+            public void onNext(GreetEveryoneRequest value) {
+                String result = "Hello " + value.getGreeting().getFirstName();
+                GreetEveryoneResponse greetEveryoneResponse = GreetEveryoneResponse.newBuilder()
+                        .setResult(result)
+                        .build();
+                responseObserver.onNext(greetEveryoneResponse);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+
+        return requestObserver;
     }
 }
