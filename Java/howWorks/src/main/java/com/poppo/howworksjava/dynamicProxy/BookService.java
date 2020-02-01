@@ -1,0 +1,6 @@
+package com.poppo.howworksjava.dynamicProxy;
+
+public interface BookService {
+
+    void rent(Book book);
+}
