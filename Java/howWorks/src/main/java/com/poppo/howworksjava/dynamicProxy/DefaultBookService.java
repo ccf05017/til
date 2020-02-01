@@ -7,4 +7,10 @@ public class DefaultBookService implements BookService {
 
         System.out.println(book.getName());
     }
+
+    @Override
+    public void returnBook(Book book) {
+
+        System.out.println(book.getName());
+    }
 }
