@@ -445,4 +445,3 @@ C.take = this.curry((limit, iter) => this.take(limit, catchNoop([...iter])));
 ### 8.5 결론
 - 필요한 연산만 해서 효율적으로 계산하고 싶다 -> 게으른 함수들 사용해서 iterable을 수직적으로 평가
 - 자원을 몽땅 써서라도 빨리 계산하고 싶다. -> Concurrent take, reduce를 통해 iterable을 수평적으로 평가
-
