@@ -379,5 +379,70 @@ exports.reduce = this.curry((f, acc, iter) => {
 });
 ```
 
-## 8. 지연 함수를 병렬으로 평가하기
-- 종종 병렬적으로 처리해야 할 때가 있다.
+## 8. 지연 함수를 병렬로 평가하기
+### 8.1 개요
+- 보통 자바스크립트는 싱글 스레드 비동기 동작을 기본으로 처리한다.
+- 그래도 병렬적으로 처리해야 할 때가 있다.
+- 동시에 출발시켜서 로직을 잘 정리해야 된다? -> 개발자가 해야됨(병렬 처리)
+- IO를 통해 작업을 보내고 기다린다 -> Node에서 해줌
+- 예시 상황
+```js
+// 지연이 이만큼 걸리는 작업이 있다 가정하자.
+const delay1000 = a => new Promise(resolve => 
+    setTimeout(() => resolve(a), 1000));
+
+const add = (a, b) => a + b;
+
+rx.go([1, 2, 3, 4, 5],
+    rx.L.map(a => delay1000(a * a)),
+    rx.L.filter(a => a % 2),
+    rx.reduce(add),
+    console.log);
+```
+
+### 8.2 게으른 reduce의 병렬 처리
+- 일반적으로 위의 상황에서 array 요소의 평가는 수직적으로 진행된다.
+- reduce 입장에서는 처리되기 위해서는 대상들이 다 실행될 때까지 기다려야 한다.
+- 이걸 동시에 array 요소를 모두 보내서 처리하고 reduce로 계산하는 게 병렬 처리.
+```js
+// 제시된 iterable을 가로로 풀어서 실행해버린다.
+C.reduce = this.curry((f, acc, iter) => iter ? 
+    this.reduce(f, acc, [...iter]) : 
+    this.reduce(f, [...acc]));
+```
+
+### 8.3 error 콜스택 안보이게 하기
+- Promise는 reject가 발생하는 즉시 error 콜스택을 쌓는다.
+- 나중에 처리하더라도 이미 쌓인 error 콜스택은 사라지지 않는다.
+- 이걸 해결하기 위한 코드 ('나중에 처리할 거니까 무시하렴'이라고 지시)
+```js
+function noop() {};
+
+this.C.reduce = this.curry((f, acc, iter) => {
+    const iter2 = iter ? [...iter] : [...acc]
+    iter2.forEach(a => a.catch(noop));
+    return iter ? this.reduce(f, acc, iter2) : this.reduce(f, iter2)
+});
+```
+
+- 주의할 점은 catch가 '된' Promise를 넘기면 안된다는 것
+```js
+// 이러면 안된다.
+this.C.reduce = this.curry((f, acc, iter) => {
+    let iter2 = iter ? [...iter] : [...acc]
+    iter2 = iter2.forEach(a => a.catch(noop));
+    return iter ? this.reduce(f, acc, iter2) : this.reduce(f, iter2)
+});
+```
+- 이러면 나중에 에러를 처리해야 될 때 처리할 수가 없다.(이미 처리된 상태로 전달됐으니까)
+
+### 8.4 take에도 적용하기
+- take도 결과를 만드는 함수이므로 reduce와 똑같이 구현 가능하다.
+```js
+C.take = this.curry((limit, iter) => this.take(limit, catchNoop([...iter])));
+```
+
+### 8.5 결론
+- 필요한 연산만 해서 효율적으로 계산하고 싶다 -> 게으른 함수들 사용해서 iterable을 수직적으로 평가
+- 자원을 몽땅 써서라도 빨리 계산하고 싶다. -> Concurrent take, reduce를 통해 iterable을 수평적으로 평가
+
