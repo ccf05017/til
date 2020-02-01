@@ -3,7 +3,14 @@ exports.curry = f =>
 
 exports.L = {};
 
+exports.C = {};
+
 const nop = Symbol('nop'); // 아무 동작도 하지 않겠다는 Symbol 생성
+
+function noop() {};
+
+const catchNoop = arr => 
+    (arr.forEach(a => a instanceof Promise ? a.catch(noop) : a), arr);
 
 const isIterable = a => a && a[Symbol.iterator];
 
@@ -155,3 +162,12 @@ exports.range = size => {
 exports.flatten = this.pipe(this.L.flatten, takeAll);
 
 exports.flatMap = this.curry(this.pipe(this.L.map, this.flatten));
+
+this.C.reduce = this.curry((f, acc, iter) => {
+    const iter2 = catchNoop(iter ? [...iter] : [...acc]);
+    return iter ? 
+        this.reduce(f, acc, iter2) :
+        this.reduce(f, iter2)
+});
+
+this.C.take = this.curry((limit, iter) => this.take(limit, catchNoop([...iter])));
