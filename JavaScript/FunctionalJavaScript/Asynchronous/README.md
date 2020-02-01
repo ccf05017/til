@@ -355,6 +355,7 @@ exports.reduce = this.curry((f, acc, iter) => {
 
 - head 함수를 통한 개선안
 ```js
+// take가 비동기 상황까지 처리해준다.
 const head = iter => isPromise(this.take(1, iter), ([h]) => h);
 
 exports.reduce = this.curry((f, acc, iter) => {
@@ -377,3 +378,6 @@ exports.reduce = this.curry((f, acc, iter) => {
     });
 });
 ```
+
+## 8. 지연 함수를 병렬으로 평가하기
+- 종종 병렬적으로 처리해야 할 때가 있다.

@@ -72,7 +72,7 @@ internal class CustomerServiceTests {
     @Test
     fun `Delete one customer which is existed`() {
 
-        given(customerRepository.getOne(1)).willReturn((Customer(1, "testUser")))
+        given(customerRepository.getOne(1)).willReturn(Customer(1, "testUser"))
 
         customerService.deleteCustomer(1)
         verify(customerRepository).deleteById(1)

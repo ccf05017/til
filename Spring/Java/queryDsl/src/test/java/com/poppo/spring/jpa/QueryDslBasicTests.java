@@ -42,7 +42,7 @@ public class QueryDslBasicTests {
         entityManager.persist(member3);
         entityManager.persist(member4);
 
-        // 동시성 문제는 걱저 안해도 된다는데? -> Spring에서 DI 해주면서 처리
+        // 동시성 문제는 걱정 안해도 된다는데? -> Spring에서 DI 해주면서 처리
         jpaQueryFactory = new JPAQueryFactory(entityManager);
     }
 
