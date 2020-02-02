@@ -163,12 +163,10 @@ exports.flatten = this.pipe(this.L.flatten, takeAll);
 
 exports.flatMap = this.curry(this.pipe(this.L.map, this.flatten));
 
-this.C.reduce = this.curry((f, acc, iter) => {
-    const iter2 = catchNoop(iter ? [...iter] : [...acc]);
-    return iter ? 
-        this.reduce(f, acc, iter2) :
-        this.reduce(f, iter2)
-});
+this.C.reduce = this.curry((f, acc, iter) => iter ? 
+    this.reduce(f, acc, catchNoop([...iter])) :
+    this.reduce(f, catchNoop([...acc]))
+);
 
 this.C.take = this.curry((limit, iter) => this.take(limit, catchNoop([...iter])));
 
