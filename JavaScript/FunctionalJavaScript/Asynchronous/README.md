@@ -464,3 +464,52 @@ rx.C.map(a => delay1000(a * a), [1, 2, 3, 4, 5]).then(console.log);
 rx.C.filter(a => delay1000(a % 2), [1, 2, 3, 4, 5]).then(console.log);
 ```
 
+## 10. 즉시, 지연, Promise, 병렬 몽땅 섞어보기
+- 아래 예제들에서 take는 reduce로 대체 될 수 있다.(둘 다 결과 만드는 함수)
+- 엄격한 평가 예시(다 돈다)
+```js
+console.time('example1');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.map(a => delay500(a * a, 'map 1')),
+    rx.filter(a => delay500(a % 2, 'filter 2')),
+    rx.map(a => delay500(a + 1, 'map 3')),
+    rx.take(2),
+    console.log,
+    _ => console.timeEnd('example1'));
+```
+
+- 평가 최소화 예시
+```js
+console.time('example2');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.L.map(a => delay500(a * a, 'map 1')),
+    rx.L.filter(a => delay500(a % 2, 'filter 2')),
+    rx.L.map(a => delay500(a + 1, 'map 3')),
+    rx.take(4),
+    console.log,
+    _ => console.timeEnd('example2'));
+```
+
+- 일부만 병렬로 처리하기
+```js
+console.time('example3');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.C.map(a => delay500(a * a, 'map 1')),
+    rx.L.filter(a => delay500(a % 2, 'filter 2')),
+    rx.L.map(a => delay500(a + 1, 'map 3')),
+    rx.take(4),
+    console.log,
+    _ => console.timeEnd('example3'));
+```
+
+- 전부 병렬로 처리하기
+```js
+console.time('example4');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.L.map(a => delay500(a * a, 'map 1')),
+    rx.L.filter(a => delay500(a % 2, 'filter 2')),
+    rx.L.map(a => delay500(a + 1, 'map 3')),
+    rx.C.take(4),
+    console.log,
+    _ => console.timeEnd('example4'));
+```
