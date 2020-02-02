@@ -445,3 +445,22 @@ C.take = this.curry((limit, iter) => this.take(limit, catchNoop([...iter])));
 ### 8.5 결론
 - 필요한 연산만 해서 효율적으로 계산하고 싶다 -> 게으른 함수들 사용해서 iterable을 수직적으로 평가
 - 자원을 몽땅 써서라도 빨리 계산하고 싶다. -> Concurrent take, reduce를 통해 iterable을 수평적으로 평가
+
+## 9. 즉시 병렬적으로 평가하기(concurrentMapFilterExample.js)
+- 특정 함수열에 대해서만 병렬적으로 평가를 원할 경우가 있을 것
+- 이를 위한 처리를 위해 C.map, C,filter를 구현해보자
+```js
+this.C.takeAll = this.C.take(Infinity);
+
+this.C.map = this.curry(this.L.map, this.takeAll);
+
+this.C.filter = this.curry(this.L.filter, this.takeAll);
+```
+
+- 사용 예시
+```js
+rx.C.map(a => delay1000(a * a), [1, 2, 3, 4, 5]).then(console.log);
+
+rx.C.filter(a => delay1000(a % 2), [1, 2, 3, 4, 5]).then(console.log);
+```
+

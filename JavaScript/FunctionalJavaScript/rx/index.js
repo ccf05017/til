@@ -171,3 +171,9 @@ this.C.reduce = this.curry((f, acc, iter) => {
 });
 
 this.C.take = this.curry((limit, iter) => this.take(limit, catchNoop([...iter])));
+
+this.C.takeAll = this.C.take(Infinity);
+
+this.C.map = this.curry(this.pipe(this.L.map, this.C.takeAll));
+
+this.C.filter = this.curry(this.pipe(this.L.filter, this.C.takeAll));
