@@ -445,3 +445,71 @@ C.take = this.curry((limit, iter) => this.take(limit, catchNoop([...iter])));
 ### 8.5 결론
 - 필요한 연산만 해서 효율적으로 계산하고 싶다 -> 게으른 함수들 사용해서 iterable을 수직적으로 평가
 - 자원을 몽땅 써서라도 빨리 계산하고 싶다. -> Concurrent take, reduce를 통해 iterable을 수평적으로 평가
+
+## 9. 즉시 병렬적으로 평가하기(concurrentMapFilterExample.js)
+- 특정 함수열에 대해서만 병렬적으로 평가를 원할 경우가 있을 것
+- 이를 위한 처리를 위해 C.map, C,filter를 구현해보자
+```js
+this.C.takeAll = this.C.take(Infinity);
+
+this.C.map = this.curry(this.L.map, this.takeAll);
+
+this.C.filter = this.curry(this.L.filter, this.takeAll);
+```
+
+- 사용 예시
+```js
+rx.C.map(a => delay1000(a * a), [1, 2, 3, 4, 5]).then(console.log);
+
+rx.C.filter(a => delay1000(a % 2), [1, 2, 3, 4, 5]).then(console.log);
+```
+
+## 10. 즉시, 지연, Promise, 병렬 몽땅 섞어보기
+- 아래 예제들에서 take는 reduce로 대체 될 수 있다.(둘 다 결과 만드는 함수)
+- 엄격한 평가 예시(다 돈다)
+```js
+console.time('example1');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.map(a => delay500(a * a, 'map 1')),
+    rx.filter(a => delay500(a % 2, 'filter 2')),
+    rx.map(a => delay500(a + 1, 'map 3')),
+    rx.take(2),
+    console.log,
+    _ => console.timeEnd('example1'));
+```
+
+- 평가 최소화 예시
+```js
+console.time('example2');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.L.map(a => delay500(a * a, 'map 1')),
+    rx.L.filter(a => delay500(a % 2, 'filter 2')),
+    rx.L.map(a => delay500(a + 1, 'map 3')),
+    rx.take(4),
+    console.log,
+    _ => console.timeEnd('example2'));
+```
+
+- 일부만 병렬로 처리하기
+```js
+console.time('example3');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.C.map(a => delay500(a * a, 'map 1')),
+    rx.L.filter(a => delay500(a % 2, 'filter 2')),
+    rx.L.map(a => delay500(a + 1, 'map 3')),
+    rx.take(4),
+    console.log,
+    _ => console.timeEnd('example3'));
+```
+
+- 전부 병렬로 처리하기
+```js
+console.time('example4');
+rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
+    rx.L.map(a => delay500(a * a, 'map 1')),
+    rx.L.filter(a => delay500(a % 2, 'filter 2')),
+    rx.L.map(a => delay500(a + 1, 'map 3')),
+    rx.C.take(4),
+    console.log,
+    _ => console.timeEnd('example4'));
+```
