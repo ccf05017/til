@@ -513,3 +513,54 @@ rx.go([1, 2, 3, 4, 5, 6, 7, 8, 9],
     console.log,
     _ => console.timeEnd('example4'));
 ```
+
+## async/await
+- 비동기를 좀더 동기적인 문장으로 다룰 수 있게 도와주는 문법
+- 기본적인 사용 예시
+```js
+function delay(a) {
+    return new Promise(resolve => setTimeout(() => resolve(a), 500));
+}
+
+async function f1() {
+    const a = await delay(10);
+    console.log(a);
+}
+
+f1();
+```
+
+- Promise 기반이다.
+- Promise가 없다면 await가 동작 자체를 안한다.
+- 그러니 비동기 라이브러리를 사용할 때는 어딘가에 Promise가 숨어 있다고 생각해라.
+- async는 언제나 Promise를 리턴한다.
+- await가 풀어내는 Promise는 해당 함수 안에서만 유효하다.
+```js
+async function warn() {
+
+    const a = await delay(10);
+    const b = await delay(20);
+
+    return a + b; // 30이 return 될 것으로 기대.
+}
+
+console.log(warn());    //Promise가 리턴 됨
+warn().then(a => console.log(a));   // 사용하고 싶으면 이렇게 사용해야 함.
+```
+
+- async는 심지어 내부에 await 없이 return을 해도 Promise로 감싸서 리턴한다.
+```js
+async function warn2() {
+
+    const a = 10;
+    const b = 20;
+
+    return a + b;   // 30 return 기대
+}
+
+console.log(warn2());   // Promise가 리턴됨
+warn2().then(a => console.log(a));
+```
+
+- async 함수는 부수효과 없이 내부에서 모든 연산을 종료할 수 있을 때 쓰는 게 좋다.
+- 만약 async 함수를 다른 함수로 전달해서 처리하려 한다면, Promise가 리턴된다는 것에 주의해라.
