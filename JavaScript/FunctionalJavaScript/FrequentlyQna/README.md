@@ -102,3 +102,37 @@ rx.go(commandStyle(list), console.log);
 - 좀 더 직관적이고 확신을 갖고 개발할 수 있도록 도와준다.
 - 필요에 따라 병렬 처리가 필요할 때 파이프라인은 C 시리즈 함수를 사용하면 간단하게 해결 가능하다.
 - 필요에 따라 동작을 추가하고 빼는 것도 아주 쉽다.
+
+## 3. 그럼 async/await랑 파이프라인을 같이 쓰기도 하나요?
+- 당연
+- 내부에 비동기 상황 두개를 모아서 처리한다거나 할 때 사용하기 아주 좋다.
+```js
+async function delayI(a) {
+    return new Promise(resolve => setTimeout(() => resolve(a), 100));
+}
+
+const list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+async function pipeline(list) {
+  
+    const a = await rx.go(list,
+        rx.L.map(a => delayI(a * a)),
+        rx.L.filter(a => delayI(a % 2)),
+        rx.L.map(a => delayI(a + 1)),
+        rx.take(3),
+        rx.reduce((a, b) => delayI(a + b)));
+
+    const b = await rx.go(list,
+        rx.L.map(a => delayI(a * a)),
+        rx.take(3),
+        rx.reduce((a, b) => delayI(a + b)));
+
+    const c = await delayI(a + b)
+
+    return c + 10;
+};
+
+rx.go(pipeline(list), console.log);
+```
+
+- 함수형을 통해 문장을 만들고, 이 두개를 명령형으로 최종 결합하는 식으로 사용하면 아주 쾌적하게 개발할 수 있다.
