@@ -245,3 +245,81 @@ Long sum = 0L;
 #### 결론
 - 진짜 필요한 상황이 아니면 JVM을 믿고 객체를 새로 만들자.
 - 불변 클래스 객체라 완벽하게 안전하거나 객체 생성 비용이 매우 클 때 고려해보고 사용하자
+
+### Item 7. 다 쓴 객체는 참조를 해제하라
+#### 개요
+- 가비지 컬렉터가 있으면 메모리 관리 안해도 된다? -> 혼난다
+- 오히려 객체 참조를 하나라도 놓치면 그 객체가 참조하는 모든 연쇄 객체를 놓친다. (치명적)
+- 또한 이런 상황을 디버깅하기가 아주 까다롭다. 모르고 있다가 사고 터지고 알게 될 경우가 많다.
+
+#### 상황 1.
+- 클래스가 자기 메모리를 직접 관리하는 경우
+- 클래스가 객체 참조를 담는 배열을 다루는 경우 문제가 자주 발생한다.(item7_MemoryLeakStack 참조)
+```java
+public class MemoryLeakStack {
+
+    private Object[] elements;
+    private int size = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 16;
+
+    public MemoryLeakStack(Object[] elements) {
+        this.elements = new Object[DEFAULT_INITIAL_CAPACITY];
+    }
+
+    public void push(Object e) {
+        ensureCapacity();
+        elements[size++] = e;
+    }
+
+    public Object pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+
+        return elements[--size]; // 여기서 메모리 누수가 발생.
+    }
+
+    private void ensureCapacity() {
+        if (elements.length == size)
+            elements = Arrays.copyOf(elements, 2 * size + 1);
+    }
+}
+```
+- 위의 예제에서 pop을 수행해도 stack 범위 밖의 참조는 남아있고 이는 메모리 누수로 이어진다.
+
+#### 해결책
+- 가장 단순하게는 필요한 객체를 모두 사용한 뒤 객체 참조를 null로 바꿔주면 된다.
+```java
+public Object pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+
+        Object result = elements[--size];
+        elements[size] == null; 
+        return result
+    }
+```
+- 사실 굉장히 안좋은 코드다. 예외적인 경우로 다뤄야 한다.
+- 참조를 담은 변수를 유효 범위 밖으로 밀어내는 것이 가장 이상적이다.
+- 이를 위해 변수의 범위를 최소가 되게 정의하는 게 좋다.
+- 또한 약한 참조를 쓰면 도움이 될 것이다. (직접 메모리 관리 못하게)
+
+#### 상황 2.
+- 캐시를 사용할 때 메모리 누수가 많이 발생한다.
+- 넣어놓고 있는지 모르고 까먹는 경우가 많다.
+
+#### 해결책
+- WeakHashMap을 사용하면 캐시 외부에서 key를 참조하는 동안만 유효하게 만들 수 있다.
+- 시간이 지날수록 캐시 entry의 가치가 떨어지도록 구현하는 방법도 있다.
+- 물론 캐시 엔트리를 청소하는 기능이 별도로 필요하다.
+
+#### 상황 3.
+- 리스너, 콜백을 사용할 때 많이 발생한다.
+- 클라이언트가 콜백을 등록만하고 해제는 까먹었다? -> 메모리 누수
+
+#### 해결책
+- 콜백이나 리스너를 약한 참조로 저장하자.
+
+#### 결론
+- 가능한 약한 참조 사용하자.
+- 클래스가 직접 메모리 관리하게 하지 말자.
+- 캐시를 구현할 때는 잘 생각해보고 구현하자.
