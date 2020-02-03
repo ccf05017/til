@@ -136,3 +136,23 @@ rx.go(pipeline(list), console.log);
 ```
 
 - 함수형을 통해 문장을 만들고, 이 두개를 명령형으로 최종 결합하는 식으로 사용하면 아주 쾌적하게 개발할 수 있다.
+
+## 4. 동기 상황에서 에러 핸들리은 어떻게 해요?
+- 함수 인자의 기본값을 주는 방법이 있다.
+- 일단 받고 해당 값이 원하던 형태가 아닐때(처리할 수 없을 때) 기본값을 주는 방법이 있다.
+- 일단 가장 기본적으로 사용하는 방법은 try/catch를 쓰는 것.
+```js
+function errorInSynchronous(list) {
+    try {
+        return list
+            .map(a => a * a)
+            .filter(a => a % 2)
+            .slice(0, 2);
+    } catch(e) {
+        console.log(e);
+        return [];
+    }
+}
+
+console.log(errorInSynchronous(null));
+```
