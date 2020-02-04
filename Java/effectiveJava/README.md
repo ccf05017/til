@@ -323,3 +323,98 @@ public Object pop() {
 - 가능한 약한 참조 사용하자.
 - 클래스가 직접 메모리 관리하게 하지 말자.
 - 캐시를 구현할 때는 잘 생각해보고 구현하자.
+
+### Item 8. finalizer, cleaner는 사용하지 말아라
+- 쓰지 말아라
+- 한번 더 얘기하지만 쓰지 말아라
+
+#### 뭐하는 녀석이길래?
+- 객체 소멸자의 역할을 수행한다.
+- C++의 소멸자와 같은 개념이 아니다. C++ 소멸자는 메모리 할당 해제를 위해 필수적이다.
+- 자바에서는 이 역할을 GC가 맡는다.
+- 객체 소멸자는 용도가 좀 다르다.
+
+#### 왜 쓰지마?
+- 언제 동작할 지 알 수 없다.
+- 동작한다는 보장도 없다.
+- 동작 중 발생한 예외는 무시하고 남은 작업이 있어도 에러 발생하자마자 종료된다.
+- 심각한 성능 문제가 발생한다.
+- finalizer 공격이라는 아주아주 심각한 보안상의 문제를 초래한다.
+- AutoCloseable 인터페이스를 구현해라! 객체 소멸자는 절대 쓰지 말아라!
+
+#### 쓸모가 아예 없나?
+- 아주아주 제한적인 용도로 사용된다.
+- 안정망 역할
+    - 클라이언트 코드가 close()를 까먹고 안했을 때를 대비한다.
+- 네이티브 피어 사용 시
+    - 네이티브 피어는 자바 객체가 아니기 때문에 GC 대상이 아니다.
+    - 단, 성능 저하가 상관 없고 즉시 닫아야 할 필요가 없는 상황에서만 사용해라
+    - 위 상황이 아니면 close 메서드를 잊지 말고 써라!
+    
+#### 어떻게 쓰는지 보기나 하자(cleaner예시)
+- 아래 코드에서 주의 사항은 State는 공유 자원이라는 점이다.
+- 추가로 State는 절대로 RoomExample 인스턴스를 참조하면 안된다(순환참조가 되어 GC 대상에서 빠진다.)
+- 이를 방지 하기 위해 내부 클래스에 static으로 State를 구현한다.
+    - 자바에서는 정적이 아닌 중첩 클래스는 자동으로 바깥 객체의 참조를 갖는다
+    - 람다도 마찬가지로 바깥 객체의 참조를 갖기 쉽다. 여기선 사용을 자제하자
+```java
+public class RoomExample implements AutoCloseable {
+
+    private static final Cleaner cleaner = Cleaner.create();
+
+    private static class State implements Runnable {
+
+        private long numJunkPiles;
+
+        State(long numJunkPiles) {
+            this.numJunkPiles = numJunkPiles;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("Clean");
+            numJunkPiles = 0;
+        }
+    }
+
+    private State state;
+
+    private final Cleaner.Cleanable cleanable;
+
+    public RoomExample(long numJunkPiles) {
+        state = new State(numJunkPiles);
+        cleanable = cleaner.register(this, state);
+    }
+
+    @Override
+    public void close() throws Exception {
+        cleanable.clean();
+    }
+}
+```
+
+- 물론 이렇게 한다고 cleaner가 매번 잘 돌 거라고 기대하면 안된다.
+- 돌아갈 수도 있고 안돌아갈 수도 있고 자세한 건 실행시켜보면 안다.
+```java
+public static void main(String[] args) {
+        new RoomExample(99);
+        System.out.println("Maybe Clean..?");
+    }
+```
+
+- 그러니 명시적으로 close 메서드를 사용하거나 try-with-resource를 사용해라
+- 모범 예시 (AutoCloseable interface + try-with-resource)
+```java
+public static void main(String[] args) throws Exception {
+        try (RoomExample roomExample = new RoomExample(7)) {
+            System.out.println("Clean!");
+        }
+    }
+```
+
+#### 결론
+- finalizer, cleanable은 믿을 수 없다. 절대 쓰지 마라
+- 예방책으로만 상용해라.
+- 이 마저도 성능이 안 중요할 때만 써라!!!!!
+- AutoCloseable interface + try-with-resource 조합을 써라
+- 최선의 방책은 close 메서드 사용을 까먹지 말아라
