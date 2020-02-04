@@ -205,3 +205,53 @@ errorInAsyncAwait(['0', '1', '2', '{']).then(console.log).catch(e => {
 ```
 
 - 이 문제의 발생 원인은 근본적으로 map, filter, reduce가 Promise 자체를 이해하지 못하기 때문에 발생한다.
+
+## 그래서 파이프라인을 쓰면 좀 편합니다.
+- FxJS의 함수들은 모두 비동기 상황을 지원한다.
+- 위와 같이 비동기 상황을 따로 어렵게 에러처리 할 필요가 없다.
+```js
+function errorInPipeline(list) {
+    try {
+        return rx.go(list,
+            rx.map(a => new Promise(resolve => {
+                resolve(JSON.parse(a));
+            })),
+            rx.filter(a => a % 2),
+            rx.take(2));
+    } catch(e) {
+        console.log(e);
+        return [];
+    }
+}
+
+errorInAsyncAwait(['0', '1', '2', '{']).then(console.log).catch(e => {
+    console.log(e);
+    console.log('이제 잡힌다!');
+});
+```
+
+- 하지만 여전히 try/catch에서 에러 처리를 하진 않는다.
+- 정 try/catch에서 처리하고 싶으면 return에서 Promise에서 reject가 발생해야 한다.
+- async/await를 통해 바로 꺼낼 수 있다.
+```js
+async function errorInPipelineWithAsyncAwait(list) {
+    try {
+        return await rx.go(list,
+            rx.map(a => new Promise(resolve => {
+                resolve(JSON.parse(a));
+            })),
+            rx.filter(a => a % 2),
+            rx.take(2));
+    } catch(e) {
+        console.log('in try/catch', e);
+        return [];
+    }
+}
+
+errorInPipelineWithAsyncAwait(['0', '1', '2', '{']).then(console.log).catch(e => {
+    console.log('이제 잡힌다! in promise catch', e);
+});
+```
+
+- 파이프라인에서는 잘 연결된 Promise를 전달해주기 때문에 에러 처리가 매우 쉽다.
+- 추가로 지연 평가를 사용하면 평가를 뒤로 미루기 때문에 전체 이터러블 안에서 에러가 있는 부분에 가기 전까지는 정상 동작한다.
