@@ -1,0 +1,15 @@
+{
+  "name": "FunctionalJavaScriptAdvanced",
+  "version": "1.0.0",
+  "description": "- 마플에서 사용중인 FxJs 라이브러리 활용 예정 - 하지만 함수형 라이브러리들의 사용법 자체는 거의 같기 때문에 다른 걸 쓰는데 문제는 없을 것.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fxjs": "^0.15.0"
+  }
+}

@@ -418,3 +418,59 @@ public static void main(String[] args) throws Exception {
 - 이 마저도 성능이 안 중요할 때만 써라!!!!!
 - AutoCloseable interface + try-with-resource 조합을 써라
 - 최선의 방책은 close 메서드 사용을 까먹지 말아라
+
+### Item 9. try-with-resource를 사용하자
+- item8의 보완적인 내용이다.
+- 기존에 꼭 닫아야 하는 자원들은 try, finally 조합이나 finalizer, cleaner를 사용했다.
+- finalizer, cleaner는 쓰지 말라고 item8에서 지겹도록 얘기했다.
+- 꼭 닫아야 하는 자원은 try-with-resource로 감싸서 사용하자
+
+#### try finally는 왜 안좋은가?
+- 일단 예외가 중첩되서 발생하는 경우 해당 자원을 정상적으로 종료시키지 못할 수도 있다.
+- 또한 여러 에러가 발생했을 때 마지막 에러가 앞의 에러들을 덮어쓰기 때문에 디버깅하기 굉장히 까다롭다.
+```java
+public class TryFinallyExample {
+    
+    static String firstLineOfFile(String path) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        try {
+            return bufferedReader.readLine();       // 어떤 이유로 readline 메서드에 오류가 발생하면 close()가 실패한다.
+        } finally {
+            bufferedReader.close();
+        }
+    }
+}
+```
+
+- 마지막으로 여러 자원을 닫아야 할 때 코드가 엄청 복잡하다.
+```java
+static void closeManyResources(String dst, String src) throws IOException {
+        InputStream inputStream = new FileInputStream(src);
+        try {
+            OutputStream outputStream = new FileOutputStream(dst);
+            try {
+                byte[] buf = new byte[100];
+                int n;
+                while ((n = inputStream.read(buf)) >= 0)
+                    outputStream.write(buf, 0, n);
+            } finally {
+                outputStream.close();
+            }
+        } finally {
+            inputStream.close();
+        }
+    }
+```
+
+#### try-with-resource는?
+- 닫아야 할 클래스에 AutoCloseable 인터페이스를 구현해주고, 사용할 때 try로 감싸기만 하면 된다.
+- 어떤 상황에서도 자동으로 잘 닫아준다.
+- 에러가 중첩되서 발생해도 suppressed라는 꼬리표를 달고 표기된다.
+- getSuppressed 메서드를 통해 감춰진 에러를 볼 수 있다.
+- 코드가 아주 깔끔해진다.
+- catch를 사용 가능하다.
+
+#### 결론
+- 꼭 닫아야 할 자원을 구현한다면 AutoCloseable 인터페이스를 무조건 구현해라
+- 꼭 닫아야 할 자원을 사용한다면 무조건 try-with-resources를 사용해라
+- 예외는 없다. 무조건이다. 써라. 제발. 꼭.
