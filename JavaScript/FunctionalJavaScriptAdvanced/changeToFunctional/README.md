@@ -26,3 +26,32 @@ console.log(_.reduce(
     (a, b) => a + b,
     L.map(user => user.age, users)));
 ```
+
+## map이 부족하다면 filter도 데려오자
+- 위의 방법으로도 연산이 더 필요할 수 있다.
+- 이럴 땐 filter까지 갖고 와서 보조함수의 간결함을 잃지 말자
+```js
+// 명령형의 잔재
+console.log(_.reduce(
+    (total, u) => u.age >= 3 ? total + u.age : total,
+    0,
+    users));
+
+console.log(_.reduce(
+    (a, b) => a + b,
+    L.map(u => u.age,
+        L.filter(u => u.age >= 3, users))));
+```
+- 물론 여기에 go까지 끼어들면 훨씬 보기 좋다.
+```js
+// 명령형의 잔재
+console.log(_.reduce(
+    (total, u) => u.age >= 3 ? total + u.age : total,
+    0,
+    users));
+
+console.log(_.reduce(
+    (a, b) => a + b,
+    L.map(u => u.age,
+        L.filter(u => u.age >= 3, users))));
+```
