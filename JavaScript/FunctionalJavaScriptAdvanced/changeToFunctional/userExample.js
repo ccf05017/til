@@ -25,5 +25,3 @@ console.log(_.reduce(
     (a, b) => a + b,
     L.map(u => u.age,
         L.filter(u => u.age >= 3, users))));
-
-c
