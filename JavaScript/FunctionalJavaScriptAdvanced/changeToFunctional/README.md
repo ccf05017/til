@@ -56,7 +56,7 @@ console.log(_.reduce(
         L.filter(u => u.age >= 3, users))));
 ```
 
-## 보조 함수를 간단하게 유지하는 이점 예제
+## 보조 함수를 간단하게 유지하는 이점 예제1
 - 객체를 URL 쿼리 형태로 전환하는 연습을 해보자
 - 명령형 예제
 ```js
@@ -126,3 +126,25 @@ const query4 = obj => _.go(
 
 console.log(query4(obj1));
 ```
+
+## 보조 함수를 간단하게 유지하는 이점 예제1
+- queryString을 반대로 객체로 변환하는 연습을 해보자
+- 자바스크립트의 내장된 문자열 split 메소드를 활용한.
+- 이걸 파이프라인에서 쓰기 위해 curry로 묶어서 함수로 만든 뒤 재 사용한다.
+- Object.assign 내장함수를 활용한다.
+- 연속된 객체를 묶어준다. 객체계의 sum 함수다.
+```js
+const split = _.curry((sep, str) => str.split(sep));
+
+const queryToObj = _.pipe(
+    split('&'),
+    _.map(split('=')),
+    _.map(([k, v]) => ({ [k]: v })),
+    _.reduce(Object.assign)
+);
+
+console.log(queryToObj('a=1&c=CC&d=DD'));
+```
+
+- 명령형 습관대로 했다면 아마 map 함수 두개 없이 그냥 들어갔을 확률이 높다.
+- 그러면 굉장히 복잡하다. 이렇게 단순한 함수를 결합해서 만들기 위해 노력하자.
