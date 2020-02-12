@@ -1,0 +1,36 @@
+POST http://localhost:8080/example
+Content-Type: application/json
+
+{
+  "tool":
+  {
+    "jsonpath":
+    {
+      "creator":
+      {
+        "name": "Jayway Inc.",
+        "location":
+        [
+          "Malmo",
+          "San Francisco",
+          "Helsingborg"
+        ]
+      }
+    }
+  },
+
+  "book":
+  [
+    {
+      "title": "Beginning JSON",
+      "price": 49.99
+    },
+
+    {
+      "title": "JSON at Work",
+      "price": 29.99
+    }
+  ]
+}
+
+###
