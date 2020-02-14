@@ -44,3 +44,16 @@ _.go(
     console.log
 );
 ```
+
+## 2. entries
+- 객체들을 다룬다.
+- 위의 예제와 거의 유사하다.
+```js
+L.entires = function *(obj) {
+    for (const k in obj) {
+        yield [k, obj[k]];
+    }
+}
+```
+
+- 위의 두 예제를 통해 어떤 값이든 제너레이터를 통해 이터러블로 바꾸고, 이터러블 프로그래밍을 할 수 있음을 알 수 있다.
