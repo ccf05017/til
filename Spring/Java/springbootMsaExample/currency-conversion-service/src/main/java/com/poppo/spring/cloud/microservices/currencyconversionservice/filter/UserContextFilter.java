@@ -1,6 +1,5 @@
 package com.poppo.spring.cloud.microservices.currencyconversionservice.filter;
 
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -14,6 +13,23 @@ public class UserContextFilter implements Filter {
         UserContextHolder.getContext().setCorrelationId(httpServletRequest.getHeader(UserContext.CORRELATION_ID));
         UserContextHolder.getContext().setUserId(httpServletRequest.getHeader(UserContext.USER_ID));
         UserContextHolder.getContext().setAuthToken(httpServletRequest.getHeader(UserContext.AUTH_TOKEN));
+
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println(((HttpServletRequest) servletRequest).getHeader(UserContext.AUTH_TOKEN));
+        System.out.println(httpServletRequest.getHeader(UserContext.AUTH_TOKEN));
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+        System.out.println(httpServletRequest.getHeaderNames().nextElement());
+
 
         filterChain.doFilter(httpServletRequest, servletResponse);
     }

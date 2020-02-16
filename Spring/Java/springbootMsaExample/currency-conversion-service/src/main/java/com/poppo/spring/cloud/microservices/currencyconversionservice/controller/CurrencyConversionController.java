@@ -1,6 +1,7 @@
 package com.poppo.spring.cloud.microservices.currencyconversionservice.controller;
 
 import com.poppo.spring.cloud.microservices.currencyconversionservice.applications.CurrencyExchangeServiceProxy;
+import com.poppo.spring.cloud.microservices.currencyconversionservice.applications.RestTemplateService;
 import com.poppo.spring.cloud.microservices.currencyconversionservice.domian.CurrencyConversionBean;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CurrencyConversionController {
 
+    private final RestTemplateService restTemplateService;
     private final CurrencyExchangeServiceProxy currencyExchangeServiceProxy;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -59,10 +61,9 @@ public class CurrencyConversionController {
             @PathVariable String from,
             @PathVariable String to,
             @PathVariable BigDecimal quantity
-    ) {
+    ) { // feign 버전
+        CurrencyConversionBean response = restTemplateService.getCurrencyConversionBean(from, to);
 
-        // feign 버전
-        CurrencyConversionBean response = currencyExchangeServiceProxy.retrieveExchangeValue(from, to);
         logger.info("{}", response);
 
         return CurrencyConversionBean.builder()

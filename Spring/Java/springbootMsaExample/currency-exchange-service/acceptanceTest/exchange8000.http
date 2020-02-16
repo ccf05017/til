@@ -1,4 +1,5 @@
 GET http://localhost:8000/currency-exchange/from/USD/to/KRW
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTM0MTg1NjIsInVzZXJfbmFtZSI6Imdsb3ZpcyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJkNmY2YjVhNy0xMWE5LTRiY2UtOGMzZS1lNjJiYmE5MzdkNDEiLCJjbGllbnRfaWQiOiJ1c2VkY2FyIiwic2NvcGUiOlsid2ViY2xpZW50Il19.XSuFoS03Tgd3_eXLbotpRXg4RIxZ1HRbsL_5pFEjUtQ
 
 ###
 

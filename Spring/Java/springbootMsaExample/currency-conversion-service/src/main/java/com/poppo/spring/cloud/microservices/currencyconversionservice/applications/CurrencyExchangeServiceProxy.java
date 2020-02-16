@@ -14,6 +14,5 @@ public interface CurrencyExchangeServiceProxy {
 
 //    @GetMapping("/currency-exchange/from/{from}/to/{to}")
     @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")   // 이 부분도 API GW를 통하도록 변경
-    public CurrencyConversionBean retrieveExchangeValue(
-            @PathVariable("from") String from, @PathVariable("to") String to);
+    CurrencyConversionBean retrieveExchangeValue(@PathVariable("from") String from, @PathVariable("to") String to);
 }
