@@ -1,4 +1,4 @@
-package com.poppo.spring.cloud.microservices.currencyconversionservice.security;
+package com.poppo.spring.cloud.microservices.currencyexchangeservice.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
