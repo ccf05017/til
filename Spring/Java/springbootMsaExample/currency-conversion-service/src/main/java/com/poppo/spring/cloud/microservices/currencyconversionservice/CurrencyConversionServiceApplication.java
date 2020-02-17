@@ -1,44 +1,62 @@
 package com.poppo.spring.cloud.microservices.currencyconversionservice;
 
-import brave.sampler.Sampler;
-import com.poppo.spring.cloud.microservices.currencyconversionservice.filter.UserContextFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.annotation.RequestScope;
 
-import javax.servlet.Filter;
+import javax.servlet.http.HttpServletRequest;
 
 @SpringBootApplication
-@EnableFeignClients("com.poppo.spring.cloud.microservices.currencyconversionservice")
+// @EnableFeignClients("com.poppo.spring.cloud.microservices.currencyconversionservice")
 @EnableDiscoveryClient
-@EnableResourceServer
 public class CurrencyConversionServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CurrencyConversionServiceApplication.class, args);
     }
 
-    @Bean
-    public Sampler defaultSampler() {
+//    @Bean
+//    public RestTemplate restTemplate() {
+//        RestTemplate restTemplate = new RestTemplate();
+//        List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();
+//        if (CollectionUtils.isEmpty(interceptors)) {
+//            interceptors = new ArrayList<>();
+//        }
+//        interceptors.add(new RestTemplateHeaderModifierInterceptor());
+//        restTemplate.setInterceptors(interceptors);
+//
+//        return restTemplate;
+//    }
 
-        return Sampler.ALWAYS_SAMPLE;
+    @Bean
+    @RequestScope
+    public RestTemplate restTemplate(HttpServletRequest inReq) {
+        final String authHeader = inReq.getHeader(HttpHeaders.AUTHORIZATION);
+        final RestTemplate restTemplate = new RestTemplate();
+        System.out.println("##################################");
+        System.out.println(inReq.getHeaderNames());
+        System.out.println(authHeader);
+        if (authHeader != null && !authHeader.isEmpty()) {
+            restTemplate.getInterceptors().add(
+                    (outReq, bytes, clientHttpReqExec) -> {
+                        outReq.getHeaders().set(
+                                HttpHeaders.AUTHORIZATION, authHeader
+                        );
+                        System.out.println(authHeader);
+                        return clientHttpReqExec.execute(outReq, bytes);
+                    });
+        }
+        return restTemplate;
     }
 
-    @Bean
-    public Filter userContextFilter() {
-
-        return new UserContextFilter();
-    }
-
-    @Bean
-    public OAuth2RestTemplate restTemplate(UserInfoRestTemplateFactory factory) {
-        return factory.getUserInfoRestTemplate();
-    }
+//    @Bean
+//    public OAuth2RestTemplate restTemplate(UserInfoRestTemplateFactory factory) {
+//        return factory.getUserInfoRestTemplate();
+//    }
 
 //    @Bean
 //    @Primary
