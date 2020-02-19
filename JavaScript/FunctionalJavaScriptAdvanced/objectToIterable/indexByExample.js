@@ -8,3 +8,10 @@ const users = [
     { id: 23, name: 'DD', age: 34 },
     { id: 24, name: 'EE', age: 23 },
 ]
+
+const indexBy = (f, itr) => 
+    _.reduce((obj, a) => (obj[f(a)] = a, obj), {}, itr);
+
+const users2 = indexBy(u => u.id, users);
+
+console.log(users2);
