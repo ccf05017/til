@@ -107,3 +107,35 @@ const mapObject = (f, obj) => _.go(
 
 console.log(mapObject(a => a + 10, { a: 1, b: 2, c: 3}));
 ```
+
+## 7. pick
+- 객체 중 특정 키값의 자료형만 골라서 반환하는 함수
+- 두개의 이터러블을 다루는 함수이기 때문에 상황 따라 유리한 방향으로 기준점을 잡아주는 게 좋다.
+- 하지만 대체적으로는 뽑아낼 대상 이터러블이 더 적기 때문에 뽑아낼 대상을 기준점으로 잡는 게 보통 유리하다.
+```js
+const obj = { a: 1, b: 2, c: 3, d: 4, e: 5 };
+
+const pick = (keys, obj) => _.go(
+    keys,
+    _.map(k => [[k], obj[k]]),
+    _.object
+);
+
+console.log(pick(['b', 'c'], obj));
+```
+
+- 하지만 지금 상태에서 존재하지 않는 키로 pick하면 undefined 값이 할당된다.
+- 이런 경우 undefiend를 아예 골라내는 게 좀더 안전하다.
+```js
+const pickOnlyExist = (keys, obj) => _.go(
+    keys,
+    _.map(k => [[k], obj[k]]),
+    _.reject(([k, v]) => v === undefined),
+    _.object
+);
+
+console.log(pickOnlyExist(['b', 'c', 'z'], obj));
+```
+
+## 8. indexBy
+- 어떤 값을 key, value 쌍으로 저장해놓는 함수
