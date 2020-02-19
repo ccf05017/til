@@ -107,3 +107,67 @@ const mapObject = (f, obj) => _.go(
 
 console.log(mapObject(a => a + 10, { a: 1, b: 2, c: 3}));
 ```
+
+## 7. pick
+- 객체 중 특정 키값의 자료형만 골라서 반환하는 함수
+- 두개의 이터러블을 다루는 함수이기 때문에 상황 따라 유리한 방향으로 기준점을 잡아주는 게 좋다.
+- 하지만 대체적으로는 뽑아낼 대상 이터러블이 더 적기 때문에 뽑아낼 대상을 기준점으로 잡는 게 보통 유리하다.
+```js
+const obj = { a: 1, b: 2, c: 3, d: 4, e: 5 };
+
+const pick = (keys, obj) => _.go(
+    keys,
+    _.map(k => [[k], obj[k]]),
+    _.object
+);
+
+console.log(pick(['b', 'c'], obj));
+```
+
+- 하지만 지금 상태에서 존재하지 않는 키로 pick하면 undefined 값이 할당된다.
+- 이런 경우 undefiend를 아예 골라내는 게 좀더 안전하다.
+```js
+const pickOnlyExist = (keys, obj) => _.go(
+    keys,
+    _.map(k => [[k], obj[k]]),
+    _.reject(([k, v]) => v === undefined),
+    _.object
+);
+
+console.log(pickOnlyExist(['b', 'c', 'z'], obj));
+```
+
+## 8. indexBy
+### 8.1 기본
+- 어떤 값을 key, value 쌍으로 저장해놓는 함수
+- reduce를 통해 구현
+- 이터러블을 새로운 형태로 만들어 낼 때 -> 언제나 reduce 필요
+```js
+const users = [
+    { id: 5, name: 'AA', age: 35 },
+    { id: 10, name: 'BB', age: 26 },
+    { id: 19, name: 'CC', age: 28 },
+    { id: 23, name: 'DD', age: 34 },
+    { id: 24, name: 'EE', age: 23 },
+]
+
+const indexBy = (f, itr) => 
+    _.reduce((obj, a) => (obj[f(a)] = a, obj), {}, itr);
+
+const users2 = indexBy(u => u.id, users);
+
+console.log(users2);
+```
+
+### 8.2 filter까지 추가하기
+- 기본적으로 indexBy의 결과는 이터러블이 아니기 때문에 filter 적용이 불가능하다.
+- 하지만 index는 꼭 필요한 상황일 때 아래와 같은 방식으로 filter를 적용할 수 있다.
+```js
+_.go(
+    users2,
+    _.entries,
+    _.filter(([_, { age }]) => age > 30),
+    _.object,
+    console.log
+);
+```
