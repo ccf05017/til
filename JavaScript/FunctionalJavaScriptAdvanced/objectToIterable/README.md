@@ -138,6 +138,7 @@ console.log(pickOnlyExist(['b', 'c', 'z'], obj));
 ```
 
 ## 8. indexBy
+### 8.1 기본
 - 어떤 값을 key, value 쌍으로 저장해놓는 함수
 - reduce를 통해 구현
 - 이터러블을 새로운 형태로 만들어 낼 때 -> 언제나 reduce 필요
@@ -156,4 +157,17 @@ const indexBy = (f, itr) =>
 const users2 = indexBy(u => u.id, users);
 
 console.log(users2);
+```
+
+### 8.2 filter까지 추가하기
+- 기본적으로 indexBy의 결과는 이터러블이 아니기 때문에 filter 적용이 불가능하다.
+- 하지만 index는 꼭 필요한 상황일 때 아래와 같은 방식으로 filter를 적용할 수 있다.
+```js
+_.go(
+    users2,
+    _.entries,
+    _.filter(([_, { age }]) => age > 30),
+    _.object,
+    console.log
+);
 ```

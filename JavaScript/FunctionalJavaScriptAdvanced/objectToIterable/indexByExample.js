@@ -15,3 +15,11 @@ const indexBy = (f, itr) =>
 const users2 = indexBy(u => u.id, users);
 
 console.log(users2);
+
+_.go(
+    users2,
+    _.entries,
+    _.filter(([_, { age }]) => age > 30),
+    _.object,
+    console.log
+);
