@@ -29,3 +29,41 @@ _.go(
     _.each(console.log)
 );
 ```
+
+## 2. takeWhile, takeUntil
+- take를 좀 더 동적으로 다루는 함수
+- filter와 take를 합한 것처럼 동작한다.
+- 명령형 기준으로는 if문이 포함된 반복문으로 생각해도 좋다.
+
+### 2.1 takeWhile
+- 주어진 함수 조건에 맞는 것들을 false가 나올때까지 골라낸다.
+```js
+const example = [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0];
+
+_.go(
+    example,
+    _.takeWhile(a => a),
+    _.each(console.log)
+);
+```
+- 이터러블에서 false가 하나라도 나오는 순간 그 뒤는 보지 않는다.
+```js
+// 아래 이터러블에서 뒤의 10은 출력되지 않는다.
+const example2 = [1, 2, 3, 4, 5, 6, 7, 8, 0, 10, 0];
+
+_.go(
+    example2,
+    _.takeWhile(a => a),
+    _.each(console.log)
+);
+```
+
+### 2.2 takeUntil
+- 주어진 함수 조건에 맞는 첫 요소를 만날때까지만 작동한다.
+```js
+_.go(
+    example,
+    _.takeUntil(a => !a),
+    _.each(console.log)
+);
+```
