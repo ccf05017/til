@@ -67,3 +67,27 @@ _.go(
     _.each(console.log)
 );
 ```
+
+## 3. 할 일을 이터러블로 바라보자
+- 실제로 쓸 법한 예제를 실습해보자
+- 자동차 경주 예제(조별 리그)
+```js
+const track = [
+    { cars: ['철수', '영희', '철희', '영수'] },
+    { cars: ['하든', '커리', '듀란트', '탐슨'] },
+    { cars: ['폴', '어빙', '릴라드', '맥컬럼'] },
+    { cars: ['마리오', '루이지'] },
+    { cars: [] },
+];
+
+_.go(
+    L.range(Infinity),
+    L.map(i => track[i]),
+    L.map(({ cars }) => cars),
+    L.map(_.delay(2000)),
+    L.takeUntil(({ length: l }) => l < 4),
+    L.flat,
+    L.map(car => `${car} 고고!`),
+    _.each(console.log)
+);
+```
