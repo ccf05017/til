@@ -21,11 +21,13 @@ const impt = {
         5: [],
         // ,,,
     },
+
     // ImPort API Mock
     getPayments: page => {
         console.log(`http://..?page=${page}`);
         return _.delay(1000, impt.payments[page]);
     },
+
     cancelPayment: imp_id => Promise.resolve(`${imp_id}: 취소 완료`)
 };
 
@@ -49,7 +51,21 @@ async function job() {
         _.flat
     );
 
-    console.log(payments);
+    const orderIds = await _.go(
+        payments,
+        L.map(p => p.order_id),
+        DB.getOrders,
+        L.map(({ id }) => id),
+        _.flat
+    );
+
+    await _.go(
+        payments,
+        L.reject(p => orderIds.includes(p.order_id)),
+        L.map(({ imp_id }) => imp_id),
+        L.map(imp_id => impt.cancelPayment(imp_id)),
+        _.each(console.log)
+    );
 }
 
 job();
