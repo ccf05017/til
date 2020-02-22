@@ -21,11 +21,13 @@ const impt = {
         5: [],
         // ,,,
     },
+
     // ImPort API Mock
     getPayments: page => {
         console.log(`http://..?page=${page}`);
-        return _.delay(1000, impt.payments[page]);
+        return _.delay(1000 * 3, impt.payments[page]);
     },
+
     cancelPayment: imp_id => Promise.resolve(`${imp_id}: 취소 완료`)
 };
 
@@ -49,7 +51,34 @@ async function job() {
         _.flat
     );
 
-    console.log(payments);
+    const orderIds = await _.go(
+        payments,
+        L.map(p => p.order_id),
+        DB.getOrders,
+        L.map(({ id }) => id),
+        _.flat
+    );
+
+    await _.go(
+        payments,
+        L.reject(p => orderIds.includes(p.order_id)),
+        L.map(({ imp_id }) => imp_id),
+        L.map(imp_id => impt.cancelPayment(imp_id)),
+        _.each(console.log)
+    );
 }
 
-job();
+// 단순무식하게 계속 실행되는 재귀
+// (function recur() {
+//     job().then(recur)
+// }) ();
+
+// 복잡한 시나리오가 시작됐다.
+// 부하가 너무 큰 작업이라 5초에 한번씩만 할 거다.
+// 근데 job 부하가 너무 커서 5초 이상 걸릴 때는 다 끝날때까지 기다려라.
+(function recur() {
+    Promise.all([
+        _.delay(5000, undefined),
+        job()
+    ]).then(recur);
+}) ();
