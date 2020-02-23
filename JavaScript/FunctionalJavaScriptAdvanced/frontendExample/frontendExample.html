@@ -114,7 +114,14 @@
             const $ = {};
             
             // $.qs = (sel, parent) => document.querySelector(sel, parent);
-            $.qs = document.querySelector.bind(document); // <- 잘 모르겠음 위와 같이 동작함
+            // $.qs = document.querySelector.bind(document); // <- 잘 모르겠음 위와 같이 동작함
+            // $.qsa = document.querySelectorAll.bind(document);
+
+            $.qs = (sel, parent = document) => parent.querySelector(sel);
+            $.qsa = (sel, parent = document) => parent.querySelectorAll(sel);
+
+            $.find = _.curry($.qs);
+            $.findAll = _.curry($.qsa);
 
             $.el = html => {
                 const wrap = document.createElement('div');
@@ -146,6 +153,7 @@
                         <div class="image">
                             <div class="box"><img src="${img.url}" alt="></div>
                             <div class="name">${img.name}</div>
+                            <div class="remove">x</div>
                         </div>
                     `, imgs)}
                 </div>
@@ -156,7 +164,13 @@
                 Images.template,
                 $.el,
                 $.append($.qs('body')),
-                console.log
+                $.findAll('.remove'),
+                _.each(el => el.addEventListener('click', e => _.go(
+                    e.currentTarget,
+                    el => el.closest('.image'),
+                    el => el.parentNode.removeChild(el),
+                    console.log
+                )))
             );
         </script>
     </body>
