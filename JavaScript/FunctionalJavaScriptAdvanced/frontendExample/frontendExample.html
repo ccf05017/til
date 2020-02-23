@@ -123,6 +123,13 @@
             $.find = _.curry($.qs);
             $.findAll = _.curry($.qsa);
 
+            $.closest = _.curry((sel, el) => el.closest(sel));
+
+            $.remove = el => el.parentNode.removeChild(el);
+
+            $.on = (event, f) => els => 
+                _.each(el => el.addEventListener(event, f), _.isIterable(els) ? els : [els]);
+
             $.el = html => {
                 const wrap = document.createElement('div');
                 wrap.innerHTML = html;
@@ -165,12 +172,11 @@
                 $.el,
                 $.append($.qs('body')),
                 $.findAll('.remove'),
-                _.each(el => el.addEventListener('click', e => _.go(
+                $.on('click', e => _.go(
                     e.currentTarget,
-                    el => el.closest('.image'),
-                    el => el.parentNode.removeChild(el),
-                    console.log
-                )))
+                    $.closest('.image'),
+                    $.remove
+                ))
             );
         </script>
     </body>
