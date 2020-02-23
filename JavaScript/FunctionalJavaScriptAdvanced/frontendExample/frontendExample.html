@@ -143,6 +143,8 @@
             // 이미지들을 다루는 모듈
             const Images = {};
 
+            const Ui = {};
+
             // 약 90개
             const images = [{ name: "HEART", url: "https://s3.marpple.co/files/m2/t3/colored_images/45_1115570_1162087.png" },
                             { name: "하트", url: "https://s3.marpple.co/f1/2019/1/1235206_1548918825999_78819.png" },
@@ -172,12 +174,65 @@
                 $.el,
                 $.append($.qs('body')),
                 $.findAll('.remove'),
-                $.on('click', e => _.go(
-                    e.currentTarget,
-                    $.closest('.image'),
-                    $.remove
-                ))
+                $.on('click', async ({ currentTarget }) =>
+                        await Ui.confirm("정말 삭제하시겠습니까?") && _.go(
+                            currentTarget,
+                            $.closest('.image'),
+                            $.remove
+                        )
+                )
+
+                // 사이드 이펙트 예시 코드
+                // e가 중간에 의도치 않은 e로 바뀐다.
+                // $.on('click', async e => { 
+                //     if (await Ui.confirm("정말 삭제하시겠습니까?")) {
+                //         _.go(
+                //             e.currentTarget,
+                //             $.closest('.image'),
+                //             $.remove
+                //         );
+                //     }}
+                // )
             );
+
+            Ui.confirm = msg => new Promise(resolve => _.go(
+                `
+                    <div class="confirm">
+                        <div class="body">
+                            <div class="msg">${msg}</div>
+                            <div class="buttons">
+                                <button type="button" class="cancel">취소</div>
+                                <button type="button" class="ok">확인</div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                $.el,
+                $.append($.qs('body')),
+                _.tap(
+                    $.find('.ok'),
+                    $.on('click', e => _.go(
+                        e.currentTarget,
+                        $.closest('.confirm'),
+                        $.remove,
+                        _ => resolve(true)
+                    ))
+                ),
+                _.tap(
+                    $.find('.cancel'),
+                    $.on('click', e => _.go(
+                        e.currentTarget,
+                        $.closest('.confirm'),
+                        $.remove,
+                        _ => resolve(false)
+                    ))
+                )
+            ));
+
+            // async function f() {
+            //     await Ui.confirm("정말 삭제하시겠습니까?");
+            //     console.log('hello');
+            // }
         </script>
     </body>
 </html>
