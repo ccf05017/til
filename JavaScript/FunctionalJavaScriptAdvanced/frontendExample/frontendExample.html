@@ -195,39 +195,46 @@
                 // )
             );
 
-            Ui.confirm = msg => new Promise(resolve => _.go(
+            Ui.message = _.curry((btns, msg) => new Promise(resolve => _.go(
                 `
                     <div class="confirm">
                         <div class="body">
                             <div class="msg">${msg}</div>
                             <div class="buttons">
-                                <button type="button" class="cancel">취소</div>
-                                <button type="button" class="ok">확인</div>
+                                ${_.strMap(btn => `
+                                    <button type="button" class="${btn.type}">${btn.name}</div>
+                                `, btns)}
                             </div>
                         </div>
                     </div>
                 `,
                 $.el,
                 $.append($.qs('body')),
-                _.tap(
-                    $.find('.ok'),
+                // 이 부분에서 map + 전개연산자 통해 함수를 평가시킨다.
+                // map의 결과는 go함수에 적용할 함수를 만들어내는 것(return이 함수다)
+                ..._.map(btn => _.tap(
+                    $.find(`.${btn.type}`),
                     $.on('click', e => _.go(
                         e.currentTarget,
                         $.closest('.confirm'),
                         $.remove,
-                        _ => resolve(true)
+                        _ => resolve(btn.value)
                     ))
-                ),
-                _.tap(
-                    $.find('.cancel'),
-                    $.on('click', e => _.go(
-                        e.currentTarget,
-                        $.closest('.confirm'),
-                        $.remove,
-                        _ => resolve(false)
-                    ))
-                )
-            ));
+                ), btns)
+            )));
+
+            Ui.confirm = Ui.message(
+                [
+                    { name: '취소', type: 'cancel', value: false },
+                    { name: '확인', type: 'ok', value: true }
+                ]
+            );
+
+            Ui.alert = Ui.message(
+                [
+                    { name: '확인', type: 'ok', value: true }
+                ]
+            );
 
             // async function f() {
             //     await Ui.confirm("정말 삭제하시겠습니까?");
