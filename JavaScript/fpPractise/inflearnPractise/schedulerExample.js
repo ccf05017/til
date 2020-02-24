@@ -50,6 +50,6 @@ async function job() {
     );
 
     console.log(payments);
-};
+}
 
 job();
