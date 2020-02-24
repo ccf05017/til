@@ -170,22 +170,35 @@
                 </div>
             `
 
+            Images.loader = limit => _.tap(
+                $.findAll('img'),
+                // 이미지 로딩 시간을 제어하는 함수(대기 된 작업들을 반환한다)
+                L.map(img => _ => new Promise(resolve => {
+                    img.onload = () => resolve(img);
+                    img.src = img.getAttribute('lazy-src')
+                })),
+
+                // 부하를 분산시켜주는 함수
+                lazy => {
+                    const r = L.range(Infinity);
+                    return _.go(
+                        lazy,
+                        _.groupBy(_ => Math.floor(r.next().value / limit)),
+                        L.values,
+                        L.map(L.map(f => f())),
+                        L.map(C.takeAll),
+                        _.each(_.each($.addClass('fade-in')))
+                    );
+                }
+            );
+
             _.go(
                 Images.fetch(),
                 Images.template,
                 $.el,
                 $.append($.qs('body')),
 
-                // 이미지 로딩 시간을 제어하는 함수
-                _.tap(
-                    $.findAll('img'),
-                    L.map(img => new Promise(resolve => {
-                        img.onload = () => resolve(img);
-                        img.src = img.getAttribute('lazy-src')
-                    })),
-                    // C.takeAll,
-                    _.each($.addClass('fade-in'))
-                ),
+                Images.loader(4),
 
                 $.findAll('.remove'),
                 $.on('click', async ({ currentTarget }) =>

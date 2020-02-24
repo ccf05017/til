@@ -178,3 +178,49 @@ _.tap(
     _.each($.addClass('fade-in'))
 ),
 ```
+
+## 6. 부하 조절하기
+- 동시에 모두 불러올 때 초기에 너무 과부하가 심하다.
+- 이 부하를 분산시켜서 좀 더 UX를 향상시켜보자
+- 기존의 작업에 부하분산기가 추가된 예제
+```js
+// 부하를 분산시켜주는 함수
+lazy => {
+    const r = L.range(Infinity);
+    return _.go(
+        lazy,
+        _.groupBy(_ => Math.floor(r.next().value / 4)),
+        L.values,
+        L.map(L.map(f => f())),
+        L.map(C.takeAll),
+        _.each(_.each($.addClass('fade-in')))
+    );
+}
+```
+
+- 위와 같은 상황이 자주 발생할 것 같다면 이를 모듈화 하는 것도 가능하다.
+```js
+Images.loader = limit => _.tap(
+    $.findAll('img'),
+    L.map(img => _ => new Promise(resolve => {
+        img.onload = () => resolve(img);
+        img.src = img.getAttribute('lazy-src')
+    })),
+
+    // 부하를 분산시켜주는 함수
+    lazy => {
+        const r = L.range(Infinity);
+        return _.go(
+            lazy,
+            _.groupBy(_ => Math.floor(r.next().value / limit)),
+            L.values,
+            L.map(L.map(f => f())),
+            L.map(C.takeAll),
+            _.each(_.each($.addClass('fade-in')))
+        );
+    }
+);
+```
+
+## 7. 고차함수를 사용해서 더 잘게 나눠보자
+
