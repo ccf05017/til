@@ -263,4 +263,39 @@ C.takeAllWithLimit = _.curry((limit, iter) => {
 
 ## 8. 상위 스코프 변수를 사용하는 함수와 아닌 함수를 쪼개기
 - 좀 더 추상화되고 사용하기 쉬운 함수를 만들 수 있다.
+- 아래의 코드에서 groupBy 함수를 제외하면 아무도 상위 스코프의 r 상수를 사용하지 않는다.
+```js
+C.takeAllWithLimit = _.curry((limit, iter) => {
+    const r = L.range(Infinity);
 
+    return _.go(
+        iter,
+        _.groupBy(_ => Math.floor(r.next().value / limit)),
+        L.values,
+        L.map(L.map(f => f())),
+        L.map(C.takeAll)
+    );
+});
+```
+
+- 자기들끼리만 놀도록 묶어줄 수 있다.
+```js
+_.groupBySize = _.curry((size, iter) => {
+    const r = L.range(Infinity);
+
+    return _.groupBy(_ => Math.floor(r.next().value / size), iter);
+});
+```
+
+- 재사용성뿐 아니라 기존 사용하던 함수에서 문장을 제거하고 식으로만 나타낼 수 있다.
+```js
+C.takeAllWithLimit = _.curry((limit, iter) => 
+    _.go(
+        iter,
+        _.groupBySize(limit),
+        L.values,
+        L.map(L.map(f => f())),
+        L.map(C.takeAll)
+    )
+);
+```

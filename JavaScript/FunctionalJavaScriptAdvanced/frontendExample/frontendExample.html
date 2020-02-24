@@ -183,18 +183,22 @@
                 _.each(_.each($.addClass('fade-in')))
             );
 
-            // 부하를 분산시켜주는 함수
-            C.takeAllWithLimit = _.curry((limit, iter) => {
+            _.groupBySize = _.curry((size, iter) => {
                 const r = L.range(Infinity);
 
-                return _.go(
+                return _.groupBy(_ => Math.floor(r.next().value / size), iter);
+            });
+
+            // 부하를 분산시켜주는 함수
+            C.takeAllWithLimit = _.curry((limit, iter) => 
+                _.go(
                     iter,
-                    _.groupBy(_ => Math.floor(r.next().value / limit)),
+                    _.groupBySize(limit),
                     L.values,
                     L.map(L.map(f => f())),
                     L.map(C.takeAll)
-                );
-            });
+                )
+            );
 
             _.go(
                 Images.fetch(),
