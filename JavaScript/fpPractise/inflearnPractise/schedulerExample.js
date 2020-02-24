@@ -49,15 +49,21 @@ async function job() {
         _.flat
     );
 
-    const orderIds = await _.go(
+    const order_ids = await _.go(
         payments,
-        L.map(({order_id}) => order_id),
+        L.map(({ order_id }) => order_id),
         DB.getOrders,
         L.map(({ id }) => id),
         _.flat
     );
 
-    console.log(orderIds)
+    await _.go(
+        payments,
+        L.reject(({ order_id }) => order_ids.includes(order_id)),
+        L.map(({ imp_id }) => imp_id),
+        L.map(Impt.cancelPayment),
+        _.each(console.log)
+    );
 }
 
 job();
