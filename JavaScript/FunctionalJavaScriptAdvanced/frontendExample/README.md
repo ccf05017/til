@@ -149,3 +149,32 @@ Ui.alert = Ui.message(
     ]
 );
 ```
+
+## 5. 이미지 동시성 다루기
+- 이미지가 고용량이 될수록 현재의 코드는 이미지가 제각각 생기는 현상이 심해진다.
+- 이터러블 프로그래밍을 통해 이런 비동기 상황을 다룰 수 있다.
+- 아래 예시는 지연 처리를 통해 하나씩 준비된 이미지를 불러온다.
+```js
+// 이미지 로딩 시간을 제어하는 함수
+_.tap(
+    $.findAll('img'),
+    L.map(img => new Promise(resolve => {           // 이 부분에서는 로드된 이미지를 준비만 한다.
+        img.onload = () => resolve(img);
+        img.src = img.getAttribute('lazy-src')
+    })),
+    _.each(img => img.classList.add('fade-in'))    // 실제로 여기서 이미지를 불러옴
+),
+```
+
+- 모두 동시에 처리하기 위한 함수
+```js
+_.tap(
+    $.findAll('img'),
+    L.map(img => new Promise(resolve => {
+        img.onload = () => resolve(img);
+        img.src = img.getAttribute('lazy-src')
+    })),
+    C.takeAll,
+    _.each($.addClass('fade-in'))
+),
+```

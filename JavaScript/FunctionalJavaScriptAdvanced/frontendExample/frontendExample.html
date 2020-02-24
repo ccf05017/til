@@ -138,6 +138,8 @@
             }
 
             $.append = _.curry((parent, child) => parent.appendChild(child));
+
+            $.addClass = _.curry((name, el) => el.classList.add(name));
         </script>
         <script>
             // 이미지들을 다루는 모듈
@@ -160,7 +162,7 @@
                 <div class="images">
                     ${_.strMap(img => `
                         <div class="image">
-                            <div class="box"><img src="${img.url}" alt="></div>
+                            <div class="box"><img src="" lazy-src="${img.url}" class="fade" alt=""></div>
                             <div class="name">${img.name}</div>
                             <div class="remove">x</div>
                         </div>
@@ -173,6 +175,18 @@
                 Images.template,
                 $.el,
                 $.append($.qs('body')),
+
+                // 이미지 로딩 시간을 제어하는 함수
+                _.tap(
+                    $.findAll('img'),
+                    L.map(img => new Promise(resolve => {
+                        img.onload = () => resolve(img);
+                        img.src = img.getAttribute('lazy-src')
+                    })),
+                    // C.takeAll,
+                    _.each($.addClass('fade-in'))
+                ),
+
                 $.findAll('.remove'),
                 $.on('click', async ({ currentTarget }) =>
                         await Ui.confirm("정말 삭제하시겠습니까?") && _.go(
