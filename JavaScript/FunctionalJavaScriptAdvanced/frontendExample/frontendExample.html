@@ -138,6 +138,8 @@
             }
 
             $.append = _.curry((parent, child) => parent.appendChild(child));
+
+            $.addClass = _.curry((name, el) => el.classList.add(name));
         </script>
         <script>
             // 이미지들을 다루는 모듈
@@ -160,7 +162,7 @@
                 <div class="images">
                     ${_.strMap(img => `
                         <div class="image">
-                            <div class="box"><img src="${img.url}" alt="></div>
+                            <div class="box"><img src="" lazy-src="${img.url}" class="fade" alt=""></div>
                             <div class="name">${img.name}</div>
                             <div class="remove">x</div>
                         </div>
@@ -168,31 +170,34 @@
                 </div>
             `
 
-            _.go(
-                Images.fetch(),
-                Images.template,
-                $.el,
-                $.append($.qs('body')),
-                $.findAll('.remove'),
-                $.on('click', async ({ currentTarget }) =>
-                        await Ui.confirm("정말 삭제하시겠습니까?") && _.go(
-                            currentTarget,
-                            $.closest('.image'),
-                            $.remove
-                        )
-                )
+            Images.loader = limit => _.tap(
+                $.findAll('img'),
+                // 이미지 로딩 시간을 제어하는 함수(대기 된 작업들을 반환한다)
+                L.map(img => _ => new Promise(resolve => {
+                    img.onload = () => resolve(img);
+                    img.src = img.getAttribute('lazy-src')
+                })),
 
-                // 사이드 이펙트 예시 코드
-                // e가 중간에 의도치 않은 e로 바뀐다.
-                // $.on('click', async e => { 
-                //     if (await Ui.confirm("정말 삭제하시겠습니까?")) {
-                //         _.go(
-                //             e.currentTarget,
-                //             $.closest('.image'),
-                //             $.remove
-                //         );
-                //     }}
-                // )
+                C.takeAllWithLimit(4),
+
+                _.each(_.each($.addClass('fade-in')))
+            );
+
+            _.groupBySize = _.curry((size, iter) => {
+                const r = L.range(Infinity);
+
+                return _.groupBy(_ => Math.floor(r.next().value / size), iter);
+            });
+
+            // 부하를 분산시켜주는 함수
+            C.takeAllWithLimit = _.curry((limit, iter) => 
+                _.go(
+                    iter,
+                    _.groupBySize(limit),
+                    L.values,
+                    L.map(L.map(f => f())),
+                    L.map(C.takeAll)
+                )
             );
 
             Ui.message = _.curry((btns, msg) => new Promise(resolve => _.go(
@@ -236,10 +241,46 @@
                 ]
             );
 
+            Ui.remover = (btnSel, targetSel, before = _ => _, after = _ => _) => _.tap(
+                $.findAll(btnSel),
+                $.on('click', async ({ currentTarget }) =>
+                        await Ui.confirm("정말 삭제하시겠습니까?") && _.go(
+                            currentTarget,
+                            $.closest(targetSel),
+                            _.tap(before),
+                            $.remove,
+                            _.tap(after)
+                        )
+                )
+            );
+
             // async function f() {
             //     await Ui.confirm("정말 삭제하시겠습니까?");
             //     console.log('hello');
             // }
+
+            _.go(
+                Images.fetch(),
+                Images.template,
+                $.el,
+                $.append($.qs('body')),
+
+                Ui.remover('.remove', '.image', _ => console.log("서버 작업"), console.log),
+
+                Images.loader(4)
+
+                // 사이드 이펙트 예시 코드
+                // e가 중간에 의도치 않은 e로 바뀐다.
+                // $.on('click', async e => { 
+                //     if (await Ui.confirm("정말 삭제하시겠습니까?")) {
+                //         _.go(
+                //             e.currentTarget,
+                //             $.closest('.image'),
+                //             $.remove
+                //         );
+                //     }}
+                // )
+            );
         </script>
     </body>
 </html>
