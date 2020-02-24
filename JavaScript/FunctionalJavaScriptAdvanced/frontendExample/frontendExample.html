@@ -200,36 +200,6 @@
                 )
             );
 
-            _.go(
-                Images.fetch(),
-                Images.template,
-                $.el,
-                $.append($.qs('body')),
-
-                Images.loader(4),
-
-                $.findAll('.remove'),
-                $.on('click', async ({ currentTarget }) =>
-                        await Ui.confirm("정말 삭제하시겠습니까?") && _.go(
-                            currentTarget,
-                            $.closest('.image'),
-                            $.remove
-                        )
-                )
-
-                // 사이드 이펙트 예시 코드
-                // e가 중간에 의도치 않은 e로 바뀐다.
-                // $.on('click', async e => { 
-                //     if (await Ui.confirm("정말 삭제하시겠습니까?")) {
-                //         _.go(
-                //             e.currentTarget,
-                //             $.closest('.image'),
-                //             $.remove
-                //         );
-                //     }}
-                // )
-            );
-
             Ui.message = _.curry((btns, msg) => new Promise(resolve => _.go(
                 `
                     <div class="confirm">
@@ -271,10 +241,46 @@
                 ]
             );
 
+            Ui.remover = (btnSel, targetSel, before = _ => _, after = _ => _) => _.tap(
+                $.findAll(btnSel),
+                $.on('click', async ({ currentTarget }) =>
+                        await Ui.confirm("정말 삭제하시겠습니까?") && _.go(
+                            currentTarget,
+                            $.closest(targetSel),
+                            _.tap(before),
+                            $.remove,
+                            _.tap(after)
+                        )
+                )
+            );
+
             // async function f() {
             //     await Ui.confirm("정말 삭제하시겠습니까?");
             //     console.log('hello');
             // }
+
+            _.go(
+                Images.fetch(),
+                Images.template,
+                $.el,
+                $.append($.qs('body')),
+
+                Ui.remover('.remove', '.image', _ => console.log("서버 작업"), console.log),
+
+                Images.loader(4)
+
+                // 사이드 이펙트 예시 코드
+                // e가 중간에 의도치 않은 e로 바뀐다.
+                // $.on('click', async e => { 
+                //     if (await Ui.confirm("정말 삭제하시겠습니까?")) {
+                //         _.go(
+                //             e.currentTarget,
+                //             $.closest('.image'),
+                //             $.remove
+                //         );
+                //     }}
+                // )
+            );
         </script>
     </body>
 </html>

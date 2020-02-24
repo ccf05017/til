@@ -299,3 +299,21 @@ C.takeAllWithLimit = _.curry((limit, iter) =>
     )
 );
 ```
+
+## 9. DOM을 다루는 고차함수
+- DOM을 제거하는 함수도 여러가지로 사용할 수 있을 것으로 보인다.
+- 이 부분을 떼어내보자
+```js
+Ui.remover = (btnSel, targetSel) => _.pipe(
+    $.findAll(btnSel),
+    $.on('click', async ({ currentTarget }) =>
+            await Ui.confirm("정말 삭제하시겠습니까?") && _.go(
+                currentTarget,
+                $.closest(targetSel),
+                $.remove
+            )
+    )
+);
+```
+
+- 추가적인 작업(서버 처리)를 추가하기도 아주 용이하다.
