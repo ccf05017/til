@@ -223,4 +223,44 @@ Images.loader = limit => _.tap(
 ```
 
 ## 7. 고차함수를 사용해서 더 잘게 나눠보자
+- 고차함수의 특징은 도메인(데이터형)이 없다.
+- 추상화를 극도로 높인 함수
+- 데이터형과 관련된 부분을 모두 분리해내고 데이터형과 관련 없는 부분을 추상화 한다.
+- 데이터형 관련 코드 분리
+```js
+// lazy 함수 내부의 특정 데이터형을 모두 제거함
+lazy => {
+    const r = L.range(Infinity);
+    return _.go(
+        lazy,
+        _.groupBy(_ => Math.floor(r.next().value / limit)),
+        L.values,
+        L.map(L.map(f => f())),
+        L.map(C.takeAll)
+    );
+},
+_.each(_.each($.addClass('fade-in')))   // <- img 타입과 관련된 함수를 밖으로 빼냄
+```
+
+- 이제 위 함수의 추상화를 높여 범용적인 함수를 만들 준비가 됐다.
+- 지연 평가가 준비된 이터러블을 받아 limit만큼씩 동시에 실행하는 함수를 만들 수 있다.
+```js
+// 부하를 분산시켜주는 함수
+C.takeAllWithLimit = _.curry((limit, iter) => {
+    const r = L.range(Infinity);
+
+    return _.go(
+        iter,
+        _.groupBy(_ => Math.floor(r.next().value / limit)),
+        L.values,
+        L.map(L.map(f => f())),
+        L.map(C.takeAll)
+    );
+});
+```
+
+- 위의 코드를 통해 높은 추상화를 얻고 범용적으로 재사용할 수 있는 함수 모듈을 추출할 수 있다.
+
+## 8. 상위 스코프 변수를 사용하는 함수와 아닌 함수를 쪼개기
+- 좀 더 추상화되고 사용하기 쉬운 함수를 만들 수 있다.
 
