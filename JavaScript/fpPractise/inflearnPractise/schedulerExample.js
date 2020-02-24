@@ -49,7 +49,15 @@ async function job() {
         _.flat
     );
 
-    console.log(payments);
+    const orderIds = await _.go(
+        payments,
+        L.map(({order_id}) => order_id),
+        DB.getOrders,
+        L.map(({ id }) => id),
+        _.flat
+    );
+
+    console.log(orderIds)
 }
 
 job();
