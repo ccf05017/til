@@ -29,3 +29,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### cert ###
+ssltest.cert
+ssltest.jks
+ssltest.ts
