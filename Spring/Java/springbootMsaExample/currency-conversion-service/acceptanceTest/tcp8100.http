@@ -6,8 +6,8 @@ GET http://localhost:8100/currency-converter-feign/from/USD/to/KRW/quantity/1000
 
 ### currency exchange service만 API GW를 통하는 경우
 
-GET http://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/KRW/quantity/1000
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiJpdGEifQ.VYX9BeSLnQU-WLImgBOtYZJ_pplGnbndSFvQTKWNnow
+GET https://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/KRW/quantity/1000
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJqYmoifQ.uOFlqsZkFiGu-MBP6RdVXjXvI_qzf5Uwaj4BpVM36Fc
 
 ### currency conversion service도 API GW를 통하는 경우
 
@@ -15,7 +15,7 @@ GET http://localhost:8765/currency-conversion-service/currency-converter-feign/f
 
 ###
 
-GET http://localhost:8765/currency-conversion-service/hello
+GET https://localhost:8765/currency-conversion-service/hello
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJqYmoifQ.uOFlqsZkFiGu-MBP6RdVXjXvI_qzf5Uwaj4BpVM36Fc
 
 ###

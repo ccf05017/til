@@ -15,7 +15,7 @@ public class RestTemplateService {
 
     public CurrencyConversionBean getCurrencyConversionBean(String from, String to) {
         ResponseEntity<CurrencyConversionBean> forEntity = restTemplate.getForEntity(
-                "http://localhost:8765/currency-exchange-service/currency-exchange/from/"
+                "https://localhost:8765/currency-exchange-service/currency-exchange/from/"
                         + from
                         + "/to/"
                         + to,
