@@ -26,7 +26,7 @@ const Impt = {
     // ImPort API Mock
     getPayments: page => {
         console.log(`http://..?page=${page}`);
-        return _.delay(1000, Impt.payments[page]);
+        return _.delay(1000 * 3, Impt.payments[page]);
     },
 
     cancelPayment: imp_id => Promise.resolve(`${imp_id}: 취소 완료`)
@@ -42,10 +42,13 @@ const DB = {
 };
 
 async function job() {
+    // API 1회당 최대로 불러올 수 있는 데이터의 양
+    const max_number = 3;
+
     const payments = await _.go(
         L.range(1, Infinity),
         L.map(Impt.getPayments),
-        _.takeUntil(({ length }) => length < 3),
+        _.takeUntil(({ length }) => length < max_number),
         _.flat
     );
 
@@ -64,6 +67,11 @@ async function job() {
         L.map(Impt.cancelPayment),
         _.each(console.log)
     );
-}
+};
 
-job();
+(function recur() {
+    Promise.all([
+        _.delay(7000, undefined),
+        job()
+    ]).then(recur);
+})();
