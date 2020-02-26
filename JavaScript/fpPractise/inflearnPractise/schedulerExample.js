@@ -26,7 +26,7 @@ const Impt = {
     // ImPort API Mock
     getPayments: page => {
         console.log(`http://..?page=${page}`);
-        return _.delay(1000 * 3, Impt.payments[page]);
+        return _.delay(100 * 3, Impt.payments[page]);
     },
 
     cancelPayment: imp_id => Promise.resolve(`${imp_id}: 취소 완료`)
@@ -74,4 +74,4 @@ async function job() {
         _.delay(7000, undefined),
         job()
     ]).then(recur);
-})();
+}) ();
