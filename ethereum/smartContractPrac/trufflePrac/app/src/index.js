@@ -1,5 +1,13 @@
 import Web3 from "web3";
-import metaCoinArtifact from "../../build/contracts/MetaCoin.json";
+import votingArtifact from "../../build/contracts/Voting.json";
+
+// 0x142Ba8A41323A77cc6CFE24a9af85bDB1cDBc213
+
+const candidates = {
+  "Rama": "candidate-1",
+  "Nick": "candidate-2",
+  "Jose": "candidate-3"
+}
 
 const App = {
   web3: null,
@@ -12,9 +20,9 @@ const App = {
     try {
       // get contract instance
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = metaCoinArtifact.networks[networkId];
-      this.meta = new web3.eth.Contract(
-        metaCoinArtifact.abi,
+      const deployedNetwork = votingArtifact.networks[networkId];
+      this.voting = new web3.eth.Contract(
+        votingArtifact.abi,
         deployedNetwork.address,
       );
 
@@ -22,37 +30,38 @@ const App = {
       const accounts = await web3.eth.getAccounts();
       this.account = accounts[0];
 
-      this.refreshBalance();
+      this.loadCandidatesAndVotes();
+
     } catch (error) {
+      console.log(error);
       console.error("Could not connect to contract or chain.");
     }
   },
 
-  refreshBalance: async function() {
-    const { getBalance } = this.meta.methods;
-    const balance = await getBalance(this.account).call();
-
-    const balanceElement = document.getElementsByClassName("balance")[0];
-    balanceElement.innerHTML = balance;
+  loadCandidatesAndVotes: async function() {
+    const { totalVotesFor } = this.voting.methods;
+    const candidateNames = Object.keys(candidates)
+    
+    for (let i = 0; i < candidateNames.length; i++) {
+      const name = candidateNames[i];
+      const count = await totalVotesFor(this.web3.utils.asciiToHex(name)).call();
+      $("#" + candidates[name]).html(count);
+    }
   },
 
-  sendCoin: async function() {
-    const amount = parseInt(document.getElementById("amount").value);
-    const receiver = document.getElementById("receiver").value;
+  voteForCandidate: async function() {
+    let candidateName = $("#candidate").val();
+    $("#msg").html("Vote submitted");
+    $("#candidate").val("");
 
-    this.setStatus("Initiating transaction... (please wait)");
+    const { totalVotesFor, voteForCandidate } = this.voting.methods;
+    await voteForCandidate(this.web3.utils.asciiToHex(candidateName)).send({ gas: 140000, from: this.account });
+    const div_id = candidates[candidateName];
+    const count = await totalVotesFor(this.web3.utils.asciiToHex(candidateName)).call();
 
-    const { sendCoin } = this.meta.methods;
-    await sendCoin(receiver, amount).send({ from: this.account });
-
-    this.setStatus("Transaction complete!");
-    this.refreshBalance();
-  },
-
-  setStatus: function(message) {
-    const status = document.getElementById("status");
-    status.innerHTML = message;
-  },
+    $("#" + div_id).html(count);
+    $("#msg").html("");
+  }
 };
 
 window.App = App;
@@ -60,8 +69,11 @@ window.App = App;
 window.addEventListener("load", function() {
   if (window.ethereum) {
     // use MetaMask's provider
-    App.web3 = new Web3(window.ethereum);
-    window.ethereum.enable(); // get permission to access accounts
+    // App.web3 = new Web3(window.ethereum);
+    // window.ethereum.enable(); // get permission to access accounts
+    App.web3 = new Web3(
+      new Web3.providers.HttpProvider("http://127.0.0.1:8545"),
+    );
   } else {
     console.warn(
       "No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live",
