@@ -33,6 +33,7 @@ const Impt = {
 };
 
 // 가맹점 DB Mock
+// 현재는 뭘 넣건 정해진 값만 준다.
 const DB = {
     getOrders: ids => _.delay(100, [
         { id: 1 },
@@ -45,6 +46,7 @@ async function job() {
     // API 1회당 최대로 불러올 수 있는 데이터의 양
     const max_number = 3;
 
+    // payments의 마지막까지 돌면서 모든 자료를 뽑아내자
     const payments = await _.go(
         L.range(1, Infinity),
         L.map(Impt.getPayments),
@@ -52,6 +54,7 @@ async function job() {
         _.flat
     );
 
+    // 가맹점 DB의 Payments 정보들을 빼내자
     const order_ids = await _.go(
         payments,
         L.map(({ order_id }) => order_id),
@@ -60,6 +63,7 @@ async function job() {
         _.flat
     );
 
+    // 결제가 정상완료 된(가맹정 DB에 있는) 정보들 외에는 취소 처리
     await _.go(
         payments,
         L.reject(({ order_id }) => order_ids.includes(order_id)),
@@ -69,9 +73,10 @@ async function job() {
     );
 };
 
+// 7초 주기로 같은 작업을 반복하도록 재귀처리
 (function recur() {
     Promise.all([
         _.delay(7000, undefined),
         job()
     ]).then(recur);
-}) ();
+})();
