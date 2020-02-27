@@ -57,26 +57,27 @@ async function job() {
     // 가맹점 DB의 Payments 정보들을 빼내자
     const order_ids = await _.go(
         payments,
-        L.map(({ order_id }) => order_id),
+        _.map(({ order_id }) => order_id),
+        _.flat,
         DB.getOrders,
-        L.map(({ id }) => id),
+        _.map(({ id }) => id),
         _.flat
     );
 
     // 결제가 정상완료 된(가맹정 DB에 있는) 정보들 외에는 취소 처리
     await _.go(
         payments,
-        L.reject(({ order_id }) => order_ids.includes(order_id)),
-        L.map(({ imp_id }) => imp_id),
+        _.reject(({ order_id }) => order_ids.includes(order_id)),
+        _.map(({ imp_id }) => imp_id),
         L.map(Impt.cancelPayment),
         _.each(console.log)
-    );
+    )
 };
 
 // 7초 주기로 같은 작업을 반복하도록 재귀처리
 (function recur() {
     Promise.all([
         _.delay(7000, undefined),
-        job()
+        job(),
     ]).then(recur);
 })();
