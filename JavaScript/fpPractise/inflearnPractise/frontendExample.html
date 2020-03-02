@@ -112,29 +112,30 @@
         <script>
             // DOM 모듈
             const $ = {};
-            
-            $.createEl = html => {
-                const wrap = document.createElement("div");
-                wrap.innerHTML = html;
 
-                return wrap.children[0];
+            $.createDom = html => {
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = html;
+
+                return wrapper.children[0];
             };
 
-            $.qs = (sel, parent = document) => parent.querySelector(sel);
-            $.qsa = (sel, parent = document) => parent.querySelectorAll(sel);
+            $.qs = (sel, parent=document) => parent.querySelector(sel);
+            $.qsa = (sel, parent=document) => parent.querySelectorAll(sel);
 
             $.find = _.curry($.qs);
             $.findAll = _.curry($.qsa);
 
-            $.addEl = _.curry((parent, el) => parent.appendChild(el));
+            $.addEl = _.curry((target, el) => target.appendChild(el));
 
             $.closest = _.curry((sel, el) => el.closest(sel));
 
             $.remove = el => el.parentNode.removeChild(el);
 
-            $.addEvent = (event, f) => els => _.each(
-                el => el.addEventListener(event, f)
-            , _.isIterable(els) ? els : [els])
+            $.addEvent = (e, f) => els => _.each(el =>
+                el.addEventListener(e, f),
+                _.isIterable(els) ? els : [els]
+            );
         </script>
         <script>
             // Image 모듈
@@ -161,21 +162,20 @@
         <script>
             const string = iter => _.reduce((a, b) => `${a}${b}`, iter);
 
-            _.strMap = _.curry(_.pipe(L.map, string));
+            _.strMap = _.pipe(L.map, string);
 
-            // 실행 구간
             _.go(
                 Image.fetch(),
                 Image.tmpl,
-                $.createEl,
-                $.addEl($.qs("body")),
-                $.findAll(".remove"),
+                $.createDom,
+                $.addEl($.qs('body')),
+                $.findAll('.remove'),
                 $.addEvent('click', e => _.go(
                     e.currentTarget,
                     $.closest('.image'),
                     $.remove
                 ))
-            )
+            );
         </script>
     </body>
 </html>
