@@ -160,6 +160,43 @@
             `;
         </script>
         <script>
+            const Ui = {};
+
+            Ui.confirm = msg => new Promise(resolve => _.go (
+                `
+                <div class="confirm">
+                    <div class="body">
+                        <div class="msg">${msg}</div>
+                        <div class="buttons">
+                            <button type="button" class="cancel">취소</button>
+                            <button type="button" class="ok">확인</button>
+                       </div>
+                    </div>
+                </div>
+                `,
+                $.createDom,
+                $.addEl($.qs('body')),
+                _.tap(
+                    $.find('.ok'),
+                    $.addEvent('click', e => _.go(
+                        e.currentTarget,
+                        $.closest('.confirm'),
+                        $.remove,
+                        _ => resolve(true)
+                    ))
+                ),
+                _.tap(
+                    $.find('.cancel'),
+                    $.addEvent('click', e => _.go(
+                        e.currentTarget,
+                        $.closest('.confirm'),
+                        $.remove,
+                        _ => resolve(false)
+                    ))
+                ),
+            ));
+        </script>
+        <script>
             const string = iter => _.reduce((a, b) => `${a}${b}`, iter);
 
             _.strMap = _.pipe(L.map, string);
@@ -170,11 +207,14 @@
                 $.createDom,
                 $.addEl($.qs('body')),
                 $.findAll('.remove'),
-                $.addEvent('click', e => _.go(
-                    e.currentTarget,
-                    $.closest('.image'),
-                    $.remove
-                ))
+                $.addEvent('click', async ({currentTarget}) =>
+                    await Ui.confirm("진짜루?") &&
+                    _.go(
+                        currentTarget,
+                        $.closest('.image'),
+                        $.remove
+                    )
+                )
             );
         </script>
     </body>
