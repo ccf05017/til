@@ -61,5 +61,28 @@
 ** 자주 사용될 것 같은 함수를 계속해서 추상화 시키자
 ** 파이프라인 외 단독적으로 FxJS를 사용하는 문법도 잘 좀 익혀놓자.
 
+#### c. 커스텀 경고창 만들어보기
+- 아래의 리터럴로 이루어진 커스텀 경고창을 만든다
+```html
+<div class="confirm">
+    <div class="body">
+        <div class="msg"></div>
+        <div class="buttons">
+            <button type="button" class="cancel"></button>
+            <button type="button" class="ok"></button>
+        </div>
+    </div>
+</div>
+```
+- 해당 만들어진 요소를 body 안에 넣는다.
+- ok 버튼에 확인 이벤트를 추가해준다.
+- cancel 버튼에 취소 이벤트를 추가해준다.
+- ok나 cancel 처리 후에만 추가적인 동작이 발생하도록 만든다.
+- 기존의 template 함수 내 remove 핸들러 커스텀 경고창을 추가해준다.
+- 취소 시 삭제가 발생하지 않도록 변경한다.
+
+** tap 함수를 활용하자
+** 구조 분해를 통해 가변객체를 불변객체로 만들 수 있다
+
 ## 2. 자체 도전 과제
 - 기존의 Vue.js 강의에서 작성한 트렐로를 함수형으로 바꿔보기
