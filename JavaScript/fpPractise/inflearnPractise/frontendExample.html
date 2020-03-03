@@ -113,29 +113,16 @@
             // DOM 모듈
             const $ = {};
 
-            $.createDom = html => {
-                const wrapper = document.createElement("div");
-                wrapper.innerHTML = html;
+            $.el = html => {
+                const wrap = document.createElement("div");
+                wrap.innerHTML = html;
 
-                return wrapper.children[0];
+                return wrap.children[0];
             };
 
-            $.qs = (sel, parent=document) => parent.querySelector(sel);
-            $.qsa = (sel, parent=document) => parent.querySelectorAll(sel);
+            $.qs = (sel, parent = document) => parent.querySelector(sel);
 
-            $.find = _.curry($.qs);
-            $.findAll = _.curry($.qsa);
-
-            $.addEl = _.curry((target, el) => target.appendChild(el));
-
-            $.closest = _.curry((sel, el) => el.closest(sel));
-
-            $.remove = el => el.parentNode.removeChild(el);
-
-            $.addEvent = (e, f) => els => _.each(el =>
-                el.addEventListener(e, f),
-                _.isIterable(els) ? els : [els]
-            );
+            $.addEl = _.curry((parent, el) => parent.appendChild(el));
         </script>
         <script>
             // Image 모듈
@@ -151,71 +138,28 @@
                 <div class="images">
                     ${_.strMap(img => `
                         <div class="image">
-                            <div class="box"><img src="${img.url}" alt=""></div>
+                            <div class="box"><img src="${img.url}" alt="" /></div>
                             <div class="name">${img.name}</div>
                             <div class="remove">x</div>
                         </div>
                     `, imgs)}
                 </div>
-            `;
+            `
         </script>
         <script>
             const Ui = {};
-
-            Ui.confirm = msg => new Promise(resolve => _.go (
-                `
-                <div class="confirm">
-                    <div class="body">
-                        <div class="msg">${msg}</div>
-                        <div class="buttons">
-                            <button type="button" class="cancel">취소</button>
-                            <button type="button" class="ok">확인</button>
-                       </div>
-                    </div>
-                </div>
-                `,
-                $.createDom,
-                $.addEl($.qs('body')),
-                _.tap(
-                    $.find('.ok'),
-                    $.addEvent('click', e => _.go(
-                        e.currentTarget,
-                        $.closest('.confirm'),
-                        $.remove,
-                        _ => resolve(true)
-                    ))
-                ),
-                _.tap(
-                    $.find('.cancel'),
-                    $.addEvent('click', e => _.go(
-                        e.currentTarget,
-                        $.closest('.confirm'),
-                        $.remove,
-                        _ => resolve(false)
-                    ))
-                ),
-            ));
         </script>
         <script>
             const string = iter => _.reduce((a, b) => `${a}${b}`, iter);
 
-            _.strMap = _.pipe(L.map, string);
+            _.strMap = _.pipe(_.map, string);
 
             _.go(
                 Image.fetch(),
                 Image.tmpl,
-                $.createDom,
-                $.addEl($.qs('body')),
-                $.findAll('.remove'),
-                $.addEvent('click', async ({currentTarget}) =>
-                    await Ui.confirm("진짜루?") &&
-                    _.go(
-                        currentTarget,
-                        $.closest('.image'),
-                        $.remove
-                    )
-                )
-            );
+                $.el,
+                $.addEl($.qs('body'))
+            )
         </script>
     </body>
 </html>
