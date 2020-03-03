@@ -46,32 +46,32 @@ async function job() {
     // API 1회당 최대로 불러올 수 있는 데이터의 양
     const max_number = 3;
 
-    // payments의 마지막까지 돌면서 모든 자료를 뽑아내자
+    // payments의 마지막까지 돌면서 모든 자료를 뽑아내자 (getPayments 함수 활용)
     const payments = await _.go(
         L.range(1, Infinity),
         L.map(Impt.getPayments),
-        _.takeUntil(({ length }) => length < max_number),
+        _.takeUntil(({length}) => length < max_number),
         _.flat
     );
 
     // 가맹점 DB의 Payments 정보들을 빼내자
     const order_ids = await _.go(
         payments,
-        L.map(({ order_id }) => order_id),
+        L.map(({order_id}) => order_id),
         _.flat,
         DB.getOrders,
-        L.map(({ id }) => id),
+        L.map(({id}) => id),
         _.flat
     );
 
     // 결제가 정상완료 된(가맹정 DB에 있는) 정보들 외에는 취소 처리
     await _.go(
-      payments,
-      _.reject(({ order_id }) => order_ids.includes(order_id)),
-      L.map(({ imp_id }) => imp_id),
-      L.map(Impt.cancelPayment),
-      _.each(console.log)
-    )
+        payments,
+        L.reject(({order_id}) => order_ids.includes(order_id)),
+        L.map(({imp_id}) => imp_id),
+        L.map(Impt.cancelPayment),
+        _.each(console.log)
+    );
 }
 
 // 7초 주기로 같은 작업을 반복하도록 재귀처리
