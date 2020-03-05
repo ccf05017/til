@@ -114,28 +114,19 @@
             const $ = {};
 
             $.el = html => {
-                const wrap = document.createElement("div");
-                wrap.innerHTML = html;
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = html;
 
-                return wrap.children[0];
+                return wrapper.children[0];
             };
 
-            $.qs = (sel, parent = document) => parent.querySelector(sel);
-            $.qsa = (sel, parent = document) => parent.querySelectorAll(sel);
+            $.qs = (sel, parent=document) => parent.querySelector(sel);
+            $.qsa = (sel, parent=document) => parent.querySelectorAll(sel);
 
             $.find = _.curry($.qs);
             $.findAll = _.curry($.qsa);
 
-            $.addEl = _.curry((parent, el) => parent.appendChild(el));
-
-            $.closest = _.curry((sel, el) => el.closest(sel));
-
-            $.remove = el => el.parentNode.removeChild(el);
-
-            $.addEvent = (e, f) => els => _.each(
-                el => el.addEventListener(e, f),
-                _.isIterable(els) ? els : [els])        // 한 개인 경우도 처리 가능
-            ;
+            $.addEl = _.curry((target, el) => target.appendChild(el));
         </script>
         <script>
             // Image 모듈
@@ -151,76 +142,28 @@
                 <div class="images">
                     ${_.strMap(img => `
                         <div class="image">
-                            <div class="box"><img src="${img.url}" alt="" /></div>
+                            <div class="box"><img src="${img.url}" alt=""></div>
                             <div class="name">${img.name}</div>
-                            <div class="remove">x</div>
                         </div>
                     `, imgs)}
                 </div>
             `
         </script>
         <script>
+            // Ui 모듈
             const Ui = {};
-
-            Ui.message = _.curry((btns, msg) => new Promise(resolve => _.go(`
-                <div class="confirm">
-                    <div class="body">
-                        <div class="msg">${msg}</div>
-                        <div class="buttons">
-                            ${_.strMap(btn => `
-                                <button type="button" class="${btn.type}">${btn.name}</button>
-                            `, btns)}
-                        </div>
-                    </div>
-                </div>
-                `,
-                $.el,
-                $.addEl($.qs('body')),
-                ..._.map(btn => _.tap(
-                    $.find(`.${btn.type}`),
-                    $.addEvent('click', e => _.go(
-                        e.currentTarget,
-                        $.closest('.confirm'),
-                        $.remove,
-                        _ => resolve(btn.value)
-                    ))
-                ), btns)
-            )));
-
-            Ui.confirm = Ui.message(
-                [
-                    {type: "cancel", name: "취소", value: false},
-                    {type: "ok", name: "확인", value: true}
-                ]
-            );
-
-            Ui.alert = Ui.message(
-                [
-                    {type: "ok", name: "확인", value: true}
-                ]
-            );
         </script>
         <script>
             const string = iter => _.reduce((a, b) => `${a}${b}`, iter);
 
-            _.strMap = _.pipe(_.map, string);
+            _.strMap = _.pipe(L.map, string);
 
             _.go(
                 Image.fetch(),
                 Image.tmpl,
                 $.el,
-                $.addEl($.qs('body')),
-                $.findAll('.remove'),
-                $.addEvent('click', async ({currentTarget}) =>
-                    await Ui.confirm("정말 삭제하시겠습니까?") &&
-                    _.go(
-                        currentTarget,
-                        $.closest('.image'),
-                        $.remove
-                    ))
-            );
-
-            Ui.alert("함수형 프론트 예제에 오신 것을 환영합니다.");
+                $.addEl($.qs('body'))
+            )
         </script>
     </body>
 </html>
