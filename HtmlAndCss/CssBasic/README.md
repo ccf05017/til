@@ -103,3 +103,155 @@
 5. 일반 형제 선택자
     - `선행요소 ~ 형제요소` 방식으로 사용
     - 선행요소의 지정된 모든 형제 요소를 찾는다.
+
+### 3.3 가상 클래스 선택자
+- 선택자 앞에 `:`가 1개 붙는다. (유의사항: `:`가 두개 붙으면 가상 요소 선택자)
+
+#### a. hover
+- 요소에 마우스가 올라가 있는 동안만 해당 요소를 선택한다.
+- `요소:hover` 방식으로 사용한다.
+- 예시
+    ```css
+    /* a tag에 마우스가 올라간 동안만 빨간색으로 바꾼다 */
+    a:hover {
+        color: red
+    }
+    ```
+
+#### b. active
+- 요소를 마우스로 클릭하는 동안만 해당 요소를 선택한다.
+- `요소:active` 방식으로 사용한다.
+- 예시
+    ```css
+    /* a 태그를 클릭한 동안만 색상을 빨간색으로 변경 */
+    a:active{
+        color:red;
+    }
+    ```
+  
+#### c. focus
+- 요소가 포커스 된 동안에만 선택 가능
+- `요소:focus` 방식으로 사용한다.
+- `대화형 컨텐츠`에서만 사용가능하다.
+    - 대화형 컨텐츠: input, img, tabindex
+- 예시
+    ```css
+    input {
+      width: 100px;
+      outline: none;
+      border: 1px solid lightgray;
+      padding: 5px 10px;
+    }
+    
+    input:focus {
+      background: red;
+    }
+    ```
+  
+#### d. first child
+- 요소가 형제 요소 중 첫번째 요소라면 선택한다
+- `요소:first-child` 방식으로 사용한다.
+- 예시
+    ```css
+    .fuits li:first-child {
+        color: red;
+    }
+    ```
+    ```html
+    <ul class="fruits">
+        <li>딸기</li> <!-- 선택 -->
+        <li>사과</li>
+        <li>망고</li>
+    </ul>
+    ```
+  
+#### e. last child
+- first child와 유사하게 동장하나, 형제 중 마지막 요소를 선택한다.
+- `요소:last-child` 방식으로 사용한다.
+- 예시
+    ```css
+    .fuits li:last-child {
+        color: red;
+    }
+    ```
+    ```html
+    <ul class="fruits">
+        <li>딸기</li> 
+        <li>사과</li>
+        <li>망고</li> <!-- 선택 -->
+    </ul>
+    ```
+  
+#### f. nth child
+- 형제 중 선택된 n번째 요소를 선택한다.
+- index는 0부터 시작된다.
+- `요소:nth-child(n)` 방식으로 사용한다.
+- 단 n 개념을 사용 시 n은 0부터 시작한다.
+- 유의사항
+    - nth child가 우선적으로 검색된 뒤 앞의 요소를 확인한다.
+    - 오른쪽부터 읽으란 얘기다. 
+- 예시(일반 사용)
+    ```css
+    .fuits li:nth-child(2) {
+        color: red;
+    }
+    ```
+    ```html
+    <ul class="fruits">
+        <li>딸기</li> 
+        <li>사과</li> <!-- 선택 -->
+        <li>망고</li>
+    </ul>
+    ```
+- 예시(n키워드 사용)
+    ```css
+    .fuits li:nth-child(n+2) {
+        color: red;
+    }
+    ```
+    ```html
+    <ul class="fruits">
+        <li>딸기</li> 
+        <li>사과</li> <!-- 선택 -->
+        <li>망고</li> <!-- 선택 -->
+    </ul>
+    ```
+  
+#### g. nth of type
+- 요소의 타입과 동일한 타입인 형제 요소 중 요소가 n번째 요소라면 선택
+- 표현부터가 어렵다
+- `요소:nth-of-type(n)` 방식으로 사용한다
+- nth child 처럼 n 요소를 사용할 수 있다.
+- 타입(태그 이름)에만 유효하다. (클래스 이름 같은 거엔 반응하지 않는다)
+- 예시
+    ```css
+    .fruits p:nth-of-type(1) {
+      color: red;
+    }
+    ```
+    ```html
+    <div class="fruits">
+      <div>딸기</div>
+      <p>사과</p> <!-- 선택됨 -->
+      <p>망고</p>
+      <span>오렌지</span>
+    </div>
+    ```
+
+#### h. 부정 선택자
+- 선택자가 아닌 요소를 선택한다
+- `요소:not(선택자)` 방식으로 사용한다.
+- 예시
+    ```css
+    .fruits li:not(.except) {
+      color: red;
+    }
+    ```
+    ```html
+    <ul class="fruits">
+      <li>딸기</li>
+      <li class="except">사과</li> <!-- 제외됨 -->
+      <li>망고</li>
+      <li>오렌지</li>
+    </ul>
+    ```
