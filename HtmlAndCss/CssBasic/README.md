@@ -255,3 +255,126 @@
       <li>오렌지</li>
     </ul>
     ```
+
+### 3.4 가상 요소 선택자
+- 선택된 요소의 내용 안쪽에 관여한다.
+- `::`로 사용된다.
+- 텍스트, 이미지, 단순 DOM 요소 모두 삽입할 수 있다.
+- 유의사항
+    - 콜론(:)을 하나만 찍어도 동작에 문제는 없다.
+    - 그러나 가상 클래스 선택자와 헷갈릴 수 있기 때문에 콜론을 두개 쓰자.
+    - 콜론 두개가 표준이다.
+
+#### a. before
+- 요소 내부의 앞에 내용을 삽입한다.
+- `요소::before` 방식으로 사용한다.
+- 가상 요소 선택자에 css를 적용할 때는 `content` 속성을 꼭 넣어야 한다.
+- 공백으로라도 만들어야 적용된다.
+- 예시
+    ```css
+    ul {
+      font-size: 40px;
+    }
+    ul li::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      background: tomato;
+      margin-right: 20px;
+      display: inline-block;
+      border-radius: 50%;
+    }
+    ```
+    ```html
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    ```
+
+#### b. after
+- 글자 그대로 before 선택자와 반대로 동작한다.
+- 예시
+    ```css
+    ul {
+      font-size: 400px;
+    }
+    ul li::after {
+      content: url("https://www.himgs.com/imagenes/hello/social/hello-fb-logo.png");
+    }
+    ```
+    ```html
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    ```
+
+### 3.5 속성 선택자
+#### a. attr
+- 특정 속성을 포함한 요소 선택
+- `[attr]` 방식으로 사용한다.
+- 예시
+    ```css
+    [disabled] {
+      opacity: 0.2;
+    }
+    ```
+    ```html
+    <input type="text" value="HEROPY">
+    <input type="passowrd" value="1234">
+    <input type="text" value="disabled text" disabled>
+    ```
+#### b. attr=value
+- 특정 속성에 특정 값이 있는 요소 선택
+- `[attr=value]` 방식으로 사용한다.
+- 예시
+    ```css
+    [type="password"] {
+      opacity: 0.5;
+      color: red;
+    }
+    ```
+    ```html
+    <input type="text" value="HEROPY">
+    <input type="passowrd" value="1234">
+    <input type="text" value="disabled text" disabled>
+    ```
+#### c. attr^=value
+- 속성 attr을 포함하며 속성 값이 value로 시작하는 요소 선택
+- `[attr^=value`] 방식으로 사용한다.
+- 예시
+    ```css
+    [class^="btn-"] {
+      color: red;
+    }
+    ```
+    ```html
+    <button class="btn-success">Success</button>
+    <button class="btn-danger">Danger</button>
+    <button>Normal</button>
+    ```
+  
+ #### d. attr$=value
+- 속성 attr을 포함하며 속성 값이 value로 끝나는 요소 선택
+- `[attr$=value`] 방식으로 사용한다.
+- 예시
+    ```css
+    [class^="btn-"] {
+      font-weight: bold;
+      border-radius: 20px;
+    }
+    [class$="-success"] {
+      color: green;
+    }
+    [class$="-danger"] {
+      color: red;
+    }
+    ```
+    ```html
+    <button class="btn-success">Success</button>
+    <button class="btn-danger">Danger</button>
+    <button>Normal</button>
+    ```
