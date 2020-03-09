@@ -21,7 +21,19 @@
             $.qs = (sel, parent=document) => parent.querySelector(sel);
             $.qsa = (sel, parent=document) => parent.querySelectorAll(sel);
 
+            $.find = _.curry($.qs);
+            $.findAll = _.curry($.qsa);
+
             $.addEl = _.curry((parent, el) => parent.appendChild(el));
+
+            $.closest = _.curry((sel, el) => el.closest(sel));
+
+            $.remove = el => el.parentNode.removeChild(el);
+
+            $.addEvent = (e, f) => els => _.each(
+                el => el.addEventListener(e, f),
+                _.isIterable(els) ? els : [els]
+            );
         </script>
         <script>
             // Image 모듈
@@ -39,6 +51,7 @@
                         <div class="image">
                             <div class="box"><img src="${img.url}" alt=""></div>
                             <div class="name">${img.name}</div>
+                            <div class="remove">x</div>
                         </div>
                     `, imgs)}
                 </div>
@@ -57,7 +70,13 @@
               Image.fetch(),
               Image.tmpl,
               $.el,
-              $.addEl($.qs("body"))
+              $.addEl($.qs("body")),
+              $.findAll(".remove"),
+              $.addEvent('click', e => _.go(
+                  e.currentTarget,
+                  $.closest('.image'),
+                  $.remove
+              ))
             );
         </script>
     </body>
