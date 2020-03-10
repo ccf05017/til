@@ -1,0 +1,28 @@
+body * {
+    border: 2px solid;
+}
+
+.container {
+    width: 60em; /* = width: 600px; */
+    font-size: 10px;
+}
+
+.parent {
+    width: 50%; /* = width: 300px; */
+}
+
+.child {
+    width: 50%; /* = width: 150px; */
+}
+
+.container2 {
+    width: 50vw;
+    height: 20vh;
+    background: palevioletred;
+}
+
+.container3 {
+    width: 50vmax;
+    height: 300px;
+    background: aquamarine;
+}
