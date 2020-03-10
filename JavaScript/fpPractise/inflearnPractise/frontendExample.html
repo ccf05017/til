@@ -49,7 +49,7 @@
                 <div class="images">
                     ${_.strMap(img => `
                         <div class="image">
-                            <div class="box"><img src="${img.url}" alt=""></div>
+                            <div class="box"><img src="" lazy-src="${img.url}" alt="" class="fade"></div>
                             <div class="name">${img.name}</div>
                             <div class="remove">x</div>
                         </div>
@@ -104,6 +104,14 @@
               Image.tmpl,
               $.el,
               $.addEl($.qs("body")),
+              _.tap(
+                  $.findAll("img"),
+                  L.map(img => new Promise(resolve => {
+                      img.onload = () => resolve(img);
+                      img.src = img.getAttribute('lazy-src');
+                  })),
+                  _.each(el => el.classList.add('fade-in'))
+              ),
               $.findAll(".remove"),
               $.addEvent('click', async ({currentTarget}) =>
                   await Ui.confirm("정말 삭제하시겠습니까?") &&
