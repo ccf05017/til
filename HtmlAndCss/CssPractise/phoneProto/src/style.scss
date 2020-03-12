@@ -1,0 +1,153 @@
+$bg-color: white;
+
+body {
+  background-color: $bg-color;
+}
+
+.phone-container {
+  height: 700px;
+  width: 420px;
+  margin: auto;
+  background: black;
+  position: relative;
+  border-radius: 25px;
+}
+
+.phone-content {
+  position: absolute;
+  left: 20px;
+  top: 45px;
+  height: 80%;
+  width: 90%;
+  background: white;
+}
+
+.nav-bar-container {
+  height: 10%;
+  width: 100%;
+  background: lightgray;
+}
+.title-box {
+  height: 100%;
+  float: left;
+  font-size: 35px;
+  margin-top: 10px;
+  margin-left: 153px;
+}
+.menu-button {
+  height: 40px;
+  width: 40px;
+  float: right;
+  margin-right: 7px;
+  margin-top: 7px;
+  background-image: url("./images/menu.png");
+  background-size: cover;
+}
+
+.main-content-container {
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  top: 13%;
+  text-align: center;
+}
+.token-info {
+  margin: 10px;
+  text-align: left;
+  font-size: 20px;
+  display: flex;
+}
+.token-info-img {
+  height: 35px;
+  width: 35px;
+}
+.token-info-name {
+  margin: 10px;
+}
+.balance-info {
+  margin: 15px;
+  text-align: left;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.token-img-wrapper {
+  margin-top: 15px;
+  border: solid 2px;
+  border-radius: 5px;
+  display: inline-block;
+  height: 60%;
+  width: 90%;
+  cursor: pointer;
+}
+.add-token {
+  width: 25%;
+  margin: 15%;
+}
+
+.primary-button-line-container {
+  width: 100%;
+  height: 15%;
+  position: absolute;
+  top: 68%;
+  display: flex;
+  justify-content: space-around;
+}
+.primary-button {
+  height: 100%;
+  width: 30%;
+  text-align: center;
+}
+.primary-button-img {
+  width: 50%;
+  height: 75%;
+  align-self: center;
+  display: inline-block;
+}
+.primary-button-name {
+  width: 100%;
+  height: 25%;
+  text-align: center;
+}
+.charge {
+  background-image: url("./images/charge.png");
+  background-size: cover;
+}
+.present {
+  background-image: url("./images/present.png");
+  background-size: cover;
+}
+.register {
+  margin-right: 3px;
+  background-image: url("./images/register.png");
+  background-size: cover;
+  cursor: pointer;
+}
+
+.phone-home-button {
+  position: absolute;
+  top: 90%;
+  left: 45%;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 57px;
+}
+
+.pay-button-container {
+  height: 10%;
+  width: 100%;
+  position: absolute;
+  top: 90%;
+  background: lightgray;
+}
+.pay-button {
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 17px;
+  cursor: pointer;
+}
