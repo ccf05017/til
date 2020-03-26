@@ -21,8 +21,7 @@
             android:background="#000000"
             android:text="My Tube"
             android:textColor="#FFFFFF"
-            android:textSize="30dp"
-            />
+            android:textSize="30dp" />
 
     </LinearLayout>
 
