@@ -30,3 +30,15 @@
     - colors: 색상 모음집
     - strings: 글자 모음집
     - styles: 테마 모음집
+
+## Activity
+- 대략적으로 앱의 한 화면이라고 생각하면 된다.(정확한 설명은 아님)
+- Life Cycle이 존재한다. (매우 중요)
+    - 6가지 콜백으로 구성된 핵심 세트 (onCreate, onStart, onResume, onPause, onStop, onDestroy)
+        - onCreate: 액티비티가 만들어질 때 단 한번만 호출됨 / 생성자와 매우 유사함
+        - onResume: 액티비티가 다시 호출될 때 하면 되는 모든 작업들
+        - onPause: 화면의 일부가 가려졌을 때
+        - onStop: 화면 전부가 보이지 않을 때
+        - onPause, onStop 후 다시 앱으로 돌아오면 onResume은 무조건 다시 실행하게 된다.
+    - https://developer.android.com/guide/components/activities/activity-lifecycle
+
