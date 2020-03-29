@@ -17,3 +17,16 @@
     - activity: 안드로이드의 화면
         - intent-filter:
             - launcher: 해당 화면을 런처(앱을 실행할 때 나오는 화면)으로 지정함.
+
+## java 패키지
+- 실제 앱 코드, 테스트 코드들이 위치한다.
+
+## res
+- 안드로이드에서 사용 될 리소스들이 모여있는 패키지
+- drawable: 앱에서 사용하는 이미지들
+- layout: 앱의 화면을 그릴 때 사용되는 xml 파일들
+- mipmap: 앱의 아이콘들
+- values: 리소스 공용 변수들
+    - colors: 색상 모음집
+    - strings: 글자 모음집
+    - styles: 테마 모음집

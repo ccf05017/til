@@ -14,19 +14,21 @@
             android:layout_height="wrap_content"
             android:background="#673AB7"
             android:text="hello"
-            android:textSize="40dp"/>
+            android:textSize="40dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#F44336"
             android:text="hello"
-            android:textSize="40dp"/>
+            android:textSize="40dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#8BC34A"
             android:text="hello"
-            android:textSize="40dp"/>
+            android:textSize="40dp" />
 
     </LinearLayout>
 
@@ -40,19 +42,21 @@
             android:layout_height="300dp"
             android:background="#673AB7"
             android:text="hello"
-            android:textSize="40dp"/>
+            android:textSize="40dp" />
+
         <TextView
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:background="#F44336"
             android:text="hello"
-            android:textSize="40dp"/>
+            android:textSize="40dp" />
+
         <TextView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="#8BC34A"
             android:text="hello"
-            android:textSize="40dp"/>
+            android:textSize="40dp" />
 
     </FrameLayout>
 
