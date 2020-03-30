@@ -82,3 +82,5 @@
     hello.setOnClickListener(click)
     ```
 
+## 뷰를 조작하는 방법
+

@@ -35,8 +35,14 @@ class Listener : AppCompatActivity() {
         val click = object: View.OnClickListener {
             override fun onClick(v: View?) {
                 Log.d("click", "Click!!")
+                hello.text = "hello"
             }
         }
         hello.setOnClickListener(click)
+
+        // 뷰 조작 함수
+        // 1. 기본적인 getter / setter (물론 코틀린이기 때문에 속성에 바로 접근 할 것을 권한다.)
+        hello.text = "not hello"
+        image.setImageResource(R.drawable.ic_launcher_foreground)
     }
 }
