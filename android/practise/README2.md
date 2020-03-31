@@ -41,4 +41,56 @@
         - onStop: 화면 전부가 보이지 않을 때
         - onPause, onStop 후 다시 앱으로 돌아오면 onResume은 무조건 다시 실행하게 된다.
     - https://developer.android.com/guide/components/activities/activity-lifecycle
+    - onPause, onStop은 명확하게 구분해서 사용하기 어렵다.
+        - 그래서 보통 그냥 둘 중 하나 선택해서 하나에 다 밀어넣는다.
+- IDE에서 제너레이트 기능으로 activity를 생성하면 manifests에 자동으로 추가된다.
 
+## Xml 가져오기
+- 익명함수를 이용하게 된다. (1회성으로 필요하기 때문)
+- findViewById 함수로 View 타입을 액티비티로 불러올 수 있다. (자바에서 지원되던 구버전 사용법)
+- 코틀린의 경우 View의 id를 통해 바로 임포트시킬 수 있다.
+
+## EventHandler
+- 자바스크립트 이벤트핸들러와 매우 유사하다.
+- 엑티비티에서 XML 형태의 View 컴포넌트를 불러오고, 해당 컴포넌트에 이벤트 핸들러를 달아줄 수 있다.
+- onClick, onScroll 등등 많은 이벤트가 있다. 자세한 건 문서 참조
+- https://developer.android.com/guide/input
+- 핸들러 작성 방법
+    - 람다
+    ```kotlin
+    hello.setOnClickListener {
+        Log.d("click", "Click!!")
+    }
+    ```
+
+    - 익명 함수
+    ```kotlin
+    hello.setOnClickListener(object: View.OnClickListener {
+        override fun onClick(v: View?) {
+            Log.d("click", "Click!!")
+        }
+    })
+    ```
+
+    - 일반적인 방식
+    ```kotlin
+    val click = object: View.OnClickListener {
+        override fun onClick(v: View?) {
+            Log.d("click", "Click!!")
+        }
+    }
+    hello.setOnClickListener(click)
+    ```
+
+## 뷰를 조작하는 방법
+- 자바스크립트 처럼 세터나 이벤트 핸들러를 통해 동작을 제어할 수 있다.
+
+## Intent
+- 무언가를 요청하는 행위
+- 사용 가능 관계
+    - Activity <-> Activity
+    - Android System <-> App
+    - 다른 App <-> My App (상호 합의를 통해 사용 가능)
+- 요청의 종류
+    - 전달만 하는 요청 (이벤트 방식)
+    - 리턴을 전달하는 요청
