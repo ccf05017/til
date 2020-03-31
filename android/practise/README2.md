@@ -168,3 +168,12 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
             - FLAG_ACTIVITY_CLEAR_TOP
             - 기타 등등
 - Task 스택 관리는 그냥 기본 설정을 가능한 쓰자 (IntentFlag나 LaunchMode는 완전히 알 때 사용하자)
+
+## Fragment
+- Activity 분할 책임 요소
+- 라이프 사이클이 존재한다.
+- Activity에 종속적이다.
+- Activity의 구성 요소가 너무 많거나 길거나 클 경우 관리할 코드가 너무 많아진다.
+- 또한 엄청난 종류의 디바이스 종류 때문에 화면 구성이 많이 틀어진다 => 뷰를 떼서 옮겨야 될 수 있다.
+- 이를 해결하기 위해 Activity를 조각조각 쪼개서 구성한다 => 이게 Fragment
+- 단, 관리 포인트가 엄청 늘어날 수 있다. 이건 유의해야 한다.
