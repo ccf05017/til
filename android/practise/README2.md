@@ -91,12 +91,80 @@
     - Activity <-> Activity
     - Android System <-> App
     - 다른 App <-> My App (상호 합의를 통해 사용 가능)
-- 요청의 종류
-    - 전달만 하는 요청 (이벤트 방식)
-    - 리턴을 전달하는 요청
+- Intent의 종류
+    - 명시적 Intent: 정확한 대상에게 요청한다.
+        - 전달만 하는 요청 (이벤트 방식)
+        - 리턴을 전달하는 요청
+    - 암시적 Intent: 할 수 있는 놈 아무한테나 요청한다.
+- 값 전달도 가능하다.
+    - putExtra 메서드 사용 (key, value 쌍으로 관리된다)
 - 예시 코드
     - Intent1 -> Intent2로 이동
+    ```kotlin
+    val moveIntent = Intent(this@IntentExample, IntentExample2::class.java)
+    moveIntent.putExtra("number1", 1)
+    moveIntent.putExtra("number2", 2)
+    startActivity(moveIntent)
+    ```
+    ```kotlin
+    val moveIntent2 = Intent(this@IntentExample, IntentExample2::class.java)
+    moveIntent2.apply {
+        this.putExtra("number1", 1)
+        this.putExtra("number2", 2)
+    }
+    ```
+- Intent는 스택 구조다
+    - Intent를 쌓을 때마다 위로 올라가기 때문에 finish 메서드로 스택을 pop 시켜야 한다.
+    ```kotlin
+    val result = number1 + number2
+    val resultIntent = Intent()
+    resultIntent.apply {
+        this.putExtra("result", result)
+    }
+
+    setResult(Activity.RESULT_OK, resultIntent)
+    finish()
+    ```
+- 보낸 Intent의 결과를 받는 것도 가능하다.
+    - 단, 보낼 때부터 받는 것도 가능한 Intent로 보냈어야 한다.
+        - startActivityForResult 메서드를 사용해서 보내야 한다.
+            - startActivityForResult({intent}, {requestCode})
+            - requestCode가 일종의 channel 역할을 하게 되는 것 같다.
+    - onActivityResult 메서드를 통해 결과를 받을 수 있다.
+    - data 객체의 get 메서드를 통해 Intent 리턴값을 받을 수 있다.
+- 예시
+```kotlin
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    if (requestCode == 3000) {
+        Log.d("requestCode", requestCode.toString())
+        Log.d("resultCode", resultCode.toString())
+        val result = data?.getIntExtra("result", 0)
+        Log.d("result", result.toString())
+    }
+
+    super.onActivityResult(requestCode, resultCode, data)
+}
+```
 
 ## Context
 - 문맥
 - 액티비티가 가지고 있는 주변 정보
+
+## Task
+- 안드로이드는 기본적으로 stack으로 쌓인다.
+- 여기서 쌓이는 단위가 Task
+- Activity와 거의 유사함.
+- Activity Stack 관리 방식
+    - launchMode: 켜지는 방법을 자체적으로 갖고 있다.
+            - 다중 허용 방식
+                - Standard: 무조건 다중 허용
+                - SingleTop: 조건부 다중 허용(열려고 하는 액티비티가 현재 액티비티라면 onNewIntent를 호출한다)
+            - 다중 비허용 방식
+                - SingleTask
+                - SingleInstance
+        - IntentFlag: 켜지는 방법을 지시한다.
+            - FLAG_ACTIVITY_NEW_TASK
+            - FLAG_ACTIVITY_SINGLE_TOP
+            - FLAG_ACTIVITY_CLEAR_TOP
+            - 기타 등등
+- Task 스택 관리는 그냥 기본 설정을 가능한 쓰자 (IntentFlag나 LaunchMode는 완전히 알 때 사용하자)
