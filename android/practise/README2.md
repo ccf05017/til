@@ -149,6 +149,9 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 ## Context
 - 문맥
 - 액티비티가 가지고 있는 주변 정보
+- ActivityManagerService에 접근하도록 해주는 역할
+    - ActivityManagerService: 안드로이드에서 이미 구현해 둔 수많은 기능들
+- 기본적으로 Activity를 만들면 AppCompatActivity를 상속받는데, 이게 Context를 상속 받고 있다.
 
 ## Task
 - 안드로이드는 기본적으로 stack으로 쌓인다.
@@ -213,3 +216,20 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     - onCreateView: Fragment가 인터페이스를 처음으로 그릴 때 호출된다.
         - inflater: 뷰를 그려주는 역할
         - container: 해당 Fragment가 들어갈 위치의 부모 뷰
+
+## NullSafety
+- 코틀린은 기본적으로 null을 허용하지 않는다. (자바에서 이미 null 고생할만큼 해봤기 때문에)
+- 그래서 이걸 강제로 null을 허용할 때는 타입 뒤에 `?`를 붙여준다
+    ```kotlin
+    // 원래 코드
+    if (button != null) {
+        button.setOnClickListener
+    }
+
+    // null safety 관련 문법
+    button?.setOnClickListener
+    ```
+- null 허용된 녀석을 다시 null이 아니라고 확신할 때는 `!!`를 붙여준다.
+    - null일 경우 컴파일 에러가 발생한다.
+    - 물론 가능한 사용 안하는 게 좋다. 에러 위험이 높다.
+
