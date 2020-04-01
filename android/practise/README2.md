@@ -149,6 +149,9 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 ## Context
 - 문맥
 - 액티비티가 가지고 있는 주변 정보
+- ActivityManagerService에 접근하도록 해주는 역할
+    - ActivityManagerService: 안드로이드에서 이미 구현해 둔 수많은 기능들
+- 기본적으로 Activity를 만들면 AppCompatActivity를 상속받는데, 이게 Context를 상속 받고 있다.
 
 ## Task
 - 안드로이드는 기본적으로 stack으로 쌓인다.
@@ -177,3 +180,56 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 - 또한 엄청난 종류의 디바이스 종류 때문에 화면 구성이 많이 틀어진다 => 뷰를 떼서 옮겨야 될 수 있다.
 - 이를 해결하기 위해 Activity를 조각조각 쪼개서 구성한다 => 이게 Fragment
 - 단, 관리 포인트가 엄청 늘어날 수 있다. 이건 유의해야 한다.
+- 사용방법
+    - View XML 에서 fragment 태그를 선언해서 사용한다.
+        - Activity와 다르게 반드시 ID를 지정해야 한다.
+    - 코틀린 코드를 통해 동적으로 추가할 수도 있다.
+        - fragmentManager, transaction을 통해 사용 가능
+        ```kotlin
+        val fragmentOne : FragmentOne = FragmentOne()
+        val fragmentManager : FragmentManager = supportFragmentManager
+
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.container, fragmentOne)
+        fragmentTransaction.commit()
+        ```
+        - 작업을 끝내는 방법은 여러가지가 있다.
+            - commit: 여유 될 때 적용해라
+            - commitnow: 당장 적용해라
+            - commitAllowingStateLoss: 복구가 안되도 상관 없으니 commit 하겠다.
+    - fragment를 떼는 방법
+        - detach: 떼면 다시 못 붙인다.
+        - remove: 떼고 다시 붙일 수 있다.
+    - Activity -> fragment 데이터 전달하는 방법
+        - bundle을 만들어서 끼워줘야 한다.
+        ```kotlin
+        val bundle : Bundle = Bundle()
+        bundle.putString("hello", "hello")
+        fragmentOne.arguments = bundle
+        ```
+    - Fragment -> Activity 데이터 전달하는 방법
+        - 자체 구현해야 한다.
+        - 보통 리스너를 구현해서 사용한다.
+        - 인터페이스를 통해 전달한다.
+- Fragment 생성 생명주기가 Activity 생명주기보다 빨리 실행된다.
+- 생명 주기 메서드
+    - onCreateView: Fragment가 인터페이스를 처음으로 그릴 때 호출된다.
+        - inflater: 뷰를 그려주는 역할
+        - container: 해당 Fragment가 들어갈 위치의 부모 뷰
+
+## NullSafety
+- 코틀린은 기본적으로 null을 허용하지 않는다. (자바에서 이미 null 고생할만큼 해봤기 때문에)
+- 그래서 이걸 강제로 null을 허용할 때는 타입 뒤에 `?`를 붙여준다
+    ```kotlin
+    // 원래 코드
+    if (button != null) {
+        button.setOnClickListener
+    }
+
+    // null safety 관련 문법
+    button?.setOnClickListener
+    ```
+- null 허용된 녀석을 다시 null이 아니라고 확신할 때는 `!!`를 붙여준다.
+    - null일 경우 컴파일 에러가 발생한다.
+    - 물론 가능한 사용 안하는 게 좋다. 에러 위험이 높다.
+
