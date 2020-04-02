@@ -152,6 +152,14 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 - ActivityManagerService에 접근하도록 해주는 역할
     - ActivityManagerService: 안드로이드에서 이미 구현해 둔 수많은 기능들
 - 기본적으로 Activity를 만들면 AppCompatActivity를 상속받는데, 이게 Context를 상속 받고 있다.
+- 다른 시스템의 경우 바로 시스템 콜이 가능하지만, 안드로이드의 경우 바로 접근이 불가능하다.
+- 안드로이드의 경우 어플리케이션 한 개가 프로세스 1개를 의미하진 않기 때문이다.
+- 안드로이드의 경우 ActivityManagerService가 시스템 콜을 관장하는 브릿지 역할을 하며, Context를 통해 어플리케이션이 여기 접촉할 수 있다.
+- 컨텍스트는 앱이 생성 될 때 만들어진다.
+- 또한 앱의 구성요소가 생성 될 때마다 만들어진다.
+- 이렇게 생성되는 컨텍스트는 서로 `다른 객체`이며, 상위 컨텍스트의 정보는 하위 컨텍스트를 통해 접촉할 수 있다.
+- Application Context > Activity Context
+- https://blog.naver.com/huewu/110085457720
 
 ## Task
 - 안드로이드는 기본적으로 stack으로 쌓인다.
@@ -232,4 +240,3 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 - null 허용된 녀석을 다시 null이 아니라고 확신할 때는 `!!`를 붙여준다.
     - null일 경우 컴파일 에러가 발생한다.
     - 물론 가능한 사용 안하는 게 좋다. 에러 위험이 높다.
-
