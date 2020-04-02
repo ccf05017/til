@@ -240,3 +240,42 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 - null 허용된 녀석을 다시 null이 아니라고 확신할 때는 `!!`를 붙여준다.
     - null일 경우 컴파일 에러가 발생한다.
     - 물론 가능한 사용 안하는 게 좋다. 에러 위험이 높다.
+
+## Resource
+- res 폴더에서 관리된다.
+- drawable, layout, values로 구분
+- values는 color, string, style을 관리한다.
+- 흔한 종류별 리소스 관리와 같다.
+- 관리의 효율성을 위해 반드시 사용하는 게 좋다.
+
+## Thread
+- 작업 흐름
+앱 실행 -----> Launcher Activity -----> -----> -----> 작업흐름
+
+- 안드로이드 쓰레드
+-> MainThread (자동으로 생성됨)
+----------------------------------------------------------->
+    -> Launcher Activity
+                     -> Activity B
+                                          -> 영상 재생
+                                                 -> 기타 등등
+- 안드로이드는 멀티 쓰레드를 지원한다. (=> Thread Safe 구현이 필요하다)
+- 위의 Main Thread와 동시에 별도의 Thread 작업을 처리하도록 만들 수 있다.
+- 안드로이드 Main Thread의 특징
+    - 안드로이드  Main Thread는 UI Thread라고도 불리운다.
+    - 사용자의 input을 받는 thread
+    - 절대 정지시킬 수 없다. (앱이 끝날 때까지)
+- 가능한 사용자 정의 thread를 만들고 사용하지 않는 게 좋다.
+- thread 선언 및 실행 방법
+```kotlin
+val runnable: Runnable = Runnable {
+    Log.d("thread-1", "thread is made")
+}
+
+val thread: Thread = Thread(runnable)
+
+button.setOnClickListener {
+    thread.start()
+}
+```
+- runOnUiThread: 작업중이던 thread에서 메인 thread로 돌아가야 될 때 사용한다.
