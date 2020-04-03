@@ -287,6 +287,7 @@ button.setOnClickListener {
     - 실제로 리스트뷰를 그리기 위해서 잘 사용되지 않는다.
     - 기본적인 원본은 AddView다. 다른 방식을 이해하려면 잘 이해해야 한다.
     - item을 담을 xml을 만든다 -> 내용을 채워준다 -> Container View에 더해준다 -> ... 반복 ...
+    - AddView는 자동으로 스크롤이 적용되지 않는다. => 자료양이 많으면 꼭 스크롤 뷰를 만들어준다.
 - ListView
     - 예전에 많이 사용했다.
 - RecycleView
