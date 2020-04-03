@@ -279,3 +279,15 @@ button.setOnClickListener {
 }
 ```
 - runOnUiThread: 작업중이던 thread에서 메인 thread로 돌아가야 될 때 사용한다.
+
+## List View
+- 유사한 화면을 반복해서 보여주는 것
+- 세가지 방식으로 그릴 수 있다. (AddView, ListView, RecycleView)
+- AddView
+    - 실제로 리스트뷰를 그리기 위해서 잘 사용되지 않는다.
+    - 기본적인 원본은 AddView다. 다른 방식을 이해하려면 잘 이해해야 한다.
+    - item을 담을 xml을 만든다 -> 내용을 채워준다 -> Container View에 더해준다 -> ... 반복 ...
+- ListView
+    - 예전에 많이 사용했다.
+- RecycleView
+    - 최근 가장 많이 사용하는 방식
