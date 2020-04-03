@@ -152,6 +152,14 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 - ActivityManagerService에 접근하도록 해주는 역할
     - ActivityManagerService: 안드로이드에서 이미 구현해 둔 수많은 기능들
 - 기본적으로 Activity를 만들면 AppCompatActivity를 상속받는데, 이게 Context를 상속 받고 있다.
+- 다른 시스템의 경우 바로 시스템 콜이 가능하지만, 안드로이드의 경우 바로 접근이 불가능하다.
+- 안드로이드의 경우 어플리케이션 한 개가 프로세스 1개를 의미하진 않기 때문이다.
+- 안드로이드의 경우 ActivityManagerService가 시스템 콜을 관장하는 브릿지 역할을 하며, Context를 통해 어플리케이션이 여기 접촉할 수 있다.
+- 컨텍스트는 앱이 생성 될 때 만들어진다.
+- 또한 앱의 구성요소가 생성 될 때마다 만들어진다.
+- 이렇게 생성되는 컨텍스트는 서로 `다른 객체`이며, 상위 컨텍스트의 정보는 하위 컨텍스트를 통해 접촉할 수 있다.
+- Application Context > Activity Context
+- https://blog.naver.com/huewu/110085457720
 
 ## Task
 - 안드로이드는 기본적으로 stack으로 쌓인다.
@@ -233,3 +241,53 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     - null일 경우 컴파일 에러가 발생한다.
     - 물론 가능한 사용 안하는 게 좋다. 에러 위험이 높다.
 
+## Resource
+- res 폴더에서 관리된다.
+- drawable, layout, values로 구분
+- values는 color, string, style을 관리한다.
+- 흔한 종류별 리소스 관리와 같다.
+- 관리의 효율성을 위해 반드시 사용하는 게 좋다.
+
+## Thread
+- 작업 흐름
+앱 실행 -----> Launcher Activity -----> -----> -----> 작업흐름
+
+- 안드로이드 쓰레드
+-> MainThread (자동으로 생성됨)
+----------------------------------------------------------->
+    -> Launcher Activity
+                     -> Activity B
+                                          -> 영상 재생
+                                                 -> 기타 등등
+- 안드로이드는 멀티 쓰레드를 지원한다. (=> Thread Safe 구현이 필요하다)
+- 위의 Main Thread와 동시에 별도의 Thread 작업을 처리하도록 만들 수 있다.
+- 안드로이드 Main Thread의 특징
+    - 안드로이드  Main Thread는 UI Thread라고도 불리운다.
+    - 사용자의 input을 받는 thread
+    - 절대 정지시킬 수 없다. (앱이 끝날 때까지)
+- 가능한 사용자 정의 thread를 만들고 사용하지 않는 게 좋다.
+- thread 선언 및 실행 방법
+```kotlin
+val runnable: Runnable = Runnable {
+    Log.d("thread-1", "thread is made")
+}
+
+val thread: Thread = Thread(runnable)
+
+button.setOnClickListener {
+    thread.start()
+}
+```
+- runOnUiThread: 작업중이던 thread에서 메인 thread로 돌아가야 될 때 사용한다.
+
+## List View
+- 유사한 화면을 반복해서 보여주는 것
+- 세가지 방식으로 그릴 수 있다. (AddView, ListView, RecycleView)
+- AddView
+    - 실제로 리스트뷰를 그리기 위해서 잘 사용되지 않는다.
+    - 기본적인 원본은 AddView다. 다른 방식을 이해하려면 잘 이해해야 한다.
+    - item을 담을 xml을 만든다 -> 내용을 채워준다 -> Container View에 더해준다 -> ... 반복 ...
+- ListView
+    - 예전에 많이 사용했다.
+- RecycleView
+    - 최근 가장 많이 사용하는 방식

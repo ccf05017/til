@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Practise</string>
+    <string name="hello">안녕하세요 라던가 이런 식으로 인사말이나 가입 인사를 써준다.</string>
 </resources>
