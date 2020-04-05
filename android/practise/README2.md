@@ -288,6 +288,20 @@ button.setOnClickListener {
     - 기본적인 원본은 AddView다. 다른 방식을 이해하려면 잘 이해해야 한다.
     - item을 담을 xml을 만든다 -> 내용을 채워준다 -> Container View에 더해준다 -> ... 반복 ...
     - AddView는 자동으로 스크롤이 적용되지 않는다. => 자료양이 많으면 꼭 스크롤 뷰를 만들어준다.
+    - 예시
+    ```kotlin
+    private fun createPhoneBookList(phoneBook: PhoneBook) {
+        val layoutInflater = LayoutInflater.from(this@PhoneBookActivity)
+        val container = findViewById<LinearLayout>(R.id.phonebook_container)
+        for (i in 0 until phoneBook.userList.size) {
+            val view = layoutInflater.inflate(R.layout.phone_book_item, null)
+            val personNameView = view.findViewById<TextView>(R.id.person_name)
+            personNameView.text = phoneBook.userList[i].name
+            addSetOnClickListener(phoneBook.userList[i], view)
+            container.addView(view)
+        }
+    }
+    ```
 - ListView
     - 예전에 많이 사용했다.
 - RecycleView
