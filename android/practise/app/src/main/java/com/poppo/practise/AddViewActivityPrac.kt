@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import android.widget.TextView
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -28,8 +29,15 @@ class AddViewActivityPrac : AppCompatActivity() {
 
         val container = findViewById<LinearLayout>(R.id.addview_container)
         val inflater = LayoutInflater.from(this@AddViewActivityPrac)
+
         for (i in carList.indices) {
-            inflater.inflate(R.layout.item_view, null)
+            val itemView = inflater.inflate(R.layout.item_view, null)
+            val carNameView = itemView.findViewById<TextView>(R.id.car_name)
+            val carEngineView = itemView.findViewById<TextView>(R.id.car_engine)
+
+            carNameView.text = carList.get(i).name
+            carEngineView.text = carList.get(i).engine
+            container.addView(itemView)
         }
     }
 }
