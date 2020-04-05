@@ -2,51 +2,31 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="6dp"
+    android:background="#03A9F4"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/phonebook_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/ic_launcher_foreground"/>
+
         <TextView
-            android:id="@+id/phonebook_header"
-            android:layout_width="0dp"
-            android:layout_weight="0.3"
+            android:id="@+id/person_name"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="첫"
-            android:textColor="#8A7F7F"
-            android:padding="5dp"
-            android:textSize="50dp"/>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/phonebook_content_header"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/circle"
-                android:padding="10dp"
-                android:text="첫"
-                android:textSize="40dp"
-                android:gravity="center"
-                android:textColor="#ffffff"/>
-
-            <TextView
-                android:id="@+id/phonebook_content"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:text="조포포"
-                android:gravity="center"
-                android:textSize="40dp"/>
-
-        </LinearLayout>
+            android:text="사용자"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="20dp"/>
 
     </LinearLayout>
 
