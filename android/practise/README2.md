@@ -313,5 +313,6 @@ button.setOnClickListener {
         - AddView는 반복문을 통해 그리기 때문에 리스트 전체 갯수에 상관없이 한번에 다 그린다.
         - ListView는 보여지는 부분과 여유분만 먼저 그리고 필요한 경우 더 그린다.
     - 위의 차이점 때문에 AddView는 실제로는 거의 사용 안한다.
+    - ListView를 그릴 때는 꼭 ViewHolder를 활용하자
 - RecycleView
     - 최근 가장 많이 사용하는 방식
