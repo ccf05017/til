@@ -282,7 +282,7 @@ button.setOnClickListener {
 
 ## List View
 - 유사한 화면을 반복해서 보여주는 것 (우리가 아는 그 리스트 쭈르륵 나오는 화면)
-- 세가지 방식으로 그릴 수 있다. (AddView, ListView, RecycleView)
+- 세가지 방식으로 그릴 수 있다. (AddView, ListView, RecyclerView)
 - AddView
     - 실제로 리스트뷰를 그리기 위해서 잘 사용되지 않는다.
     - 기본적인 원본은 AddView다. 다른 방식을 이해하려면 잘 이해해야 한다.
@@ -314,5 +314,11 @@ button.setOnClickListener {
         - ListView는 보여지는 부분과 여유분만 먼저 그리고 필요한 경우 더 그린다.
     - 위의 차이점 때문에 AddView는 실제로는 거의 사용 안한다.
     - ListView를 그릴 때는 꼭 ViewHolder를 활용하자
-- RecycleView
+- RecyclerView
     - 최근 가장 많이 사용하는 방식
+    - ListView의 개선판 (ViewHolder를 내장하고 있다)
+    - 앞의 두 방식에 비해 유연하다.
+    - LayoutManager
+        - Linear: 선형(가로, 세로 모두 지원)
+        - Grid: 균일한 바둑판
+        - StaggeredGrid: 균일하지 않은 바둑판
