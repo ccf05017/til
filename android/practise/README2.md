@@ -322,3 +322,14 @@ button.setOnClickListener {
         - Linear: 선형(가로, 세로 모두 지원)
         - Grid: 균일한 바둑판
         - StaggeredGrid: 균일하지 않은 바둑판
+
+## TabLayout, Pager
+- 둘이 같이 사용되는 경우가 많다.
+- 따로 사용이 불가능하다는 의미가 절대 아님
+- Pager
+    - 화면을 넘겨주는 역할 수행
+- TabLayout
+    - 탭을 담당하는 역
+- Adapter
+    - TabLayout과 Pager를 연결해주는 역할
+    - Tab에 따라 연관된 Pager를 보여주거나, 보고 있는 Pager의 Tab이 어딘지 알려줄 수 있도록 해준다.
