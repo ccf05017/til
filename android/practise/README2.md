@@ -328,8 +328,12 @@ button.setOnClickListener {
 - 따로 사용이 불가능하다는 의미가 절대 아님
 - Pager
     - 화면을 넘겨주는 역할 수행
+    - 수평 리스트 뷰 같은 놈
+    - adapter가 추가적으로 필요하다.
+    - Fragment로 구성된다
 - TabLayout
     - 탭을 담당하는 역
-- Adapter
+    - 기본 제공 view가 아니다
+- Listener
     - TabLayout과 Pager를 연결해주는 역할
     - Tab에 따라 연관된 Pager를 보여주거나, 보고 있는 Pager의 Tab이 어딘지 알려줄 수 있도록 해준다.
