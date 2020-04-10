@@ -337,3 +337,16 @@ button.setOnClickListener {
 - Listener
     - TabLayout과 Pager를 연결해주는 역할
     - Tab에 따라 연관된 Pager를 보여주거나, 보고 있는 Pager의 Tab이 어딘지 알려줄 수 있도록 해준다.
+
+## SharedPreference
+- DB와 비슷한 무언가
+- SQLite를 지원하지만 SharedPreference도 많이 사용한다
+- Key, Value 방식의 DB
+- 사용자의 기호를 저장하고 공유하기 위한 용도로 많이 사용된다.
+- 간단한 DB 용도기 때문에 진짜 DB처럼 사용하려면 SQLite로 가자
+- Mode
+    - MODE_PRIVATE: 생성한 앱에서만 사용 가능 (가장 많이 사용하는 모드)
+    - MODE_WORLD_READABLE: 다른 앱에서 읽을 수 있다.
+    - MODE_WORLD_WRITEABLE: 다른 앱에서 읽고 쓸 수 있다.
+    - MODE_MULTI_PROCESS: 이미 호출되어 사용중인지 체크
+    - MODE_APPEND: 기존 preference에 신규로 추가

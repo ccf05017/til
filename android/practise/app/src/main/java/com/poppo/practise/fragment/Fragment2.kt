@@ -18,6 +18,6 @@ class Fragment2: Fragment() {
 
         // Fragment가 인터페이스를 처음으로 그릴 때 호출된다.
         // 그리는 역할을 여기서 하면 된다.
-        return inflater.inflate(R.layout.fragment_one, container, false)
+        return inflater.inflate(R.layout.fragment_two, container, false)
     }
 }
