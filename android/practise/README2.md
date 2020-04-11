@@ -350,3 +350,12 @@ button.setOnClickListener {
     - MODE_WORLD_WRITEABLE: 다른 앱에서 읽고 쓸 수 있다.
     - MODE_MULTI_PROCESS: 이미 호출되어 사용중인지 체크
     - MODE_APPEND: 기존 preference에 신규로 추가
+
+## Realm
+- 또 다른 DB
+- RDB
+- SharedPreference보다 복잡한 데이터를 처리할 수 있다.
+- IOS도 지원된다.
+- 한국어 지원도 잘 됨
+- 외부 라이브러리이기 때문에 추가 필요하다
+- 제공하는 기능이 더럽게 많으니까 제대로 쓰려면 문서 필독
