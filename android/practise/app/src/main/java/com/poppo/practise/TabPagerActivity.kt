@@ -21,24 +21,25 @@ class TabPagerActivity : AppCompatActivity() {
         tab_layout.addTab(tab_layout.newTab().setText("two"))
         tab_layout.addTab(tab_layout.newTab().setText("three"))
 
-        val pagerAdapter = PagerAdapter(supportFragmentManager, 3)
+        val pagerAdapter = FragmentPagerAdapter(supportFragmentManager, 3)
         view_pager.adapter = pagerAdapter
 
         tab_layout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                view_pager.currentItem = tab!!.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                view_pager.currentItem = tab!!.position
             }
         })
+        view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
     }
 }
 
-class PagerAdapter(
+class FragmentPagerAdapter(
     fragmentManager: FragmentManager,
     val tabCount: Int
 ): FragmentStatePagerAdapter(fragmentManager) {
