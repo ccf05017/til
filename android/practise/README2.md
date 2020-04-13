@@ -359,3 +359,29 @@ button.setOnClickListener {
 - 한국어 지원도 잘 됨
 - 외부 라이브러리이기 때문에 추가 필요하다
 - 제공하는 기능이 더럽게 많으니까 제대로 쓰려면 문서 필독
+
+## Async
+- 그 유명한 비동기 처리 (non-blocking)
+- 싱글 쓰레드 방식 아님 (백그라운드에서 별도의 쓰레드를 만들어서 처리)
+- 사용법
+    - AsyncTask 상속 받아서 구현
+        - onPreExecute: 쓰레드 출발하기 전에 할 작업
+        - doInBackground: 쓰레드가 할 작업
+        - onProgressUpdate: 쓰레드에서 진행 중인 작업의 진행 상태를 메인 쓰레드에게 알려줄 때 사용
+        - onPostExecute: 보조 쓰레드 작업이 모두 완료되고 메인 쓰레드로 돌아왔을 때 하는 작업
+    - AsyncTask<params, progress, result>()
+        - params: doInBackground에서 사용할 타입
+        - progress: onProgressUpdate에서 사용할 타입
+        - result: onPostExecut에서 사용할 타입
+- 장점
+    - 메인 쓰레드를 기다리게 할 필요 없다.
+    - 백엔드에서 데이터를 받을 때 주로 사용하게 된다.
+- 단점
+    - 재사용이 불가능하다.
+    - AsyncTask는 동시에 하나만 실행할 수 있다. (병렬 처리 불가능)
+        - 동시에 두 개의 AsyncTask를 실행하면 첫번째 AsyncTask가 완료될 때까지 두번째 AsyncTask는 실행되지 않는다.
+- 주의사항
+    - 구현 된 Activity가 종료되더라도 같이 종료되지 않는다. (찌꺼기가 남는다.)
+        - 라이프 사이클 메서드를 활용해서 Async Task를 실행한 Activity를 벗어날 때 Async를 정리하도록 해야 한다.
+- 공식적으로 안드로이드는 동기 방식으로 네트워크 통신을 사용하지 못하도록 강제된다.
+    - 아무런 조치 없이 사용 시 강제로 동기 방식 네트워크 사용 시 에러, 경고 메시지 발생
