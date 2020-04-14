@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".instaclone.utils.MasterApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PermissionActivity">
+        <activity android:name=".instaclone.activity.PostListActivity"></activity>
+        <activity android:name=".instaclone.activity.LoginActivity" />
+        <activity android:name=".instaclone.activity.EmailSignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
