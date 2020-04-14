@@ -392,3 +392,6 @@ button.setOnClickListener {
 - 대부분 필요한 데이터를 받아오기 위해 사용되므로, 비동기 통신을 통해 처리되야 한다.
 - Serialize, Deserialize 필수
     - 보통 gson으로 처리한다.
+- 그냥 생으로 Async, Buffer를 사용해서 처리하는 방법도 있지만 보통은 라이브러리를 사용한다.
+    - Volly, Retorfit을 가장 많이 사용
+    - Volly는 정식 라이브러리(구글 인수)
