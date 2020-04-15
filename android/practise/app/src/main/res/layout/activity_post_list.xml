@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NetworkActivity"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:context=".instaclone.activity.PostListActivity">
+    
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_person"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/post_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
