@@ -1,4 +1,4 @@
-## 1. 모든 객체의 공통 메서드
+## 2. 모든 객체의 공통 메서드
 - Object 구체 클래스가 모든 클래스에게 상속된다.
 - 이 때문에 final이 아닌 메서드들(equals, hashCode, toString, clone 등)은 규약에 맞춰 재정의 해야한다.
 - 안 그러면 오작동 할 수 있다.
@@ -79,3 +79,75 @@ public boolean equals(Object obj) {
 - 나보다 인텔리제이가 더 똑똑하니까 인텔리제이 자동완성을 쓰자
 - 인텔리제이가 없다면 구글의 AutoValue 프레임워크를 사용하자
 - 물론 그래도 잘 만들어졌나 확인할 수 있고, 어떻게 만들어진가 알수 있을 정도로는 공부하쟈
+
+### Item11. equals를 재정의 했다면 hashCode도 재정의해라
+#### 1. 왜?
+- hashCode 재정의 없이 equal만 재정의 하면 HashMap, HashSet 컬렉션에서 문제가 발생한다.
+- hashCode 관련 Object 명세
+    - equals 비교에 사용되는 정보가 변경되지 않았다면, 애플리케이션이 실행되는 동안 그 객체의 hashCode 메서드는 몇번을 호출해도 같은 값을 반환해야 한다.
+    - equals 메서드가 두 객체를 같다고 판단했다면, 두 객체의 hashCode는 똑같은 값을 반환해야 한다.
+    - equals가 두 객체를 다르다고 판단해도 hashCode가 서로 다른 값을 반환할 필요는 없다.
+    => hashCode가 같다고 무조건 같은 객체는 아니다. 하지만 논리적으로 같은 객체는 hashCode 반환값이 무조건 같아야 한다.
+
+#### 2. 어떻게 만들어야 할까?
+- 좋은 해시 함수는 서로 다른 인스턴스에 다른 해시코드를 반환한다.
+- 이상적인 해시 함수는 주어진 인스턴스들을 32비트 정수 범위에 균일하게 분배해야 한다.
+- 나쁜 예시
+    ```java
+    @Override public int hashCode() { return 42; }
+    ```
+    - 위와 같이 작성하면 거대한 링크드 리스트로 작성한 것처럼 동작한다
+    - 더럽게 느려질 것이다
+- 이상적인 구현을 위한 방법론
+    - int 변수 result를 선언한 후 값 c로 초기화한다.
+        - c는 해당 객체의 첫번째 핵심 필드를 아래 방식으로 계산한 해시 코드
+    - 해당 객체의 나머지 핵심 필드들에 아래의 작업을 수행한다.
+        - 해시 코드 계산
+            - 기본 타입 필드: Type.hashCode(f)
+            - 참조 타입 필드 + equals 메서드가 이 필드의 equals를 재귀적으로 호출하면 재귀적으로 호출한다.(뭔 말이야..)
+            - 필드가 배열이라면 핵심 원소 각각을 별도 필드처럼 다룬다.
+        - 위에서 계산한 해시코드 c로 result를 갱신한다.
+            - result = 31 * result + c;
+    - result를 반환한다.
+    - 파생 필드는 해시 코드 계산에서 제외해도 된다.(= 다른 필드로부터 계산 가능하다면 생략해도 된다.)
+    - equals 비교에 사용되지 않는 필드는 `반드시` 제외한다.
+- result 갱신 식의 근거는 전통적인 해시 계산 방식(소수를 사용하는 등)의 어쩌구 저쩌구가 녹아 있으니 안심하고 쓰자
+
+#### 3. 편하게 구현하려면?
+- Object의 hash 메서드를 활용하면 된다.
+    ```java
+    @Override
+        public int hashCode() {
+            return Objects.hash(lineNum, prefix, areaCode);
+        }
+    ```
+ 
+ #### 4. 좀 더 성능을 높일 수는 없을까?
+ - 캐싱을 사용할 수 있다.
+ - 혹은 지연 초기화 전략을 사용할 수 있다.
+     ```java
+    private int hashCode; // 자동으로 0으로 초기화된다.
+        
+        @Override
+        public int hashCode() {
+            int result = hashCode;
+            if (result == 0) {
+                result = Short.hashCode(areaCode);
+                result = 31 * result + Short.hashCode(prefix);
+                result = 31 * result + Short.hashCode(lineNum);
+                hashCode = result;
+            }
+            return result;
+        }
+    ```
+
+#### 5. 주의 사항
+- 성능 높인다고 해시코드 계산할 때 멍청하게 핵심 필드 생략하지 말아라
+    - 당장은 성능이 올라도 결국 해시 테이블 성능을 크게 떨어뜨릴 수 있다.
+- hashCode가 반환하는 값의 생성 규칙을 API 사용자에게 자세히 공표하지 말자
+    - 그래야 클라이언트가 이 값에 의지하지 않는다.
+    - 그래야 추후에 더 좋은 계산식을 발견했을 때 수웛하게 고칠 수 있다.
+
+#### 6. 결론
+- 아주 민감하게 처리해야 되거나, 잘 아는 상태가 아니면 인텔리제이 기능을 사용하자
+- 혹은 AutoValue 프레임워크를 사용하자
