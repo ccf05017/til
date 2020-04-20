@@ -178,3 +178,79 @@ public boolean equals(Object obj) {
 - 그 외에는 전부 재정의해라!
 - 특히 컬렉션 클래스는 재정의 꼭 해줘라.
     - 안하면 기본 내장 추상 컬렉션 클래스의 toString이 실행된다(메모리 주소 찍히는 그것)
+
+### Item13. clone 재정의는 주의해서
+#### Cloneable 인터페이스는 일단 쓰지 말아라
+- Cloneable 인터페이스는 규약이 매우 허술하고, 깨지기 쉽고, 위험하고, 모순적인 구현을 강제한다.
+- 그래도 하도 많이 쓰이기 때문에 어떻게 쓰는지는 알고 있어야 한다.
+- 그래도 쓰지 마라. 이미 Cloneable 인터페이스로 clone이 재정의 된 객체가 아니면 쓰지 마라.
+- 배열만이 여기서 예외다. 배열의 clone은 유일하게 올바른 구현법을 보여준다.
+
+#### 구현 방안
+- Cloneable 인터페이스 구현, clone override
+- 접근 제한자 public, 반환 타입을 자기 자신으로 override
+- super.clone을 호출한 후 필요한 필드를 모두 적절히 수정한다.
+    - 객체의 깊은 구조에 숨어 있는 모든 가변 객체를 복사한다.
+    - 복제본이 가진 객체 참조 모두가 복사된 객체를 가리키도록 한다.
+
+#### 가장 간단한 경우
+- 모든 필드가 기본 타입이거나 불변 객체를 참조할 때
+- 별로 손댈 게 없다.
+```java
+@Override
+public PhoneNumber clone() {
+    try {
+        return (PhoneNumber) super.clone();
+    } catch (CloneNotSupportedException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+```
+
+#### 재앙으로 변하는 경우
+- 가변 객체를 손대는 경우 아주 끔찍해진다.
+- 재귀적으로 돌면서 다 카피해야 한다.
+- 안 그러면 불변식을 해치는 상황이 발생한다.
+```java
+@Override
+protected Stack clone() throws CloneNotSupportedException {
+    Stack result = (Stack) super.clone();
+    result.elements = elements.clone();
+    return result;
+}
+```
+- 위 상항보다 더 끔찍한 경우도 있다.
+    - 링크드 리스트를 가변 객체로 갖고 있다던가 하면 호출해야 될 복사가 훨씬 많아진다.
+
+#### 유의사항
+- 재정의한 clone 메서드는 throws 절을 없애야 한다.
+    - 안 그러면 사용하기 굉장히 불편하다.
+- 상속용 클래스는 cloneable을 구현하면 안된다.
+    - 구현할 경우 하위 객체에서 clone을 호출해도 상위 객체 타입을 리턴하게 된다.
+    - 그래서 아래와 같이 아예 못쓰게 만드는 방법도 있다.
+    ```java
+    @Override
+    protected final Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
+    }
+    ```
+- Cloneable을 구현한 스레드 안전 클래스를 작성할 때는 clone 메서드 동기화도 필수다.
+
+#### 그럼 뭘 쓰란거냐?
+- 어차피 clone 메서드는 생성자와 유사하게 동작한다.
+- 그러니 `복사 생성자`와 `복사 팩터리`를 사용하자
+- 이 방법은 위와 같이 복잡하지도 않고 문제 소지도 적다.
+- 또한 인터페이스 타입을 인수로 받아서 처리할 수 있기 때문에 더 유연하기까지 하다
+```java
+// 복사 생성자
+public Yum(Yum yum) {
+    // 우리가 아는 바로 그 생성자 내용 그대로
+}
+
+// 복사 팩토리
+// 어차피 위의 생성자를 정적 팩터리 메서드로 바꿨을 뿐이다
+public static Yum copyInstance(Yum yum) {
+    // 생성자 내용 그대로
+}
+```
