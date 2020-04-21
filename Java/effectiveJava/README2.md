@@ -246,7 +246,7 @@ protected Stack clone() throws CloneNotSupportedException {
 // 복사 생성자
 public Yum(Yum yum) {
     // 우리가 아는 바로 그 생성자 내용 그대로
-}
+} 
 
 // 복사 팩토리
 // 어차피 위의 생성자를 정적 팩터리 메서드로 바꿨을 뿐이다
@@ -254,3 +254,74 @@ public static Yum copyInstance(Yum yum) {
     // 생성자 내용 그대로
 }
 ```
+
+### Item14. Comparable 구현을 고려하자
+#### 왜?
+- Comparable을 구현하면 내장된 제니릭 알고리즘과 컬렉션을 손쉽게 사용할 수 있다.
+- 사실 말이 '고려하자'이지 실질적으로 순서 비교가 있다면 무조건 구현해라
+- '작은 노력으로 나중에 큰 효과를 누릴 수 있을 것이다'라고 저자가 추천했다.
+
+#### compareTo 메서드 규약
+- 아래의 규약을 지키지 않으면 정렬 알고리즘을 지원하는 내장 객체 사용이 불가능하다.
+    - TreeSet, TreeMap, Collections, Arrays
+- 해당 객체와 주어진 객체의 순서를 비교한다
+- 해당 객체가 주어진 객체보다 작으면 음의 정수, 같으면 0, 크면 양의 정수를 반환한다.
+- 타입이 다른 객체가 주어지면 ClassCastException을 던진다.
+    - 처리가 꼭 필요한 경우에는 예외를 던지지 않고처리해도 된다.
+- 아래 조건을 모두 충족해야 한다.
+    - 두 객체 참조의 순서를 바꿔 비교해도 같은 결과가 나와야 한다.
+    - 추이성이 있어야 한다.
+        - 첫번째 객체가 두번째보다 크고 두번째가 세번째보다 크면 첫번째는 세번째보다 커야 한다.
+    - 크기가 같은 객체 끼리는 어떤 객체와 비교해도 항상 같아야 한다.
+    
+#### 유의사항
+- Comparable을 구현한 클래스를 확장해서 값 컴포넌트를 추가하고 싶다면 독립된 클래스를 만들어라
+    - 기존 클래스를 확장한 구체 클래스에서 새로운 값 컴포넌트를 추가하면 compareTo 규약을 지킬 수 없다.
+- compareTo 메서드로 수행한 동치성 테스트의 결과가 equals 메서드와 같도록 구현해야 한다.
+    - 정렬된 컬렉션들은 동치성 비교에 equals 대신 compareTo를 사용하기 때문이다.
+- compareTo 메서드는 각 필드의 동치성을 비교하는 게 아니라 `그 순서를 비교`한다.
+- 종종 값의 차를 기준으로 compareTo를 구현하는 경우가 있다 => `하지 말아라`
+
+#### 기본 비교자를 통한 구현
+- 이미 compareTo가 구현된 객체나 기본 제공되는 경우 구현된 비교자를 사용한다
+- 참조 필드가 하나인 경우
+```java
+public final class CaseInsensitiveString
+    implements Comparable<CaseInsensitiveString> {
+    public int compareTo(CaseInsensitiveString cis) {
+        return String.CASE_INSENSITIVE_ORDER.compare(s, cis.s);
+    }   
+}
+```
+- 참조 필드가 여러개인 경우
+    - 가장 핵심적인 필드부터 비교해 나간다.
+    - 우선순위가 높은 필드가 동일할 경우 다음 순서로 계속해서 비교해 나간다.
+```java
+@Override
+public int compareTo(PhoneNumber phoneNumber) {
+    int result = Short.compare(areaCode, phoneNumber.areaCode);
+    if (result == 0) {
+        result = Short.compare(prefix, phoneNumber.prefix);
+        if (result == 0) {
+            result = Short.compare(lineNum, phoneNumber.lineNum);
+        }
+    }
+    return result;
+}
+```
+
+#### 비교자 생성 메서드를 통한 구현
+- 기본 원시타입에 대해서는 내장된 comparing 메서드를 사용하면 된다.
+```java
+private static final Comparator<PhoneNumber> COMPARATOR = 
+            comparingInt((PhoneNumber phoneNumber) -> phoneNumber.areaCode)
+            .thenComparingInt(phoneNumber -> phoneNumber.prefix)
+            .thenComparingInt(phoneNumber -> phoneNumber.lineNum);
+    
+@Override
+public int compareTo(PhoneNumber phoneNumber) {
+    return COMPARATOR.compare(this, phoneNumber);
+}
+```
+- 객체 참조용 비교자 생성 메서드도 있기 때문에 객체 참조에는 해당 메서드를 사용하면 된다.
+- 성능 저하가 약간 발생할 수 있다. 이건 염두해두자.
