@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: blue
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-jenkins
+  namespace: blue
+  labels:
+    app: pod-jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-jenkins
+  template:
+    metadata:
+      labels:
+        app: pod-jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: jenkins
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: srv-jenkins
+spec:
+  selector:
+    app: jenkins
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
