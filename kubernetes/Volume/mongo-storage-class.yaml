@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: storage
+provisioner: kubernetes.io/gce-pd # 지원되는 게 정해져 있다.(문서 참고)
+parameters:
+  type: pd-ssd
