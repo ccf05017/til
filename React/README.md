@@ -64,3 +64,29 @@ function Wrapper({ children }) {
     return <div style={style}>{children}</div>
 }
 ```
+
+## 조건부 렌더링
+- 조건에 따라 렌더링 여부를 결정하는 코드
+- 가장 대표적인 구현법은 3항 연산자
+    ```javascript
+    function Hello({ color, name, isSpecial }) {
+        // ...
+                {isSpecial ? <b>*</b> : null}
+                Hello {name}!
+            </div>
+        // ...
+    }
+    ```
+- 3항 연산자의 경우 조건에 따라 값이 바뀔 때 사용하는 게 좋다.
+- 팁: null, undefined를 렌더링하면 아무 내용도 나오지 않는다.
+- 조건이 간단할 때는 and 연산자를 사용하는 방법도 있다.
+    ```javascript
+    function Hello({ color, name, isSpecial }) {
+        // ...
+                {isSpecial && <b>*</b>}
+                Hello {name}!
+            </div>
+        // ...
+    }
+    ```
+- and 연산자는 조건에 따라 값을 숨길 때 사용하는 게 좋다.
