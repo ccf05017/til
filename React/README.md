@@ -108,4 +108,32 @@ function Wrapper({ children }) {
     - 이거 빼먹으면 UI 상에서 input 창 값 변화를 주기가 어렵다.
 - 여러개의 input을 관리할 때는 객체 형태로 한꺼번에 관리한다.
     - 무식하게 핸들러 여러개 달고 상태 여러개 만들어서 처리하지 말아라.
-- `훅을 통해서 객체를 수정할 때는` 객체 사본을 변경해서 적용해야 한다.(불변 유지?)
+- `훅을 통해서 객체를 수정할 때는` 객체 사본을 변경해서 적용해야 한다.(불변 유지)
+
+## useRef로 특정 DOM 선택하기
+- 일반 JS에서는 DomSelector 함수를 사용했음
+- 비디오, 그래프, 스크롤 위치 추적 등등을 위해 필요함
+- 리액트에서는 이런 상황에서 ref를 사용한다.
+    - 함수형: useRef
+    - 클래스형: React.createRef() 혹은 콜백 함수
+- 렌더링과 관계 없는 변수를 관리할 때 사용되기도 한다.
+- 사용 예시
+```javascript
+const nameInput = useRef(); // ref 정의. 객체 형태로 생성된다.
+
+const onReset = () => {
+    setInputs({
+        name: '',
+        nickname: '',
+    });
+    // {ref}.{current}.{DOM 메서드}
+    nameInput.current.focus();
+};
+
+return (
+    <div>
+        {/* ref 속성에 html class 처럼 박아 넣는다 */}
+        <input name="name" placeholder="이름" onChange={onChange} value={name} ref={nameInput}/>
+    </div>
+);
+```

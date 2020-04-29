@@ -1,9 +1,9 @@
 import React from 'react';
-import MultiInputPractise from "./MultiInputPractise";
+import MultiInputSample from "./MultiInputSample";
 
 function App() {
   return (
-      <MultiInputPractise/>
+      <MultiInputSample/>
   );
 }
 
