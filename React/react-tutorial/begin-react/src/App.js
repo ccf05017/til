@@ -1,9 +1,9 @@
 import React from 'react';
-import MultiInputSample from "./MultiInputSample";
+import UserList from "./UserList";
 
 function App() {
   return (
-      <MultiInputSample/>
+      <UserList/>
   );
 }
 
