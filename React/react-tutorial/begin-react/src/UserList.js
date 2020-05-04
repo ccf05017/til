@@ -11,25 +11,7 @@ function User({ user }) {
     );
 }
 
-function UserList() {
-    const users = [
-        {
-            id: 1,
-            username: "poppo",
-            email: "poppo@gmail.com"
-        },
-        {
-            id: 2,
-            username: "saul",
-            email: "saul@gmail.com"
-        },
-        {
-            id: 3,
-            username: "ita",
-            email: "ita@naver.com"
-        },
-    ];
-
+function UserList({ users }) {
     return (
         <div>
             {
