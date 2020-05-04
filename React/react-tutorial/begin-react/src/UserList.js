@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 const _ = require("fxjs/Strict");
 const L = require("fxjs/Lazy");
 const C = require("fxjs/Concurrency");
 
 function User({ user, onRemove, onToggle }) {
     const { username, email, id, active } = user;
+    useEffect(_ => {
+        console.log(user);
+    });
 
     return (
         <div>
