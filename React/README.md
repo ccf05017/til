@@ -239,7 +239,7 @@ return (
 - 3항 연산자를 통해 구현하는 방법도 있다.
 - 물론 filter와 조합해서 만들어도 될 것
 
-## useEffect 훅
+## useEffect Hook
 - 컴포넌트의 생명주기 관련 훅을 추가할 수 있다.
 - 사용방법 `useEffect({실행할 함수 콜백}, {dependencies array})`
 - `url 변화에 따라 페이지 내용을 바꿔야할 때` 아주 유용하다.
@@ -274,3 +274,20 @@ return (
         }, [user]);
         ```
 - 주의 사항: state, props를 useEffect에서 사용할 때는 꼭 dependency array에 넣어주자.
+
+## useMemo Hook
+- 이전에 계산한 값을 재활용할 때 사용
+- 성능 최적화에 사용한다는 이야기
+- 특정값이 바뀌었을 때만 특정 함수를 실행하도록 해준다.
+- 예시
+```javascript
+const count = useMemo(_ => countActiveUsers(users), [users]);
+
+return (
+    <>
+        <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate}/>
+        <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
+        <div>활성 사용자 수: {count}</div>
+    </>
+);
+```

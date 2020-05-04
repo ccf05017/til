@@ -5,9 +5,9 @@ const C = require("fxjs/Concurrency");
 
 function User({ user, onRemove, onToggle }) {
     const { username, email, id, active } = user;
-    useEffect(_ => {
-        console.log(user);
-    });
+    // useEffect(_ => {
+    //     console.log(user);
+    // });
 
     return (
         <div>
