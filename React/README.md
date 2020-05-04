@@ -11,7 +11,7 @@
 - 역시나 Babel이 관여한다. [Babel 링크](https://babeljs.io)
 - 내부적으로 `React.createElement()` 함수로 컴포넌트를 만들어준다.
 
-### 규칙
+### JSX 작성 규칙
 #### 1. 태그는 반드시 쌍을 맞춰서 닫는다.
 - br, input도 예외는 없다.
 - 단 셀프 클로징 태그는 가능하다.(ex. `<br/>`)
@@ -20,7 +20,7 @@
 #### 3. JSX 안의 자바스크립트 값은 중괄호를 사용한다.
 - `<div>{name}</div>`
 #### 4. inline 스타일링 
-- 스타일 객체를 만들어서 전달해준다. + 대시 구분은 카멜 케이스로 전환한다.
+- 스타일 객체를 만들어서 전달해준다. (대시 구분`-`은 카멜 케이스로 전환한다.)
     ```jsx harmony
     const style = {
         backgroundColor: 'black',
@@ -34,7 +34,7 @@
 #### 5. 클래스 지정
 - className 속성으로 클래스 지정 가능 (class라고 해도 작동은 하지만 경고가 주렁주렁 달릴 것)
 #### 6. 주석 처리 
-- 이것도 주석으로 감싸서 html 주석처럼 작성한다.
+- 이것도 중괄호로 감싸서 html 주석처럼 작성한다.
     ```jsx harmony
     {/* 주석은 이렇게 */}
     ```
@@ -106,9 +106,53 @@ function Wrapper({ children }) {
 - useState 함수를 통해 input 값 변화를 관리한다.
 - input의 value 속성에 관리할 값을 꼭 넣어주자
     - 이거 빼먹으면 UI 상에서 input 창 값 변화를 주기가 어렵다.
+- 단일 input 관리 예제
+    ```javascript
+    const [text, setText] = useState('');
+    
+    return (
+        <div>
+            <input onChange={onChange} value={text}/>
+            <button onClick={onReset}>초기화</button>
+            <div>
+                <b>값: </b>
+                {text}
+            </div>
+        </div>
+    );
+    ```
 - 여러개의 input을 관리할 때는 객체 형태로 한꺼번에 관리한다.
     - 무식하게 핸들러 여러개 달고 상태 여러개 만들어서 처리하지 말아라.
 - `훅을 통해서 객체를 수정할 때는` 객체 사본을 변경해서 적용해야 한다.(불변 유지)
+- 예제
+    ```javascript
+    const [inputs, setInputs] = useState({
+        name: '',
+        nickname: '',
+    });
+    const { name, nickname } = inputs;
+    
+    const onChange = (e) => {
+        const { name, value } = e.target;
+    
+        setInputs({
+           ...inputs,
+           [name]: value,
+        });
+    };
+    
+    return (
+        <div>
+            <input name="name" placeholder="이름" onChange={onChange} value={name} ref={nameInput}/>
+            <input name="nickname" placeholder="닉네임" onChange={onChange} value={nickname}/>
+            <button onClick={onReset}>초기화</button>
+            <div>
+                <b>값: </b>
+                {name} ({nickname})
+            </div>
+        </div>
+    );
+    ```
 
 ## useRef로 특정 DOM 선택하기
 - 일반 JS에서는 DomSelector 함수를 사용했음
