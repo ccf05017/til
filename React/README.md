@@ -275,19 +275,47 @@ return (
         ```
 - 주의 사항: state, props를 useEffect에서 사용할 때는 꼭 dependency array에 넣어주자.
 
-## useMemo Hook
+## useXXX Hook을 이용한 성능 최적화
+- 가장 중요한 건 아래 내용들 모두 확실하게 성능 최적화를 할 수 있는 포인트가 보일 때만 사용해라
+- 늘 그렇듯 어설픈 성능 최적화는 오히려 성능 저하를 발생시킨다. (웬만하면 원작자가 나보다 똑똑하다.)
+
+### useMemo Hook
 - 이전에 계산한 값을 재활용할 때 사용
 - 성능 최적화에 사용한다는 이야기
 - 특정값이 바뀌었을 때만 특정 함수를 실행하도록 해준다.
 - 예시
-```javascript
-const count = useMemo(_ => countActiveUsers(users), [users]);
+    ```javascript
+    const count = useMemo(_ => countActiveUsers(users), [users]);
+    
+    return (
+        <>
+            <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate}/>
+            <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
+            <div>활성 사용자 수: {count}</div>
+        </>
+    );
+    ```
 
-return (
-    <>
-        <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate}/>
-        <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
-        <div>활성 사용자 수: {count}</div>
-    </>
-);
-```
+### useCallback Hook
+- useMemo의 함수용 버전
+- 기존 방식은 컴포넌트가 리렌더링 될 때마다 함수를 다시 만든다.
+- 성능상 큰 문제가 발생하진 않지만, 향후 props 변화가 없으면 리렌더링조차 하지 않게 개선할 때는 문제가 될 수 있다.
+- 예시
+    ```javascript
+    const onChange = e => useCallback(_ => {
+        const {name, value} = e.target;
+        setInputs({
+            ...inputs,
+            [name]: value
+        })
+    }, [inputs]);
+    ```
+ - 위 예시의 경우 inputs가 변경될 때만 해당 함수를 다시 만든다. 그 외에는 기존 함수를 그대로 사용함.
+ - 모든 Hook과 마찬가지로 해당 함수가 상태를 참조한다면 꼭 deps 배열에 추가해주자.
+
+### React.memo
+- 컴포넌트 리렌더링이 불필요한 상황에 리렌더링을 하지 않도록 만들어주는 함수
+- 적용 방법
+    - 우선 사용하는 컴포넌트들을 React.memo 함수로 감싸준다.
+    - state 중에 기존값을 참조하는 대상들을 골라낸다.
+    - 해당 대상들을 함수형으로 업데이트하도록 변경한다.
