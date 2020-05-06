@@ -337,3 +337,17 @@ return (
 - 반복되는 공용 함수들이 있다.
 - 이 때를 위한 Hook
 - input 상태를 관리하는 Hook 예시
+    ```javascript
+    function useInputs(initialForm) {
+        const [form, setForm] = useState(initialForm);
+    
+        const onChange = useCallback(e => {
+            const { name, value } = e.target;
+            setForm(form => ({ ...form, [name]: value }));
+        }, []);
+    
+        const reset = useCallback(() => setForm(initialForm), [initialForm]);
+    
+        return [form, onChange, reset];
+    }
+    ```
