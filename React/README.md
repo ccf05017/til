@@ -302,7 +302,7 @@ return (
 - 성능상 큰 문제가 발생하진 않지만, 향후 props 변화가 없으면 리렌더링조차 하지 않게 개선할 때는 문제가 될 수 있다.
 - 예시
     ```javascript
-    const onChange = e => useCallback(_ => {
+    const onChange = useCallback(e => {
         const {name, value} = e.target;
         setInputs({
             ...inputs,
@@ -327,3 +327,13 @@ return (
     - 업데이트에 필요한 참조값을 추가할 수 있음
 - 상태 업데이트 로직을 컴포넌트 밖으로 분리 가능함
 - 동작 자체를 추상화하고 다른 곳에서 한꺼번에 관리할 수 있다.
+- 어떤 훅을 사용하건 상태의 불변성 유지에 각별히 신경쓸 것
+- useState vs. useReducer?
+    - 늘 그렇듯 정해진 규칙은 없다.
+    - 상황에 맞게 트레이드오프 해라
+    - 권장안은 useState를 먼저 사용하다가 불편해질 거 같을 때 useReducer로 변경
+
+## Custom Hook
+- 반복되는 공용 함수들이 있다.
+- 이 때를 위한 Hook
+- input 상태를 관리하는 Hook 예시
