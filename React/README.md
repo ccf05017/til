@@ -351,3 +351,9 @@ return (
         return [form, onChange, reset];
     }
     ```
+
+## Context API
+- 전역값 관리
+- 하지만 아샬님 얘기대로 아주아주 주의해서 사용하자
+    - 값 관리 자체가 목적이라면 가능한 state, props에서 끊어내자
+- 함부로 사용하면 관리가 어렵다.
