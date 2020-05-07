@@ -302,7 +302,7 @@ return (
 - 성능상 큰 문제가 발생하진 않지만, 향후 props 변화가 없으면 리렌더링조차 하지 않게 개선할 때는 문제가 될 수 있다.
 - 예시
     ```javascript
-    const onChange = e => useCallback(_ => {
+    const onChange = useCallback(e => {
         const {name, value} = e.target;
         setInputs({
             ...inputs,
@@ -319,3 +319,41 @@ return (
     - 우선 사용하는 컴포넌트들을 React.memo 함수로 감싸준다.
     - state 중에 기존값을 참조하는 대상들을 골라낸다.
     - 해당 대상들을 함수형으로 업데이트하도록 변경한다.
+
+## useReducer
+- 상태를 업데이트하는 또다른 방법
+- setState와의 차이점
+    - action 객체를 통해 상태를 업데이트 함
+    - 업데이트에 필요한 참조값을 추가할 수 있음
+- 상태 업데이트 로직을 컴포넌트 밖으로 분리 가능함
+- 동작 자체를 추상화하고 다른 곳에서 한꺼번에 관리할 수 있다.
+- 어떤 훅을 사용하건 상태의 불변성 유지에 각별히 신경쓸 것
+- useState vs. useReducer?
+    - 늘 그렇듯 정해진 규칙은 없다.
+    - 상황에 맞게 트레이드오프 해라
+    - 권장안은 useState를 먼저 사용하다가 불편해질 거 같을 때 useReducer로 변경
+
+## Custom Hook
+- 반복되는 공용 함수들이 있다.
+- 이 때를 위한 Hook
+- input 상태를 관리하는 Hook 예시
+    ```javascript
+    function useInputs(initialForm) {
+        const [form, setForm] = useState(initialForm);
+    
+        const onChange = useCallback(e => {
+            const { name, value } = e.target;
+            setForm(form => ({ ...form, [name]: value }));
+        }, []);
+    
+        const reset = useCallback(() => setForm(initialForm), [initialForm]);
+    
+        return [form, onChange, reset];
+    }
+    ```
+
+## Context API
+- 전역값 관리
+- 하지만 아샬님 얘기대로 아주아주 주의해서 사용하자
+    - 값 관리 자체가 목적이라면 가능한 state, props에서 끊어내자
+- 함부로 사용하면 관리가 어렵다.

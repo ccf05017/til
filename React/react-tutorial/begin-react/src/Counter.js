@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
+
+function reducer(state, action) {
+    switch(action.type) {
+        case 'INCREMENT':
+            return state + 1;
+        case 'DECREMENT':
+            return state - 1;
+        default:
+            throw new Error('Unhandled Error');
+    }
+}
 
 function Counter() {
-    const [number, setNumber] = useState(0);
-    // 위와 같은 의미의 코드
-    // const numberState = useState(0);
-    // const number = numberState[0];
-    // const setNumber = numberState[1];
+    const [number, dispatch] = useReducer(reducer, 0);
 
     const onIncrease = () => {
-        // setNumber(number + 1);
-        setNumber(prevNumber => prevNumber + 1);    // 위와 똑같이 작동한다.
+        dispatch({
+            type: 'INCREMENT'
+        })
     };
 
     const onDecrease = () => {
-        setNumber(number - 1);
+        dispatch({
+            type: 'DECREMENT'
+        })
     };
 
     return (
