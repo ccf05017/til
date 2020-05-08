@@ -44,3 +44,6 @@
     
 ## Polished
 - 유용한 함수들이 들어있는 서드파티 라이브러리 [링크](https://polished.js.org/)
+
+## Transition
+- CSS @keyframes를 활용함 [링크](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) 
