@@ -41,3 +41,6 @@
     ```
 - FxJS에서 template 함수 정의해서 화면 그리던 예제와 유사한 방식
     - 간단하기로는 FxJS가 훨씬 간단하긴 하다.
+    
+## Polished
+- 유용한 함수들이 들어있는 서드파티 라이브러리 [링크](https://polished.js.org/)

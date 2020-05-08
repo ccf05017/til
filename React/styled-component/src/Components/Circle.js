@@ -1,9 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-function Circle() {
-
-    return styled.div`
+const StyledCircle = styled.div`
       width: 5rem;
       height: 5rem;
       background: ${props => props.color};
@@ -14,6 +12,14 @@ function Circle() {
             height: 10rem;
         `}
     `;
+
+function Circle({ color, huge }) {
+
+    return (
+        <div>
+            <StyledCircle color={color} huge={huge}/>
+        </div>
+    );
 }
 
 export default Circle;
