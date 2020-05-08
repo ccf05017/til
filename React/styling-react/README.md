@@ -17,3 +17,24 @@
       font-size: 1rem;
     }
     ```
+  
+## CSS Module
+- 서드파티 라이브러리
+- 이를 통해서 사용하면 CSS가 절대 겹치지 않도록 해준다.
+    - 작성한 CSS를 별도의 객체를 만들어서 감싸줌
+- SCSS도 지원한다.
+- CSS 네이밍 정책 정하기 귀찮거나 `레거시랑 연동할 때` 쓰면 아주 좋다.
+- 사용법
+    - CSS 생성은 기존과 똑같이
+    - 불러올 때만 좀 다르다
+        ```javascript
+        import styles from "./{fileName}.module.css"
+        ```
+
+## React Icons
+- 리액트에서 사용 가능한 아이콘들을 모아 놓은 모듈
+- 공식문서에서 사용할 요소를 검색하고 해당 이름으로 import 하면 됨 [링크](https://react-icons.github.io/react-icons/)
+- 예시
+    ```javascript
+    import { IconName } from "react-icons/bs";
+    ```
