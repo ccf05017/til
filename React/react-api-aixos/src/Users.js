@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import useAsync from "./UseAsync";
 import User from './User';
-
-async function getUsers() {
-  const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-  return response.data;
-}
+import { useUsersDispatch, useUsersState, getUsers } from "./UsersContext";
 
 function Users() {
-  const [state, fetchData] = useAsync(getUsers, [], true);
   const [userId, setUserId] = useState(null);
+  const state = useUsersState();
+  const dispatch = useUsersDispatch();
 
-  const { loading, data: users, error } = state;
+  const { loading, data: users, error } = state.users;
+
+  const fetchData = () => {
+    getUsers(dispatch);
+  };
   if (loading) return <div>loading...</div>;
   if (error) return <div>error!</div>;
   if (!users) return <button onClick={fetchData}>Load</button>;
