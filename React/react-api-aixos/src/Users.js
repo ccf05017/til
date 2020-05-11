@@ -1,34 +1,19 @@
-import React, {useEffect, useReducer} from 'react';
+import React from 'react';
 import axios from 'axios';
-import { asyncReducer } from "./AsyncReducer";
+import useAsync from "./UseAsync";
+
+async function getUsers() {
+  const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+  return response.data;
+}
 
 function Users() {
-  const [state, dispatch] = useReducer(asyncReducer, {
-    loading: false,
-    data: null,
-    error: null
-  });
-
-  const fetchUsers = async () => {
-    dispatch({ type: 'LOADING' });
-    try {
-      const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/users'
-      );
-      dispatch({ type: 'SUCCESS', data: response.data });
-    } catch(e) {
-      dispatch({ type: 'ERROR', error: e })
-    }
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const [state, fetchData] = useAsync(getUsers, [], true);
 
   const { loading, data: users, error } = state;
   if (loading) return <div>loading...</div>;
   if (error) return <div>error!</div>;
-  if (!users) return null;
+  if (!users) return <button onClick={fetchData}>Load</button>;
 
   return (
     <>
@@ -39,7 +24,7 @@ function Users() {
           </li>
         ))}
       </ul>
-      <button onClick={fetchUsers}>Reload</button>
+      <button onClick={fetchData}>Reload</button>
     </>
   );
 }
