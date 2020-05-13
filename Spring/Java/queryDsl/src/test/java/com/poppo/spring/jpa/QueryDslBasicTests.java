@@ -2,6 +2,7 @@ package com.poppo.spring.jpa;
 
 import com.poppo.spring.jpa.entity.Member;
 import com.poppo.spring.jpa.entity.Team;
+import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -87,5 +88,32 @@ public class QueryDslBasicTests {
         assertThat(result.get(0).getUsername()).isEqualTo("member5");
         assertThat(result.get(1).getUsername()).isEqualTo("member6");
         assertThat(result.get(2).getUsername()).isNull();
+    }
+
+    @Test
+    public void paging1() {
+        List<Member> result = jpaQueryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetch();
+
+        assertThat(result.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void paging2() {
+        QueryResults<Member> memberQueryResults = jpaQueryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetchResults();
+
+        assertThat(memberQueryResults.getTotal()).isEqualTo(4);
+        assertThat(memberQueryResults.getLimit()).isEqualTo(2);
+        assertThat(memberQueryResults.getOffset()).isEqualTo(1);
+        assertThat(memberQueryResults.getResults().size()).isEqualTo(2);
     }
 }
