@@ -1,7 +1,6 @@
 package com.poppo.spring.jpa;
 
 import com.poppo.spring.jpa.entity.Member;
-import com.poppo.spring.jpa.entity.QMember;
 import com.poppo.spring.jpa.entity.Team;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.poppo.spring.jpa.entity.QMember.*;
 
 @SpringBootTest
 @Transactional
@@ -61,12 +63,29 @@ public class QueryDslBasicTests {
 
     @Test
     public void changeToQueryDsl() {
-
-        QMember m = new QMember("m");   // 나중엔 이거 안쓰고 기존에 있는 QMember 쓸거다.
-
         // Parameter binding 없이 그냥 자바를 넘겨도 된다.
-        Member foundMember = jpaQueryFactory.select(m).from(m).where(m.username.eq("member1")).fetchOne();
+        Member foundMember = jpaQueryFactory.select(member)
+                .from(member)
+                .where(member.username.eq("member1"))
+                .fetchOne();
 
         assertThat(foundMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    public void sort() {
+        entityManager.persist(new Member(null, 100));
+        entityManager.persist(new Member("member5", 100));
+        entityManager.persist(new Member("member6", 100));
+
+        List<Member> result = jpaQueryFactory
+                .selectFrom(member)
+                .where(member.age.eq(100))
+                .orderBy(member.age.desc(), member.username.asc().nullsLast())
+                .fetch();
+
+        assertThat(result.get(0).getUsername()).isEqualTo("member5");
+        assertThat(result.get(1).getUsername()).isEqualTo("member6");
+        assertThat(result.get(2).getUsername()).isNull();
     }
 }
