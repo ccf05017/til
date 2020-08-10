@@ -60,7 +60,7 @@
       currentScene--;
     }
 
-    console.log(currentScene);
+    document.body.setAttribute('id', `show-scene-${currentScene}`);
   }
 
   window.addEventListener('resize', setLayout);
@@ -68,6 +68,6 @@
     currentYOffset = window.pageYOffset;     // 스크롤이 움직일 때마다 현재의 y 좌표를 추적함.
     scrollLoop();
   });
-  
-  setLayout();
+  window.addEventListener('load', setLayout);
+  window.addEventListener('resize', setLayout);
 })();
