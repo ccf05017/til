@@ -145,6 +145,22 @@ a {
 	align-items: center;
 }
 
+.sticky-elem {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+#show-scene-0 #scroll-section-0 .sticky-elem
+#show-scene-1 #scroll-section-1 .sticky-elem
+#show-scene-2 #scroll-section-2 .sticky-elem
+#show-scene-3 #scroll-section-3 .sticky-elem {
+	display: block;
+	/* 리액트에 적용할 때는 js로 보여줄 컴포넌트 넣었다 뺐다로 바꾸기면 될듯 */
+}
+
 @media (min-width: 1024px) {
 	#scroll-section-0 h1 {
 		font-size: 9vw;
