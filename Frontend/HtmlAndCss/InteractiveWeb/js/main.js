@@ -56,6 +56,7 @@
     }
 
     if (currentYOffset < sumOfpreviousSceneY) {
+      if (currentScene == 0) return   // 브라우저에 따라 바운스 효과 발생 시 scroll이 음수로 가는 경우 방지
       currentScene--;
     }
 
