@@ -70,3 +70,22 @@
 - 이 경우 자동 속성끼리 알아서 빈칸을 찾아서 붙어 들어간다.
 - grid-auto-flow 속성을 통해 이 자동 배치되는 알고리즘을 조정할 수 있다.
 - 디자인 사이트에서 크기가 막 다른 사진 붙여넣을 때 좋다.
+
+## 4. 정렬
+- grid 안의 요소 정렬
+- 컨테이너 안의 `셀 내부의 아이템 위치`를 정렬하는 속성
+  - 세로 정렬: align-items
+    - flex와 다르게 기준축이 없기 때문에 무조건 세로 정렬을 결정짓는다.
+    - start, end, center, stretch(기본값)로 조정할 수 있다.
+  - 가로 정렬: justify-items
+    - flex와 다르게 기준축이 없기 때문에 무조건 가로 정렬을 결정짓는다.
+    - start, end, center, stretch(기본값)로 조정할 수 있다.
+  - 축약 속성: place-items
+    - align-items, justify-items를 축약해서 사용할 때
+- 컨테이너 안의 모든 요소를 한번에 정렬하는 속성
+  - align-content, justify-content, place-content
+  - stretch, start, center, end, space-between, space-around, space-evenly
+- 개별 아이템 정렬
+  - 아이템에만 적용할 수 있다.
+  - align-self, justify-self, place-self
+  - stretch, start, center, end
