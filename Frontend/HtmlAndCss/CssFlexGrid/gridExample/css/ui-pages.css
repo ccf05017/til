@@ -1,0 +1,116 @@
+.header {
+  display: flex;
+  /* justify-content: space-between; */
+  height: 80px;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.search-form {
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
+.primary {
+  padding: 1rem;
+}
+
+.search-from {
+  width: 240px;
+  max-width: 60%;
+}
+
+.secondary {
+  padding: 1rem;
+}
+
+.secondary-a {
+  background: white;
+}
+
+.secondary-b {
+  color: white;
+  background: #666;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+#modal-switch {
+  font-size: 2rem;
+}
+
+.modal {
+  display: none;
+  top: 80px
+}
+
+#modal-switch:checked ~ .modal {
+  display: flex;
+}
+
+label[for="modal-switch"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 1.3rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+}
+
+label[for="modal-switch"]:before {
+  content: "🇰🇷";
+  font-size: 2rem;
+}
+
+#modal-switch,
+label[for="modal-switch"] span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* 아이패드 너비가 보통 1024임 */
+@media (min-width: 1024px) {
+  .page {
+    display: grid;
+    grid-template-columns: 20% auto 20%;
+  }
+  .header {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+  }
+  .menu {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+  }
+  .secondary-a {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+  .secondary-b {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+  }
+  .primary {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+  }
+  .footer {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+  }
+}
+
+@media (min-width: 1400px) {
+  .page {
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+  }
+}

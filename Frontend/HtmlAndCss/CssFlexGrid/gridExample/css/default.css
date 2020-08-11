@@ -7,6 +7,7 @@ html {
 }
 body {
 	-webkit-font-smoothing: antialiased;
+	background: lightgray;
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -47,16 +48,4 @@ button {
 	border: 0;
 	background: transparent;
 	cursor: pointer;
-}
-
-.grid-container {
-	padding: 10px;
-	background: lightgray;
-}
-
-.grid-item {
-	padding: 10px;
-	border: 3px solid rgb(50,50,40);
-	color: white;
-	background: #ff6937;
 }
