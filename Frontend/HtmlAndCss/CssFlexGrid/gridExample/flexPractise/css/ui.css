@@ -17,7 +17,7 @@
 .menu-link {
   display: block;
   padding: 1em;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #555;
   text-decoration: none;
@@ -47,7 +47,8 @@
   border: 0;
   border-radius: 0.3em;
   font-size: 1rem;
-  background: gold;
+  background: #555;
+  color: white;
 }
 
 /* bullet list */
