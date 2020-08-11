@@ -113,6 +113,12 @@
 }
 
 /* card-list */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+  column-gap: 1%;
+}
+
 .card-item {
   display: flex;
   flex-direction: column;
@@ -120,6 +126,7 @@
 }
 
 .card-image {
+  /* height와 padding-bottom 이용에 주목. 이미지 배치 때 자주 쓰는 기법 */
   height: 0;
   padding-bottom: 100%;
   background-color: lightgray;
@@ -136,22 +143,4 @@
   flex: 1 1 auto;
   padding: 1em;
   background: white;
-}
-
-@media (min-width: 600px) {
-  .card-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -1rem;
-  }
-  .card-item {
-    width: 50%;
-    padding: 0 1rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .card-item {
-    width: 33.333333%;
-  }
 }
