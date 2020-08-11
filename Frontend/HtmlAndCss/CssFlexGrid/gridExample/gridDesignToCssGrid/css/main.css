@@ -1,0 +1,8 @@
+body {
+  font-family: Roboto, sans-serif;
+  font-weight: 900;
+  color: #222;
+  background-image: url(images/cat.jpg);
+  background: no-repeat white;
+  background-size: 50vw;
+}
