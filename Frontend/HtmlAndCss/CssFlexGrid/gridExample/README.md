@@ -89,3 +89,9 @@
   - 아이템에만 적용할 수 있다.
   - align-self, justify-self, place-self
   - stretch, start, center, end
+
+## 5. 배치 순서
+- order 속성
+- 숫자가 들어가고 숫자가 작은 순서로 정렬된다.
+- HTML을 바꾸는 게 아니라 시각적인 요소만 바뀐다.
+- z-index가 존재하며, 이를 통해 겹치기 정렬이 가능하다.
