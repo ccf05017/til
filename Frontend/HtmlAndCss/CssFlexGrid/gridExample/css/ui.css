@@ -63,6 +63,11 @@
 }
 
 /* message list */
+.message-item {
+  display: flex;
+  align-items: center;
+}
+
 .user-item {
   display: flex;
   margin-bottom: 1.5em;
@@ -75,7 +80,7 @@
   margin-right: 0.5em;
   border: 2px solid #333;
   border-radius: 50%;
-  background-color: gold;
+  background-color: black;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 120%;
@@ -129,7 +134,7 @@
   /* height와 padding-bottom 이용에 주목. 이미지 배치 때 자주 쓰는 기법 */
   height: 0;
   padding-bottom: 100%;
-  background-color: lightgray;
+  background-color: black;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
