@@ -43,6 +43,18 @@
       scene.scrollHeight = scene.heightNum * window.innerHeight;
       scene.objs.container.style.height = `${scene.scrollHeight}px`;
     });
+
+    const currentYOffset = window.pageYOffset;
+
+    let totalScrollHeight = 0;
+    for (let i = 0; i < sceneInfo.length; i++) {
+      totalScrollHeight += sceneInfo[i].scrollHeight;
+      if (totalScrollHeight >= currentYOffset) {
+        currentScene = i;
+        break;
+      }
+    }
+    document.body.setAttribute('id', `show-scene-${currentScene}`);
   }
 
   function scrollLoop() {
@@ -53,14 +65,14 @@
 
     if (currentYOffset > sumOfpreviousSceneY + sceneInfo[currentScene].scrollHeight) {
       currentScene++;
+      document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
 
     if (currentYOffset < sumOfpreviousSceneY) {
       if (currentScene == 0) return   // 브라우저에 따라 바운스 효과 발생 시 scroll이 음수로 가는 경우 방지
       currentScene--;
+      document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
-
-    document.body.setAttribute('id', `show-scene-${currentScene}`);
   }
 
   window.addEventListener('resize', setLayout);
