@@ -9,8 +9,15 @@
       heightNum: 5,
       scrollHeight: 0,
       objs: {
-        container: document.querySelector('#scroll-section-0')
-      }
+        container: document.querySelector('#scroll-section-0'),
+        messageA: document.querySelector('#scroll-section-0 .main-message.a'),
+        messageB: document.querySelector('#scroll-section-0 .main-message.b'),
+        messageC: document.querySelector('#scroll-section-0 .main-message.c'),
+        messageD: document.querySelector('#scroll-section-0 .main-message.d'),
+      },
+      effects: {
+        messageAOpacity: [0, 1],
+      },
     },
     {
       type: 'normal',
@@ -57,6 +64,51 @@
     document.body.setAttribute('id', `show-scene-${currentScene}`);
   }
 
+  function getYOffsetOfCurrentScene() {
+    return currentYOffset - sumOfpreviousSceneY;
+  }
+
+  function calculateEffects(effects) {
+    const effectRange = effects[1] - effects[0];
+    const scrollRatio = getYOffsetOfCurrentScene() / sceneInfo[currentScene].scrollHeight;
+
+    return (effectRange * scrollRatio) + effects[0];
+  }
+
+  function playFirstScene() {
+    const { objs, effects } = sceneInfo[currentScene];
+
+    const messageAOpacityIn = calculateEffects(effects.messageAOpacity);
+    objs.messageA.style.opacity = messageAOpacityIn;
+  }
+
+  function playSecondScene() {
+    console.log('scene 2');
+  }
+
+  function playThirdScene() {
+    console.log('scene 3');
+  }
+
+  function playFourthScene() {
+    console.log('scene 4');
+  }
+
+  function playAnimation() {
+    if (currentScene === 0) {
+      playFirstScene();
+    }
+    if (currentScene === 1) {
+      playSecondScene();
+    }
+    if (currentScene === 2) {
+      playThirdScene();
+    }
+    if (currentScene === 3) {
+      playFourthScene();
+    }
+  }
+
   function scrollLoop() {
     sumOfpreviousSceneY = 0;
     for (let i = 0; i < currentScene; i++) {
@@ -73,6 +125,8 @@
       currentScene--;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
+
+    playAnimation();
   }
 
   window.addEventListener('resize', setLayout);
