@@ -17,8 +17,9 @@
         messageD: document.querySelector('#scroll-section-0 .main-message.d'),
       },
       effects: {
-        messageAOpacity: [0, 1, { start: 0.1, end: 0.2 }],
-        messageBOpacity: [0, 1, { start: 0.3, end: 0.4 }],
+        messageAOpacityIn: [0, 1, { start: 0.1, end: 0.2 }],
+        messageAOpacityOut: [1, 0, { start: 0.25, end: 0.3 }],
+        messageBOpacityIn: [0, 1, { start: 0.3, end: 0.4 }],
         messageCOpacity: [0, 1, { start: 0.5, end: 0.6 }],
         messageDOpacity: [0, 1, { start: 0.7, end: 0.8 }],
       },
@@ -72,25 +73,31 @@
     return currentYOffset - sumOfpreviousSceneY;
   }
 
+  function getScrollRatio(effects) {
+    const scrollHeight = sceneInfo[currentScene].scrollHeight;
+
+    return getYOffsetOfCurrentScene() / scrollHeight;
+  }
+
   function calculateEffects(effects) {
     const effectRange = effects[1] - effects[0];
     const scrollHeight = sceneInfo[currentScene].scrollHeight;
-    const scrollRatio = getYOffsetOfCurrentScene() / scrollHeight;
+    const scrollRatio = getScrollRatio(effects);
 
     if (effects.length === 3) {
       // 애니메이션 진행시간이 존재하는 경우
       const { start, end } = effects[2];
 
-      const effectStartPoint = start * scrollHeight;
-      const effectEndPoint = end * scrollHeight;
-      const partEffectRange = effectEndPoint - effectStartPoint;
-      const currentEffectRatio = getYOffsetOfCurrentScene() - effectStartPoint;
+      const partEffectStartPoint = start * scrollHeight;
+      const partEffectEndPoint = end * scrollHeight;
+      const partEffectRange = partEffectEndPoint - partEffectStartPoint;
+      const currentEffectRatio = getYOffsetOfCurrentScene() - partEffectStartPoint;
 
-      if (currentYOffset >= effectStartPoint && currentYOffset <= effectEndPoint) {
+      if (currentYOffset >= partEffectStartPoint && currentYOffset <= partEffectEndPoint) {
         return ((currentEffectRatio / partEffectRange)  * effectRange) + effects[0];
-      } else if (currentYOffset < effectStartPoint) {
+      } else if (currentYOffset < partEffectStartPoint) {
         return effects[0]
-      } else if (currentYOffset > effectEndPoint) {
+      } else if (currentYOffset > partEffectEndPoint) {
         return effects[1];
       }
       
@@ -103,9 +110,14 @@
   function playFirstScene() {
     const { objs, effects } = sceneInfo[currentScene];
 
-    const messageAOpacityIn = calculateEffects(effects.messageAOpacity);
+    const messageAOpacityIn = calculateEffects(effects.messageAOpacityIn);
+    const messageAOpacityOut = calculateEffects(effects.messageAOpacityOut);
 
-    objs.messageA.style.opacity = messageAOpacityIn;
+    if (getScrollRatio() < 0.22) {
+      objs.messageA.style.opacity = messageAOpacityIn;
+    } else {
+      objs.messageA.style.opacity = messageAOpacityOut;
+    }
   }
 
   function playSecondScene() {
