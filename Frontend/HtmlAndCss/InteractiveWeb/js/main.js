@@ -15,8 +15,15 @@
         messageB: document.querySelector('#scroll-section-0 .main-message.b'),
         messageC: document.querySelector('#scroll-section-0 .main-message.c'),
         messageD: document.querySelector('#scroll-section-0 .main-message.d'),
+        canvas: document.querySelector('#video-canvas-0'),
+        context: document.querySelector('#video-canvas-0').getContext('2d'),
+        videoImages: [],
       },
       effects: {
+        vidioImageCount: 300,
+        imageSequence: [0, 299],
+        canvasOpacity: [1, 0, { start: 0.9, end: 1}],
+
         messageAOpacityIn: [0, 1, { start: 0.1, end: 0.2 }],
 				messageBOpacityIn: [0, 1, { start: 0.3, end: 0.4 }],
 				messageCOpacityIn: [0, 1, { start: 0.5, end: 0.6 }],
@@ -40,7 +47,7 @@
     },
     {
       type: 'normal',
-      heightNum: 5,
+      // heightNum: 5,
       scrollHeight: 0,
       objs: {
         container: document.querySelector('#scroll-section-1')
@@ -56,9 +63,16 @@
 				messageB: document.querySelector('#scroll-section-2 .b'),
 				messageC: document.querySelector('#scroll-section-2 .c'),
 				pinB: document.querySelector('#scroll-section-2 .b .pin'),
-				pinC: document.querySelector('#scroll-section-2 .c .pin'),
+        pinC: document.querySelector('#scroll-section-2 .c .pin'),
+        canvas: document.querySelector('#video-canvas-2'),
+        context: document.querySelector('#video-canvas-2').getContext('2d'),
+        videoImages: [],
       },
       effects: {
+        vidioImageCount: 960,
+        imageSequence: [0, 959],
+        canvasOpacity: [1, 0, { start: 0.9, end: 1}],
+
 				messageATranslateYIn: [20, 0, { start: 0.25, end: 0.3 }],
 				messageBTranslateYIn: [30, 0, { start: 0.6, end: 0.65 }],
         messageCTranslateYIn: [30, 0, { start: 0.87, end: 0.92 }],
@@ -89,6 +103,28 @@
     }
   ];
 
+  function setCanvasImages() {
+    let imgElem;
+    const firstScene = sceneInfo[0];
+
+    for(let i = 0; i < firstScene.effects.vidioImageCount; i++) {
+      imgElem = new Image();
+      imgElem.src = `video/001/IMG_${6726 + i}.jpg`;
+      firstScene.objs.videoImages.push(imgElem);
+    }
+
+    let imgElem2;
+    const thirdScene = sceneInfo[2];
+
+    for(let i = 0; i < thirdScene.effects.vidioImageCount; i++) {
+      imgElem2 = new Image();
+      imgElem2.src = `video/002/IMG_${7027 + i}.jpg`;
+      thirdScene.objs.videoImages.push(imgElem2)
+    }
+  }
+
+  setCanvasImages();
+
   function setLayout() {
     sceneInfo.forEach((scene) => {
       if (scene.type === 'sticky') {
@@ -111,6 +147,10 @@
       }
     }
     document.body.setAttribute('id', `show-scene-${currentScene}`);
+
+    const heightRatio = window.innerHeight / 1080;
+    sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+    sceneInfo[2].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
   }
 
   function getYOffsetOfCurrentScene() {
@@ -155,17 +195,21 @@
   function playFirstScene() {
     const { objs, effects } = sceneInfo[currentScene];
 
+    let sequence = Math.round(calculateEffects(effects.imageSequence));
+    objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+    objs.canvas.style.opacity = calculateEffects(effects.canvasOpacity);
+
     if (getScrollRatio() < 0.22) {
       objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityIn);
-      objs.messageA.style.transform = `translateY(${calculateEffects(effects.messageATranslateYIn)}%)`;
+      objs.messageA.style.transform = `translate3D(0, ${calculateEffects(effects.messageATranslateYIn)}%, 0)`;
     } else {
       objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityOut)
-      objs.messageA.style.transform = `translateY(${calculateEffects(effects.messageATranslateYOut)}%)`;
+      objs.messageA.style.transform = `translate3D(0, ${calculateEffects(effects.messageATranslateYOut)}%, 0)`;
     }
 
     if (getScrollRatio() < 0.42) {
       objs.messageB.style.opacity = calculateEffects(effects.messageBOpacityIn);
-      objs.messageB.style.transform = `translateY(${calculateEffects(effects.messageBTranslateYIn)}%)`;
+      objs.messageB.style.transform = `translate3D(0, ${calculateEffects(effects.messageBTranslateYIn)}%, 0)`;
     } else {
       objs.messageB.style.opacity = calculateEffects(effects.messageBOpacityOut)
       objs.messageB.style.transform = `translateY(${calculateEffects(effects.messageBTranslateYOut)}%)`;
@@ -181,19 +225,19 @@
 
     if (getScrollRatio() < 0.82) {
       objs.messageD.style.opacity = calculateEffects(effects.messageDOpacityIn);
-      objs.messageD.style.transform = `translateY(${calculateEffects(effects.messageDTranslateYIn)}%)`;
+      objs.messageD.style.transform = `translate3D(0, ${calculateEffects(effects.messageDTranslateYIn)}%, 0)`;
     } else {
       objs.messageD.style.opacity = calculateEffects(effects.messageBOpacityOut)
-      objs.messageD.style.transform = `translateY(${calculateEffects(effects.messageDTranslateYOut)}%)`;
+      objs.messageD.style.transform = `translate3d(0, ${calculateEffects(effects.messageDTranslateYOut)}%, 0)`;
     }
-  }
-
-  function playSecondScene() {
-    console.log('scene 2 - no effects')
   }
 
   function playThirdScene() {
     const { objs, effects } = sceneInfo[currentScene];
+
+    let sequence = Math.round(calculateEffects(effects.imageSequence));
+    objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+    objs.canvas.style.opacity = calculateEffects(effects.canvasOpacity);
 
     if (getScrollRatio() < 0.32) {
       objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityIn);
@@ -231,9 +275,6 @@
   function playAnimation() {
     if (currentScene === 0) {
       playFirstScene();
-    }
-    if (currentScene === 1) {
-      playSecondScene();
     }
     if (currentScene === 2) {
       playThirdScene();
@@ -274,6 +315,9 @@
     currentYOffset = window.pageYOffset;     // 스크롤이 움직일 때마다 현재의 y 좌표를 추적함.
     scrollLoop();
   });
-  window.addEventListener('load', setLayout);
+  window.addEventListener('load', () => {
+    setLayout();
+    sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+  });
   window.addEventListener('resize', setLayout);
 })();
