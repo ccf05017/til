@@ -59,7 +59,7 @@
 				pinC: document.querySelector('#scroll-section-2 .c .pin'),
       },
       effects: {
-				messageATranslateYIn: [20, 0, { start: 0.15, end: 0.2 }],
+				messageATranslateYIn: [20, 0, { start: 0.25, end: 0.3 }],
 				messageBTranslateYIn: [30, 0, { start: 0.6, end: 0.65 }],
         messageCTranslateYIn: [30, 0, { start: 0.87, end: 0.92 }],
         
@@ -75,7 +75,7 @@
 				messageBOpacityOut: [1, 0, { start: 0.68, end: 0.73 }],
         messageCOpacityOut: [1, 0, { start: 0.95, end: 1 }],
         
-				pinBSscaleY: [0.5, 1, { start: 0.6, end: 0.65 }],
+				pinBScaleY: [0.5, 1, { start: 0.6, end: 0.65 }],
 				pinCScaleY: [0.5, 1, { start: 0.87, end: 0.92 }]
 			},
     },
@@ -197,8 +197,30 @@
 
     if (getScrollRatio() < 0.32) {
       objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityIn);
+      objs.messageA.style.transform = `translate3d(0, ${calculateEffects(effects.messageATranslateYIn)}%, 0)`;
     } else {
-      objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityOut)
+      objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityOut);
+      objs.messageA.style.transform = `translate3d(0, ${calculateEffects(effects.messageATranslateYOut)}%, 0)`;
+    }
+
+    if (getScrollRatio() < 0.67) {
+      objs.messageB.style.opacity = calculateEffects(effects.messageBOpacityIn);
+      objs.messageB.style.transform = `translate3d(0, ${calculateEffects(effects.messageBTranslateYIn)}%, 0)`;
+      objs.pinB.style.transform = `scaleY(${calculateEffects(effects.pinBScaleY)})`;
+    } else {
+      objs.messageB.style.opacity = calculateEffects(effects.messageBOpacityOut);
+      objs.messageB.style.transform = `translate3d(0, ${calculateEffects(effects.messageBTranslateYIn)}%, 0)`;
+      objs.pinB.style.transform = `scaleY(${calculateEffects(effects.pinBScaleY)})`;
+    }
+
+    if (getScrollRatio() < 0.93) {
+      objs.messageC.style.opacity = calculateEffects(effects.messageCOpacityIn);
+      objs.messageC.style.transform = `translate3d(0, ${calculateEffects(effects.messageCTranslateYIn)}%, 0)`;
+      objs.pinC.style.transform = `scaleY(${calculateEffects(effects.pinCScaleY)})`;
+    } else {
+      objs.messageC.style.opacity = calculateEffects(effects.messageCOpacityOut);
+      objs.messageC.style.transform = `translate3d(0, ${calculateEffects(effects.messageCTranslateYIn)}%, 0)`;
+      objs.pinC.style.transform = `scaleY(${calculateEffects(effects.pinCScaleY)})`;
     }
   }
 
