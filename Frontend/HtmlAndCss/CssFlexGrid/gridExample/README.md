@@ -96,6 +96,12 @@
 - HTML을 바꾸는 게 아니라 시각적인 요소만 바뀐다.
 - z-index가 존재하며, 이를 통해 겹치기 정렬이 가능하다.
 
-## 참고
+## 참고1
 - [CopyChar](https://copychar.cc)
 - 클릭만 하면 여러가지 아이콘 요소를 복사해올 수 있다.
+
+## 참고2
+- IE에서도 grid 쓸 수는 있다.
+- 아주 구리지만
+- [1분코딩](https://studiomeal.com/archives/533)
+- [공식문서](https://www.w3.org/TR/2011/WD-css3-grid-layout-20110407/)
