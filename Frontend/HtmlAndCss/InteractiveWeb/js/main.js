@@ -18,10 +18,24 @@
       },
       effects: {
         messageAOpacityIn: [0, 1, { start: 0.1, end: 0.2 }],
-        messageAOpacityOut: [1, 0, { start: 0.25, end: 0.3 }],
-        messageBOpacityIn: [0, 1, { start: 0.3, end: 0.4 }],
-        messageCOpacity: [0, 1, { start: 0.5, end: 0.6 }],
-        messageDOpacity: [0, 1, { start: 0.7, end: 0.8 }],
+				messageBOpacityIn: [0, 1, { start: 0.3, end: 0.4 }],
+				messageCOpacityIn: [0, 1, { start: 0.5, end: 0.6 }],
+        messageDOpacityIn: [0, 1, { start: 0.7, end: 0.8 }],
+        
+				messageATranslateYIn: [20, 0, { start: 0.1, end: 0.2 }],
+				messageBTranslateYIn: [20, 0, { start: 0.3, end: 0.4 }],
+				messageCTranslateYIn: [20, 0, { start: 0.5, end: 0.6 }],
+        messageDTranslateYIn: [20, 0, { start: 0.7, end: 0.8 }],
+        
+				messageAOpacityOut: [1, 0, { start: 0.25, end: 0.3 }],
+				messageBOpacityOut: [1, 0, { start: 0.45, end: 0.5 }],
+				messageCOpacityOut: [1, 0, { start: 0.65, end: 0.7 }],
+        messageDOpacityOut: [1, 0, { start: 0.85, end: 0.9 }],
+        
+				messageATranslateYOut: [0, -20, { start: 0.25, end: 0.3 }],
+				messageBTranslateYOut: [0, -20, { start: 0.45, end: 0.5 }],
+				messageCTranslateYOut: [0, -20, { start: 0.65, end: 0.7 }],
+				messageDTranslateYOut: [0, -20, { start: 0.85, end: 0.9 }]
       },
     },
     {
@@ -30,15 +44,40 @@
       scrollHeight: 0,
       objs: {
         container: document.querySelector('#scroll-section-1')
-      }
+      },
     },
     {
       type: 'sticky',
       heightNum: 5,
       scrollHeight: 0,
       objs: {
-        container: document.querySelector('#scroll-section-2')
-      }
+        container: document.querySelector('#scroll-section-2'),
+				messageA: document.querySelector('#scroll-section-2 .a'),
+				messageB: document.querySelector('#scroll-section-2 .b'),
+				messageC: document.querySelector('#scroll-section-2 .c'),
+				pinB: document.querySelector('#scroll-section-2 .b .pin'),
+				pinC: document.querySelector('#scroll-section-2 .c .pin'),
+      },
+      effects: {
+				messageATranslateYIn: [20, 0, { start: 0.15, end: 0.2 }],
+				messageBTranslateYIn: [30, 0, { start: 0.6, end: 0.65 }],
+        messageCTranslateYIn: [30, 0, { start: 0.87, end: 0.92 }],
+        
+				messageAOpacityIn: [0, 1, { start: 0.25, end: 0.3 }],
+				messageBOpacityIn: [0, 1, { start: 0.6, end: 0.65 }],
+        messageCOpacityIn: [0, 1, { start: 0.87, end: 0.92 }],
+        
+				messageATranslateYOut: [0, -20, { start: 0.4, end: 0.45 }],
+				messageBTranslateYOut: [0, -20, { start: 0.68, end: 0.73 }],
+        messageCTranslateYOut: [0, -20, { start: 0.95, end: 1 }],
+        
+				messageAOpacityOut: [1, 0, { start: 0.4, end: 0.45 }],
+				messageBOpacityOut: [1, 0, { start: 0.68, end: 0.73 }],
+        messageCOpacityOut: [1, 0, { start: 0.95, end: 1 }],
+        
+				pinBSscaleY: [0.5, 1, { start: 0.6, end: 0.65 }],
+				pinCScaleY: [0.5, 1, { start: 0.87, end: 0.92 }]
+			},
     },
     {
       type: 'sticky',
@@ -52,8 +91,13 @@
 
   function setLayout() {
     sceneInfo.forEach((scene) => {
-      scene.scrollHeight = scene.heightNum * window.innerHeight;
-      scene.objs.container.style.height = `${scene.scrollHeight}px`;
+      if (scene.type === 'sticky') {
+        scene.scrollHeight = scene.heightNum * window.innerHeight;
+        scene.objs.container.style.height = `${scene.scrollHeight}px`;
+      } else {
+        scene.scrollHeight = scene.objs.container.offsetHeight;
+        scene.objs.container.style.height = `${scene.scrollHeight}px`;
+      }
     });
 
     const currentYOffset = window.pageYOffset;
@@ -73,7 +117,7 @@
     return currentYOffset - sumOfpreviousSceneY;
   }
 
-  function getScrollRatio(effects) {
+  function getScrollRatio() {
     const scrollHeight = sceneInfo[currentScene].scrollHeight;
 
     return getYOffsetOfCurrentScene() / scrollHeight;
@@ -83,6 +127,7 @@
     const effectRange = effects[1] - effects[0];
     const scrollHeight = sceneInfo[currentScene].scrollHeight;
     const scrollRatio = getScrollRatio(effects);
+    const currentYOffsetInScene = currentYOffset - sumOfpreviousSceneY;
 
     if (effects.length === 3) {
       // 애니메이션 진행시간이 존재하는 경우
@@ -93,11 +138,11 @@
       const partEffectRange = partEffectEndPoint - partEffectStartPoint;
       const currentEffectRatio = getYOffsetOfCurrentScene() - partEffectStartPoint;
 
-      if (currentYOffset >= partEffectStartPoint && currentYOffset <= partEffectEndPoint) {
+      if (currentYOffsetInScene >= partEffectStartPoint && currentYOffsetInScene <= partEffectEndPoint) {
         return ((currentEffectRatio / partEffectRange)  * effectRange) + effects[0];
-      } else if (currentYOffset < partEffectStartPoint) {
-        return effects[0]
-      } else if (currentYOffset > partEffectEndPoint) {
+      } else if (currentYOffsetInScene < partEffectStartPoint) {
+        return effects[0];
+      } else if (currentYOffsetInScene > partEffectEndPoint) {
         return effects[1];
       }
       
@@ -110,22 +155,51 @@
   function playFirstScene() {
     const { objs, effects } = sceneInfo[currentScene];
 
-    const messageAOpacityIn = calculateEffects(effects.messageAOpacityIn);
-    const messageAOpacityOut = calculateEffects(effects.messageAOpacityOut);
-
     if (getScrollRatio() < 0.22) {
-      objs.messageA.style.opacity = messageAOpacityIn;
+      objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityIn);
+      objs.messageA.style.transform = `translateY(${calculateEffects(effects.messageATranslateYIn)}%)`;
     } else {
-      objs.messageA.style.opacity = messageAOpacityOut;
+      objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityOut)
+      objs.messageA.style.transform = `translateY(${calculateEffects(effects.messageATranslateYOut)}%)`;
+    }
+
+    if (getScrollRatio() < 0.42) {
+      objs.messageB.style.opacity = calculateEffects(effects.messageBOpacityIn);
+      objs.messageB.style.transform = `translateY(${calculateEffects(effects.messageBTranslateYIn)}%)`;
+    } else {
+      objs.messageB.style.opacity = calculateEffects(effects.messageBOpacityOut)
+      objs.messageB.style.transform = `translateY(${calculateEffects(effects.messageBTranslateYOut)}%)`;
+    }
+
+    if (getScrollRatio() < 0.62) {
+      objs.messageC.style.opacity = calculateEffects(effects.messageCOpacityIn);
+      objs.messageC.style.transform = `translateY(${calculateEffects(effects.messageCTranslateYIn)}%)`;
+    } else {
+      objs.messageC.style.opacity = calculateEffects(effects.messageBOpacityOut)
+      objs.messageC.style.transform = `translateY(${calculateEffects(effects.messageCTranslateYOut)}%)`;
+    }
+
+    if (getScrollRatio() < 0.82) {
+      objs.messageD.style.opacity = calculateEffects(effects.messageDOpacityIn);
+      objs.messageD.style.transform = `translateY(${calculateEffects(effects.messageDTranslateYIn)}%)`;
+    } else {
+      objs.messageD.style.opacity = calculateEffects(effects.messageBOpacityOut)
+      objs.messageD.style.transform = `translateY(${calculateEffects(effects.messageDTranslateYOut)}%)`;
     }
   }
 
   function playSecondScene() {
-    console.log('scene 2');
+    console.log('scene 2 - no effects')
   }
 
   function playThirdScene() {
-    console.log('scene 3');
+    const { objs, effects } = sceneInfo[currentScene];
+
+    if (getScrollRatio() < 0.32) {
+      objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityIn);
+    } else {
+      objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityOut)
+    }
   }
 
   function playFourthScene() {
