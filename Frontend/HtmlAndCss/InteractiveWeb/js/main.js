@@ -71,7 +71,8 @@
       effects: {
         vidioImageCount: 960,
         imageSequence: [0, 959],
-        canvasOpacity: [1, 0, { start: 0.9, end: 1}],
+        canvasOpacityIn: [0, 1, { start: 0, end: 0.1}],
+        canvasOpacityOut: [1, 0, { start: 0.95, end: 1}],
 
 				messageATranslateYIn: [20, 0, { start: 0.25, end: 0.3 }],
 				messageBTranslateYIn: [30, 0, { start: 0.6, end: 0.65 }],
@@ -98,7 +99,10 @@
       heightNum: 5,
       scrollHeight: 0,
       objs: {
-        container: document.querySelector('#scroll-section-3')
+        container: document.querySelector('#scroll-section-3'),
+        canvasCaption: document.querySelector('.canvas-caption'),
+        canvas: document.querySelector('#scroll-section-3 .image-blend-canvas'),
+        context: document.querySelector('#scroll-section-3 .image-blend-canvas').getContext('2d'),
       }
     }
   ];
@@ -237,7 +241,12 @@
 
     let sequence = Math.round(calculateEffects(effects.imageSequence));
     objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-    objs.canvas.style.opacity = calculateEffects(effects.canvasOpacity);
+
+    if (getScrollRatio() <= 0.5) {
+      objs.canvas.style.opacity = calculateEffects(effects.canvasOpacityIn);
+    } else {
+      objs.canvas.style.opacity = calculateEffects(effects.canvasOpacityOut);
+    }
 
     if (getScrollRatio() < 0.32) {
       objs.messageA.style.opacity = calculateEffects(effects.messageAOpacityIn);
@@ -269,7 +278,19 @@
   }
 
   function playFourthScene() {
-    console.log('scene 4');
+    const { objs, effects } = sceneInfo[currentScene];
+
+    const widthRatio = window.innerWidth / objs.canvas.width;
+    const heightRatio = window.innerHeight / objs.canvas.height;
+    let canvasScaleRatio;
+    
+    if (widthRatio <= heightRatio) {
+      canvasScaleRatio = heightRatio;
+    } else {
+      canvasScaleRatio = widthRatio;
+    }
+
+    objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
   }
 
   function playAnimation() {
