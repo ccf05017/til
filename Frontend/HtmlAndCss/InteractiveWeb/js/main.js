@@ -103,7 +103,17 @@
         canvasCaption: document.querySelector('.canvas-caption'),
         canvas: document.querySelector('#scroll-section-3 .image-blend-canvas'),
         context: document.querySelector('#scroll-section-3 .image-blend-canvas').getContext('2d'),
-      }
+        imagesPath: [
+          'images/blend-image-1.jpg',
+          'images/blend-image-2.jpg',
+        ],
+        images: [],
+      },
+      effects: {
+        leftWhiteBoxX: [0, 0, { start: 0, end: 0 }],
+        rightWhiteBoxX: [0, 0, { start: 0, end: 0 }],
+        whiteBoxStartY: 0,
+      },
     }
   ];
 
@@ -124,6 +134,15 @@
       imgElem2 = new Image();
       imgElem2.src = `video/002/IMG_${7027 + i}.jpg`;
       thirdScene.objs.videoImages.push(imgElem2)
+    }
+
+    let imgElem3;
+    const fourthScene = sceneInfo[3];
+
+    for (let i = 0; i < fourthScene.objs.imagesPath.length; i++) {
+      imgElem3 = new Image();
+      imgElem3.src = fourthScene.objs.imagesPath[i];
+      fourthScene.objs.images.push(imgElem3);
     }
   }
 
@@ -291,6 +310,42 @@
     }
 
     objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+    objs.context.fillStyle = 'white';
+    objs.context.drawImage(objs.images[0], 0, 0);
+
+    // 캔버스 사이즈에 맞춰 가정한 innerWidth, innerHeight(실제 보이는 화면 크기)
+    const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
+    const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+    // 흰 박스 크기가 변하는 게 아니라 흰 박스의 위치가 양 옆으로 밀려나는 것
+    if (!effects.whiteBoxStartY) {
+      effects.whiteBoxStartY = objs.canvas.offsetTop + (objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2;
+      effects.leftWhiteBoxX[2].start = (window.innerHeight / 2) / sceneInfo[currentScene].scrollHeight;
+      effects.rightWhiteBoxX[2].start = (window.innerHeight / 2) / sceneInfo[currentScene].scrollHeight;
+      effects.leftWhiteBoxX[2].end = effects.whiteBoxStartY / sceneInfo[currentScene].scrollHeight;
+      effects.rightWhiteBoxX[2].end = effects.whiteBoxStartY / sceneInfo[currentScene].scrollHeight;
+    }
+
+    const whiteBoxWidth = recalculatedInnerWidth * 0.15;
+
+    effects.leftWhiteBoxX[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
+    effects.leftWhiteBoxX[1] = effects.leftWhiteBoxX[0] - whiteBoxWidth;
+    effects.rightWhiteBoxX[0] = effects.leftWhiteBoxX[0] + recalculatedInnerWidth - whiteBoxWidth;
+    effects.rightWhiteBoxX[1] = effects.rightWhiteBoxX[0] + whiteBoxWidth;
+
+    // fillRect(x, y, width, height)
+    objs.context.fillRect(
+      parseInt(calculateEffects(effects.leftWhiteBoxX)),
+      0,
+      parseInt(whiteBoxWidth),
+      recalculatedInnerHeight
+    );
+    objs.context.fillRect(
+      parseInt(calculateEffects(effects.rightWhiteBoxX)),
+      0,
+      parseInt(whiteBoxWidth),
+      recalculatedInnerHeight
+    );
   }
 
   function playAnimation() {
