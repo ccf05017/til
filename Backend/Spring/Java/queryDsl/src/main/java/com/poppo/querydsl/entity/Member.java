@@ -1,4 +1,4 @@
-package com.poppo.spring.jpa.entity;
+package com.poppo.querydsl.entity;
 
 import lombok.*;
 
@@ -6,10 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id", "username", "age"})
+@ToString(of = { "id", "username", "age" })
 public class Member {
     @Id
     @GeneratedValue
@@ -23,7 +22,7 @@ public class Member {
     private Team team;
 
     public Member(String username) {
-        this(username, 0);
+        this(username, 0, null);
     }
 
     public Member(String username, int age) {

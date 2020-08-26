@@ -1,4 +1,4 @@
-package com.poppo.spring.jpa.entity;
+package com.poppo.querydsl.entity;
 
 import lombok.*;
 
@@ -8,19 +8,20 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@ToString(of = {"id", "name"})
+@ToString(of = { "id", "name" })
 public class Team {
-
     @Id
     @GeneratedValue
     @Column(name = "team_id")
     private Long id;
-
     private String name;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<>();
+
+    public Team(String name) {
+        this.name = name;
+    }
 }
