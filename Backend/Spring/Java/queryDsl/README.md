@@ -1,9 +1,3 @@
-# QueryDSL 강의 실습
-
-## 기본 동작
-- 컴파일될 때 queryDsl 컴파일 같이 진행
-- 성공하면 QType 생성
-
-## 유의 사항
-- 생성된 QType은 절대 git에 올라가지 않게 주의하자
-- 현재 설정 방식은 build 안에 들어가기 때문에 딱히 신경 안써도 됨
+# 인프런 영한님 QueryDSL 강의
+## 1. 설정
+- 설정 파일 모두 설정 후 `gradle - tasks - other`의 compileQueryDsl을 실행해서 잘 되는지 확인할 것
