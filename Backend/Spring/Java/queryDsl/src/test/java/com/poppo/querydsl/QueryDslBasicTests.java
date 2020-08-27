@@ -19,6 +19,7 @@ import java.util.List;
 
 import static com.poppo.querydsl.entity.QMember.member;
 import static com.poppo.querydsl.entity.QTeam.team;
+import static com.querydsl.jpa.JPAExpressions.select;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -321,5 +322,71 @@ public class QueryDslBasicTests {
 
         boolean loaded2 = entityManagerFactory.getPersistenceUnitUtil().isLoaded(foundMember2.getTeam());
         assertThat(loaded2).isTrue();
+    }
+
+    @Test
+    public void subQueryTest() {
+        // 나이가 가장 많은 회원을 조회해보자
+        QMember memberSub = new QMember("memberSub");
+
+        List<Member> result = jpaQueryFactory
+                .selectFrom(member)
+                .where(member.age.eq(
+                        select(memberSub.age.max())
+                                .from(memberSub)
+                ))
+                .fetch();
+
+        assertThat(result).extracting("age").containsExactly(40);
+    }
+
+    @Test
+    public void subQueryTest2() {
+        // 나이가 평균 이상인 회원을 검색해보자
+        QMember memberSub = new QMember("memberSub");
+
+        List<Member> result = jpaQueryFactory
+                .selectFrom(member)
+                .where(member.age.goe(
+                        select(memberSub.age.avg())
+                                .from(memberSub)
+                ))
+                .fetch();
+
+        assertThat(result).extracting("age").containsExactly(30, 40);
+    }
+
+    @Test
+    public void subQueryTest3() {
+        // 나이가 평균 이상인 회원을 검새개해보자
+        QMember memberSub = new QMember("memberSub");
+
+        List<Member> result = jpaQueryFactory
+                .selectFrom(member)
+                .where(member.age.in(
+                        select(memberSub.age)
+                                .from(memberSub)
+                                .where(memberSub.age.gt(10))
+                ))
+                .fetch();
+
+        assertThat(result).extracting("age").containsExactly(20, 30, 40);
+    }
+
+    @Test
+    public void selectSubQueryTest() {
+        QMember memberSub = new QMember("memberSub");
+
+        List<Tuple> result = jpaQueryFactory
+                .select(member.username,
+                        select(memberSub.age.avg())
+                                .from(memberSub)
+                )
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : result) {
+            System.out.println(tuple);
+        }
     }
 }
