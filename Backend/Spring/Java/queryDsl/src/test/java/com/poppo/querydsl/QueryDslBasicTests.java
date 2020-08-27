@@ -5,6 +5,7 @@ import com.poppo.querydsl.entity.QMember;
 import com.poppo.querydsl.entity.Team;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -387,6 +388,36 @@ public class QueryDslBasicTests {
 
         for (Tuple tuple : result) {
             System.out.println(tuple);
+        }
+    }
+
+    @Test
+    public void basicCaseTest() {
+        List<String> result = jpaQueryFactory
+                .select(member.age
+                        .when(10).then("열짤")
+                        .when(20).then("스무쨜")
+                        .otherwise("기타"))
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println(s);
+        }
+    }
+
+    @Test
+    public void complexCaseTest() {
+        List<String> result = jpaQueryFactory
+                .select(new CaseBuilder()
+                        .when(member.age.between(0, 20)).then("0~20")
+                        .when(member.age.between(21, 230)).then("21~30")
+                        .otherwise("기타"))
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println(s);
         }
     }
 }
