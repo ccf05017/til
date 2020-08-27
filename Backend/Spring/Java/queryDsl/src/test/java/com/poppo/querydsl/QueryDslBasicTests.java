@@ -1,6 +1,7 @@
 package com.poppo.querydsl;
 
 import com.poppo.querydsl.entity.Member;
+import com.poppo.querydsl.entity.QMember;
 import com.poppo.querydsl.entity.Team;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
@@ -11,7 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 import static com.poppo.querydsl.entity.QMember.member;
@@ -289,7 +292,34 @@ public class QueryDslBasicTests {
         }
     }
 
+    @PersistenceUnit
+    EntityManagerFactory entityManagerFactory;
+
     @Test
     public void fetchJoinTest() {
+        entityManager.flush();
+        entityManager.clear();
+
+        // no fetch - member만 조회한다 (fetch Lazy이기 때문에 team은 안 가져온다)
+        Member foundMember = jpaQueryFactory
+                .selectFrom(QMember.member)
+                .where(QMember.member.username.eq("member1"))
+                .fetchOne();
+
+        boolean loaded = entityManagerFactory.getPersistenceUnitUtil().isLoaded(foundMember.getTeam());
+        assertThat(loaded).isFalse();
+
+        // fetch 적용
+        entityManager.flush();
+        entityManager.clear();
+
+        Member foundMember2 = jpaQueryFactory
+                .selectFrom(QMember.member)
+                .join(member.team, team).fetchJoin()
+                .where(QMember.member.username.eq("member1"))
+                .fetchOne();
+
+        boolean loaded2 = entityManagerFactory.getPersistenceUnitUtil().isLoaded(foundMember2.getTeam());
+        assertThat(loaded2).isTrue();
     }
 }
