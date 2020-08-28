@@ -1,10 +1,15 @@
 package com.poppo.querydsl;
 
+import com.poppo.querydsl.dto.MemberDto;
+import com.poppo.querydsl.dto.QQueryProjectionMemberDto;
+import com.poppo.querydsl.dto.QueryProjectionMemberDto;
+import com.poppo.querydsl.dto.UserDto;
 import com.poppo.querydsl.entity.Member;
 import com.poppo.querydsl.entity.QMember;
 import com.poppo.querydsl.entity.Team;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -444,6 +449,102 @@ public class QueryDslBasicTests {
 
         for (String s : result) {
             System.out.println(s);
+        }
+    }
+
+    @Test
+    public void tupleProjectionTest() {
+        List<Tuple> result = jpaQueryFactory
+                .select(member.username, member.age)
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : result) {
+            String username = tuple.get(member.username);
+            Integer age = tuple.get(member.age);
+
+            System.out.println("useranme = " + username);
+            System.out.println("age = " + age);
+        }
+    }
+
+    @Test
+    public void findDtoByJPQL() {
+        List<MemberDto> results = entityManager.createQuery("select new com.poppo.querydsl.dto.MemberDto(m.username, m.age) " +
+                "from Member m", MemberDto.class).getResultList();
+
+        for (MemberDto result : results) {
+            System.out.println(result);
+        }
+    }
+
+    @Test
+    void findDtoBySetter() {
+        List<MemberDto> result = jpaQueryFactory
+                .select(Projections.bean(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println(memberDto);
+        }
+    }
+
+    @Test
+    void findDtoByField() {
+        // setter가 없어도 실행된다.
+        List<MemberDto> result = jpaQueryFactory
+                .select(Projections.fields(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println(memberDto);
+        }
+    }
+
+    @Test
+    void findDtoByFieldAndDifferentFieldName() {
+        // setter가 없어도 실행된다.
+        List<UserDto> result = jpaQueryFactory
+                .select(Projections.fields(UserDto.class,
+                        member.username.as("name"),
+                        member.age))
+                .from(member)
+                .fetch();
+
+        for (UserDto userDto : result) {
+            System.out.println(userDto);
+        }
+    }
+
+    @Test
+    void findDtoByConstructor() {
+        List<MemberDto> result = jpaQueryFactory
+                .select(Projections.constructor(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println(memberDto);
+        }
+    }
+
+    @Test
+    void findDtoByQueryProjection() {
+        List<QueryProjectionMemberDto> result = jpaQueryFactory
+                .select(new QQueryProjectionMemberDto(member.username, member.age))
+                .from(member)
+                .fetch();
+
+        for (QueryProjectionMemberDto queryProjectionMemberDto : result) {
+            System.out.println(queryProjectionMemberDto);
         }
     }
 }
