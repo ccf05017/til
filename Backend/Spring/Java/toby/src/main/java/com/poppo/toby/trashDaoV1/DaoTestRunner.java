@@ -1,4 +1,4 @@
-package com.poppo.toby.dao;
+package com.poppo.toby.trashDaoV1;
 
 import com.poppo.toby.domain.User;
 

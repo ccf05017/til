@@ -1,15 +1,10 @@
-package com.poppo.toby.dao;
+package com.poppo.toby.trashdaoV2;
 
 import com.poppo.toby.domain.User;
 
 import java.sql.*;
 
-public class TrashUserDao {
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:h2:tcp://localhost/~/data/toby", "sa", "");
-    }
-
+public abstract class TrashUserDaoV2 {
     public void add(User user) throws SQLException {
         Connection connection = getConnection();
 
@@ -27,8 +22,7 @@ public class TrashUserDao {
     }
 
     public User get(String id) throws SQLException {
-        Connection connection = DriverManager.getConnection(
-                "jdbc:h2:tcp://localhost/~/data/toby", "sa", "");
+        Connection connection = getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "select * from users where id = ?");
@@ -48,4 +42,6 @@ public class TrashUserDao {
 
         return user;
     }
+
+    public abstract Connection getConnection() throws SQLException;
 }
