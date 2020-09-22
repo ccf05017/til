@@ -2,6 +2,7 @@ package com.poppo.toby.userDao;
 
 import com.poppo.toby.domain.User;
 import com.poppo.toby.trashDaoV3.ConnectionMaker;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,15 +41,22 @@ public class NotBadUserDao {
         preparedStatement.setString(1, id);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        User user = new User();
-        user.setId(resultSet.getString("id"));
-        user.setName(resultSet.getString("name"));
-        user.setPassword(resultSet.getString("password"));
+
+        User user = null;
+        if (resultSet.next()) {
+            user = new User();
+            user.setId(resultSet.getString("id"));
+            user.setId(resultSet.getString("name"));
+            user.setId(resultSet.getString("password"));
+        }
 
         resultSet.close();
         preparedStatement.close();
         connection.close();
+
+        if (user == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
 
         return user;
     }
