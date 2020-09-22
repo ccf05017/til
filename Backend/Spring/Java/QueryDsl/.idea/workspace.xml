@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8d3577bb-ccbe-4f4a-b85f-ba222a6f115e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../Frontend/Webpack/lecture-frontend-dev-env" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Frontend/Webpack/lecture-frontend-dev-env" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="querydsl" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="querydsl" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="querydsl" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="1gcDQdst2YOTaQf9LTrNkuu54cr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.poppo.querydsl.entity" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.QueryDslBasicTests.findDtoByQueryProjection">
+    <configuration name="QueryDsl [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileQuerydsl" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="QueryDslBasicTests.findDtoByConstructor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="querydsl.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.querydsl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.querydsl" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.querydsl.QueryDslBasicTests" />
+      <option name="METHOD_NAME" value="findDtoByConstructor" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QueryDslBasicTests.findDtoByField" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="querydsl.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.querydsl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.querydsl" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.querydsl.QueryDslBasicTests" />
+      <option name="METHOD_NAME" value="findDtoByField" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QueryDslBasicTests.findDtoByFieldAndDifferentFieldName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="querydsl.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.querydsl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.querydsl" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.querydsl.QueryDslBasicTests" />
+      <option name="METHOD_NAME" value="findDtoByFieldAndDifferentFieldName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QueryDslBasicTests.findDtoByQueryProjection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="querydsl.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.querydsl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.querydsl" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.querydsl.QueryDslBasicTests" />
+      <option name="METHOD_NAME" value="findDtoByQueryProjection" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuerydslApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="querydsl.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.poppo.querydsl.QuerydslApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.QueryDslBasicTests.findDtoByQueryProjection" />
+        <item itemvalue="Gradle.QueryDsl [compileQuerydsl]" />
+        <item itemvalue="JUnit.QueryDslBasicTests.findDtoByFieldAndDifferentFieldName" />
+        <item itemvalue="JUnit.QueryDslBasicTests.findDtoByConstructor" />
+        <item itemvalue="JUnit.QueryDslBasicTests.findDtoByField" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8d3577bb-ccbe-4f4a-b85f-ba222a6f115e" name="Default Changelist" comment="" />
+      <created>1598404972008</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598404972008</updated>
+      <workItem from="1598404977539" duration="996000" />
+      <workItem from="1598405990643" duration="7120000" />
+      <workItem from="1598503547328" duration="4625000" />
+      <workItem from="1598588456554" duration="2708000" />
+      <workItem from="1598591983567" duration="536000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="790" y="1339" key="#com.intellij.ide.util.MemberChooser" timestamp="1598590822683">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state x="790" y="1339" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598590822683" />
+    <state x="738" y="1161" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1598588938534">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state x="738" y="1161" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598588938533" />
+    <state width="1638" height="309" key="GridCell.Tab.0.bottom" timestamp="1598592529636">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.0.bottom/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598592529636" />
+    <state width="1638" height="309" key="GridCell.Tab.0.bottom/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359253" />
+    <state width="1638" height="309" key="GridCell.Tab.0.center" timestamp="1598592529635">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.0.center/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598592529635" />
+    <state width="1638" height="309" key="GridCell.Tab.0.center/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359252" />
+    <state width="1638" height="309" key="GridCell.Tab.0.left" timestamp="1598592529635">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.0.left/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598592529635" />
+    <state width="1638" height="309" key="GridCell.Tab.0.left/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359252" />
+    <state width="1638" height="309" key="GridCell.Tab.0.right" timestamp="1598592529635">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.0.right/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598592529635" />
+    <state width="1638" height="309" key="GridCell.Tab.0.right/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359253" />
+    <state width="1638" height="309" key="GridCell.Tab.1.bottom" timestamp="1598418887576">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.1.bottom/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598418887576" />
+    <state width="1638" height="309" key="GridCell.Tab.1.bottom/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359256" />
+    <state width="1638" height="309" key="GridCell.Tab.1.center" timestamp="1598418887576">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.1.center/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598418887576" />
+    <state width="1638" height="309" key="GridCell.Tab.1.center/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359255" />
+    <state width="1638" height="309" key="GridCell.Tab.1.left" timestamp="1598418887576">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.1.left/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598418887576" />
+    <state width="1638" height="309" key="GridCell.Tab.1.left/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359254" />
+    <state width="1638" height="309" key="GridCell.Tab.1.right" timestamp="1598418887576">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="309" key="GridCell.Tab.1.right/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598418887576" />
+    <state width="1638" height="309" key="GridCell.Tab.1.right/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598407359255" />
+    <state x="478" y="1231" key="SettingsEditor" timestamp="1598407943488">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state x="478" y="1231" key="SettingsEditor/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598407943488" />
+    <state x="478" y="1223" key="SettingsEditor/137.1103.1680.963/0.23.1920.1057@137.1103.1680.963" timestamp="1598405226893" />
+    <state x="748" y="1339" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1598408129618">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state x="748" y="1339" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598408129618" />
+    <state x="715" y="1366" key="extract.method.dialog" timestamp="1598408845952">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state x="715" y="1366" key="extract.method.dialog/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598408845952" />
+    <state x="642" y="788" key="run.anything.popup" timestamp="1598504055567">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="642" y="788" key="run.anything.popup/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598504055567" />
+    <state x="642" y="1330" width="670" height="676" key="search.everywhere.popup" timestamp="1598409902879">
+      <screen x="137" y="1103" width="1680" height="1027" />
+    </state>
+    <state x="642" y="1330" width="670" height="676" key="search.everywhere.popup/137.1103.1680.1027/0.23.1920.1057@137.1103.1680.1027" timestamp="1598409902879" />
+  </component>
+</project>

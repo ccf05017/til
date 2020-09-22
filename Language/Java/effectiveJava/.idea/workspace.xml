@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d37ad6f9-3679-40fc-a980-343de2316375" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../Frontend/Webpack/lecture-frontend-dev-env" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Frontend/Webpack/lecture-frontend-dev-env" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1gbx8WYQE1xDgJj1meUeWomHfxf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Runner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.poppo.effective.item18.Runner" />
+      <module name="effectiveJava" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.effective.item18.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Runner" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d37ad6f9-3679-40fc-a980-343de2316375" name="Default Changelist" comment="" />
+      <created>1598396934615</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598396934615</updated>
+      <workItem from="1598396942466" duration="2339000" />
+      <workItem from="1598485787679" duration="1578000" />
+      <workItem from="1598574473848" duration="537000" />
+      <workItem from="1598829611573" duration="612000" />
+      <workItem from="1599180976973" duration="1808000" />
+      <workItem from="1600046668688" duration="360000" />
+      <workItem from="1600734265511" duration="627000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="773" y="274" key="#com.intellij.ide.util.MemberChooser" timestamp="1598486841731">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="773" y="274" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598486841731" />
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom" timestamp="1598487368924">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598487368924" />
+    <state width="1878" height="271" key="GridCell.Tab.0.center" timestamp="1598487368923">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598487368923" />
+    <state width="1878" height="271" key="GridCell.Tab.0.left" timestamp="1598487368922">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598487368922" />
+    <state width="1878" height="271" key="GridCell.Tab.0.right" timestamp="1598487368924">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598487368924" />
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600046767468">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598487172264" />
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600046767468" />
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599181329917" />
+  </component>
+</project>
