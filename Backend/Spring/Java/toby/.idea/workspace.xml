@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/03_Test.md" beforeDir="false" afterPath="$PROJECT_DIR$/03_Test.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/userDao/NotBadUserDaoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/userDao/NotBadUserDaoTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Frontend/Webpack/lecture-frontend-dev-env" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Frontend/Webpack/lecture-frontend-dev-env" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="toby" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="toby" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="toby" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="toby" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="1gt2DcNTzPkenCHyTaOiWNlQKDd" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.poppo.toby.userDao" />
+      <recent name="com.poppo.toby.trashDaoV4" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.NotBadUserDaoTests">
+    <configuration name="TrashUserDaoV5Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.trashDaoV5.TrashUserDaoV5Test" />
+      <module name="toby.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.trashDaoV5.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotBadUserDaoTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.userDao" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.userDao.NotBadUserDaoTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotBadUserDaoTests.addAndGet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.userDao" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.userDao.NotBadUserDaoTests" />
+      <option name="METHOD_NAME" value="addAndGet" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotBadUserDaoTests.getCountTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.userDao" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.userDao.NotBadUserDaoTests" />
+      <option name="METHOD_NAME" value="getCountTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TrashUserDaoV4Tests.addAndGet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.trashDaoV4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.trashDaoV4" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.trashDaoV4.TrashUserDaoV4Tests" />
+      <option name="METHOD_NAME" value="addAndGet" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TobyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="toby.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.poppo.toby.TobyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.NotBadUserDaoTests" />
+        <item itemvalue="JUnit.NotBadUserDaoTests.getCountTest" />
+        <item itemvalue="JUnit.NotBadUserDaoTests.addAndGet" />
+        <item itemvalue="Application.TrashUserDaoV5Test" />
+        <item itemvalue="JUnit.TrashUserDaoV4Tests.addAndGet" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="" />
+      <created>1598919449966</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598919449966</updated>
+      <workItem from="1598919452920" duration="8407000" />
+      <workItem from="1599020747674" duration="2823000" />
+      <workItem from="1599089773633" duration="4245000" />
+      <workItem from="1599174082945" duration="4166000" />
+      <workItem from="1599438543482" duration="3577000" />
+      <workItem from="1599519623940" duration="3996000" />
+      <workItem from="1599607963215" duration="3707000" />
+      <workItem from="1600038449982" duration="4525000" />
+      <workItem from="1600319998233" duration="2291000" />
+      <workItem from="1600731677525" duration="2162000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="560" y="217" key="#SQL_Dialects" timestamp="1598924486543">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="560" y="217" key="#SQL_Dialects/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924486543" />
+    <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser" timestamp="1599608772176">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599022254470" />
+    <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1599608772176" />
+    <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599094026422" />
+    <state x="705" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1598925011280">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="705" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598925011280" />
+    <state x="698" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1600323777583">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="698" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323777583" />
+    <state x="698" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599094049332" />
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom" timestamp="1600734257868">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599028484177" />
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600734257868" />
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323965301" />
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404953" />
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046034" />
+    <state width="1878" height="271" key="GridCell.Tab.0.center" timestamp="1600734257868">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599028484176" />
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600734257868" />
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323965300" />
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404953" />
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046034" />
+    <state width="1878" height="271" key="GridCell.Tab.0.left" timestamp="1600734257868">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599028484175" />
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600734257868" />
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323965300" />
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404952" />
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046033" />
+    <state width="1878" height="271" key="GridCell.Tab.0.right" timestamp="1600734257868">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599028484176" />
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600734257868" />
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323965301" />
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404953" />
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046034" />
+    <state width="1878" height="271" key="GridCell.Tab.1.bottom" timestamp="1598924840145">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.1.bottom/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924840145" />
+    <state width="1878" height="271" key="GridCell.Tab.1.center" timestamp="1598924840144">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.1.center/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924840144" />
+    <state width="1878" height="271" key="GridCell.Tab.1.left" timestamp="1598924840144">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.1.left/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924840144" />
+    <state width="1878" height="271" key="GridCell.Tab.1.right" timestamp="1598924840144">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="271" key="GridCell.Tab.1.right/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924840144" />
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599179484076">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1599179484076" />
+    <state x="736" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1600323519502">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="736" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600320546466" />
+    <state x="736" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323519502" />
+    <state x="698" y="311" key="extract.method.dialog" timestamp="1599022138694">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="698" y="311" key="extract.method.dialog/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599022138694" />
+    <state x="625" y="256" width="670" height="675" key="run.anything.popup" timestamp="1600733366091">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="625" y="256" width="670" height="675" key="run.anything.popup/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600733366091" />
+    <state x="625" y="256" width="670" height="675" key="run.anything.popup/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1599179119820" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1600732171458">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599022494687" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/137.1103.1680.958/0.23.1920.1057@0.23.1920.1057" timestamp="1600732171458" />
+    <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600040546605" />
+  </component>
+</project>
