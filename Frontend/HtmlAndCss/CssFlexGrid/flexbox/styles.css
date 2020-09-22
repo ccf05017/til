@@ -1,0 +1,22 @@
+.grid {
+  display: grid;
+  color: white;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.child:nth-child(even) {
+  background: red;
+}
+
+.child:nth-child(odd){
+  background: blue;
+}
+
+.grid:first-child {
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.grid:last-child {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
