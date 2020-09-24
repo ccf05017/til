@@ -1,60 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../Algorithm/PythonAlgorithmInterview/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Algorithm/PythonAlgorithmInterview/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03_Test.md" beforeDir="false" afterPath="$PROJECT_DIR$/03_Test.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/countingDao/CountTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/countingDao/CountingConnectionMaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/countingDao/CountingDaoFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/datasourceExample/DaoFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/datasourceExample/DataSourceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/datasourceExample/UserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV1/DaoTestRunner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV1/TrashUserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV3/ConnectionMaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV3/DConnectionMaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV3/NConnectionMaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV3/TrashUserDaoV3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV4/TrashUserDaoV4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV4/TrashUserDaoV4Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV5/DaoFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashDaoV5/TrashUserDaoV5Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashdaoV2/DUserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashdaoV2/NUserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashdaoV2/TrashUserDaoV2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/trashdaoV2/TrashUserDaoV2Runner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/userDao/NotBadUserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/userDao/NotBadUserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/userDao/NotBadUserDaoFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/poppo/toby/userDao/NotBadUserDaoFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/classes/com/poppo/toby/trashDaoV4/TrashUserDaoV4Tests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/classes/com/poppo/toby/userDao/NotBadUserDaoTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/classes/com/poppo/toby/userDao/NotBadUserDaoTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/countingDao/CountTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/countingDao/CountingConnectionMaker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/countingDao/CountingDaoFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/datasourceExample/DaoFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/datasourceExample/DataSourceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/datasourceExample/UserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV1/DaoTestRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV1/TrashUserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV3/ConnectionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/ConnectionMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV3/DConnectionMaker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV3/NConnectionMaker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV3/TrashUserDaoV3.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV4/TrashUserDaoV4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV4/TrashUserDaoV4Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV5/DaoFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashDaoV5/TrashUserDaoV5Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashdaoV2/DUserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashdaoV2/NUserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashdaoV2/TrashUserDaoV2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/trashdaoV2/TrashUserDaoV2Runner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/trashDaoV4/TrashUserDaoV4Tests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/userDao/NotBadUserDaoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/userDao/NotBadUserDaoTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Language/Java/effectiveJava/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Language/Java/effectiveJava/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -283,7 +230,7 @@
       <workItem from="1600731677525" duration="2162000" />
       <workItem from="1600816749700" duration="3463000" />
       <workItem from="1600901494497" duration="52000" />
-      <workItem from="1600902260159" duration="4041000" />
+      <workItem from="1600902260159" duration="4367000" />
     </task>
     <servers />
   </component>
