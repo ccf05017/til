@@ -1,8 +1,8 @@
 package com.poppo.toby.userDao;
 
 import com.poppo.toby.domain.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
@@ -12,13 +12,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NotBadUserDaoTests {
+    private NotBadUserDao userDao;
+    private User user1;
+    private User user2;
+    private User user3;
+
+    @BeforeEach
+    public void setup() {
+        ConnectionMaker testConnectionMaker = new TestConnectionMaker();
+
+        userDao = new NotBadUserDao(testConnectionMaker);
+
+        user1 = User.builder().id("ccf05017").name("poppo").password("password").build();
+        user2 = User.builder().id("ccf05018").name("ita").password("password").build();
+        user3 = User.builder().id("ccf05019").name("hoojjang").password("password").build();
+    }
+
     @Test
     public void addAndGet() throws SQLException {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-                NotBadUserDaoFactory.class);
-
-        NotBadUserDao userDao = applicationContext.getBean("notBadUserDao", NotBadUserDao.class);
-
         userDao.deleteAll();
 
         assertThat(userDao.getCount()).isEqualTo(0);
@@ -43,22 +54,12 @@ class NotBadUserDaoTests {
 
     @Test
     public void getFailTest() {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-                NotBadUserDaoFactory.class);
-
-        NotBadUserDao userDao = applicationContext.getBean("notBadUserDao", NotBadUserDao.class);
-
         assertThatThrownBy(() -> userDao.get("1")).isInstanceOf(EmptyResultDataAccessException.class);
     }
 
     @Test
     public void getCountTest() throws SQLException {
         String testPassword = "password";
-
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-                NotBadUserDaoFactory.class);
-
-        NotBadUserDao userDao = applicationContext.getBean("notBadUserDao", NotBadUserDao.class);
 
         userDao.deleteAll();
         assertThat(userDao.getCount()).isEqualTo(0);

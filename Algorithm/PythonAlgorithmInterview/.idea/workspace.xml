@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60ede94e-3c5b-4bd9-b180-f6e558e82bfc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/PythonAlgorithmInterview.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonAlgorithmInterview.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonDataStructures.md" beforeDir="false" afterPath="$PROJECT_DIR$/PythonDataStructures.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/Webpack/lecture-frontend-dev-env" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/Webpack/lecture-frontend-dev-env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Language/Java/effectiveJava/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Language/Java/effectiveJava/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +32,29 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.good_solution1">
+  <component name="RunManager" selected="Python.dup">
+    <configuration name="dup" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonAlgorithmInterview" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dup.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="good_solution1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PythonAlgorithmInterview" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -49,6 +69,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Palindrome/good_solution1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="max_grade" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonAlgorithmInterview" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/max_grade.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -81,6 +123,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.dup" />
+        <item itemvalue="Python.max_grade" />
         <item itemvalue="Python.good_solution1" />
         <item itemvalue="Python.my_solution" />
       </list>
@@ -98,6 +142,7 @@
       <updated>1599100406289</updated>
       <workItem from="1599100409055" duration="5047000" />
       <workItem from="1599183252601" duration="4339000" />
+      <workItem from="1600762211039" duration="5053000" />
     </task>
     <servers />
   </component>
@@ -109,29 +154,38 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="672" y="351" key="#com.intellij.fileTypes.FileTypeChooser/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599108246861" />
-    <state width="1878" height="271" key="GridCell.Tab.0.bottom" timestamp="1599188266473">
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom" timestamp="1600769092991">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600769092991" />
+    <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600768581304" />
     <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599188266473" />
-    <state width="1878" height="271" key="GridCell.Tab.0.center" timestamp="1599188266472">
+    <state width="1878" height="271" key="GridCell.Tab.0.center" timestamp="1600769092991">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600769092991" />
+    <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600768581303" />
     <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599188266472" />
-    <state width="1878" height="271" key="GridCell.Tab.0.left" timestamp="1599188266472">
+    <state width="1878" height="271" key="GridCell.Tab.0.left" timestamp="1600769092991">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600769092991" />
+    <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600768581303" />
     <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599188266472" />
-    <state width="1878" height="271" key="GridCell.Tab.0.right" timestamp="1599188266472">
+    <state width="1878" height="271" key="GridCell.Tab.0.right" timestamp="1600769092991">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600769092991" />
+    <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600768581303" />
     <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599188266472" />
     <state x="469" y="190" key="SettingsEditor" timestamp="1599184942633">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="469" y="190" key="SettingsEditor/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599184942633" />
-    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599109617041">
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600763071894">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600763071894" />
     <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599109617041" />
     <state x="625" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1599106891971">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -141,5 +195,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonAlgorithmInterview$my_solution.coverage" NAME="my_solution Coverage Results" MODIFIED="1599187080440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Palindrome" />
     <SUITE FILE_PATH="coverage/PythonAlgorithmInterview$good_solution1.coverage" NAME="good_solution1 Coverage Results" MODIFIED="1599187943525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Palindrome" />
+    <SUITE FILE_PATH="coverage/PythonAlgorithmInterview$dup.coverage" NAME="dup Coverage Results" MODIFIED="1600768581291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonAlgorithmInterview$max_grade.coverage" NAME="max_grade Coverage Results" MODIFIED="1600763353086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
