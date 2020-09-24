@@ -1,7 +1,6 @@
 package com.poppo.toby.userDao;
 
 import com.poppo.toby.domain.User;
-import com.poppo.toby.trashDaoV3.ConnectionMaker;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.Connection;
