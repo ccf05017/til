@@ -61,32 +61,77 @@ public class NotBadUserDao {
     }
 
     public void deleteAll() throws SQLException {
-        Connection connection = connectionMaker.makeConnection();
-
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "delete from users");
-
-        preparedStatement.executeUpdate();
-
-        preparedStatement.close();
-        connection.close();
+        StatementStrategy statementStrategy = new DeleteAllStatement();
+        jdbcContextWithStatementStrategy(statementStrategy);
     }
 
     public int getCount() throws SQLException {
-        Connection connection = connectionMaker.makeConnection();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "select count(*) from users"
-        );
+        try {
+            connection = connectionMaker.makeConnection();
+            preparedStatement = connection.prepareStatement("select count(*) from users");
+            resultSet = preparedStatement.executeQuery();
 
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        int count = resultSet.getInt(1);
+            resultSet.next();
+            int count = resultSet.getInt(1);
 
-        resultSet.close();
-        preparedStatement.close();
-        connection.close();
+            return count;
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
 
-        return count;
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+
+                }
+            }
+        }
+    }
+
+    // 클라이언트 코드에 오브젝트 팩토리가 같이 들어와 있는 형태
+    public void jdbcContextWithStatementStrategy(StatementStrategy statementStrategy) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = connectionMaker.makeConnection();
+            preparedStatement = statementStrategy.makePreparedStatement(connection);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+
+                }
+            }
+        }
     }
 }
