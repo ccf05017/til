@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JdbcUserDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chapter01.00</a> &gt; <a href="index.source.html" class="el_package">io.baselogic.springsecurity.dao</a> &gt; <span class="el_source">JdbcUserDao.java</span></div><h1>JdbcUserDao.java</h1><pre class="source lang-java linenums">package io.baselogic.springsecurity.dao;
+
+import io.baselogic.springsecurity.domain.AppUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
+/**
+ * A jdbc implementation of {@link UserDao}.
+ *
+ * @author mickknutson
+ * @since chapter01.00
+ *
+ */
+@Repository
+@Validated
+public class JdbcUserDao implements UserDao {
+
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    private final UserRowMapper userRowMapper;
+
+    private final String userQuery;
+    private final String userInsertQuery;
+
+    @Autowired
+    public JdbcUserDao(final @NotNull NamedParameterJdbcTemplate jdbcTemplate,
+                       final UserRowMapper userRowMapper,
+                       final @Qualifier(&quot;userQuery&quot;) String userQuery,
+<span class="fc" id="L42">                       final @Qualifier(&quot;userInsertQuery&quot;) String userInsertQuery) {</span>
+<span class="fc" id="L43">        this.jdbcTemplate = jdbcTemplate;</span>
+<span class="fc" id="L44">        this.userRowMapper = userRowMapper;</span>
+<span class="fc" id="L45">        this.userQuery = userQuery;</span>
+<span class="fc" id="L46">        this.userInsertQuery = userInsertQuery;</span>
+<span class="fc" id="L47">    }</span>
+
+    //-----------------------------------------------------------------------//
+
+    @Override
+    @Transactional(readOnly = true)
+    public AppUser findById(final @NotNull Integer id) {
+<span class="fc" id="L54">        final String sql = userQuery + &quot; id = :id&quot;;</span>
+
+<span class="fc" id="L56">        SqlParameterSource parameter = new MapSqlParameterSource().addValue(&quot;id&quot;, id);</span>
+
+<span class="fc" id="L58">        return jdbcTemplate.queryForObject(sql, parameter, userRowMapper);</span>
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public AppUser findByEmail(final @NotEmpty String email) {
+        try {
+
+<span class="fc" id="L66">            final String sql = userQuery + &quot; email = :email&quot;;</span>
+
+<span class="fc" id="L68">            SqlParameterSource parameter = new MapSqlParameterSource().addValue(&quot;email&quot;, email);</span>
+
+<span class="fc" id="L70">            return jdbcTemplate.queryForObject(sql, parameter, userRowMapper);</span>
+<span class="fc" id="L71">        } catch (EmptyResultDataAccessException notFound) {</span>
+<span class="fc" id="L72">            return null;</span>
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;AppUser&gt; findAllByEmail(final @NotEmpty String email) {
+<span class="fc" id="L79">        final String sql = userQuery + &quot; email LIKE '%&quot;+ email +&quot;%' ORDER BY id&quot;;</span>
+
+<span class="fc" id="L81">        return jdbcTemplate.query(sql, userRowMapper);</span>
+    }
+
+    @Override
+    public Integer save(final @NotNull AppUser newAppUser) {
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (newAppUser.getId() != null) {</span>
+<span class="fc" id="L87">            throw new IllegalArgumentException(&quot;newUser.getId() must be null when creating a &quot;+ AppUser.class.getName());</span>
+        }
+
+<span class="fc" id="L90">        KeyHolder holder = new GeneratedKeyHolder();</span>
+
+<span class="fc" id="L92">        SqlParameterSource parameter = new MapSqlParameterSource()</span>
+<span class="fc" id="L93">                .addValue(&quot;email&quot;, newAppUser.getEmail())</span>
+<span class="fc" id="L94">                .addValue(&quot;psswd&quot;, newAppUser.getPassword())</span>
+<span class="fc" id="L95">                .addValue(&quot;first_name&quot;, newAppUser.getFirstName())</span>
+<span class="fc" id="L96">                .addValue(&quot;last_name&quot;, newAppUser.getLastName());</span>
+
+<span class="fc" id="L98">        jdbcTemplate.update(userInsertQuery, parameter, holder);</span>
+
+<span class="fc" id="L100">        return holder.getKey().intValue();</span>
+    }
+
+
+} // The End...
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JdbcEventDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chapter01.00</a> &gt; <a href="index.source.html" class="el_package">io.baselogic.springsecurity.dao</a> &gt; <span class="el_source">JdbcEventDao.java</span></div><h1>JdbcEventDao.java</h1><pre class="source lang-java linenums">package io.baselogic.springsecurity.dao;
+
+import io.baselogic.springsecurity.domain.AppUser;
+import io.baselogic.springsecurity.domain.Event;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Calendar;
+import java.util.List;
+
+/**
+ * A jdbc implementation of {@link EventDao}.
+ *
+ * @author mickknutson
+ */
+@Repository
+@Validated
+public class JdbcEventDao implements EventDao {
+
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    private final EventRowMapper eventRowMapper;
+
+    private final String eventQuery;
+
+    //-----------------------------------------------------------------------//
+
+    public JdbcEventDao(final @NotNull NamedParameterJdbcTemplate jdbcTemplate,
+                        final EventRowMapper eventRowMapper,
+<span class="fc" id="L39">                        final @Qualifier(&quot;eventQuery&quot;) String eventQuery) {</span>
+<span class="fc" id="L40">        this.jdbcTemplate = jdbcTemplate;</span>
+<span class="fc" id="L41">        this.eventRowMapper = eventRowMapper;</span>
+<span class="fc" id="L42">        this.eventQuery = eventQuery;</span>
+<span class="fc" id="L43">    }</span>
+
+    //-----------------------------------------------------------------------//
+
+    @Override
+    @Transactional(readOnly = true)
+    public Event findById(final @NotNull Integer eventId) {
+<span class="fc" id="L50">        final String sql = eventQuery + &quot; AND e.id = :id&quot;;</span>
+
+<span class="fc" id="L52">        SqlParameterSource parameter = new MapSqlParameterSource().addValue(&quot;id&quot;, eventId);</span>
+
+<span class="fc" id="L54">        return jdbcTemplate.queryForObject(sql, parameter, eventRowMapper);</span>
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;Event&gt; findByUser(final @NotNull Integer userId) {
+<span class="fc" id="L60">        final String sql = eventQuery + &quot; and (e.owner = :id OR e.attendee = :id) order by e.id&quot;;</span>
+
+<span class="fc" id="L62">        SqlParameterSource parameter = new MapSqlParameterSource().addValue(&quot;id&quot;, userId);</span>
+
+<span class="fc" id="L64">        return jdbcTemplate.query(sql, parameter, eventRowMapper);</span>
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;Event&gt; findAll() {
+<span class="fc" id="L70">        return jdbcTemplate.query(eventQuery + &quot; order by e.id&quot;, eventRowMapper);</span>
+    }
+
+    private static final String EVENT_INSERT_QUERY = &quot;insert into events (event_date, summary, description, owner, attendee) values(:event_date, :summary, :description, :owner, :attendee)&quot;;
+
+    @Override
+    public Integer save(final @NotNull @Valid Event event) {
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (event.getId() != null) {</span>
+<span class="fc" id="L78">            throw new IllegalArgumentException(&quot;event.getId() must be null when creating a new Message&quot;);</span>
+        }
+<span class="fc" id="L80">        final AppUser owner = event.getOwner();</span>
+<span class="fc" id="L81">        final AppUser attendee = event.getAttendee();</span>
+<span class="fc" id="L82">        final Calendar when = event.getWhen();</span>
+
+
+<span class="fc" id="L85">        KeyHolder holder = new GeneratedKeyHolder();</span>
+
+<span class="fc" id="L87">        SqlParameterSource parameter = new MapSqlParameterSource()</span>
+<span class="fc" id="L88">                .addValue(&quot;event_date&quot;, new java.sql.Date(when.getTimeInMillis()))</span>
+<span class="fc" id="L89">                .addValue(&quot;summary&quot;, event.getSummary())</span>
+<span class="fc" id="L90">                .addValue(&quot;description&quot;, event.getDescription())</span>
+<span class="fc" id="L91">                .addValue(&quot;owner&quot;, owner.getId())</span>
+<span class="fc" id="L92">                .addValue(&quot;attendee&quot;, attendee.getId());</span>
+
+<span class="fc" id="L94">        jdbcTemplate.update(EVENT_INSERT_QUERY, parameter, holder);</span>
+
+<span class="fc" id="L96">        return holder.getKey().intValue();</span>
+    }
+
+} // The End...
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,15 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+chapter01.00,io.baselogic.springsecurity.dao,JdbcEventDao,0,120,0,2,0,26,0,6,0,5
+chapter01.00,io.baselogic.springsecurity.dao,EventRowMapper,0,50,0,0,0,16,0,2,0,2
+chapter01.00,io.baselogic.springsecurity.dao,JdbcUserDao,0,117,0,2,0,26,0,6,0,5
+chapter01.00,io.baselogic.springsecurity.dao,UserRowMapper,0,48,0,0,0,10,0,2,0,2
+chapter01.00,io.baselogic.springsecurity.domain,AppUser,0,3,0,0,0,1,0,1,0,1
+chapter01.00,io.baselogic.springsecurity.web.configuration,WebMvcConfig,0,81,0,0,0,18,0,5,0,5
+chapter01.00,io.baselogic.springsecurity.configuration,JavaConfig,0,7,0,0,0,2,0,2,0,2
+chapter01.00,io.baselogic.springsecurity.configuration,DataSourceConfig,0,87,0,0,0,26,0,10,0,10
+chapter01.00,io.baselogic.springsecurity.web.controllers,ErrorController,0,64,0,2,0,13,0,4,0,3
+chapter01.00,io.baselogic.springsecurity.web.controllers,EventsController,0,164,0,8,0,43,0,13,0,9
+chapter01.00,io.baselogic.springsecurity.web.controllers,WelcomeController,0,9,0,0,0,3,0,3,0,3
+chapter01.00,io.baselogic.springsecurity,Application,0,66,0,2,0,16,0,6,0,5
+chapter01.00,io.baselogic.springsecurity.service,UserContextStub,0,31,0,2,0,10,0,4,0,3
+chapter01.00,io.baselogic.springsecurity.service,DefaultEventService,0,48,0,0,0,12,0,9,0,9

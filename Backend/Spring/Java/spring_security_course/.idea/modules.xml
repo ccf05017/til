@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/chapter01/chapter01.iml" filepath="$PROJECT_DIR$/chapter01/chapter01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter01/chapter01.00/chapter01.00.iml" filepath="$PROJECT_DIR$/chapter01/chapter01.00/chapter01.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.00/chapter02.00.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.00/chapter02.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.01/chapter02.01.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.01/chapter02.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.02/chapter02.02.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.02/chapter02.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.03/chapter02.03.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.03/chapter02.03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.04/chapter02.04.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.04/chapter02.04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.05/chapter02.05.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.05/chapter02.05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter02/chapter02.06/chapter02.06.iml" filepath="$PROJECT_DIR$/chapter02/chapter02.06/chapter02.06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.00/chapter03.00.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.00/chapter03.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.01/chapter03.01.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.01/chapter03.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.02/chapter03.02.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.02/chapter03.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.03/chapter03.03.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.03/chapter03.03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.04/chapter03.04.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.04/chapter03.04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.05/chapter03.05.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.05/chapter03.05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter03/chapter03.06/chapter03.06.iml" filepath="$PROJECT_DIR$/chapter03/chapter03.06/chapter03.06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter04/chapter04.iml" filepath="$PROJECT_DIR$/chapter04/chapter04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter04/chapter04.00/chapter04.00.iml" filepath="$PROJECT_DIR$/chapter04/chapter04.00/chapter04.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter04/chapter04.01/chapter04.01.iml" filepath="$PROJECT_DIR$/chapter04/chapter04.01/chapter04.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter04/chapter04.02/chapter04.02.iml" filepath="$PROJECT_DIR$/chapter04/chapter04.02/chapter04.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter04/chapter04.03/chapter04.03.iml" filepath="$PROJECT_DIR$/chapter04/chapter04.03/chapter04.03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter04/chapter04.04/chapter04.04.iml" filepath="$PROJECT_DIR$/chapter04/chapter04.04/chapter04.04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter05/chapter05.iml" filepath="$PROJECT_DIR$/chapter05/chapter05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter05/chapter05.00/chapter05.00.iml" filepath="$PROJECT_DIR$/chapter05/chapter05.00/chapter05.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter05/chapter05.01/chapter05.01.iml" filepath="$PROJECT_DIR$/chapter05/chapter05.01/chapter05.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter05/chapter05.02/chapter05.02.iml" filepath="$PROJECT_DIR$/chapter05/chapter05.02/chapter05.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter06/chapter06.iml" filepath="$PROJECT_DIR$/chapter06/chapter06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter06/chapter06.00/chapter06.00.iml" filepath="$PROJECT_DIR$/chapter06/chapter06.00/chapter06.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter06/chapter06.01/chapter06.01.iml" filepath="$PROJECT_DIR$/chapter06/chapter06.01/chapter06.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter06/chapter06.02/chapter06.02.iml" filepath="$PROJECT_DIR$/chapter06/chapter06.02/chapter06.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter07/chapter07.iml" filepath="$PROJECT_DIR$/chapter07/chapter07.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter07/chapter07.00/chapter07.00.iml" filepath="$PROJECT_DIR$/chapter07/chapter07.00/chapter07.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter07/chapter07.01/chapter07.01.iml" filepath="$PROJECT_DIR$/chapter07/chapter07.01/chapter07.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter07/chapter07.02/chapter07.02.iml" filepath="$PROJECT_DIR$/chapter07/chapter07.02/chapter07.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter08/chapter08.iml" filepath="$PROJECT_DIR$/chapter08/chapter08.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter08/chapter08.00/chapter08.00.iml" filepath="$PROJECT_DIR$/chapter08/chapter08.00/chapter08.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.00/chapter09.00.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.00/chapter09.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.01/chapter09.01.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.01/chapter09.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.02/chapter09.02.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.02/chapter09.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.03/chapter09.03.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.03/chapter09.03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.04/chapter09.04.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.04/chapter09.04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.05/chapter09.05.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.05/chapter09.05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.06/chapter09.06.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.06/chapter09.06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter09/chapter09.07/chapter09.07.iml" filepath="$PROJECT_DIR$/chapter09/chapter09.07/chapter09.07.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter10/chapter10.iml" filepath="$PROJECT_DIR$/chapter10/chapter10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter10/chapter10.00/chapter10.00.iml" filepath="$PROJECT_DIR$/chapter10/chapter10.00/chapter10.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter11/chapter11.iml" filepath="$PROJECT_DIR$/chapter11/chapter11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter11/chapter11.00/chapter11.00.iml" filepath="$PROJECT_DIR$/chapter11/chapter11.00/chapter11.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter12/chapter12.iml" filepath="$PROJECT_DIR$/chapter12/chapter12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter12/chapter12.00/chapter12.00.iml" filepath="$PROJECT_DIR$/chapter12/chapter12.00/chapter12.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter12/chapter12.01/chapter12.01.iml" filepath="$PROJECT_DIR$/chapter12/chapter12.01/chapter12.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter12/chapter12.02/chapter12.02.iml" filepath="$PROJECT_DIR$/chapter12/chapter12.02/chapter12.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter12/chapter12.03/chapter12.03.iml" filepath="$PROJECT_DIR$/chapter12/chapter12.03/chapter12.03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter12/chapter12.04/chapter12.04.iml" filepath="$PROJECT_DIR$/chapter12/chapter12.04/chapter12.04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter12/chapter12.05/chapter12.05.iml" filepath="$PROJECT_DIR$/chapter12/chapter12.05/chapter12.05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter13/chapter13.iml" filepath="$PROJECT_DIR$/chapter13/chapter13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter13/chapter13.00/chapter13.00.iml" filepath="$PROJECT_DIR$/chapter13/chapter13.00/chapter13.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter14/chapter14.iml" filepath="$PROJECT_DIR$/chapter14/chapter14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter14/chapter14.00/chapter14.00.iml" filepath="$PROJECT_DIR$/chapter14/chapter14.00/chapter14.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter15/chapter15.iml" filepath="$PROJECT_DIR$/chapter15/chapter15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chapter15/chapter15.00/chapter15.00.iml" filepath="$PROJECT_DIR$/chapter15/chapter15.00/chapter15.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_security_course.iml" filepath="$PROJECT_DIR$/spring_security_course.iml" />
+    </modules>
+  </component>
+</project>

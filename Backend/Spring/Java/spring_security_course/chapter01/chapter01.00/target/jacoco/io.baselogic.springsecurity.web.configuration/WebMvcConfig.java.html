@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WebMvcConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chapter01.00</a> &gt; <a href="index.source.html" class="el_package">io.baselogic.springsecurity.web.configuration</a> &gt; <span class="el_source">WebMvcConfig.java</span></div><h1>WebMvcConfig.java</h1><pre class="source lang-java linenums">package io.baselogic.springsecurity.web.configuration;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+/**
+ * &lt;p&gt;
+ * Here we leverage Spring's {@link EnableWebMvc} support. This allows more powerful configuration but still be
+ * concise about it.
+ * &lt;/p&gt;
+ *
+ * @author Mick Knutson
+ *
+ * @since chapter01.00
+ */
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = {
+        &quot;io.baselogic.springsecurity.web.controllers&quot;,
+        &quot;io.baselogic.springsecurity.web.model&quot;
+})
+<span class="fc" id="L29">public class WebMvcConfig implements WebMvcConfigurer {</span>
+
+<span class="fc" id="L31">    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {</span>
+            &quot;classpath:/META-INF/resources/&quot;, &quot;classpath:/resources/&quot;,
+            &quot;classpath:/static/&quot;, &quot;classpath:/public/&quot;};
+
+
+    @Override
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        // Add WebJars for Bootstrap &amp; jQuery
+<span class="fc" id="L39">        registry.addResourceHandler(&quot;/webjars/**&quot;)</span>
+<span class="fc" id="L40">                .addResourceLocations(&quot;classpath:webjars/&quot;)</span>
+        ;
+
+
+<span class="fc" id="L44">        registry.addResourceHandler(&quot;/**&quot;)</span>
+<span class="fc" id="L45">                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS)</span>
+        ;
+<span class="fc" id="L47">    }</span>
+
+    @Override
+    public void addViewControllers(final ViewControllerRegistry registry) {
+<span class="fc" id="L51">        registry.addViewController(&quot;/error&quot;)</span>
+<span class="fc" id="L52">                .setViewName(&quot;/error&quot;);</span>
+<span class="fc" id="L53">        registry.addViewController(&quot;/errors/403&quot;)</span>
+<span class="fc" id="L54">                .setViewName(&quot;/errors/403&quot;);</span>
+
+<span class="fc" id="L56">        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);</span>
+<span class="fc" id="L57">    }</span>
+
+    // i18N support
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+<span class="fc" id="L62">        ReloadableResourceBundleMessageSource resource = new ReloadableResourceBundleMessageSource();</span>
+<span class="fc" id="L63">        resource.setBasename(&quot;classpath:locales/messages&quot;);</span>
+<span class="fc" id="L64">        resource.setDefaultEncoding(&quot;UTF-8&quot;);</span>
+<span class="fc" id="L65">        resource.setFallbackToSystemLocale(Boolean.TRUE);</span>
+<span class="fc" id="L66">        return resource;</span>
+    }
+
+} // The End...
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
