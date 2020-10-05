@@ -1,0 +1,15 @@
+io/baselogic/springsecurity/dao/TestUtils$1.class
+io/baselogic/springsecurity/dao/TestUtils.class
+io/baselogic/springsecurity/service/DefaultEventServiceTests.class
+io/baselogic/springsecurity/dao/TestUtils$6.class
+io/baselogic/springsecurity/dao/TestUtils$3.class
+io/baselogic/springsecurity/dao/TestUtils$2.class
+io/baselogic/springsecurity/dao/TestUtils$4.class
+io/baselogic/springsecurity/service/UserContextTests.class
+io/baselogic/springsecurity/web/controllers/ErrorControllerTests.class
+io/baselogic/springsecurity/dao/JdbcEventDaoTests.class
+io/baselogic/springsecurity/dao/JdbcUserDaoTests.class
+io/baselogic/springsecurity/ApplicationTests.class
+io/baselogic/springsecurity/web/controllers/WelcomeControllerTests.class
+io/baselogic/springsecurity/web/controllers/EventsControllerTests.class
+io/baselogic/springsecurity/dao/TestUtils$5.class

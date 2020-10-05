@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EventsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chapter01.00</a> &gt; <a href="index.source.html" class="el_package">io.baselogic.springsecurity.web.controllers</a> &gt; <span class="el_source">EventsController.java</span></div><h1>EventsController.java</h1><pre class="source lang-java linenums">package io.baselogic.springsecurity.web.controllers;
+
+import io.baselogic.springsecurity.domain.AppUser;
+import io.baselogic.springsecurity.domain.Event;
+import io.baselogic.springsecurity.service.EventService;
+import io.baselogic.springsecurity.service.UserContext;
+import io.baselogic.springsecurity.web.model.EventDto;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
+import java.util.Calendar;
+
+/**
+ * Event Controller
+ *
+ * @since chapter01.00
+ */
+@Controller
+@RequestMapping(&quot;/events&quot;)
+//@Validated
+<span class="fc" id="L29">@Slf4j</span>
+public class EventsController {
+
+    private final MessageSource messageSource;
+
+    private final EventService eventService;
+    private final UserContext userContext;
+
+    private static final String EVENT_CREATE_VIEW = &quot;events/create&quot;;
+    private static final String EVENT_LIST_VIEW = &quot;events/list&quot;;
+    private static final String EVENT_MY_VIEW = &quot;events/my&quot;;
+    private static final String EVENT_SHOW_VIEW = &quot;events/show&quot;;
+
+    @Autowired
+    public EventsController(final EventService eventService,
+                            final UserContext userContext,
+<span class="fc" id="L45">                            final MessageSource messageSource) {</span>
+<span class="fc" id="L46">        this.eventService = eventService;</span>
+<span class="fc" id="L47">        this.userContext = userContext;</span>
+<span class="fc" id="L48">        this.messageSource = messageSource;</span>
+<span class="fc" id="L49">    }</span>
+
+    @GetMapping(&quot;/&quot;)
+    public ModelAndView allEvents() {
+<span class="fc" id="L53">        return new ModelAndView(EVENT_LIST_VIEW, &quot;events&quot;, eventService.findAllEvents());</span>
+    }
+
+    @GetMapping(&quot;/my&quot;)
+    public ModelAndView userEvents() {
+<span class="fc" id="L58">        AppUser currentAppUser = userContext.getCurrentUser();</span>
+<span class="fc" id="L59">        Integer currentUserId = currentAppUser.getId();</span>
+
+<span class="fc" id="L61">        ModelAndView result = new ModelAndView(EVENT_MY_VIEW, &quot;events&quot;, eventService.findEventByUser(currentUserId));</span>
+<span class="fc" id="L62">        result.addObject(&quot;currentAppUser&quot;, currentAppUser);</span>
+<span class="fc" id="L63">        return result;</span>
+    }
+
+    @GetMapping(&quot;/{eventId}&quot;)
+    public ModelAndView showEvent(final @PathVariable Integer eventId) {
+<span class="fc" id="L68">        Event event = eventService.findEventById(eventId);</span>
+<span class="fc" id="L69">        return new ModelAndView(EVENT_SHOW_VIEW, &quot;event&quot;, event);</span>
+    }
+
+    @GetMapping(&quot;/form&quot;)
+    public String showEventForm(final @ModelAttribute EventDto eventDto) {
+<span class="fc" id="L74">        return EVENT_CREATE_VIEW;</span>
+    }
+
+    /**
+     * Populates the form for creating an event with valid information.
+     * Useful so that users do not have to think when
+     * filling out the form for testing.
+     *
+     * @param {@link eventDto} for new {@link Event} to be created.
+     */
+    @PostMapping(value = &quot;/new&quot;, params = &quot;auto&quot;)
+    public String showEventFormAutoPopulate(final @ModelAttribute EventDto eventDto) {
+        // provide default values to make user submission easier
+<span class="fc" id="L87">        eventDto.setSummary(&quot;A new event....&quot;);</span>
+<span class="fc" id="L88">        eventDto.setDescription(&quot;This was auto-populated to save time creating a valid event.&quot;);</span>
+<span class="fc" id="L89">        eventDto.setWhen(Calendar.getInstance());</span>
+
+        // make the attendee not the current user
+<span class="fc" id="L92">        AppUser currentAppUser = userContext.getCurrentUser();</span>
+
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        Integer attendeeId = currentAppUser.getId() == 0 ? 1 : 0;</span>
+
+<span class="fc" id="L96">        AppUser attendee = eventService.findUserById(attendeeId);</span>
+<span class="fc" id="L97">        eventDto.setAttendeeEmail(attendee.getEmail());</span>
+
+<span class="fc" id="L99">        return EVENT_CREATE_VIEW;</span>
+    }
+
+    @PostMapping(&quot;/new&quot;)
+    public String createEvent(final @Valid EventDto eventDto,
+                              final BindingResult result,
+                              final RedirectAttributes redirectAttributes) {
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L108">            result.getAllErrors().forEach( e -&gt; log.info(&quot;error: {}&quot;, e) );</span>
+<span class="fc" id="L109">            return EVENT_CREATE_VIEW;</span>
+        }
+
+<span class="fc" id="L112">        AppUser attendee = eventService.findUserByEmail(eventDto.getAttendeeEmail());</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (attendee == null) {</span>
+<span class="fc" id="L114">            result.rejectValue(&quot;attendeeEmail&quot;, &quot;event.new.attendeeEmail.missing&quot;);</span>
+        }
+
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L118">            return EVENT_CREATE_VIEW;</span>
+        }
+
+<span class="fc" id="L121">        Event event = Event.builder()</span>
+<span class="fc" id="L122">                .summary(eventDto.getSummary())</span>
+<span class="fc" id="L123">                .description(eventDto.getDescription())</span>
+<span class="fc" id="L124">                .when(eventDto.getWhen())</span>
+<span class="fc" id="L125">                .attendee(attendee)</span>
+<span class="fc" id="L126">                .owner(userContext.getCurrentUser())</span>
+<span class="fc" id="L127">                .build();</span>
+
+<span class="fc" id="L129">        eventService.createEvent(event);</span>
+
+<span class="fc" id="L131">        String success = messageSource.getMessage(&quot;event.new.success&quot;,</span>
+<span class="fc" id="L132">                null, LocaleContextHolder.getLocale());</span>
+
+<span class="fc" id="L134">        redirectAttributes.addFlashAttribute(&quot;message&quot;, success);</span>
+
+<span class="fc" id="L136">        return &quot;redirect:/events/my&quot;;</span>
+    }
+
+} // The End...
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

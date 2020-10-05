@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="chapter03.00" />
+        <module name="chapter06.00" />
+        <module name="chapter01.00" />
+        <module name="chapter04.04" />
+        <module name="chapter04.03" />
+        <module name="chapter04.02" />
+        <module name="chapter04.01" />
+        <module name="chapter04.00" />
+        <module name="chapter11.00" />
+        <module name="chapter07.02" />
+        <module name="chapter07.01" />
+        <module name="chapter07.00" />
+        <module name="chapter14.00" />
+        <module name="chapter02.06" />
+        <module name="chapter02.05" />
+        <module name="chapter02.04" />
+        <module name="chapter02.03" />
+        <module name="chapter02.02" />
+        <module name="chapter02.01" />
+        <module name="chapter02.00" />
+        <module name="chapter12.05" />
+        <module name="chapter05.02" />
+        <module name="chapter12.03" />
+        <module name="chapter05.00" />
+        <module name="chapter12.01" />
+        <module name="chapter12.00" />
+        <module name="chapter08.00" />
+        <module name="chapter15.00" />
+        <module name="chapter12.04" />
+        <module name="chapter06.01" />
+        <module name="chapter03.06" />
+        <module name="chapter03.05" />
+        <module name="chapter03.04" />
+        <module name="chapter03.03" />
+        <module name="chapter03.02" />
+        <module name="chapter03.01" />
+        <module name="chapter05.01" />
+        <module name="chapter10.00" />
+        <module name="chapter09.07" />
+        <module name="chapter09.06" />
+        <module name="chapter12.02" />
+        <module name="chapter09.04" />
+        <module name="chapter13.00" />
+        <module name="chapter09.02" />
+        <module name="chapter09.01" />
+        <module name="chapter09.00" />
+        <module name="chapter09.03" />
+        <module name="chapter06.02" />
+        <module name="chapter09.05" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="chapter01" target="11" />
+      <module name="chapter01.00" target="11" />
+      <module name="chapter02" target="11" />
+      <module name="chapter02.00" target="11" />
+      <module name="chapter02.01" target="11" />
+      <module name="chapter02.02" target="11" />
+      <module name="chapter02.03" target="11" />
+      <module name="chapter02.04" target="11" />
+      <module name="chapter02.05" target="11" />
+      <module name="chapter02.06" target="11" />
+      <module name="chapter03" target="11" />
+      <module name="chapter03.00" target="11" />
+      <module name="chapter03.01" target="11" />
+      <module name="chapter03.02" target="11" />
+      <module name="chapter03.03" target="11" />
+      <module name="chapter03.04" target="11" />
+      <module name="chapter03.05" target="11" />
+      <module name="chapter03.06" target="11" />
+      <module name="chapter04" target="11" />
+      <module name="chapter04.00" target="11" />
+      <module name="chapter04.01" target="11" />
+      <module name="chapter04.02" target="11" />
+      <module name="chapter04.03" target="11" />
+      <module name="chapter04.04" target="11" />
+      <module name="chapter05" target="11" />
+      <module name="chapter05.00" target="11" />
+      <module name="chapter05.01" target="11" />
+      <module name="chapter05.02" target="11" />
+      <module name="chapter06" target="11" />
+      <module name="chapter06.00" target="11" />
+      <module name="chapter06.01" target="11" />
+      <module name="chapter06.02" target="11" />
+      <module name="chapter07" target="11" />
+      <module name="chapter07.00" target="11" />
+      <module name="chapter07.01" target="11" />
+      <module name="chapter07.02" target="11" />
+      <module name="chapter08" target="11" />
+      <module name="chapter08.00" target="11" />
+      <module name="chapter09" target="11" />
+      <module name="chapter09.00" target="11" />
+      <module name="chapter09.01" target="11" />
+      <module name="chapter09.02" target="11" />
+      <module name="chapter09.03" target="11" />
+      <module name="chapter09.04" target="11" />
+      <module name="chapter09.05" target="11" />
+      <module name="chapter09.06" target="11" />
+      <module name="chapter09.07" target="11" />
+      <module name="chapter10" target="11" />
+      <module name="chapter10.00" target="11" />
+      <module name="chapter11" target="11" />
+      <module name="chapter11.00" target="11" />
+      <module name="chapter12" target="11" />
+      <module name="chapter12.00" target="11" />
+      <module name="chapter12.01" target="11" />
+      <module name="chapter12.02" target="11" />
+      <module name="chapter12.03" target="11" />
+      <module name="chapter12.04" target="11" />
+      <module name="chapter12.05" target="11" />
+      <module name="chapter13" target="11" />
+      <module name="chapter13.00" target="11" />
+      <module name="chapter14" target="11" />
+      <module name="chapter14.00" target="11" />
+      <module name="chapter15" target="11" />
+      <module name="chapter15.00" target="11" />
+      <module name="spring_security_course" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="chapter01.00" options="-parameters" />
+      <module name="chapter02.00" options="-parameters" />
+      <module name="chapter02.01" options="-parameters" />
+      <module name="chapter02.02" options="-parameters" />
+      <module name="chapter02.03" options="-parameters" />
+      <module name="chapter02.04" options="-parameters" />
+      <module name="chapter02.05" options="-parameters" />
+      <module name="chapter02.06" options="-parameters" />
+      <module name="chapter03.00" options="-parameters" />
+      <module name="chapter03.01" options="-parameters" />
+      <module name="chapter03.02" options="-parameters" />
+      <module name="chapter03.03" options="-parameters" />
+      <module name="chapter03.04" options="-parameters" />
+      <module name="chapter03.05" options="-parameters" />
+      <module name="chapter03.06" options="-parameters" />
+      <module name="chapter04.00" options="-parameters" />
+      <module name="chapter04.01" options="-parameters" />
+      <module name="chapter04.02" options="-parameters" />
+      <module name="chapter04.03" options="-parameters" />
+      <module name="chapter04.04" options="-parameters" />
+      <module name="chapter05.00" options="-parameters" />
+      <module name="chapter05.01" options="-parameters" />
+      <module name="chapter05.02" options="-parameters" />
+      <module name="chapter06.00" options="-parameters" />
+      <module name="chapter06.01" options="-parameters" />
+      <module name="chapter06.02" options="-parameters" />
+      <module name="chapter07.00" options="-parameters" />
+      <module name="chapter07.01" options="-parameters" />
+      <module name="chapter07.02" options="-parameters" />
+      <module name="chapter08.00" options="-parameters" />
+      <module name="chapter09.00" options="-parameters" />
+      <module name="chapter09.01" options="-parameters" />
+      <module name="chapter09.02" options="-parameters" />
+      <module name="chapter09.03" options="-parameters" />
+      <module name="chapter09.04" options="-parameters" />
+      <module name="chapter09.05" options="-parameters" />
+      <module name="chapter09.06" options="-parameters" />
+      <module name="chapter09.07" options="-parameters" />
+      <module name="chapter10.00" options="-parameters" />
+      <module name="chapter11.00" options="-parameters" />
+      <module name="chapter12.00" options="-parameters" />
+      <module name="chapter12.01" options="-parameters" />
+      <module name="chapter12.02" options="-parameters" />
+      <module name="chapter12.03" options="-parameters" />
+      <module name="chapter12.04" options="-parameters" />
+      <module name="chapter12.05" options="-parameters" />
+      <module name="chapter13.00" options="-parameters" />
+      <module name="chapter14.00" options="-parameters" />
+      <module name="chapter15.00" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Application.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chapter01.00</a> &gt; <a href="index.source.html" class="el_package">io.baselogic.springsecurity</a> &gt; <span class="el_source">Application.java</span></div><h1>Application.java</h1><pre class="source lang-java linenums">package io.baselogic.springsecurity;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Profile;
+
+import java.util.Arrays;
+
+@SpringBootApplication
+<span class="fc" id="L16">@Slf4j</span>
+<span class="fc" id="L17">public class Application {</span>
+
+	public static void main(String[] args) {
+<span class="fc" id="L20">		SpringApplication.run(Application.class, args);</span>
+<span class="fc" id="L21">	}</span>
+
+
+    //@Profile(&quot;trace&quot;)
+    @Bean     // ApplicationContextAware
+    @Autowired
+    public CommandLineRunner viewBeansInContext(ApplicationContext ctx) {
+<span class="fc" id="L28">        return args -&gt; {</span>
+
+<span class="fc" id="L30">            StringBuilder sb = new StringBuilder(1_000);</span>
+<span class="fc" id="L31">            sb.append(&quot;\n------------------------------------------------&quot;);</span>
+<span class="fc" id="L32">            sb.append(&quot;Let's inspect the beans provided by Spring Boot:&quot;);</span>
+<span class="fc" id="L33">            sb.append(&quot;\n------------------------------------------------&quot;);</span>
+
+<span class="fc" id="L35">            String[] beanNames = ctx.getBeanDefinitionNames();</span>
+<span class="fc" id="L36">            Arrays.sort(beanNames);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            for (String beanName : beanNames) {</span>
+<span class="fc" id="L38">                sb.append(beanName);</span>
+            }
+
+<span class="fc" id="L41">            sb.append(&quot;\n------------------------------------------------\n&quot;);</span>
+
+<span class="fc" id="L43">            log.debug(sb.toString());</span>
+<span class="fc" id="L44">        };</span>
+    }
+} // The End...
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

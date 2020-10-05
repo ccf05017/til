@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultEventService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chapter01.00</a> &gt; <a href="index.source.html" class="el_package">io.baselogic.springsecurity.service</a> &gt; <span class="el_source">DefaultEventService.java</span></div><h1>DefaultEventService.java</h1><pre class="source lang-java linenums">package io.baselogic.springsecurity.service;
+
+import io.baselogic.springsecurity.dao.EventDao;
+import io.baselogic.springsecurity.dao.UserDao;
+import io.baselogic.springsecurity.domain.AppUser;
+import io.baselogic.springsecurity.domain.Event;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
+/**
+ * A default implementation of {@link EventService} that delegates to {@link EventDao} and {@link UserDao}.
+ *
+ * @since chapter01.00
+ * @author mickknutson
+ *
+ */
+@Service
+@Validated
+public class DefaultEventService implements EventService {
+
+    private final EventDao eventDao;
+    private final UserDao userDao;
+
+    @Autowired
+    public DefaultEventService(final @NotNull EventDao eventDao,
+<span class="fc" id="L30">                               final @NotNull UserDao userDao) {</span>
+<span class="fc" id="L31">        this.eventDao = eventDao;</span>
+<span class="fc" id="L32">        this.userDao = userDao;</span>
+<span class="fc" id="L33">    }</span>
+
+    @Override
+    public Event findEventById(final Integer eventId) {
+<span class="fc" id="L37">        return eventDao.findById(eventId);</span>
+    }
+
+    @Override
+    public List&lt;Event&gt; findEventByUser(final Integer userId) {
+<span class="fc" id="L42">        return eventDao.findByUser(userId);</span>
+    }
+
+    @Override
+    public List&lt;Event&gt; findAllEvents() {
+<span class="fc" id="L47">        return eventDao.findAll();</span>
+    }
+
+    @Override
+    public Integer createEvent(final Event event) {
+<span class="fc" id="L52">        return eventDao.save(event);</span>
+    }
+
+    @Override
+    public AppUser findUserById(final Integer id) {
+<span class="fc" id="L57">        return userDao.findById(id);</span>
+    }
+
+    @Override
+    public AppUser findUserByEmail(final String email) {
+<span class="fc" id="L62">        return userDao.findByEmail(email);</span>
+    }
+
+    @Override
+    public List&lt;AppUser&gt; findUsersByEmail(final String partialEmail) {
+<span class="fc" id="L67">        return userDao.findAllByEmail(partialEmail);</span>
+    }
+
+    @Override
+    public Integer createUser(final AppUser appUser) {
+<span class="fc" id="L72">        return userDao.save(appUser);</span>
+    }
+
+} // The End...
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
