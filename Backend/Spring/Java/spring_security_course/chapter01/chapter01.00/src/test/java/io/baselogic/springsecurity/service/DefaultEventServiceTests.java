@@ -56,17 +56,17 @@ public class DefaultEventServiceTests {
     public void findEventById() {
 
         // Expectation
-        given(eventDao.findById(any(Integer.class)))
+        given(eventDao.findById(TestUtils.testEvent.getId()))
                 .willReturn(TestUtils.testEvent);
 
-
         // Execute test code
-        Event event = eventService.findEventById(100);
+        Event event = eventService.findEventById(TestUtils.testEvent.getId());
 
         // Validate assertions
         assertThat(event).isNotNull();
 
-        verify(eventDao).findById(any(Integer.class));
+        // 모킹을 사용할 때는 모킹 자체가 잘 됐는지 반드시 확인해야 한다.
+        verify(eventDao).findById(TestUtils.testEvent.getId());
     }
 
     @Test
