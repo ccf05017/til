@@ -4,6 +4,7 @@ import com.poppo.toby.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import java.sql.SQLException;
 import java.util.stream.IntStream;
@@ -19,9 +20,13 @@ class NotBadUserDaoTests {
 
     @BeforeEach
     public void setup() {
-        ConnectionMaker testConnectionMaker = new TestConnectionMaker();
+        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+        dataSource.setDriverClass(org.h2.Driver.class);
+        dataSource.setUrl("jdbc:h2:tcp://localhost/~/data/testdb");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("");
 
-        userDao = new NotBadUserDao(testConnectionMaker);
+        userDao = new NotBadUserDao(dataSource);
 
         user1 = User.builder().id("ccf05017").name("poppo").password("password").build();
         user2 = User.builder().id("ccf05018").name("ita").password("password").build();

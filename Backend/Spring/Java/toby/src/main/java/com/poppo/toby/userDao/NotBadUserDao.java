@@ -3,20 +3,21 @@ package com.poppo.toby.userDao;
 import com.poppo.toby.domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class NotBadUserDao {
-    private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
 
-    public NotBadUserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public NotBadUserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public void add(User user) throws SQLException {
-        Connection connection = connectionMaker.makeConnection();
+        Connection connection = dataSource.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into users(id, name, password) values(?,?,?)");
@@ -32,7 +33,7 @@ public class NotBadUserDao {
     }
 
     public User get(String id) throws SQLException {
-        Connection connection = connectionMaker.makeConnection();
+        Connection connection = dataSource.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "select * from users where id = ?");
@@ -71,7 +72,7 @@ public class NotBadUserDao {
         ResultSet resultSet = null;
 
         try {
-            connection = connectionMaker.makeConnection();
+            connection = dataSource.getConnection();
             preparedStatement = connection.prepareStatement("select count(*) from users");
             resultSet = preparedStatement.executeQuery();
 
@@ -106,13 +107,13 @@ public class NotBadUserDao {
         }
     }
 
-    // 클라이언트 코드에 오브젝트 팩토리가 같이 들어와 있는 형태
+    // 클라이언트 코드에 오브젝트 팩토리(DI 컨테이너)가 같이 들어와 있는 형태
     public void jdbcContextWithStatementStrategy(StatementStrategy statementStrategy) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            connection = connectionMaker.makeConnection();
+            connection = dataSource.getConnection();
             preparedStatement = statementStrategy.makePreparedStatement(connection);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
