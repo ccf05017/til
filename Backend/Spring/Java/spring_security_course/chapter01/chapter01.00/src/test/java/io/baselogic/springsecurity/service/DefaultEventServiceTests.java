@@ -59,7 +59,6 @@ public class DefaultEventServiceTests {
         given(eventDao.findById(TestUtils.testEvent.getId()))
                 .willReturn(TestUtils.testEvent);
 
-
         // Execute test code
         Event event = eventService.findEventById(TestUtils.testEvent.getId());
 
