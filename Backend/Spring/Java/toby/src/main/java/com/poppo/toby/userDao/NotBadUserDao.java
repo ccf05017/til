@@ -17,19 +17,8 @@ public class NotBadUserDao {
     }
 
     public void add(User user) throws SQLException {
-        Connection connection = dataSource.getConnection();
-
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into users(id, name, password) values(?,?,?)");
-
-        preparedStatement.setString(1, user.getId());
-        preparedStatement.setString(2, user.getName());
-        preparedStatement.setString(3, user.getPassword());
-
-        preparedStatement.executeUpdate();
-
-        preparedStatement.close();
-        connection.close();
+        StatementStrategy statementStrategy = new AddStatement(user);
+        jdbcContextWithStatementStrategy(statementStrategy);
     }
 
     public User get(String id) throws SQLException {
