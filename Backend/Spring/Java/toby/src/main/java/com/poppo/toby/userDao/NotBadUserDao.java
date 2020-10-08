@@ -11,13 +11,15 @@ import java.sql.SQLException;
 
 public class NotBadUserDao {
     private DataSource dataSource;
+    private JdbcContext jdbcContext;
 
-    public NotBadUserDao(DataSource dataSource) {
+    public NotBadUserDao(DataSource dataSource, JdbcContext jdbcContext) {
         this.dataSource = dataSource;
+        this.jdbcContext = jdbcContext;
     }
 
     public void add(User user) throws SQLException {
-        jdbcContextWithStatementStrategy((connection -> {
+        jdbcContext.workWithStatementStrategy((connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into users(id, name, password) values(?,?,?)");
 
@@ -59,7 +61,7 @@ public class NotBadUserDao {
     }
 
     public void deleteAll() throws SQLException {
-        jdbcContextWithStatementStrategy(connection ->
+        jdbcContext.workWithStatementStrategy(connection ->
                 connection.prepareStatement("delete from users")
         );
     }
@@ -88,35 +90,6 @@ public class NotBadUserDao {
 
                 }
             }
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
-    }
-
-    // 클라이언트 코드에 오브젝트 팩토리(DI 컨테이너)가 같이 들어와 있는 형태
-    public void jdbcContextWithStatementStrategy(StatementStrategy statementStrategy) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            connection = dataSource.getConnection();
-            preparedStatement = statementStrategy.makePreparedStatement(connection);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        } finally {
             if (preparedStatement != null) {
                 try {
                     preparedStatement.close();

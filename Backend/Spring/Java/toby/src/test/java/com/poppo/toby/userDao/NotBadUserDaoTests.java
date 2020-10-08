@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NotBadUserDaoTests {
     private NotBadUserDao userDao;
+    private JdbcContext jdbcContext;
     private User user1;
     private User user2;
     private User user3;
@@ -26,7 +27,9 @@ class NotBadUserDaoTests {
         dataSource.setUsername("sa");
         dataSource.setPassword("");
 
-        userDao = new NotBadUserDao(dataSource);
+        jdbcContext = new JdbcContext(dataSource);
+
+        userDao = new NotBadUserDao(dataSource, jdbcContext);
 
         user1 = User.builder().id("ccf05017").name("poppo").password("password").build();
         user2 = User.builder().id("ccf05018").name("ita").password("password").build();
