@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/04_TemplatePattern.md" beforeDir="false" afterPath="$PROJECT_DIR$/04_TemplatePattern.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/StatementStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/StatementStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +235,7 @@
       <workItem from="1600902260159" duration="4773000" />
       <workItem from="1601250975450" duration="4055000" />
       <workItem from="1601277143418" duration="404000" />
-      <workItem from="1602112069066" duration="2888000" />
+      <workItem from="1602112069066" duration="3330000" />
     </task>
     <servers />
   </component>
