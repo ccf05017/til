@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 public class NotBadUserDaoFactory {
     @Bean
     public NotBadUserDao notBadUserDao() {
-        return new NotBadUserDao(dataSource(), jdbcContext());
+        return new NotBadUserDao(dataSource());
     }
 
     @Bean
@@ -23,10 +23,5 @@ public class NotBadUserDaoFactory {
         dataSource.setPassword("");
 
         return dataSource;
-    }
-
-    @Bean
-    public JdbcContext jdbcContext() {
-        return new JdbcContext(dataSource());
     }
 }

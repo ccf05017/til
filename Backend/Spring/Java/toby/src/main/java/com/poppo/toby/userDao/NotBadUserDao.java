@@ -13,9 +13,9 @@ public class NotBadUserDao {
     private DataSource dataSource;
     private JdbcContext jdbcContext;
 
-    public NotBadUserDao(DataSource dataSource, JdbcContext jdbcContext) {
+    public NotBadUserDao(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.jdbcContext = jdbcContext;
+        this.jdbcContext = new JdbcContext(dataSource);
     }
 
     public void add(User user) throws SQLException {
