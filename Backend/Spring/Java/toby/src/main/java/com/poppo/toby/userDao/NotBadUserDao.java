@@ -3,36 +3,36 @@ package com.poppo.toby.userDao;
 import com.poppo.toby.domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class NotBadUserDao {
-    private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
+    private JdbcContext jdbcContext;
 
-    public NotBadUserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public NotBadUserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+        this.jdbcContext = new JdbcContext(dataSource);
     }
 
     public void add(User user) throws SQLException {
-        Connection connection = connectionMaker.makeConnection();
+        jdbcContext.workWithStatementStrategy((connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "insert into users(id, name, password) values(?,?,?)");
 
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into users(id, name, password) values(?,?,?)");
+            preparedStatement.setString(1, user.getId());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getPassword());
 
-        preparedStatement.setString(1, user.getId());
-        preparedStatement.setString(2, user.getName());
-        preparedStatement.setString(3, user.getPassword());
-
-        preparedStatement.executeUpdate();
-
-        preparedStatement.close();
-        connection.close();
+            return preparedStatement;
+        }));
     }
 
     public User get(String id) throws SQLException {
-        Connection connection = connectionMaker.makeConnection();
+        Connection connection = dataSource.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "select * from users where id = ?");
@@ -61,8 +61,9 @@ public class NotBadUserDao {
     }
 
     public void deleteAll() throws SQLException {
-        StatementStrategy statementStrategy = new DeleteAllStatement();
-        jdbcContextWithStatementStrategy(statementStrategy);
+        jdbcContext.workWithStatementStrategy(connection ->
+                connection.prepareStatement("delete from users")
+        );
     }
 
     public int getCount() throws SQLException {
@@ -71,7 +72,7 @@ public class NotBadUserDao {
         ResultSet resultSet = null;
 
         try {
-            connection = connectionMaker.makeConnection();
+            connection = dataSource.getConnection();
             preparedStatement = connection.prepareStatement("select count(*) from users");
             resultSet = preparedStatement.executeQuery();
 
@@ -89,35 +90,6 @@ public class NotBadUserDao {
 
                 }
             }
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
-    }
-
-    // 클라이언트 코드에 오브젝트 팩토리가 같이 들어와 있는 형태
-    public void jdbcContextWithStatementStrategy(StatementStrategy statementStrategy) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            connection = connectionMaker.makeConnection();
-            preparedStatement = statementStrategy.makePreparedStatement(connection);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        } finally {
             if (preparedStatement != null) {
                 try {
                     preparedStatement.close();
