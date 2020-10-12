@@ -19,16 +19,9 @@ public class NotBadUserDao {
     }
 
     public void add(User user) throws SQLException {
-        jdbcContext.workWithStatementStrategy((connection -> {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into users(id, name, password) values(?,?,?)");
-
-            preparedStatement.setString(1, user.getId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getPassword());
-
-            return preparedStatement;
-        }));
+        jdbcContext.executeQueryWithArgs(
+                "insert into users(id, name, password) values(?,?,?)",
+                user.getId(), user.getName(), user.getPassword());
     }
 
     public User get(String id) throws SQLException {
@@ -61,7 +54,7 @@ public class NotBadUserDao {
     }
 
     public void deleteAll() throws SQLException {
-        jdbcContext.executeSql("delete from users");
+        jdbcContext.executeQuery("delete from users");
     }
 
     public int getCount() throws SQLException {

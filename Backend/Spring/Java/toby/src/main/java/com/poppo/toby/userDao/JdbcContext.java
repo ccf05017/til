@@ -4,6 +4,8 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 public class JdbcContext {
     private DataSource dataSource;
@@ -40,7 +42,21 @@ public class JdbcContext {
         }
     }
 
-    public void executeSql(final String query) throws SQLException {
+    public void executeQuery(final String query) throws SQLException {
         this.workWithStatementStrategy(connection -> connection.prepareStatement(query));
+    }
+
+    public void executeQueryWithArgs(final String query, final String... args) throws SQLException {
+        List<String> arguments = Arrays.asList(args);
+
+        this.workWithStatementStrategy((connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            for (String argument : arguments) {
+                preparedStatement.setString(arguments.indexOf(argument) + 1, argument);
+            }
+
+            return preparedStatement;
+        }));
     }
 }
