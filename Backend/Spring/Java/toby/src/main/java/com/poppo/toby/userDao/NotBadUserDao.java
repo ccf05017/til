@@ -61,9 +61,7 @@ public class NotBadUserDao {
     }
 
     public void deleteAll() throws SQLException {
-        jdbcContext.workWithStatementStrategy(connection ->
-                connection.prepareStatement("delete from users")
-        );
+        executeSql("delete from users");
     }
 
     public int getCount() throws SQLException {
@@ -105,5 +103,9 @@ public class NotBadUserDao {
                 }
             }
         }
+    }
+
+    private void executeSql(final String query) throws SQLException {
+        jdbcContext.workWithStatementStrategy(connection -> connection.prepareStatement(query));
     }
 }
