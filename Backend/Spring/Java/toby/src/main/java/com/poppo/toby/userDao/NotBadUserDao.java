@@ -24,6 +24,10 @@ public class NotBadUserDao {
                 user.getId(), user.getName(), user.getPassword());
     }
 
+    public void deleteAll() throws SQLException {
+        jdbcContext.executeQuery("delete from users");
+    }
+
     public User get(String id) throws SQLException {
         Connection connection = dataSource.getConnection();
 
@@ -51,10 +55,6 @@ public class NotBadUserDao {
         }
 
         return user;
-    }
-
-    public void deleteAll() throws SQLException {
-        jdbcContext.executeQuery("delete from users");
     }
 
     public int getCount() throws SQLException {
