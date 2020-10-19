@@ -8,7 +8,7 @@ public class CalculatorSample {
     public int calcSum(String path) throws IOException {
         return this.lineReadTemplate(
                 path,
-                (String line, int value) -> value + Integer.parseInt(line),
+                (String line, Integer value) -> value + Integer.parseInt(line),
                 0
         );
     }
@@ -16,12 +16,20 @@ public class CalculatorSample {
     public int calcMultiply(String path) throws IOException {
         return this.lineReadTemplate(
                 path,
-                (String line, int value) -> value * Integer.parseInt(line),
+                (String line, Integer value) -> value * Integer.parseInt(line),
                 1
         );
     }
 
-    public int fileReadTemplate(String filePath, BufferedReaderCallback bufferedReaderCallback) throws IOException {
+    public String concat(String path) throws IOException {
+        return this.lineReadTemplate(
+                path,
+                (String line, String value) -> value + line,
+                ""
+        );
+    }
+
+    private int fileReadTemplate(String filePath, BufferedReaderCallback bufferedReaderCallback) throws IOException {
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new FileReader(filePath));
@@ -40,11 +48,11 @@ public class CalculatorSample {
         }
     }
 
-    public int lineReadTemplate(String filepath, LineCallback lineCallback, int initValue) throws IOException {
+    private <T> T lineReadTemplate(String filepath, LineCallback<T> lineCallback, T initValue) throws IOException {
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new FileReader(filepath));
-            int result = initValue;
+            T result = initValue;
             String line = null;
 
             while((line = bufferedReader.readLine()) != null) {

@@ -45,6 +45,22 @@ class CalculatorSampleTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("concatTestSuccessResources")
+    void concatTestSuccess(String expectedResult, String resourcePath) throws IOException {
+        CalculatorSample calculatorSample = new CalculatorSample();
+
+        String concatString = calculatorSample.concat(ResourceUtils.getFile(resourcePath).getPath());
+
+        assertThat(concatString).isEqualTo(expectedResult);
+    }
+    public static Stream<Arguments> concatTestSuccessResources() {
+        return Stream.of(
+                Arguments.of("1234", "classpath:numbers.txt"),
+                Arguments.of("2345", "classpath:numbers2.txt")
+        );
+    }
+
     @Test
     void addTestFail() {
         String notExistResource = "notExist";
