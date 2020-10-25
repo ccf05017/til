@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dedba92-9405-4a17-b00b-11fcd263e7fe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../Frontend/Webpack/lecture-frontend-dev-env" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Frontend/Webpack/lecture-frontend-dev-env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/poppo/study/multithread/multiExecute/MultiExecutorTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/poppo/study/multithread/multiExecute/MultiExecutorTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,29 +84,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.poppo.study.multithread.hostman.example" />
       <recent name="com.poppo.study.multithread.multiExecute" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MultiExecutorTests.runMultiAsynchronous">
-    <configuration name="MultiExecutorTests.runMulti" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="multi-thread.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.study.multithread.multiExecute.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.study.multithread.multiExecute" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.study.multithread.multiExecute.MultiExecutorTests" />
-      <option name="METHOD_NAME" value="runMulti" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.RunnableAndExecutorTests.simpleExample">
     <configuration name="MultiExecutorTests.runMultiAsynchronous" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="multi-thread.test" />
       <extension name="coverage">
@@ -154,6 +140,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RunnableAndExecutorTests.howManyThreadTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="multi-thread.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.study.multithread.hostman.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.study.multithread.hostman.example" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.study.multithread.hostman.example.RunnableAndExecutorTests" />
+      <option name="METHOD_NAME" value="howManyThreadTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RunnableAndExecutorTests.simpleExample" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="multi-thread.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.study.multithread.hostman.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.study.multithread.hostman.example" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.study.multithread.hostman.example.RunnableAndExecutorTests" />
+      <option name="METHOD_NAME" value="simpleExample" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MultiThreadApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="multi-thread.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.poppo.study.multithread.MultiThreadApplication" />
@@ -163,10 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RunnableAndExecutorTests.simpleExample" />
+        <item itemvalue="JUnit.RunnableAndExecutorTests.howManyThreadTest" />
         <item itemvalue="JUnit.MultiExecutorTests.runMultiAsynchronous" />
         <item itemvalue="JUnit.MultiExecutorTests.runMultiSynchronous" />
         <item itemvalue="JUnit.MultiExecutorTests.runMultiByStream" />
-        <item itemvalue="JUnit.MultiExecutorTests.runMulti" />
       </list>
     </recent_temporary>
   </component>
@@ -182,6 +201,7 @@
       <updated>1600310992316</updated>
       <workItem from="1600311000650" duration="613000" />
       <workItem from="1600325170021" duration="1209000" />
+      <workItem from="1603610592113" duration="1147000" />
     </task>
     <servers />
   </component>
@@ -193,25 +213,30 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600325270750" />
-    <state width="1878" height="343" key="GridCell.Tab.0.bottom" timestamp="1600326523491">
+    <state width="1878" height="273" key="GridCell.Tab.0.bottom" timestamp="1603612148415">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="273" key="GridCell.Tab.0.bottom/137.1103.1680.956/0.23.1920.1057@0.23.1920.1057" timestamp="1603612148415" />
     <state width="1878" height="343" key="GridCell.Tab.0.bottom/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600326523491" />
-    <state width="1878" height="343" key="GridCell.Tab.0.center" timestamp="1600326523490">
+    <state width="1878" height="273" key="GridCell.Tab.0.center" timestamp="1603612148414">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="273" key="GridCell.Tab.0.center/137.1103.1680.956/0.23.1920.1057@0.23.1920.1057" timestamp="1603612148414" />
     <state width="1878" height="343" key="GridCell.Tab.0.center/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600326523490" />
-    <state width="1878" height="343" key="GridCell.Tab.0.left" timestamp="1600326523490">
+    <state width="1878" height="273" key="GridCell.Tab.0.left" timestamp="1603612148413">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="273" key="GridCell.Tab.0.left/137.1103.1680.956/0.23.1920.1057@0.23.1920.1057" timestamp="1603612148413" />
     <state width="1878" height="343" key="GridCell.Tab.0.left/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600326523490" />
-    <state width="1878" height="343" key="GridCell.Tab.0.right" timestamp="1600326523491">
+    <state width="1878" height="273" key="GridCell.Tab.0.right" timestamp="1603612148414">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state width="1878" height="273" key="GridCell.Tab.0.right/137.1103.1680.956/0.23.1920.1057@0.23.1920.1057" timestamp="1603612148414" />
     <state width="1878" height="343" key="GridCell.Tab.0.right/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600326523491" />
-    <state x="695" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1600325290472">
+    <state x="695" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1603610654282">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
+    <state x="695" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.956/0.23.1920.1057@0.23.1920.1057" timestamp="1603610654282" />
     <state x="695" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600325290472" />
   </component>
 </project>
