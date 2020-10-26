@@ -88,3 +88,46 @@
 - 데이터는 아래로 흐른다
   - 부모 컴포넌는 props 형태로 자식 컴포넌트에게 상태를 전달할 수 있다.
 - 핵심질문: state를 다룰 때 주의 사항 세가지는? -> 직접 수정 불가, 업데이트 비동기 가능성, 상태 병합
+
+### 1.5. 이벤트 처리하기
+- 일반적인 html 이벤트 핸들러와 유사하지만, 캐멀케이스를 사용한다.
+- JSX를 사용할 경우 문자열이 아닌 `함수`로 이벤트를 전달한다.
+- 리액트에서 이벤트 핸들러의 기본동작을 방지하려면 `명시적으로 preventDefault`가 있어야 한다.
+```javascript
+// <a href="#" onclick="console.log('The link was clicked.'); return false">
+//   Click me
+// </a>
+
+function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  return (
+    <a href="#" onClick={handleClick}>
+      Click me
+    </a>
+  );
+}
+```
+- 리액트에서는 이벤트 핸들러의 인자로 `합성 이벤트 e`를 받는다.
+  - [참고문서](https://www.w3.org/TR/DOM-Level-3-Events/)
+- 클래스 컴포넌트로 이벤트 핸들러 정의 시 주의사항
+  - 일반적으로 클래스 컴포넌트의 메서드로 구현한다.
+  - 명시적인 this 바인딩에 주의해야 한다. (그놈의 클로저)
+  - 클래스 메서드로 구현하지 않고 콜백을 이벤트 핸들러에 전달하면 매번 콜백이 재생성된다.
+    - 일반적으로 문제는 없지만, 하위 컴포넌트에 props로 전달되면 그 컴포넌트들이 추가 렌더링을 수행할 수 있다.
+    - 잘못하면 무한루프에 빠진다.
+- 이벤트 핸들러에 인자를 전달할 수 있다.
+  - 화살표 함수 사용 시
+    ```javascript
+    <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+    ```
+    - 명시적으로 `합성 이벤트 e`를 전달해야 한다.
+  - Function.prototype.bind 사용 시
+    ```javascript
+    <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+    ```
+    - 추가 인자로 `합성 이벤트 e`가 자동으로 전달된다.
+- 핵심질문: 클래스 컴포넌트에서 이벤트 핸들러에 콜백을 사용하고 자식 컴포넌트에게 전달할 경우 `콜백이 매번 생성된다`
