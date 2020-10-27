@@ -131,3 +131,48 @@ function ActionLink() {
     ```
     - 추가 인자로 `합성 이벤트 e`가 자동으로 전달된다.
 - 핵심질문: 클래스 컴포넌트에서 이벤트 핸들러에 콜백을 사용하고 자식 컴포넌트에게 전달할 경우 `콜백이 매번 생성된다`
+
+### 1.6. 조건부 렌더링
+- 조건부 렌더링: 애플리케이션 상태에 따라 `일부 컴포넌트만 렌더링`하는 것
+- 리엑트 엘리먼트는 표현식이기 때문에 자바스크립트의 조건문, 조건부 연산자를 모두 사용 가능하다.
+```javascript
+// 예시 1(조건문)
+function Greeting({ loggedState }) {
+  const isLoggedIn = loggedState;
+  if (isLoggedIn) {
+    return (
+      <UserGreeting />
+    );
+  }
+  return (
+    <GuestGreeting />
+  );
+}
+
+ReactDom.render(
+  <Greeting loggedState={false} />,
+  document.getElementById('root')
+);
+
+// 예시 2(논리 연산자)
+function Mailbox({ unreadMessages }) {
+  return (
+    <div>
+      {unreadMessages.length > 0 &&
+        <h2>
+          You have {unreadMessages.length} unread messages.
+        </h2>
+      }
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <Mailbox unreadMessages={[1, 2, 3]}>,
+  document.getElementById('root')
+);
+```
+- 엘리먼트를 변수로 취급해서 조건부 렌더링을 할 수도 있다.
+- 컴포넌트가 렌더링 되는 걸 막고 싶다면 null을 반환하면 된다.
+- 원하는 방법 쓰면 되지만, 가독성이 가장 좋은 방향을 팀원과 협의하고 결정하자.
+- 핵심질문: 조건부 렌더링의 방법으로는 `조건문`, `조건부 연산자`, `논리 연산자` 등이 있다.
