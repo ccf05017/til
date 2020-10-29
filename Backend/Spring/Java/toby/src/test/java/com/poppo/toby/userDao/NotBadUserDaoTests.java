@@ -116,4 +116,13 @@ class NotBadUserDaoTests {
         assertThat(user1.getName()).isEqualTo(user2.getName());
         assertThat(user1.getPassword()).isEqualTo(user2.getPassword());
     }
+    
+    @Test
+    void getAllWithEmptyListTest() {
+        userDao.deleteAll();
+
+        List<User> users = userDao.getAll();
+
+        assertThat(users.size()).isEqualTo(0);
+    }
 }
