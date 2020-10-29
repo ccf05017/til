@@ -131,3 +131,96 @@ function ActionLink() {
     ```
     - 추가 인자로 `합성 이벤트 e`가 자동으로 전달된다.
 - 핵심질문: 클래스 컴포넌트에서 이벤트 핸들러에 콜백을 사용하고 자식 컴포넌트에게 전달할 경우 `콜백이 매번 생성된다`
+
+### 1.6. 조건부 렌더링
+- 조건부 렌더링: 애플리케이션 상태에 따라 `일부 컴포넌트만 렌더링`하는 것
+- 리엑트 엘리먼트는 표현식이기 때문에 자바스크립트의 조건문, 조건부 연산자를 모두 사용 가능하다.
+```javascript
+// 예시 1(조건문)
+function Greeting({ loggedState }) {
+  const isLoggedIn = loggedState;
+  if (isLoggedIn) {
+    return (
+      <UserGreeting />
+    );
+  }
+  return (
+    <GuestGreeting />
+  );
+}
+
+ReactDom.render(
+  <Greeting loggedState={false} />,
+  document.getElementById('root')
+);
+
+// 예시 2(논리 연산자)
+function Mailbox({ unreadMessages }) {
+  return (
+    <div>
+      {unreadMessages.length > 0 &&
+        <h2>
+          You have {unreadMessages.length} unread messages.
+        </h2>
+      }
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <Mailbox unreadMessages={[1, 2, 3]}>,
+  document.getElementById('root')
+);
+```
+- 엘리먼트를 변수로 취급해서 조건부 렌더링을 할 수도 있다.
+- 컴포넌트가 렌더링 되는 걸 막고 싶다면 null을 반환하면 된다.
+- 원하는 방법 쓰면 되지만, 가독성이 가장 좋은 방향을 팀원과 협의하고 결정하자.
+- 핵심질문: 조건부 렌더링의 방법으로는 `조건문`, `조건부 연산자`, `논리 연산자` 등이 있다.
+
+### 1.7. 리스트와 Key
+- 리액트에서는 표현식에 리스트를 넣을 경우 그 요소를 개별로 렌더링해줄 수 있다.
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const listNumbers = numbers.map((number) => <li>{number}</li>);
+
+ReactDOM.render(
+  <ul>{listNumbers}</ul>
+  document.getElementId('root');
+)
+```
+- 리액트에서 리스트를 렌더링할 때는 key를 필수적으로 넣어줘야 한다.
+  - key가 있어야 리액트가 어떤 엘리먼트를 빼고 넣을지 계산할 수 있다.
+  - key는 고유값을 사용해야 한다.
+  - 일반적으로 데이터의 id를 key로 사용한다.
+  - 최악의 경우에만 list의 index를 key로 사용해라.
+  - key는 props로 전달되지 않는다. (필요하다면 별도 props로 지정해서 전달해라)
+  - key는 형제 사이에만 고유하면 된다.
+- 리스트를 꼭 변수에 넣지 않고 인라인 방식으로 넣어도 된다.
+  - 하지만 늘 그렇듯 가독성을 고려해서 방식을 선택해라
+- 핵심질문: 리액트에서 리스트를 렌더링할 때는 `key`를 무조건 지정해야 한다.
+
+### 1.8. 폼
+- HTML 폼은 자체적으로 내부 상태를 갖고 있다.
+  - 이를 해결하기 위해 리액트의 다른 DOM 엘리먼트와는 좀 다르다.
+  - HTML 동작을 그대로 써도 되지만, 보통 자바스크립트 함수로 폼을 처리하는 게 더 편하다.
+  - 이 때 `제어 컴포넌트`라는 표준 기술을 사용하면 좋다.
+- 리액트의 제어 컴포넌트
+  - 리액트 상태를 `신뢰 가능한 단일 출처`로 만들어 사용자 입력과 리액트 상태를 결합한다.
+  - 이를 통해 리액트에 의해 폼의 값을 제어 할 수 있고, 이를 `제어 컴포넌트`라 한다.
+- testarea 태그
+  - 일반적으로 HTML에서 textarea는 텍스트를 자식으로 정의한다.
+    ```html
+    <textarea>
+      hi, thank you, bye
+    </textarea>
+    ```
+  - 리액트에서는 textarea의 value 어트리뷰트를 사용한다. (다른 폼 요소와 동일하게)
+- select 태그
+  - 이 또한 일반적인 HTML과 살짝 다르다.
+  - 리액트는 select 태그 또한 value 어트리뷰트를 사용한다.
+- input, textarea, select 모두 value 어트리뷰트로 제어 컴포넌트를 구현한다.
+- file input은 비제어 컴포넌트다.
+- 다중 입력 제어하기
+  - 여러개의 input 엘리먼트를 제어할 때, 각 엘리먼트에 name 어트리뷰트를 추가하고 관리할 수 있다.
+  - 여러개의 input에 대한 상태를 한번에 관리할 수 있다.
+- 핵심질문: 리액트에 의해 폼의 값을 제어하는 컴포넌트를 `제어 컴포넌트`라 한다.
