@@ -134,3 +134,17 @@
         - 이를 위해서 `템플릿에서 콜백으로 줄 정보`와 `콜백에서 템플릿을 줄 정보`를 잘 구분해야 한다.
     - 핵심은 `코드의 특성이 바뀌는 경계`를 찾아내는 것
     - 바뀌는 부분과 바뀌지 않는 부분을 구분해서 인터페이스로 추출하면 자연스럽게 템플릿/콜백 패턴이 완성될 것이다.
+
+### 3.6 JdbcTemplate
+- 스프링이 자체적으로 제공하는 템플릿 패턴 첫번째
+- JdbcTemplate은 스프링에서 제공하는 클래스지만 DI 컨테이너 없이 직접 주입해서도 사용 가능하다.
+- 사실 지금까지 하던 짓은 스프링에서 아주 잘 만들어서 제공하는 기능이 있었다!
+- JdbcTemplate.update
+    - createdPreparedStatement 메서드를 통해 쿼리를 실행시킬 수 있다.
+    - 그냥 바로 실행할 쿼리문을 인자로 전달해서 바로 실행시킬 수도 있다.
+- JdbcTemplate.query
+    - PreparedStatementCreator, ResultSetExtractor 콜백 두개를 인자로 전달해 실행할 수 있다.
+    - queryForInt 등 ResultSet의 타입이 정해진 세부 메서드들도 있다.
+- JdbcTemplate.queryForObject
+    - PreparedStatementCreator, ResultSetExtractor(혹은 RowMapper) 콜백 두개를 인자로 전달해 실행할 수 있다.
+    - 결과가 하나가 아닐때는 예외가 발생한다.
