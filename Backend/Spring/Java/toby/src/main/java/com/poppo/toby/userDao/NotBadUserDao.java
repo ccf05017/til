@@ -27,8 +27,13 @@ public class NotBadUserDao {
                 user.getId(), user.getName(), user.getPassword());
     }
 
-    public void deleteAll() throws SQLException {
-        jdbcContext.executeQuery("delete from users");
+//    public void deleteAll() throws SQLException {
+//        jdbcContext.executeQuery("delete from users");
+//    }
+    public void deleteAll() {
+        this.jdbcTemplate.update(
+                (Connection connection) -> connection.prepareStatement("delete from users")
+        );
     }
 
     public User get(String id) throws SQLException {
