@@ -30,10 +30,16 @@ public class NotBadUserDao {
 //    public void deleteAll() throws SQLException {
 //        jdbcContext.executeQuery("delete from users");
 //    }
+
+    // createPreparedStatement 사용 버전
+//    public void deleteAll() {
+//        this.jdbcTemplate.update(
+//                (Connection connection) -> connection.prepareStatement("delete from users")
+//        );
+//    }
+
     public void deleteAll() {
-        this.jdbcTemplate.update(
-                (Connection connection) -> connection.prepareStatement("delete from users")
-        );
+        this.jdbcTemplate.update("delete from users");
     }
 
     public User get(String id) throws SQLException {
