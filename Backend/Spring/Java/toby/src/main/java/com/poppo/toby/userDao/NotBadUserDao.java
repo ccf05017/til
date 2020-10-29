@@ -6,13 +6,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class NotBadUserDao {
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
     public NotBadUserDao(DataSource dataSource) {
-        this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -139,5 +138,18 @@ public class NotBadUserDao {
 
     public Integer getCount() throws SQLException {
         return this.jdbcTemplate.queryForObject("select count(*) from users", Integer.class);
+    }
+
+    public List<User> getAll() {
+        return this.jdbcTemplate.query(
+                "select * from users order by id",
+                (ResultSet resultSet, int rowNum) -> {
+                    User user = new User();
+                    user.setId(resultSet.getString("id"));
+                    user.setPassword(resultSet.getString("password"));
+                    user.setName(resultSet.getString("name"));
+                    return user;
+                }
+        );
     }
 }

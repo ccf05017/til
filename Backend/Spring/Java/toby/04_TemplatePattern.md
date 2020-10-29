@@ -144,6 +144,8 @@
     - 그냥 바로 실행할 쿼리문을 인자로 전달해서 바로 실행시킬 수도 있다.
 - JdbcTemplate.query
     - PreparedStatementCreator, ResultSetExtractor 콜백 두개를 인자로 전달해 실행할 수 있다.
+    - ResultSetExtractor 대신 RowMapper을 넘겨줄 수도 있다.
+    - 일반적으로 여러개의 결과가 반환될 때 사용한다.
     - queryForInt 등 ResultSet의 타입이 정해진 세부 메서드들도 있다.
 - JdbcTemplate.queryForObject
     - PreparedStatementCreator, ResultSetExtractor(혹은 RowMapper) 콜백 두개를 인자로 전달해 실행할 수 있다.
