@@ -1,12 +1,9 @@
 package com.poppo.toby.userDao;
 
 import com.poppo.toby.domain.User;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -45,33 +42,47 @@ public class NotBadUserDao {
         this.jdbcTemplate.update("delete from users");
     }
 
-    public User get(String id) throws SQLException {
-        Connection connection = dataSource.getConnection();
+//    public User get(String id) throws SQLException {
+//        Connection connection = dataSource.getConnection();
+//
+//        PreparedStatement preparedStatement = connection.prepareStatement(
+//                "select * from users where id = ?");
+//
+//        preparedStatement.setString(1, id);
+//
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//
+//        User user = null;
+//        if (resultSet.next()) {
+//            user = new User();
+//            user.setId(resultSet.getString("id"));
+//            user.setId(resultSet.getString("name"));
+//            user.setId(resultSet.getString("password"));
+//        }
+//
+//        resultSet.close();
+//        preparedStatement.close();
+//        connection.close();
+//
+//        if (user == null) {
+//            throw new EmptyResultDataAccessException(1);
+//        }
+//
+//        return user;
+//    }
 
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "select * from users where id = ?");
-
-        preparedStatement.setString(1, id);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        User user = null;
-        if (resultSet.next()) {
-            user = new User();
-            user.setId(resultSet.getString("id"));
-            user.setId(resultSet.getString("name"));
-            user.setId(resultSet.getString("password"));
-        }
-
-        resultSet.close();
-        preparedStatement.close();
-        connection.close();
-
-        if (user == null) {
-            throw new EmptyResultDataAccessException(1);
-        }
-
-        return user;
+    public User get(String id) {
+        return this.jdbcTemplate.queryForObject(
+                "select * from users where id = ?",
+                new Object[] {id},
+                (ResultSet resultSet, int rowNum) -> {
+                    User user = new User();
+                    user.setId(resultSet.getString("id"));
+                    user.setName(resultSet.getString("name"));
+                    user.setPassword(resultSet.getString("password"));
+                    return user;
+                }
+        );
     }
 
 //    public int getCount() throws SQLException {
@@ -115,14 +126,18 @@ public class NotBadUserDao {
 //        }
 //    }
 
-    public int getCount() throws SQLException {
-        // 이 부분 warnning에 대해 알아볼 것
-        return this.jdbcTemplate.query(
-                (Connection connection) -> connection.prepareStatement("select count(*) from users"),
-                (ResultSet resultSet) -> {
-                    resultSet.next();
-                    return resultSet.getInt(1);
-                }
-        );
+//    public int getCount() throws SQLException {
+//        // 이 부분 warnning에 대해 아볼 것
+//        return this.jdbcTemplate.query(
+//                (Connection connection) -> connection.prepareStatement("select count(*) from users"),
+//                (ResultSet resultSet) -> {
+//                    resultSet.next();
+//                    return resultSet.getInt(1);
+//                }
+//        );
+//    }
+
+    public Integer getCount() throws SQLException {
+        return this.jdbcTemplate.queryForObject("select count(*) from users", Integer.class);
     }
 }

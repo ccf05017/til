@@ -137,6 +137,7 @@
 
 ### 3.6 JdbcTemplate
 - 스프링이 자체적으로 제공하는 템플릿 패턴 첫번째
+- JdbcTemplate은 스프링에서 제공하는 클래스지만 DI 컨테이너 없이 직접 주입해서도 사용 가능하다.
 - 사실 지금까지 하던 짓은 스프링에서 아주 잘 만들어서 제공하는 기능이 있었다!
 - JdbcTemplate.update
     - createdPreparedStatement 메서드를 통해 쿼리를 실행시킬 수 있다.
@@ -144,3 +145,6 @@
 - JdbcTemplate.query
     - PreparedStatementCreator, ResultSetExtractor 콜백 두개를 인자로 전달해 실행할 수 있다.
     - queryForInt 등 ResultSet의 타입이 정해진 세부 메서드들도 있다.
+- JdbcTemplate.queryForObject
+    - PreparedStatementCreator, ResultSetExtractor(혹은 RowMapper) 콜백 두개를 인자로 전달해 실행할 수 있다.
+    - 결과가 하나가 아닐때는 예외가 발생한다.
