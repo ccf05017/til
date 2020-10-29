@@ -12,12 +12,10 @@ import java.sql.SQLException;
 
 public class NotBadUserDao {
     private DataSource dataSource;
-    private JdbcContext jdbcContext;
     private JdbcTemplate jdbcTemplate;
 
     public NotBadUserDao(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.jdbcContext = new JdbcContext(dataSource);
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
