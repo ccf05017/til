@@ -74,44 +74,55 @@ public class NotBadUserDao {
         return user;
     }
 
+//    public int getCount() throws SQLException {
+//        Connection connection = null;
+//        PreparedStatement preparedStatement = null;
+//        ResultSet resultSet = null;
+//
+//        try {
+//            connection = dataSource.getConnection();
+//            preparedStatement = connection.prepareStatement("select count(*) from users");
+//            resultSet = preparedStatement.executeQuery();
+//
+//            resultSet.next();
+//            int count = resultSet.getInt(1);
+//
+//            return count;
+//        } catch (SQLException e) {
+//            throw e;
+//        } finally {
+//            if (resultSet != null) {
+//                try {
+//                    resultSet.close();
+//                } catch (SQLException e) {
+//
+//                }
+//            }
+//            if (preparedStatement != null) {
+//                try {
+//                    preparedStatement.close();
+//                } catch (SQLException e) {
+//
+//                }
+//            }
+//            if (connection != null) {
+//                try {
+//                    connection.close();
+//                } catch (SQLException e) {
+//
+//                }
+//            }
+//        }
+//    }
+
     public int getCount() throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            connection = dataSource.getConnection();
-            preparedStatement = connection.prepareStatement("select count(*) from users");
-            resultSet = preparedStatement.executeQuery();
-
-            resultSet.next();
-            int count = resultSet.getInt(1);
-
-            return count;
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-
+        // 이 부분 warnning에 대해 알아볼 것
+        return this.jdbcTemplate.query(
+                (Connection connection) -> connection.prepareStatement("select count(*) from users"),
+                (ResultSet resultSet) -> {
+                    resultSet.next();
+                    return resultSet.getInt(1);
                 }
-            }
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
+        );
     }
 }
