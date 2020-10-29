@@ -21,9 +21,14 @@ public class NotBadUserDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void add(User user) throws SQLException {
-        jdbcContext.executeQueryWithArgs(
-                "insert into users(id, name, password) values(?,?,?)",
+//    public void add(User user) throws SQLException {
+//        jdbcContext.executeQueryWithArgs(
+//                "insert into users(id, name, password) values(?,?,?)",
+//                user.getId(), user.getName(), user.getPassword());
+//    }
+
+    public void add(User user) {
+        this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
                 user.getId(), user.getName(), user.getPassword());
     }
 
