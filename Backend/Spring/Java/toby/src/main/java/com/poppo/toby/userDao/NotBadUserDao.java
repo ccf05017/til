@@ -74,13 +74,7 @@ public class NotBadUserDao {
         return this.jdbcTemplate.queryForObject(
                 "select * from users where id = ?",
                 new Object[] {id},
-                (ResultSet resultSet, int rowNum) -> {
-                    User user = new User();
-                    user.setId(resultSet.getString("id"));
-                    user.setName(resultSet.getString("name"));
-                    user.setPassword(resultSet.getString("password"));
-                    return user;
-                }
+                this::mapUser
         );
     }
 
@@ -143,13 +137,16 @@ public class NotBadUserDao {
     public List<User> getAll() {
         return this.jdbcTemplate.query(
                 "select * from users order by id",
-                (ResultSet resultSet, int rowNum) -> {
-                    User user = new User();
-                    user.setId(resultSet.getString("id"));
-                    user.setPassword(resultSet.getString("password"));
-                    user.setName(resultSet.getString("name"));
-                    return user;
-                }
+                this::mapUser
         );
+    }
+
+    private User mapUser(ResultSet resultSet, int rowNum) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getString("id"));
+        user.setPassword(resultSet.getString("password"));
+        user.setName(resultSet.getString("name"));
+
+        return user;
     }
 }
