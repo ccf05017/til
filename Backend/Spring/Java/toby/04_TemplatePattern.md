@@ -144,7 +144,15 @@
     - 그냥 바로 실행할 쿼리문을 인자로 전달해서 바로 실행시킬 수도 있다.
 - JdbcTemplate.query
     - PreparedStatementCreator, ResultSetExtractor 콜백 두개를 인자로 전달해 실행할 수 있다.
+    - ResultSetExtractor 대신 RowMapper을 넘겨줄 수도 있다.
+    - 일반적으로 여러개의 결과가 반환될 때 사용한다.
     - queryForInt 등 ResultSet의 타입이 정해진 세부 메서드들도 있다.
 - JdbcTemplate.queryForObject
     - PreparedStatementCreator, ResultSetExtractor(혹은 RowMapper) 콜백 두개를 인자로 전달해 실행할 수 있다.
     - 결과가 하나가 아닐때는 예외가 발생한다.
+- 네거티브 테스트
+    - 개발자들은 해피패스만 기가 막히게 생각하고 테스트하는 경우가 있다.
+    - 해피패스만 있는 테스트는 반쪽도 안된다. 결국 에러 가능성을 내포한 쓸모 없는 코드다.
+    - 일반적이지 않은 `네거티브 테스트 케이스`를 반드시 고려하고 테스트해라
+    - 즉, 생각나는 모든 예외 상황을 테스트해라
+    - 자신만의 규칙을 세우고 모든 테스트에 일관적으로 우선 `네거티브 케이스`를 넣는 것도 좋은 방법이다.
