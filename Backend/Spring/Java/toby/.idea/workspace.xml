@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_Exceptions.md" beforeDir="false" afterPath="$PROJECT_DIR$/05_Exceptions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,6 +253,7 @@
       <workItem from="1603969895309" duration="2675000" />
       <workItem from="1604012962279" duration="3092000" />
       <workItem from="1604273945382" duration="3360000" />
+      <workItem from="1604363762708" duration="1017000" />
     </task>
     <servers />
   </component>
@@ -263,13 +266,14 @@
     </state>
     <state x="560" y="217" key="#SQL_Dialects/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924486543" />
     <state x="560" y="225" key="#SQL_Dialects/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1603971344999" />
-    <state x="-1147" y="262" key="#com.intellij.ide.util.MemberChooser" timestamp="1602113608491">
-      <screen x="-1920" y="23" width="1920" height="1057" />
+    <state x="773" y="271" key="#com.intellij.ide.util.MemberChooser" timestamp="1604364550958">
+      <screen x="0" y="23" width="1920" height="1098" />
     </state>
     <state x="-1147" y="262" key="#com.intellij.ide.util.MemberChooser/-1920.23.1920.1057/0.23.1920.1102@-1920.23.1920.1057" timestamp="1602113608491" />
     <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599022254470" />
     <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1599608772176" />
     <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599094026422" />
+    <state x="773" y="271" key="#com.intellij.ide.util.MemberChooser/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604364550958" />
     <state x="705" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600905075482">
       <screen x="0" y="23" width="1920" height="1102" />
     </state>
