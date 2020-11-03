@@ -21,21 +21,7 @@ public class NotBadUserDao {
 //                "insert into users(id, name, password) values(?,?,?)",
 //                user.getId(), user.getName(), user.getPassword());
 //    }
-
-//    public void add(User user) {
-//        try {
-//            this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
-//                    user.getId(), user.getName(), user.getPassword());
-//        } catch (SQLException e) {
-//            if (e.getErrorCode() == MYSQL_ER_DUP_ENTRY) {
-//                throw new DuplicateUserIdException(e);
-//            }
-//            throw new RuntimeException(e);
-//        }
-//    }
-
-    // 원래는 위와 같이 예외 처리를 해야했다.
-    // 최근에는 JdbcTemplate의 update 구문에서 SQLException을 어느정도 처리한 후 에러 스택을 보낸다.
+    
     public void add(User user) {
         this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
                 user.getId(), user.getName(), user.getPassword());
