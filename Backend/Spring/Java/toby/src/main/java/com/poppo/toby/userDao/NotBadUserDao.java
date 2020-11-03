@@ -10,7 +10,6 @@ import java.util.List;
 
 public class NotBadUserDao {
     private JdbcTemplate jdbcTemplate;
-    public final static int MYSQL_ER_DUP_ENTRY = 1022;
 
     public NotBadUserDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);

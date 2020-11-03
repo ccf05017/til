@@ -7,10 +7,15 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-public class NotBadUserDaoFactory {
+public class UserDaoFactory {
     @Bean
     public NotBadUserDao notBadUserDao() {
         return new NotBadUserDao(dataSource());
+    }
+
+    @Bean
+    public UserDao userDao() {
+        return new UserDaoJdbc(dataSource());
     }
 
     @Bean
