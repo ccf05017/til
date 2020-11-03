@@ -44,11 +44,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @param am       AuthenticationManagerBuilder
      * @throws Exception Authentication exception
      */
+    // WebSecurityAdapter 오버라이드를 이용 한 컨피그 설정
     @Override
     public void configure(final AuthenticationManagerBuilder am) throws Exception {
+        // 단순히 이것만 설정하면 no PasswordEncoder 예외가 발생한다.
+//        am.inMemoryAuthentication()
+//                .withUser("user1@baselogic.com").password("user1").roles(ROLE_USER);
 
+        // 중괄호 안의 구문이 id 관련 무언가 동작을 취한다.
+        // Spring Security 5에 추가된 기능
+        // 아래 특수구문을 통해 NoOpPasswordEncoder가 암호 인코더에 위임된다.
         am.inMemoryAuthentication()
-                .withUser("user1@baselogic.com").password("{noop}user1").roles(ROLE_USER);
+                .withUser("poppo@gmail.com").password("{noop}password").roles(ROLE_USER);
     }
 
 
@@ -120,16 +127,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * the {@link org.springframework.web.filter.DelegatingFilterProxy} delegates to.
      * </p>
      */
-    @Override
-    public void configure(final WebSecurity web) {
-        web.ignoring()
-                .antMatchers("/resources/**")
-                .antMatchers("/css/**")
-                .antMatchers("/favicon.ico")
-                .antMatchers("/img/**")
-                .antMatchers("/webjars/**")
-        ;
-    }
+//    @Override
+//    public void configure(final WebSecurity web) {
+//        web.ignoring()
+//                .antMatchers("/resources/**")
+//                .antMatchers("/css/**")
+//                .antMatchers("/favicon.ico")
+//                .antMatchers("/img/**")
+//                .antMatchers("/webjars/**")
+//        ;
+//    }
 
 
 } // The End...
