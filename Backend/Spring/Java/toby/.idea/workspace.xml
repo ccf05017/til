@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/NotBadUserDaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/userDao/UserDaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/userDao/UserDaoJdbcTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/userDao/UserDaoJdbcTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,8 +110,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="com.poppo.toby.simpleSamples" />
       <recent name="com.poppo.toby.userDao" />
+      <recent name="com.poppo.toby.simpleSamples" />
       <recent name="com.poppo.toby.trashDaoV4" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -124,7 +122,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/poppo/toby/simpleSamples" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TobyApplicationTests">
+  <component name="RunManager" selected="JUnit.UserDaoJdbcTests">
     <configuration name="CalculatorSampleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
@@ -136,22 +134,6 @@
       <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples" />
       <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.CalculatorSampleTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculatorSampleTest.concatTestSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.simpleSamples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.CalculatorSampleTest" />
-      <option name="METHOD_NAME" value="concatTestSuccess(java.lang.String,java.lang.String)" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -201,6 +183,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserDaoJdbcTests.duplicateIdErrorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.userDao" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.userDao.UserDaoJdbcTests" />
+      <option name="METHOD_NAME" value="duplicateIdErrorTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TobyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="toby.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.poppo.toby.TobyApplication" />
@@ -210,11 +208,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TobyApplicationTests" />
         <item itemvalue="JUnit.UserDaoJdbcTests" />
+        <item itemvalue="JUnit.UserDaoJdbcTests.duplicateIdErrorTest" />
+        <item itemvalue="JUnit.TobyApplicationTests" />
         <item itemvalue="JUnit.NotBadUserDaoTests" />
         <item itemvalue="JUnit.CalculatorSampleTest" />
-        <item itemvalue="JUnit.CalculatorSampleTest.concatTestSuccess" />
       </list>
     </recent_temporary>
   </component>
@@ -251,7 +249,7 @@
       <workItem from="1603969895309" duration="2675000" />
       <workItem from="1604012962279" duration="3092000" />
       <workItem from="1604273945382" duration="3360000" />
-      <workItem from="1604363762708" duration="4074000" />
+      <workItem from="1604363762708" duration="4406000" />
     </task>
     <servers />
   </component>
@@ -283,7 +281,7 @@
     <state x="-1222" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.23.1920.1057/0.23.1920.1102@-1920.23.1920.1057" timestamp="1602112776017" />
     <state x="698" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323777583" />
     <state x="698" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599094049332" />
-    <state width="1878" height="239" key="GridCell.Tab.0.bottom" timestamp="1604370110530">
+    <state width="1878" height="239" key="GridCell.Tab.0.bottom" timestamp="1604370360917">
       <screen x="1920" y="102" width="1920" height="980" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.bottom/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086544" />
@@ -301,8 +299,8 @@
     <state width="1878" height="278" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604016308680" />
     <state width="1878" height="266" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842766" />
-    <state width="1878" height="239" key="GridCell.Tab.0.bottom/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370110530" />
-    <state width="1878" height="239" key="GridCell.Tab.0.center" timestamp="1604370110530">
+    <state width="1878" height="239" key="GridCell.Tab.0.bottom/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360917" />
+    <state width="1878" height="239" key="GridCell.Tab.0.center" timestamp="1604370360916">
       <screen x="1920" y="102" width="1920" height="980" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.center/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086543" />
@@ -320,8 +318,8 @@
     <state width="1878" height="278" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604016308679" />
     <state width="1878" height="266" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842765" />
-    <state width="1878" height="239" key="GridCell.Tab.0.center/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370110530" />
-    <state width="1878" height="239" key="GridCell.Tab.0.left" timestamp="1604370110529">
+    <state width="1878" height="239" key="GridCell.Tab.0.center/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360916" />
+    <state width="1878" height="239" key="GridCell.Tab.0.left" timestamp="1604370360916">
       <screen x="1920" y="102" width="1920" height="980" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.left/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086542" />
@@ -339,8 +337,8 @@
     <state width="1878" height="278" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604016308679" />
     <state width="1878" height="266" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842764" />
-    <state width="1878" height="239" key="GridCell.Tab.0.left/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370110529" />
-    <state width="1878" height="239" key="GridCell.Tab.0.right" timestamp="1604370110530">
+    <state width="1878" height="239" key="GridCell.Tab.0.left/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360916" />
+    <state width="1878" height="239" key="GridCell.Tab.0.right" timestamp="1604370360917">
       <screen x="1920" y="102" width="1920" height="980" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.right/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086543" />
@@ -358,7 +356,7 @@
     <state width="1878" height="278" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604016308680" />
     <state width="1878" height="266" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842765" />
-    <state width="1878" height="239" key="GridCell.Tab.0.right/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370110530" />
+    <state width="1878" height="239" key="GridCell.Tab.0.right/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360917" />
     <state width="1878" height="271" key="GridCell.Tab.1.bottom" timestamp="1598924840145">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

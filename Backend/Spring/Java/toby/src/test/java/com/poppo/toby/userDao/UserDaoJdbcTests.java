@@ -3,6 +3,7 @@ package com.poppo.toby.userDao;
 import com.poppo.toby.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
@@ -120,5 +121,13 @@ class UserDaoJdbcTests {
         List<User> users = userDao.getAll();
 
         assertThat(users.size()).isEqualTo(0);
+    }
+
+    @Test
+    void duplicateIdErrorTest() {
+        userDao.deleteAll();
+
+        userDao.add(user1);
+        assertThatThrownBy(() -> userDao.add(user1)).isInstanceOf(DuplicateKeyException.class);
     }
 }
