@@ -21,7 +21,7 @@ public class NotBadUserDao {
 //                "insert into users(id, name, password) values(?,?,?)",
 //                user.getId(), user.getName(), user.getPassword());
 //    }
-    
+
     public void add(User user) {
         this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
                 user.getId(), user.getName(), user.getPassword());
