@@ -47,6 +47,14 @@ public class UserDaoJdbc implements UserDao {
         );
     }
 
+    public void update(User user) {
+        this.jdbcTemplate.update(
+                "update users set name = ?, password = ?, level = ?, login = ?, recommend = ? where id = ?",
+                user.getName(), user.getPassword(), user.getLevel().toInt(),
+                user.getLogin(), user.getRecommend(), user.getId()
+        );
+    }
+
     private User mapUser(ResultSet resultSet, int rowNum) throws SQLException {
         User user = new User();
         user.setId(resultSet.getString("id"));

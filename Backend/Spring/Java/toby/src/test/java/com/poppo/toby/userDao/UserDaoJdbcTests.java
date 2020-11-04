@@ -133,4 +133,25 @@ class UserDaoJdbcTests {
         userDao.add(user1);
         assertThatThrownBy(() -> userDao.add(user1)).isInstanceOf(DuplicateKeyException.class);
     }
+
+    @Test
+    void update() {
+        userDao.deleteAll();
+
+        userDao.add(user1);
+        userDao.add(user2);
+
+        user1.setName("newUser");
+        user1.setPassword("newPassword");
+        user1.setLevel(Level.GOLD);
+        user1.setLogin(4);
+        user1.setRecommend(4);
+
+        userDao.update(user1);
+
+        User updatedUser = userDao.get(user1.getId());
+        checkSameUser(user1, updatedUser);
+        User user2same = userDao.get(user2.getId());
+        checkSameUser(user2, user2same);
+    }
 }
