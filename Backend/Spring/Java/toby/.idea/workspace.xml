@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/domain/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +104,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
@@ -254,7 +254,7 @@
       <workItem from="1604012962279" duration="3092000" />
       <workItem from="1604273945382" duration="3360000" />
       <workItem from="1604363762708" duration="6202000" />
-      <workItem from="1604447605320" duration="1292000" />
+      <workItem from="1604447605320" duration="1563000" />
     </task>
     <servers />
   </component>
@@ -262,6 +262,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="560" y="237" key="#Project_Structure" timestamp="1604451552151">
+      <screen x="0" y="23" width="1920" height="1098" />
+    </state>
+    <state x="560" y="237" key="#Project_Structure/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604451552151" />
     <state x="560" y="225" key="#SQL_Dialects" timestamp="1603971344999">
       <screen x="0" y="23" width="1920" height="1100" />
     </state>
