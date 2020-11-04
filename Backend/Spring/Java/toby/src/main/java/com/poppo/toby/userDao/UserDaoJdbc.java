@@ -1,5 +1,6 @@
 package com.poppo.toby.userDao;
 
+import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -16,8 +17,11 @@ public class UserDaoJdbc implements UserDao {
     }
 
     public void add(User user) {
-        this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
-                user.getId(), user.getName(), user.getPassword());
+        this.jdbcTemplate.update(
+                "insert into users(id, name, password, level, login, recommend) values(?, ?, ?, ?, ?, ?)",
+                user.getId(), user.getName(), user.getPassword(), user.getLevel().toInt(),
+                user.getLogin(), user.getRecommend()
+                );
     }
 
     public void deleteAll() {
@@ -48,6 +52,9 @@ public class UserDaoJdbc implements UserDao {
         user.setId(resultSet.getString("id"));
         user.setPassword(resultSet.getString("password"));
         user.setName(resultSet.getString("name"));
+        user.setLevel(Level.of(resultSet.getInt("level")));
+        user.setLogin(resultSet.getInt("login"));
+        user.setRecommend(resultSet.getInt("recommend"));
 
         return user;
     }

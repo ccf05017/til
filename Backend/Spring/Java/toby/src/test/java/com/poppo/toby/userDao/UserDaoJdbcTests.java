@@ -47,22 +47,13 @@ class UserDaoJdbcTests {
 
         assertThat(userDao.getCount()).isEqualTo(0);
 
-        String testId = "userN";
-        String testName = "poppoN";
-        String password = "passowrd";
-
-        User userN = new User();
-        userN.setId(testId);
-        userN.setName(testName);
-        userN.setPassword(password);
-
-        userDao.add(userN);
+        userDao.add(user1);
 
         assertThat(userDao.getCount()).isEqualTo(1);
 
-        assertThat(userN.getId()).isEqualTo(testId);
-        assertThat(userN.getName()).isEqualTo(testName);
-        assertThat(userN.getPassword()).isEqualTo(password);
+        assertThat(user1.getId()).isEqualTo("ccf05017");
+        assertThat(user1.getName()).isEqualTo("poppo");
+        assertThat(user1.getPassword()).isEqualTo("password");
     }
 
     @Test
@@ -82,6 +73,9 @@ class UserDaoJdbcTests {
                         .id("poppo" + num)
                         .name("poppo" + num)
                         .password(testPassword)
+                        .level(Level.BASIC)
+                        .login(num)
+                        .recommend(num)
                         .build()
                 );
                 assertThat(userDao.getCount()).isEqualTo(num);
