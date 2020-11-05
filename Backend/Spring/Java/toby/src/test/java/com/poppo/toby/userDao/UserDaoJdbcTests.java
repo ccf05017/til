@@ -1,5 +1,6 @@
 package com.poppo.toby.userDao;
 
+import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -30,33 +30,30 @@ class UserDaoJdbcTests {
 
         userDao = new UserDaoJdbc(dataSource);
 
-        user1 = User.builder().id("ccf05017").name("poppo").password("password").build();
-        user2 = User.builder().id("ccf05018").name("ita").password("password").build();
-        user3 = User.builder().id("ccf05019").name("hoojjang").password("password").build();
+        user1 = User.builder()
+                .id("ccf05017").name("poppo").password("password").level(Level.BASIC).login(1).recommend(0)
+                .build();
+        user2 = User.builder()
+                .id("ccf05018").name("ita").password("password").level(Level.SILVER).login(55).recommend(10)
+                .build();
+        user3 = User.builder()
+                .id("ccf05019").name("hoojjang").password("password").level(Level.GOLD).login(100).recommend(40)
+                .build();
     }
 
     @Test
-    void addAndGet() throws SQLException {
+    void addAndGet() {
         userDao.deleteAll();
 
         assertThat(userDao.getCount()).isEqualTo(0);
 
-        String testId = "userN";
-        String testName = "poppoN";
-        String password = "passowrd";
-
-        User userN = new User();
-        userN.setId(testId);
-        userN.setName(testName);
-        userN.setPassword(password);
-
-        userDao.add(userN);
+        userDao.add(user1);
 
         assertThat(userDao.getCount()).isEqualTo(1);
 
-        assertThat(userN.getId()).isEqualTo(testId);
-        assertThat(userN.getName()).isEqualTo(testName);
-        assertThat(userN.getPassword()).isEqualTo(password);
+        assertThat(user1.getId()).isEqualTo("ccf05017");
+        assertThat(user1.getName()).isEqualTo("poppo");
+        assertThat(user1.getPassword()).isEqualTo("password");
     }
 
     @Test
@@ -76,6 +73,9 @@ class UserDaoJdbcTests {
                         .id("poppo" + num)
                         .name("poppo" + num)
                         .password(testPassword)
+                        .level(Level.BASIC)
+                        .login(num)
+                        .recommend(num)
                         .build()
                 );
                 assertThat(userDao.getCount()).isEqualTo(num);
@@ -112,6 +112,9 @@ class UserDaoJdbcTests {
         assertThat(user1.getId()).isEqualTo(user2.getId());
         assertThat(user1.getName()).isEqualTo(user2.getName());
         assertThat(user1.getPassword()).isEqualTo(user2.getPassword());
+        assertThat(user1.getLevel()).isEqualTo(user2.getLevel());
+        assertThat(user1.getLogin()).isEqualTo(user2.getLogin());
+        assertThat(user1.getRecommend()).isEqualTo(user2.getRecommend());
     }
 
     @Test
@@ -129,5 +132,26 @@ class UserDaoJdbcTests {
 
         userDao.add(user1);
         assertThatThrownBy(() -> userDao.add(user1)).isInstanceOf(DuplicateKeyException.class);
+    }
+
+    @Test
+    void update() {
+        userDao.deleteAll();
+
+        userDao.add(user1);
+        userDao.add(user2);
+
+        user1.setName("newUser");
+        user1.setPassword("newPassword");
+        user1.setLevel(Level.GOLD);
+        user1.setLogin(4);
+        user1.setRecommend(4);
+
+        userDao.update(user1);
+
+        User updatedUser = userDao.get(user1.getId());
+        checkSameUser(user1, updatedUser);
+        User user2same = userDao.get(user2.getId());
+        checkSameUser(user2, user2same);
     }
 }

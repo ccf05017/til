@@ -1,5 +1,9 @@
-package com.poppo.toby.userDao;
+package com.poppo.toby;
 
+import com.poppo.toby.services.UserService;
+import com.poppo.toby.userDao.NotBadUserDao;
+import com.poppo.toby.userDao.UserDao;
+import com.poppo.toby.userDao.UserDaoJdbc;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -7,10 +11,15 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-public class UserDaoFactory {
+public class BeanConfiguration {
     @Bean
     public NotBadUserDao notBadUserDao() {
         return new NotBadUserDao(dataSource());
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserService(userDao());
     }
 
     @Bean

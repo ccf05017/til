@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +73,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
         <option value="JUnit5 Test Class" />
       </list>
@@ -103,16 +107,24 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.poppo.toby.services" />
+      <recent name="com.poppo.toby.domain" />
       <recent name="com.poppo.toby.userDao" />
       <recent name="com.poppo.toby.simpleSamples" />
       <recent name="com.poppo.toby.trashDaoV4" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.poppo.toby" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -122,57 +134,12 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/poppo/toby/simpleSamples" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.UserDaoJdbcTests">
-    <configuration name="CalculatorSampleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.simpleSamples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.CalculatorSampleTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NotBadUserDaoTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.userDao" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.userDao.NotBadUserDaoTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TobyApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.TobyApplicationTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.UserServiceTests">
     <configuration name="UserDaoJdbcTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -183,17 +150,64 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDaoJdbcTests.duplicateIdErrorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserDaoJdbcTests.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.poppo.toby.userDao" />
       <option name="MAIN_CLASS_NAME" value="com.poppo.toby.userDao.UserDaoJdbcTests" />
-      <option name="METHOD_NAME" value="duplicateIdErrorTest" />
+      <option name="METHOD_NAME" value="update" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTests.bean" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="bean" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTests.upgradeLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="upgradeLevel" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -208,11 +222,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserServiceTests" />
+        <item itemvalue="JUnit.UserServiceTests.upgradeLevel" />
+        <item itemvalue="JUnit.UserServiceTests.bean" />
         <item itemvalue="JUnit.UserDaoJdbcTests" />
-        <item itemvalue="JUnit.UserDaoJdbcTests.duplicateIdErrorTest" />
-        <item itemvalue="JUnit.TobyApplicationTests" />
-        <item itemvalue="JUnit.NotBadUserDaoTests" />
-        <item itemvalue="JUnit.CalculatorSampleTest" />
+        <item itemvalue="JUnit.UserDaoJdbcTests.update" />
       </list>
     </recent_temporary>
   </component>
@@ -250,6 +264,7 @@
       <workItem from="1604012962279" duration="3092000" />
       <workItem from="1604273945382" duration="3360000" />
       <workItem from="1604363762708" duration="6202000" />
+      <workItem from="1604447605320" duration="7894000" />
     </task>
     <servers />
   </component>
@@ -257,31 +272,45 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="560" y="237" key="#Project_Structure" timestamp="1604451552151">
+      <screen x="0" y="23" width="1920" height="1098" />
+    </state>
+    <state x="560" y="237" key="#Project_Structure/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604451552151" />
     <state x="560" y="225" key="#SQL_Dialects" timestamp="1603971344999">
       <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state x="560" y="217" key="#SQL_Dialects/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924486543" />
     <state x="560" y="225" key="#SQL_Dialects/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1603971344999" />
-    <state x="773" y="271" key="#com.intellij.ide.util.MemberChooser" timestamp="1604364550958">
+    <state x="670" y="371" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604450317542">
       <screen x="0" y="23" width="1920" height="1098" />
+    </state>
+    <state x="670" y="371" key="#com.intellij.fileTypes.FileTypeChooser/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604450317542" />
+    <state x="773" y="271" key="#com.intellij.ide.util.MemberChooser" timestamp="1604457633149">
+      <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state x="-1147" y="262" key="#com.intellij.ide.util.MemberChooser/-1920.23.1920.1057/0.23.1920.1102@-1920.23.1920.1057" timestamp="1602113608491" />
     <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599022254470" />
     <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1599608772176" />
     <state x="773" y="262" key="#com.intellij.ide.util.MemberChooser/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599094026422" />
-    <state x="773" y="271" key="#com.intellij.ide.util.MemberChooser/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604364550958" />
+    <state x="773" y="271" key="#com.intellij.ide.util.MemberChooser/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604450862746" />
+    <state x="773" y="271" key="#com.intellij.ide.util.MemberChooser/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604457633149" />
+    <state x="743" y="421" width="433" height="304" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1604457665742">
+      <screen x="0" y="23" width="1920" height="1100" />
+    </state>
+    <state x="743" y="421" width="433" height="304" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604457665742" />
     <state x="705" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600905075482">
       <screen x="0" y="23" width="1920" height="1102" />
     </state>
     <state x="705" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.23.1920.1057/0.23.1920.1102@0.23.1920.1102" timestamp="1600905075482" />
     <state x="705" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598925011280" />
-    <state x="-1222" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602112776017">
-      <screen x="-1920" y="23" width="1920" height="1057" />
+    <state x="698" y="316" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604458243305">
+      <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state x="-1222" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.23.1920.1057/0.23.1920.1102@-1920.23.1920.1057" timestamp="1602112776017" />
     <state x="698" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323777583" />
     <state x="698" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599094049332" />
-    <state width="1878" height="239" key="GridCell.Tab.0.bottom" timestamp="1604386826476">
+    <state x="698" y="316" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604458243305" />
+    <state width="1878" height="238" key="GridCell.Tab.0.bottom" timestamp="1604474003253">
       <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.bottom/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086544" />
@@ -295,12 +324,12 @@
     <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600820829398" />
     <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404953" />
     <state width="1878" height="271" key="GridCell.Tab.0.bottom/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046034" />
-    <state width="1878" height="278" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604034622300" />
-    <state width="1878" height="239" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604386826476" />
+    <state width="1878" height="238" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604451252007" />
+    <state width="1878" height="238" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604474003253" />
     <state width="1878" height="266" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.bottom/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842766" />
     <state width="1878" height="239" key="GridCell.Tab.0.bottom/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360917" />
-    <state width="1878" height="239" key="GridCell.Tab.0.center" timestamp="1604386826475">
+    <state width="1878" height="238" key="GridCell.Tab.0.center" timestamp="1604474003252">
       <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.center/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086543" />
@@ -314,12 +343,12 @@
     <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600820829397" />
     <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404953" />
     <state width="1878" height="271" key="GridCell.Tab.0.center/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046034" />
-    <state width="1878" height="278" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604034622300" />
-    <state width="1878" height="239" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604386826475" />
+    <state width="1878" height="238" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604451252006" />
+    <state width="1878" height="238" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604474003252" />
     <state width="1878" height="266" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.center/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842765" />
     <state width="1878" height="239" key="GridCell.Tab.0.center/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360916" />
-    <state width="1878" height="239" key="GridCell.Tab.0.left" timestamp="1604386826475">
+    <state width="1878" height="238" key="GridCell.Tab.0.left" timestamp="1604474003252">
       <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.left/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086542" />
@@ -333,12 +362,12 @@
     <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600820829396" />
     <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404952" />
     <state width="1878" height="271" key="GridCell.Tab.0.left/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046033" />
-    <state width="1878" height="278" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604034622299" />
-    <state width="1878" height="239" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604386826475" />
+    <state width="1878" height="238" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604451252006" />
+    <state width="1878" height="238" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604474003252" />
     <state width="1878" height="266" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.left/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842764" />
     <state width="1878" height="239" key="GridCell.Tab.0.left/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360916" />
-    <state width="1878" height="239" key="GridCell.Tab.0.right" timestamp="1604386826476">
+    <state width="1878" height="238" key="GridCell.Tab.0.right" timestamp="1604474003253">
       <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state width="1878" height="271" key="GridCell.Tab.0.right/-1920.23.1920.1057/0.23.1920.1100@-1920.23.1920.1057" timestamp="1600904086543" />
@@ -352,8 +381,8 @@
     <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600820829397" />
     <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.963/0.23.1920.1057@0.23.1920.1057" timestamp="1599451404953" />
     <state width="1878" height="271" key="GridCell.Tab.0.right/137.1103.1680.966/0.23.1920.1057@0.23.1920.1057" timestamp="1599100046034" />
-    <state width="1878" height="278" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604034622300" />
-    <state width="1878" height="239" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604386826476" />
+    <state width="1878" height="238" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604451252007" />
+    <state width="1878" height="238" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604474003253" />
     <state width="1878" height="266" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1100@1920.102.1920.1057" timestamp="1602489112224" />
     <state width="1878" height="266" key="GridCell.Tab.0.right/1920.102.1920.1057/0.23.1920.1102@1920.102.1920.1057" timestamp="1602465842765" />
     <state width="1878" height="239" key="GridCell.Tab.0.right/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604370360917" />
@@ -377,29 +406,36 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="763" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1599179484076" />
-    <state x="2656" y="335" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1604369935750">
-      <screen x="1920" y="102" width="1920" height="980" />
+    <state x="736" y="284" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1604457712596">
+      <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state x="736" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.956/0.23.1920.1057@0.23.1920.1057" timestamp="1603067568438" />
     <state x="736" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600320546466" />
     <state x="736" y="274" key="com.intellij.testIntegration.createTest.CreateTestDialog/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600323519502" />
+    <state x="736" y="284" key="com.intellij.testIntegration.createTest.CreateTestDialog/1920.102.1920.1057/0.23.1920.1098@0.23.1920.1098" timestamp="1604450616561" />
+    <state x="736" y="284" key="com.intellij.testIntegration.createTest.CreateTestDialog/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604457712596" />
     <state x="2656" y="335" key="com.intellij.testIntegration.createTest.CreateTestDialog/1920.102.1920.980/0.23.1920.1177@1920.102.1920.980" timestamp="1604369935750" />
     <state x="698" y="311" key="extract.method.dialog" timestamp="1599022138694">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="698" y="311" key="extract.method.dialog/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599022138694" />
+    <state x="630" y="312" width="659" height="518" key="find.popup" timestamp="1604452230658">
+      <screen x="0" y="23" width="1920" height="1100" />
+    </state>
+    <state x="630" y="312" width="659" height="518" key="find.popup/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604452230658" />
     <state x="625" y="256" width="670" height="675" key="run.anything.popup" timestamp="1603073529082">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="625" y="256" width="670" height="675" key="run.anything.popup/137.1103.1680.958/0.23.1920.1057@0.23.1920.1057" timestamp="1603073529082" />
     <state x="625" y="256" width="670" height="675" key="run.anything.popup/137.1103.1680.960/0.23.1920.1057@0.23.1920.1057" timestamp="1600733366091" />
     <state x="625" y="256" width="670" height="675" key="run.anything.popup/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1599179119820" />
-    <state x="-1295" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1601265453564">
-      <screen x="-1920" y="23" width="1920" height="1057" />
+    <state x="625" y="268" width="670" height="704" key="search.everywhere.popup" timestamp="1604458255587">
+      <screen x="0" y="23" width="1920" height="1100" />
     </state>
     <state x="-1295" y="258" width="670" height="676" key="search.everywhere.popup/-1920.23.1920.1057/0.23.1920.1102@-1920.23.1920.1057" timestamp="1601265453564" />
     <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599022494687" />
     <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/137.1103.1680.958/0.23.1920.1057@0.23.1920.1057" timestamp="1600732171458" />
     <state x="625" y="258" width="670" height="676" key="search.everywhere.popup/137.1103.1680.961/0.23.1920.1057@0.23.1920.1057" timestamp="1600040546605" />
+    <state x="625" y="268" width="670" height="704" key="search.everywhere.popup/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1604458255587" />
   </component>
 </project>
