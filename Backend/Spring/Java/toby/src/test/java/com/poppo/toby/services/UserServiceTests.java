@@ -15,6 +15,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.poppo.toby.services.UserService.MIN_LOG_COUNT_FOR_SILVER;
+import static com.poppo.toby.services.UserService.MIN_RECOMMEND_FOR_GOLD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
@@ -31,11 +33,26 @@ class UserServiceTests {
     @BeforeEach
     void setup() {
         users = Arrays.asList(
-                User.builder().id("11").name("poppo").password("p1").level(Level.BASIC).login(49).recommend(0).build(),
-                User.builder().id("22").name("saul").password("p2").level(Level.BASIC).login(50).recommend(0).build(),
-                User.builder().id("33").name("ita").password("p3").level(Level.SILVER).login(60).recommend(29).build(),
-                User.builder().id("44").name("hoo").password("p4").level(Level.SILVER).login(60).recommend(30).build(),
-                User.builder().id("55").name("nugu").password("p5").level(Level.GOLD).login(100).recommend(100).build()
+                User.builder()
+                        .id("11").name("poppo").password("p1").level(Level.BASIC)
+                        .login(MIN_LOG_COUNT_FOR_SILVER - 1).recommend(0)
+                        .build(),
+                User.builder()
+                        .id("22").name("saul").password("p2").level(Level.BASIC)
+                        .login(MIN_LOG_COUNT_FOR_SILVER).recommend(0)
+                        .build(),
+                User.builder()
+                        .id("33").name("ita").password("p3").level(Level.SILVER)
+                        .login(60).recommend(MIN_RECOMMEND_FOR_GOLD - 1)
+                        .build(),
+                User.builder()
+                        .id("44").name("hoo").password("p4").level(Level.SILVER)
+                        .login(60).recommend(MIN_RECOMMEND_FOR_GOLD)
+                        .build(),
+                User.builder()
+                        .id("55").name("nugu").password("p5").level(Level.GOLD)
+                        .login(100).recommend(Integer.MAX_VALUE)
+                        .build()
         );
     }
 
@@ -53,16 +70,20 @@ class UserServiceTests {
 
         userService.upgradeLevels();
 
-        checkLevel(users.get(0), Level.BASIC);
-        checkLevel(users.get(1), Level.SILVER);
-        checkLevel(users.get(2), Level.SILVER);
-        checkLevel(users.get(3), Level.GOLD);
-        checkLevel(users.get(4), Level.GOLD);
+        checkLevelUpgraded(users.get(0), false);
+        checkLevelUpgraded(users.get(1), true);
+        checkLevelUpgraded(users.get(2), false);
+        checkLevelUpgraded(users.get(3), true);
+        checkLevelUpgraded(users.get(4), false);
     }
 
-    private void checkLevel(User user, Level expectedLevel) {
+    private void checkLevelUpgraded(User user, boolean upgraded) {
         User updatedUser = userDao.get(user.getId());
-        assertThat(updatedUser.getLevel()).isEqualTo(expectedLevel);
+        if (upgraded) {
+            assertThat(updatedUser.getLevel()).isEqualTo(user.getLevel().nextLevel());
+        } else {
+            assertThat(updatedUser.getLevel()).isEqualTo(user.getLevel());
+        }
     }
 
     @DisplayName("신규 유저 등록시 BASIC 레벨로 생성")
