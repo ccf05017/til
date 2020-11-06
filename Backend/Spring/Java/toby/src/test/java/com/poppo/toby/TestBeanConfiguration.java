@@ -1,5 +1,7 @@
 package com.poppo.toby;
 
+import com.poppo.toby.services.NormalUserLevelUpgradePolicy;
+import com.poppo.toby.services.UserLevelUpgradePolicy;
 import com.poppo.toby.services.UserService;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.UserDaoJdbc;
@@ -13,12 +15,17 @@ import javax.sql.DataSource;
 public class TestBeanConfiguration {
     @Bean
     public UserService userService() {
-        return new UserService(userDao());
+        return new UserService(userDao(), userLevelUpgradePolicy());
     }
 
     @Bean
     public UserDao userDao() {
         return new UserDaoJdbc(dataSource());
+    }
+
+    @Bean
+    public UserLevelUpgradePolicy userLevelUpgradePolicy() {
+        return new NormalUserLevelUpgradePolicy();
     }
 
     @Bean

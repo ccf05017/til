@@ -11,16 +11,18 @@ public class UserService {
     public static final int MIN_RECOMMEND_FOR_GOLD = 30;
 
     private UserDao userDao;
+    private UserLevelUpgradePolicy userLevelUpgradePolicy;
 
-    public UserService(UserDao userDao) {
+    public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy) {
         this.userDao = userDao;
+        this.userLevelUpgradePolicy = userLevelUpgradePolicy;
     }
 
     public void upgradeLevels() {
         List<User> users = userDao.getAll();
 
         for (User user : users) {
-            if (canUpgradeLevel(user)) {
+            if (userLevelUpgradePolicy.canUpgradeLevel(user)) {
                 upgradeLevel(user);
             }
         }
@@ -33,21 +35,8 @@ public class UserService {
         userDao.add(user);
     }
 
-    private boolean canUpgradeLevel(User user) {
-        Level currentLevel = user.getLevel();
-
-        if (currentLevel == Level.BASIC) {
-            return user.getLogin() >= MIN_LOG_COUNT_FOR_SILVER;
-        }
-        if (currentLevel == Level.SILVER) {
-            return user.getRecommend() >= MIN_RECOMMEND_FOR_GOLD;
-        }
-
-        return false;
-    }
-
     private void upgradeLevel(User user) {
-        user.upgradeLevel();
+        userLevelUpgradePolicy.upgradeLevel(user);
         userDao.update(user);
     }
 }
