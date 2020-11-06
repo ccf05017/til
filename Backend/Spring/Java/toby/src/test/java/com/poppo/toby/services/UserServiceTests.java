@@ -5,6 +5,7 @@ import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import com.poppo.toby.userDao.UserDao;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,26 @@ class UserServiceTests {
     private void checkLevel(User user, Level expectedLevel) {
         User updatedUser = userDao.get(user.getId());
         assertThat(updatedUser.getLevel()).isEqualTo(expectedLevel);
+    }
+
+    @DisplayName("신규 유저 등록시 BASIC 레벨로 생성")
+    @Test
+    void createNewLevelTest() {
+        // 좋은 테스트는 아니다.
+        // 유닛 테스트 치고 너무 복잡하다.
+        userDao.deleteAll();
+
+        User userWithLevel = users.get(4);
+        User userWithoutLevel = users.get(0);
+        userWithLevel.setLevel(null);
+
+        userService.add(userWithLevel);
+        userService.add(userWithoutLevel);
+
+        User userWithLevelRead = userDao.get(userWithLevel.getId());
+        assertThat(userWithLevelRead.getLevel()).isEqualTo(userWithLevel.getLevel());
+
+        User userWithoutLevelRead = userDao.get(userWithoutLevel.getId());
+        assertThat(userWithoutLevelRead.getLevel()).isEqualTo(Level.BASIC);
     }
 }
