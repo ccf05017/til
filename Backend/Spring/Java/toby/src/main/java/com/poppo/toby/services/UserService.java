@@ -17,21 +17,8 @@ public class UserService {
         List<User> users = userDao.getAll();
 
         for (User user : users) {
-            Boolean isChanged = null;
-            if (user.getLevel() == Level.BASIC && user.getLogin() >= 50) {
-                user.setLevel(Level.SILVER);
-                isChanged = true;
-            } else if (user.getLevel() == Level.SILVER && user.getRecommend() >= 30) {
-                user.setLevel(Level.GOLD);
-                isChanged = true;
-            } else if (user.getLevel() == Level.GOLD) {
-                isChanged = false;
-            } else {
-                isChanged = false;
-            }
-
-            if (isChanged) {
-                userDao.update(user);
+            if (canUpgradeLevel(user)) {
+                upgradeLevel(user);
             }
         }
     }
@@ -41,5 +28,23 @@ public class UserService {
             user.setLevel(Level.BASIC);
         }
         userDao.add(user);
+    }
+
+    private boolean canUpgradeLevel(User user) {
+        Level currentLevel = user.getLevel();
+
+        if (currentLevel == Level.BASIC) {
+            return user.getLogin() >= 50;
+        }
+        if (currentLevel == Level.SILVER) {
+            return user.getRecommend() >= 30;
+        }
+
+        return false;
+    }
+
+    private void upgradeLevel(User user) {
+        user.upgradeLevel();
+        userDao.update(user);
     }
 }
