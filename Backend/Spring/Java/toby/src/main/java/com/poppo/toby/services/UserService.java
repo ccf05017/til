@@ -7,32 +7,36 @@ import com.poppo.toby.userDao.UserDao;
 import java.util.List;
 
 public class UserService {
-    private UserDao userDao;
+    public static final int MIN_LOG_COUNT_FOR_SILVER = 50;
+    public static final int MIN_RECOMMEND_FOR_GOLD = 30;
 
-    public UserService(UserDao userDao) {
+    private UserDao userDao;
+    private UserLevelUpgradePolicy userLevelUpgradePolicy;
+
+    public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy) {
         this.userDao = userDao;
+        this.userLevelUpgradePolicy = userLevelUpgradePolicy;
     }
 
     public void upgradeLevels() {
         List<User> users = userDao.getAll();
 
         for (User user : users) {
-            Boolean isChanged = null;
-            if (user.getLevel() == Level.BASIC && user.getLogin() >= 50) {
-                user.setLevel(Level.SILVER);
-                isChanged = true;
-            } else if (user.getLevel() == Level.SILVER && user.getRecommend() >= 30) {
-                user.setLevel(Level.GOLD);
-                isChanged = true;
-            } else if (user.getLevel() == Level.GOLD) {
-                isChanged = false;
-            } else {
-                isChanged = false;
-            }
-
-            if (isChanged) {
-                userDao.update(user);
+            if (userLevelUpgradePolicy.canUpgradeLevel(user)) {
+                upgradeLevel(user);
             }
         }
+    }
+
+    public void add(User user) {
+        if (user.getLevel() == null) {
+            user.setLevel(Level.BASIC);
+        }
+        userDao.add(user);
+    }
+
+    private void upgradeLevel(User user) {
+        userLevelUpgradePolicy.upgradeLevel(user);
+        userDao.update(user);
     }
 }
