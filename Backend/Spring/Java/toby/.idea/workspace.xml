@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="" />
+    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,18 +145,55 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.UserServiceTests">
+  <component name="RunManager" selected="JUnit.TestAll">
+    <configuration name="TestAll" type="JUnit" factoryName="JUnit">
+      <useClassPathOnly />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="PARAMETERS" value="" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UserServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
+      <useClassPathOnly />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.poppo.toby.services.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
       <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
       <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -228,6 +268,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.TestAll" />
+      <item itemvalue="JUnit.UserServiceTests" />
+      <item itemvalue="JUnit.UserServiceTests.allUpgradeOrNotTest" />
+      <item itemvalue="JUnit.UserTests" />
+      <item itemvalue="JUnit.UserTests.upgradeLevelFailTest" />
+      <item itemvalue="JUnit.UserTests.upgradeLevelSuccessTest" />
+      <item itemvalue="Spring Boot.TobyApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.UserServiceTests" />
@@ -276,7 +325,7 @@
       <workItem from="1604620055928" duration="5926000" />
       <workItem from="1604964151823" duration="6981000" />
       <workItem from="1604981469102" duration="44000" />
-      <workItem from="1605050945185" duration="941000" />
+      <workItem from="1605050945185" duration="1402000" />
     </task>
     <servers />
   </component>
@@ -293,6 +342,10 @@
     </state>
     <state x="560" y="217" key="#SQL_Dialects/137.1103.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598924486543" />
     <state x="560" y="225" key="#SQL_Dialects/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1603971344999" />
+    <state x="424" y="233" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605052523578">
+      <screen x="0" y="23" width="1920" height="1100" />
+    </state>
+    <state x="424" y="233" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.102.1920.1057/0.23.1920.1100@0.23.1920.1100" timestamp="1605052523578" />
     <state x="670" y="371" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604450317542">
       <screen x="0" y="23" width="1920" height="1098" />
     </state>
