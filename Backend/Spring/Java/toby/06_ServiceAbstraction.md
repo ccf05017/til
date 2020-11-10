@@ -53,3 +53,9 @@
     - DAO를 하이버네이트로 전환해도 마찬가지다. 하이버네이트는 세션이라는 객체를 통해 트랜잭션을 관리한다.
 - 이를 해결하기 위해 `트랜잭션 처리를 추상화` 할 방법을 고민할 필요가 있다.
     - 트랜잭션 처리는 각 기술별로 구현은 다르지만 대체로 유사한 형태를 갖기 때문에 이게 가능하다.
+- 스프링에서는 `트랜잭션 처리에 대한 추상화`로 추상 `인터페이스`인 `PlatformTransactionManager`를 지원한다.
+    - JDBC의 경우 DataSourceTransactionManager 구현체를 통해 사용할 수 있다.
+    - getTransaction을 통해 트랜잭션만 가져오면 필요에 따라 DB Connection도 같이 가져온다.
+    - 시작된 트랜잭션은 TransactionStatus 타입의 변수에 저장된다.
+    - 이 변수를 트랜잭션 관련 작업(commit, rollback) 시 전달해줘야 한다.
+    - PlatformTransactionManager는 트랜잭션 동기화 저장소를 이용하기 때문에 JDBC에 별도로 Connection을 넘겨주지 않아도 된다.
