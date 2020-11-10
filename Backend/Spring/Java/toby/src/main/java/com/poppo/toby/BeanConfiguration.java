@@ -1,5 +1,7 @@
 package com.poppo.toby;
 
+import com.poppo.toby.services.NormalUserLevelUpgradePolicy;
+import com.poppo.toby.services.UserLevelUpgradePolicy;
 import com.poppo.toby.services.UserService;
 import com.poppo.toby.userDao.NotBadUserDao;
 import com.poppo.toby.userDao.UserDao;
@@ -19,7 +21,12 @@ public class BeanConfiguration {
 
     @Bean
     public UserService userService() {
-        return new UserService(userDao());
+        return new UserService(userDao(), userLevelUpgradePolicy(), dataSource());
+    }
+
+    @Bean
+    public UserLevelUpgradePolicy userLevelUpgradePolicy() {
+        return new NormalUserLevelUpgradePolicy();
     }
 
     @Bean
