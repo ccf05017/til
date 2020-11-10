@@ -4,6 +4,7 @@ import com.poppo.toby.TestBeanConfiguration;
 import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import com.poppo.toby.userDao.UserDao;
+import com.poppo.toby.userDao.exceptions.TestUserServiceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import java.util.List;
 import static com.poppo.toby.services.UserService.MIN_LOG_COUNT_FOR_SILVER;
 import static com.poppo.toby.services.UserService.MIN_RECOMMEND_FOR_GOLD;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestBeanConfiguration.class)
@@ -27,6 +29,9 @@ class UserServiceTests {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private UserLevelUpgradePolicy userLevelUpgradePolicy;
 
     private List<User> users;
 
@@ -105,5 +110,22 @@ class UserServiceTests {
 
         User userWithoutLevelRead = userDao.get(userWithoutLevel.getId());
         assertThat(userWithoutLevelRead.getLevel()).isEqualTo(Level.BASIC);
+    }
+
+    @DisplayName("트랜잭션 원자성 테스트")
+    @Test
+    void allUpgradeOrNotTest() {
+        UserService userService =
+                new UserService.TestUserService(userDao, userLevelUpgradePolicy, users.get(3).getId());
+
+        userDao.deleteAll();
+
+        for (User user : users) {
+            userDao.add(user);
+        }
+
+        assertThatThrownBy(userService::upgradeLevels).isInstanceOf(TestUserServiceException.class);
+
+        checkLevelUpgraded(users.get(1), false);
     }
 }
