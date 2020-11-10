@@ -40,3 +40,11 @@
     - 서비스 계층에서 작업을 시작할 때 Connection 객체를 생성해서 트랜잭션 저장소로 넘기고 해당 Connection 기반으로 트랜잭션 경계를 설정한다.
     - DAO는 트랜잭션 저장소를 통해 DB 작업을 수행한다.
     - 트랜잭션 저장소는 작업 스레드 별로 분리되기 때문에 다중 스레드 환경에서도 안전하다.
+- 트랜잭션 동기화 적용
+    - TransactionSynchronizationManager를 통해 스프링이 제공하는 트랜잭션 동기화 관리 클래스를 불러올 수 있다.
+    - 트랜잭션 동기화 시 Connection은 DataSourceUtils를 통해 불러오는 게 좋다.(알아서 트랜잭션 저장소에 동기화까지 해준다.)
+    - 트랜잭션 동기화가 된 상태로 JDBCTemplate을 사용하면 JDBCTemplate은 작업 중 동기화된 DB Connection을 사용한다.
+- JDBCTemplate은 어떻게 동기화가 된거지?
+    - 스프링아 알아서 똑똑하게 잘 처리해준다.
+    - JDBCTemplate은 실행되기 전 트랜잭션 동기화 저장소를 확인하고 저장소에 Connection이 없는 경우에만 직접 Connection을 생성한다.
+    - try/catch/finally 작업 흐름 지원, SQLException 예외 변환, 트랜잭션 동기화 Connection 지원 이 세가지가 JDBCTemplate의 주요 기능이다.

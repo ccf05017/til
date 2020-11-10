@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/BeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/BeanConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/06_ServiceAbstraction.md" beforeDir="false" afterPath="$PROJECT_DIR$/06_ServiceAbstraction.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +277,7 @@
       <workItem from="1604363762708" duration="6202000" />
       <workItem from="1604447605320" duration="7894000" />
       <workItem from="1604620055928" duration="5926000" />
-      <workItem from="1604964151823" duration="4723000" />
+      <workItem from="1604964151823" duration="6276000" />
     </task>
     <servers />
   </component>
