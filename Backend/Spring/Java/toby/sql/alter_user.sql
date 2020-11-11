@@ -8,6 +8,9 @@ alter table users
 add (recommend int);
 
 alter table users
+add (email varchar not null);
+
+alter table users
 alter level int not null;
 
 alter table users
