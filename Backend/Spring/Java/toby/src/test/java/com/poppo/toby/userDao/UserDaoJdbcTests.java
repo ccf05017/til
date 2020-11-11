@@ -32,12 +32,15 @@ class UserDaoJdbcTests {
 
         user1 = User.builder()
                 .id("ccf05017").name("poppo").password("password").level(Level.BASIC).login(1).recommend(0)
+                .email("test1@gmail.com")
                 .build();
         user2 = User.builder()
                 .id("ccf05018").name("ita").password("password").level(Level.SILVER).login(55).recommend(10)
+                .email("test2@gmail.com")
                 .build();
         user3 = User.builder()
                 .id("ccf05019").name("hoojjang").password("password").level(Level.GOLD).login(100).recommend(40)
+                .email("test3@gmail.com")
                 .build();
     }
 
@@ -76,6 +79,7 @@ class UserDaoJdbcTests {
                         .level(Level.BASIC)
                         .login(num)
                         .recommend(num)
+                        .email("test" + num + "@gmail.com")
                         .build()
                 );
                 assertThat(userDao.getCount()).isEqualTo(num);
@@ -146,6 +150,7 @@ class UserDaoJdbcTests {
         user1.setLevel(Level.GOLD);
         user1.setLogin(4);
         user1.setRecommend(4);
+        user1.setEmail("newMail@gamil.com");
 
         userDao.update(user1);
 

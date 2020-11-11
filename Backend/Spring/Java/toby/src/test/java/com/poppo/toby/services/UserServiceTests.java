@@ -14,7 +14,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,9 +35,6 @@ class UserServiceTests {
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
 
     @Autowired
-    private DataSource dataSource;
-
-    @Autowired
     private PlatformTransactionManager transactionManager;
 
     private List<User> users;
@@ -49,22 +45,27 @@ class UserServiceTests {
                 User.builder()
                         .id("11").name("poppo").password("p1").level(Level.BASIC)
                         .login(MIN_LOG_COUNT_FOR_SILVER - 1).recommend(0)
+                        .email("test1@gmail.com")
                         .build(),
                 User.builder()
                         .id("22").name("saul").password("p2").level(Level.BASIC)
                         .login(MIN_LOG_COUNT_FOR_SILVER).recommend(0)
+                        .email("test2@gmail.com")
                         .build(),
                 User.builder()
                         .id("33").name("ita").password("p3").level(Level.SILVER)
                         .login(60).recommend(MIN_RECOMMEND_FOR_GOLD - 1)
+                        .email("test3@gmail.com")
                         .build(),
                 User.builder()
                         .id("44").name("hoo").password("p4").level(Level.SILVER)
                         .login(60).recommend(MIN_RECOMMEND_FOR_GOLD)
+                        .email("test4@gmail.com")
                         .build(),
                 User.builder()
                         .id("55").name("nugu").password("p5").level(Level.GOLD)
                         .login(100).recommend(Integer.MAX_VALUE)
+                        .email("test5@gmail.com")
                         .build()
         );
     }

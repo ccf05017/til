@@ -3,7 +3,6 @@ package com.poppo.toby;
 import com.poppo.toby.services.NormalUserLevelUpgradePolicy;
 import com.poppo.toby.services.UserLevelUpgradePolicy;
 import com.poppo.toby.services.UserService;
-import com.poppo.toby.userDao.NotBadUserDao;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.UserDaoJdbc;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +15,6 @@ import javax.sql.DataSource;
 
 @Configuration
 public class BeanConfiguration {
-    @Bean
-    public NotBadUserDao notBadUserDao() {
-        return new NotBadUserDao(dataSource());
-    }
-
     @Bean
     public UserService userService() {
         return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager());
