@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 public class TestBeanConfiguration {
     @Bean
     public UserService userService() {
-        return new UserService(userDao(), userLevelUpgradePolicy(), dataSource(), transactionManager());
+        return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager());
     }
 
     @Bean

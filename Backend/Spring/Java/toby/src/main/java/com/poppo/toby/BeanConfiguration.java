@@ -23,7 +23,7 @@ public class BeanConfiguration {
 
     @Bean
     public UserService userService() {
-        return new UserService(userDao(), userLevelUpgradePolicy(), dataSource(), transactionManager());
+        return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager());
     }
 
     @Bean

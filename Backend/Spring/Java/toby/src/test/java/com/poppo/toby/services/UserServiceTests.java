@@ -124,7 +124,7 @@ class UserServiceTests {
     @Test
     void allUpgradeOrNotTest() {
         UserService userService = new UserService.TestUserService(
-                userDao, userLevelUpgradePolicy, dataSource, transactionManager, users.get(3).getId()
+                userDao, userLevelUpgradePolicy, transactionManager, users.get(3).getId()
         );
 
         userDao.deleteAll();

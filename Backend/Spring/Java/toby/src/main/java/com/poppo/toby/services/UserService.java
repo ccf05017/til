@@ -8,7 +8,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 public class UserService {
@@ -17,14 +16,12 @@ public class UserService {
 
     private UserDao userDao;
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
-    private DataSource dataSource;
     private PlatformTransactionManager transactionManager;
 
     public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
-                       DataSource dataSource, PlatformTransactionManager transactionManager) {
+                       PlatformTransactionManager transactionManager) {
         this.userDao = userDao;
         this.userLevelUpgradePolicy = userLevelUpgradePolicy;
-        this.dataSource = dataSource;
         this.transactionManager = transactionManager;
     }
 
@@ -64,8 +61,8 @@ public class UserService {
         private String id;
 
         public TestUserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
-                               DataSource dataSource, PlatformTransactionManager transactionManager, String id) {
-            super(userDao, userLevelUpgradePolicy, dataSource, transactionManager);
+                               PlatformTransactionManager transactionManager, String id) {
+            super(userDao, userLevelUpgradePolicy, transactionManager);
             this.id = id;
         }
 
