@@ -4,7 +4,6 @@ import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.exceptions.TestUserServiceException;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -19,15 +18,17 @@ public class UserService {
     private UserDao userDao;
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
     private DataSource dataSource;
+    private PlatformTransactionManager transactionManager;
 
-    public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy, DataSource dataSource) {
+    public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
+                       DataSource dataSource, PlatformTransactionManager transactionManager) {
         this.userDao = userDao;
         this.userLevelUpgradePolicy = userLevelUpgradePolicy;
         this.dataSource = dataSource;
+        this.transactionManager = transactionManager;
     }
 
     public void upgradeLevels() {
-        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
         TransactionStatus transaction = transactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
@@ -63,8 +64,8 @@ public class UserService {
         private String id;
 
         public TestUserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
-                               DataSource dataSource, String id) {
-            super(userDao, userLevelUpgradePolicy, dataSource);
+                               DataSource dataSource, PlatformTransactionManager transactionManager, String id) {
+            super(userDao, userLevelUpgradePolicy, dataSource, transactionManager);
             this.id = id;
         }
 

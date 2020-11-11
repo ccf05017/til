@@ -59,3 +59,6 @@
     - 시작된 트랜잭션은 TransactionStatus 타입의 변수에 저장된다.
     - 이 변수를 트랜잭션 관련 작업(commit, rollback) 시 전달해줘야 한다.
     - PlatformTransactionManager는 트랜잭션 동기화 저장소를 이용하기 때문에 JDBC에 별도로 Connection을 넘겨주지 않아도 된다.
+- 스프링이 제공하는 PlatformTransactionManager의 구현체는 모두 Thread-safe 하다.
+    - 맘 놓고 스프링 빈으로 등록해도 된다는 의미다.
+    - 또한 빈으로 등록하지 않으면 서비스 계층에서 트랜잭션 매니저의 구현에 의존하기 때문에 빈으로 등록하고 DI 해주는 게 좋다.
