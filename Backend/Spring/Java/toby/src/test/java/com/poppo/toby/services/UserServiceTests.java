@@ -12,9 +12,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,6 +37,9 @@ class UserServiceTests {
 
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
     private List<User> users;
 
@@ -72,7 +75,7 @@ class UserServiceTests {
     }
 
     @Test
-    void upgradeLevel() throws SQLException {
+    void upgradeLevel() {
         userDao.deleteAll();
         for (User user : users) {
             userDao.add(user);
@@ -120,8 +123,9 @@ class UserServiceTests {
     @DisplayName("트랜잭션 원자성 테스트")
     @Test
     void allUpgradeOrNotTest() {
-        UserService userService =
-                new UserService.TestUserService(userDao, userLevelUpgradePolicy, dataSource, users.get(3).getId());
+        UserService userService = new UserService.TestUserService(
+                userDao, userLevelUpgradePolicy, transactionManager, users.get(3).getId()
+        );
 
         userDao.deleteAll();
 

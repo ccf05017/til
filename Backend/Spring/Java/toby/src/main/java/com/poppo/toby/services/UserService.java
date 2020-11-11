@@ -4,12 +4,10 @@ import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.exceptions.TestUserServiceException;
-import org.springframework.jdbc.datasource.DataSourceUtils;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
@@ -18,18 +16,17 @@ public class UserService {
 
     private UserDao userDao;
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
-    private DataSource dataSource;
+    private PlatformTransactionManager transactionManager;
 
-    public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy, DataSource dataSource) {
+    public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
+                       PlatformTransactionManager transactionManager) {
         this.userDao = userDao;
         this.userLevelUpgradePolicy = userLevelUpgradePolicy;
-        this.dataSource = dataSource;
+        this.transactionManager = transactionManager;
     }
 
-    public void upgradeLevels() throws SQLException {
-        TransactionSynchronizationManager.initSynchronization();
-        Connection connection = DataSourceUtils.getConnection(dataSource);
-        connection.setAutoCommit(false);
+    public void upgradeLevels() {
+        TransactionStatus transaction = transactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
             List<User> users = userDao.getAll();
@@ -41,14 +38,10 @@ public class UserService {
                 }
             }
 
-            connection.commit();
+            transactionManager.commit(transaction);
         } catch (Exception e) {
-            connection.rollback();
+            transactionManager.rollback(transaction);
             throw e;
-        } finally {
-            DataSourceUtils.releaseConnection(connection, dataSource);
-            TransactionSynchronizationManager.unbindResource(dataSource); // 책에서는 왜 여기만 this에 바인드 시켰을까?
-            TransactionSynchronizationManager.clearSynchronization();
         }
     }
 
@@ -68,8 +61,8 @@ public class UserService {
         private String id;
 
         public TestUserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
-                               DataSource dataSource, String id) {
-            super(userDao, userLevelUpgradePolicy, dataSource);
+                               PlatformTransactionManager transactionManager, String id) {
+            super(userDao, userLevelUpgradePolicy, transactionManager);
             this.id = id;
         }
 

@@ -45,6 +45,20 @@
     - 트랜잭션 동기화 시 Connection은 DataSourceUtils를 통해 불러오는 게 좋다.(알아서 트랜잭션 저장소에 동기화까지 해준다.)
     - 트랜잭션 동기화가 된 상태로 JDBCTemplate을 사용하면 JDBCTemplate은 작업 중 동기화된 DB Connection을 사용한다.
 - JDBCTemplate은 어떻게 동기화가 된거지?
-    - 스프링아 알아서 똑똑하게 잘 처리해준다.
+    - 스프링이 알아서 똑똑하게 잘 처리해준다.
     - JDBCTemplate은 실행되기 전 트랜잭션 동기화 저장소를 확인하고 저장소에 Connection이 없는 경우에만 직접 Connection을 생성한다.
     - try/catch/finally 작업 흐름 지원, SQLException 예외 변환, 트랜잭션 동기화 Connection 지원 이 세가지가 JDBCTemplate의 주요 기능이다.
+- 개선된 트랜잭션 처리 방식은 또하나의 문제가 발생한다: `구현기술에 종속`된 코드가 만들어진다.
+    - 여러개의 DB, 메시지 큐와 작업을 해야할 경우 JTA를 사용해야 하며, 기존과는 다른 방식으로 트랜잭션을 관리한다.
+    - DAO를 하이버네이트로 전환해도 마찬가지다. 하이버네이트는 세션이라는 객체를 통해 트랜잭션을 관리한다.
+- 이를 해결하기 위해 `트랜잭션 처리를 추상화` 할 방법을 고민할 필요가 있다.
+    - 트랜잭션 처리는 각 기술별로 구현은 다르지만 대체로 유사한 형태를 갖기 때문에 이게 가능하다.
+- 스프링에서는 `트랜잭션 처리에 대한 추상화`로 추상 `인터페이스`인 `PlatformTransactionManager`를 지원한다.
+    - JDBC의 경우 DataSourceTransactionManager 구현체를 통해 사용할 수 있다.
+    - getTransaction을 통해 트랜잭션만 가져오면 필요에 따라 DB Connection도 같이 가져온다.
+    - 시작된 트랜잭션은 TransactionStatus 타입의 변수에 저장된다.
+    - 이 변수를 트랜잭션 관련 작업(commit, rollback) 시 전달해줘야 한다.
+    - PlatformTransactionManager는 트랜잭션 동기화 저장소를 이용하기 때문에 JDBC에 별도로 Connection을 넘겨주지 않아도 된다.
+- 스프링이 제공하는 PlatformTransactionManager의 구현체는 모두 Thread-safe 하다.
+    - 맘 놓고 스프링 빈으로 등록해도 된다는 의미다.
+    - 또한 빈으로 등록하지 않으면 서비스 계층에서 트랜잭션 매니저의 구현에 의존하기 때문에 빈으로 등록하고 DI 해주는 게 좋다.
