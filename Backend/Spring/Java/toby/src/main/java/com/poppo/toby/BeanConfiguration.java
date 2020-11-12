@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -17,7 +19,7 @@ import javax.sql.DataSource;
 public class BeanConfiguration {
     @Bean
     public UserService userService() {
-        return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager());
+        return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager(), mailSender());
     }
 
     @Bean
@@ -33,6 +35,13 @@ public class BeanConfiguration {
     @Bean
     public UserDao userDao() {
         return new UserDaoJdbc(dataSource());
+    }
+
+    @Bean
+    public MailSender mailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("mail.server.com");
+        return mailSender;
     }
 
     @Bean
