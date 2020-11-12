@@ -28,6 +28,8 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
+
 }
 
 test {

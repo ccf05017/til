@@ -8,7 +8,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.List;
+import java.util.Properties;
 
 public class UserService {
     public static final int MIN_LOG_COUNT_FOR_SILVER = 50;
@@ -55,6 +62,26 @@ public class UserService {
     protected void upgradeLevel(User user) {
         userLevelUpgradePolicy.upgradeLevel(user);
         userDao.update(user);
+        sendUpgradeEmail(user);
+    }
+
+    // 가장 전형적인 자바 메일 발송 코드
+    private void sendUpgradeEmail(User user) {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "mail.ksug.org");
+        Session session = Session.getInstance(props);
+
+        MimeMessage mimeMessage = new MimeMessage(session);
+        try {
+            mimeMessage.setFrom(new InternetAddress("admin@ksug.org"));
+            mimeMessage.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress(user.getEmail()));
+            mimeMessage.setSubject("Upgrade 안내");
+            mimeMessage.setText(user.getName() + "님의 등급이 " + user.getLevel().name() + " 으로 업그레이드 됐습니다.");
+            Transport.send(mimeMessage);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     static class TestUserService extends UserService {
