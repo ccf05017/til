@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -36,6 +37,9 @@ class UserServiceTests {
 
     @Autowired
     private PlatformTransactionManager transactionManager;
+
+    @Autowired
+    private MailSender mailSender;
 
     private List<User> users;
 
@@ -125,7 +129,7 @@ class UserServiceTests {
     @Test
     void allUpgradeOrNotTest() {
         UserService userService = new UserService.TestUserService(
-                userDao, userLevelUpgradePolicy, transactionManager, users.get(3).getId()
+                userDao, userLevelUpgradePolicy, transactionManager, mailSender, users.get(3).getId()
         );
 
         userDao.deleteAll();
