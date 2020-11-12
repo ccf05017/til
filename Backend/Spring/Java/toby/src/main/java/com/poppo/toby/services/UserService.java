@@ -4,6 +4,8 @@ import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.exceptions.TestUserServiceException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -17,12 +19,14 @@ public class UserService {
     private UserDao userDao;
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
     private PlatformTransactionManager transactionManager;
+    private MailSender mailSender;
 
     public UserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
-                       PlatformTransactionManager transactionManager) {
+                       PlatformTransactionManager transactionManager, MailSender mailSender) {
         this.userDao = userDao;
         this.userLevelUpgradePolicy = userLevelUpgradePolicy;
         this.transactionManager = transactionManager;
+        this.mailSender = mailSender;
     }
 
     public void upgradeLevels() {
@@ -55,14 +59,45 @@ public class UserService {
     protected void upgradeLevel(User user) {
         userLevelUpgradePolicy.upgradeLevel(user);
         userDao.update(user);
+        sendUpgradeEmail(user);
     }
+
+    // 스프링이 제공하는 메일 추상화
+    private void sendUpgradeEmail(User user) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(user.getEmail());
+        simpleMailMessage.setFrom("tobyPractise@gmail.com");
+        simpleMailMessage.setSubject("Upgrade 안내");
+        simpleMailMessage.setText(user.getName() + "님의 등급이 " + user.getLevel().name() + " 으로 업그레이드 됐습니다.");
+
+        mailSender.send(simpleMailMessage);
+    }
+
+    // 가장 전형적인 자바 메일 발송 코드
+//    private void sendUpgradeEmail(User user) {
+//        Properties props = new Properties();
+//        props.put("mail.smtp.host", "mail.ksug.org");
+//        Session session = Session.getInstance(props);
+//
+//        MimeMessage mimeMessage = new MimeMessage(session);
+//        try {
+//            mimeMessage.setFrom(new InternetAddress("admin@ksug.org"));
+//            mimeMessage.addRecipient(Message.RecipientType.TO,
+//                    new InternetAddress(user.getEmail()));
+//            mimeMessage.setSubject("Upgrade 안내");
+//            mimeMessage.setText(user.getName() + "님의 등급이 " + user.getLevel().name() + " 으로 업그레이드 됐습니다.");
+//            Transport.send(mimeMessage);
+//        } catch (MessagingException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     static class TestUserService extends UserService {
         private String id;
 
         public TestUserService(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
-                               PlatformTransactionManager transactionManager, String id) {
-            super(userDao, userLevelUpgradePolicy, transactionManager);
+                               PlatformTransactionManager transactionManager, MailSender mailSender, String id) {
+            super(userDao, userLevelUpgradePolicy, transactionManager, mailSender);
             this.id = id;
         }
 

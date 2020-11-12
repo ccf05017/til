@@ -10,11 +10,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestBeanConfiguration.class)
+@DirtiesContext // 스프링 컨텍스트를 수동으로 바꾼 부분이 있음을 명시
 class UserServiceTests {
     @Autowired
     private UserService userService;
@@ -36,10 +38,10 @@ class UserServiceTests {
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
 
     @Autowired
-    private DataSource dataSource;
+    private PlatformTransactionManager transactionManager;
 
     @Autowired
-    private PlatformTransactionManager transactionManager;
+    private MailSender mailSender;
 
     private List<User> users;
 
@@ -49,22 +51,27 @@ class UserServiceTests {
                 User.builder()
                         .id("11").name("poppo").password("p1").level(Level.BASIC)
                         .login(MIN_LOG_COUNT_FOR_SILVER - 1).recommend(0)
+                        .email("test1@gmail.com")
                         .build(),
                 User.builder()
                         .id("22").name("saul").password("p2").level(Level.BASIC)
                         .login(MIN_LOG_COUNT_FOR_SILVER).recommend(0)
+                        .email("test2@gmail.com")
                         .build(),
                 User.builder()
                         .id("33").name("ita").password("p3").level(Level.SILVER)
                         .login(60).recommend(MIN_RECOMMEND_FOR_GOLD - 1)
+                        .email("test3@gmail.com")
                         .build(),
                 User.builder()
                         .id("44").name("hoo").password("p4").level(Level.SILVER)
                         .login(60).recommend(MIN_RECOMMEND_FOR_GOLD)
+                        .email("test4@gmail.com")
                         .build(),
                 User.builder()
                         .id("55").name("nugu").password("p5").level(Level.GOLD)
                         .login(100).recommend(Integer.MAX_VALUE)
+                        .email("test5@gmail.com")
                         .build()
         );
     }
@@ -76,6 +83,10 @@ class UserServiceTests {
 
     @Test
     void upgradeLevel() {
+        MockMailSender mockMailSender = new MockMailSender();
+        UserService userService = new UserService(userDao, userLevelUpgradePolicy,
+                transactionManager, mockMailSender);
+
         userDao.deleteAll();
         for (User user : users) {
             userDao.add(user);
@@ -88,6 +99,11 @@ class UserServiceTests {
         checkLevelUpgraded(users.get(2), false);
         checkLevelUpgraded(users.get(3), true);
         checkLevelUpgraded(users.get(4), false);
+
+        List<String> requests = mockMailSender.getRequests();
+        assertThat(requests.size()).isEqualTo(2);
+        assertThat(requests.get(0)).isEqualTo(users.get(1).getEmail());
+        assertThat(requests.get(1)).isEqualTo(users.get(3).getEmail());
     }
 
     private void checkLevelUpgraded(User user, boolean upgraded) {
@@ -124,7 +140,7 @@ class UserServiceTests {
     @Test
     void allUpgradeOrNotTest() {
         UserService userService = new UserService.TestUserService(
-                userDao, userLevelUpgradePolicy, transactionManager, users.get(3).getId()
+                userDao, userLevelUpgradePolicy, transactionManager, mailSender, users.get(3).getId()
         );
 
         userDao.deleteAll();

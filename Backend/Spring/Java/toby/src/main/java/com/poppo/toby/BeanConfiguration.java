@@ -3,13 +3,14 @@ package com.poppo.toby;
 import com.poppo.toby.services.NormalUserLevelUpgradePolicy;
 import com.poppo.toby.services.UserLevelUpgradePolicy;
 import com.poppo.toby.services.UserService;
-import com.poppo.toby.userDao.NotBadUserDao;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.UserDaoJdbc;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -17,13 +18,8 @@ import javax.sql.DataSource;
 @Configuration
 public class BeanConfiguration {
     @Bean
-    public NotBadUserDao notBadUserDao() {
-        return new NotBadUserDao(dataSource());
-    }
-
-    @Bean
     public UserService userService() {
-        return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager());
+        return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager(), mailSender());
     }
 
     @Bean
@@ -39,6 +35,13 @@ public class BeanConfiguration {
     @Bean
     public UserDao userDao() {
         return new UserDaoJdbc(dataSource());
+    }
+
+    @Bean
+    public MailSender mailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("mail.server.com");
+        return mailSender;
     }
 
     @Bean
