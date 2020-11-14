@@ -1,8 +1,6 @@
 package com.poppo.toby;
 
-import com.poppo.toby.services.NormalUserLevelUpgradePolicy;
-import com.poppo.toby.services.UserLevelUpgradePolicy;
-import com.poppo.toby.services.UserService;
+import com.poppo.toby.services.*;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.UserDaoJdbc;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +17,7 @@ import javax.sql.DataSource;
 public class BeanConfiguration {
     @Bean
     public UserService userService() {
-        return new UserService(userDao(), userLevelUpgradePolicy(), transactionManager(), mailSender());
+        return new UserServiceTx(userServiceImpl(), transactionManager());
     }
 
     @Bean
@@ -42,6 +40,11 @@ public class BeanConfiguration {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("mail.server.com");
         return mailSender;
+    }
+
+    @Bean
+    public UserServiceImpl userServiceImpl() {
+        return new UserServiceImpl(userDao(), userLevelUpgradePolicy(), mailSender());
     }
 
     @Bean

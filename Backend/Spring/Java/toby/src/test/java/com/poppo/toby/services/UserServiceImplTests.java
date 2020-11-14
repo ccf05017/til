@@ -19,15 +19,15 @@ import org.springframework.transaction.PlatformTransactionManager;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.poppo.toby.services.UserService.MIN_LOG_COUNT_FOR_SILVER;
-import static com.poppo.toby.services.UserService.MIN_RECOMMEND_FOR_GOLD;
+import static com.poppo.toby.services.UserServiceImpl.MIN_LOG_COUNT_FOR_SILVER;
+import static com.poppo.toby.services.UserServiceImpl.MIN_RECOMMEND_FOR_GOLD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestBeanConfiguration.class)
 @DirtiesContext // 스프링 컨텍스트를 수동으로 바꾼 부분이 있음을 명시
-class UserServiceTests {
+class UserServiceImplTests {
     @Autowired
     private UserService userService;
 
@@ -84,15 +84,14 @@ class UserServiceTests {
     @Test
     void upgradeLevel() {
         MockMailSender mockMailSender = new MockMailSender();
-        UserService userService = new UserService(userDao, userLevelUpgradePolicy,
-                transactionManager, mockMailSender);
+        UserServiceImpl userServiceImpl = new UserServiceImpl(userDao, userLevelUpgradePolicy, mockMailSender);
 
         userDao.deleteAll();
         for (User user : users) {
             userDao.add(user);
         }
 
-        userService.upgradeLevels();
+        userServiceImpl.upgradeLevels();
 
         checkLevelUpgraded(users.get(0), false);
         checkLevelUpgraded(users.get(1), true);
@@ -139,9 +138,11 @@ class UserServiceTests {
     @DisplayName("트랜잭션 원자성 테스트")
     @Test
     void allUpgradeOrNotTest() {
-        UserService userService = new UserService.TestUserService(
-                userDao, userLevelUpgradePolicy, transactionManager, mailSender, users.get(3).getId()
+        UserServiceImpl testUserServiceImpl = new UserServiceImpl.TestUserServiceImpl(
+                userDao, userLevelUpgradePolicy, mailSender, users.get(3).getId()
         );
+
+        UserService testUserService = new UserServiceTx(testUserServiceImpl, transactionManager);
 
         userDao.deleteAll();
 
@@ -149,7 +150,7 @@ class UserServiceTests {
             userDao.add(user);
         }
 
-        assertThatThrownBy(userService::upgradeLevels).isInstanceOf(TestUserServiceException.class);
+        assertThatThrownBy(testUserService::upgradeLevels).isInstanceOf(TestUserServiceException.class);
 
         checkLevelUpgraded(users.get(1), false);
     }
