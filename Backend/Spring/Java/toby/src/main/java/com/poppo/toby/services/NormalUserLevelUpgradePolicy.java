@@ -3,8 +3,8 @@ package com.poppo.toby.services;
 import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 
-import static com.poppo.toby.services.UserService.MIN_LOG_COUNT_FOR_SILVER;
-import static com.poppo.toby.services.UserService.MIN_RECOMMEND_FOR_GOLD;
+import static com.poppo.toby.services.UserServiceImpl.MIN_LOG_COUNT_FOR_SILVER;
+import static com.poppo.toby.services.UserServiceImpl.MIN_RECOMMEND_FOR_GOLD;
 
 public class NormalUserLevelUpgradePolicy implements UserLevelUpgradePolicy {
 
