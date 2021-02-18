@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserServiceTx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/UserServiceTx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/CalculatorSampleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/calculator/CalculatorSampleTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +165,97 @@
       <command value="TestAll" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestAll">
+  <component name="RunManager" selected="JUnit.DynamicProxyTest.simpleTest">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DynamicProxyTest.simpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.simpleSamples.proxy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples.proxy" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.proxy.DynamicProxyTest" />
+      <option name="METHOD_NAME" value="simpleTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloTargetTest.simpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.simpleSamples.proxy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples.proxy" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.proxy.HelloTargetTest" />
+      <option name="METHOD_NAME" value="simpleTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloUpperCaseTest.simpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.simpleSamples.proxy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples.proxy" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.proxy.HelloUpperCaseTest" />
+      <option name="METHOD_NAME" value="simpleTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReflectionLearningTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.learning.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.learning" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.learning.ReflectionLearningTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReflectionLearningTest.charAtTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.learning.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.learning" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.learning.ReflectionLearningTest" />
+      <option name="METHOD_NAME" value="charAtTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestAll" type="JUnit" factoryName="JUnit">
       <useClassPathOnly />
       <extension name="net.ashald.envfile">
@@ -187,96 +280,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDaoJdbcTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.userDao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.userDao" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.userDao.UserDaoJdbcTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceImplTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <useClassPathOnly />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceImplTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceImplTests.allUpgradeOrNotTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceImplTests" />
-      <option name="METHOD_NAME" value="allUpgradeOrNotTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceImplTests.upgradeLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceImplTests" />
-      <option name="METHOD_NAME" value="upgradeLevel" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.domain" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.domain.UserTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TobyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="toby.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.poppo.toby.TobyApplication" />
@@ -286,20 +289,20 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.TestAll" />
-      <item itemvalue="JUnit.UserTests" />
-      <item itemvalue="JUnit.UserDaoJdbcTests" />
-      <item itemvalue="JUnit.UserServiceImplTests" />
-      <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
-      <item itemvalue="JUnit.UserServiceImplTests.upgradeLevel" />
       <item itemvalue="Spring Boot.TobyApplication" />
+      <item itemvalue="JUnit.ReflectionLearningTest.charAtTest" />
+      <item itemvalue="JUnit.ReflectionLearningTest" />
+      <item itemvalue="JUnit.HelloTargetTest.simpleTest" />
+      <item itemvalue="JUnit.HelloUpperCaseTest.simpleTest" />
+      <item itemvalue="JUnit.DynamicProxyTest.simpleTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserServiceImplTests.upgradeLevel" />
-        <item itemvalue="JUnit.UserServiceImplTests" />
-        <item itemvalue="JUnit.UserDaoJdbcTests" />
-        <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
-        <item itemvalue="JUnit.UserTests" />
+        <item itemvalue="JUnit.DynamicProxyTest.simpleTest" />
+        <item itemvalue="JUnit.HelloTargetTest.simpleTest" />
+        <item itemvalue="JUnit.HelloUpperCaseTest.simpleTest" />
+        <item itemvalue="JUnit.ReflectionLearningTest" />
+        <item itemvalue="JUnit.ReflectionLearningTest.charAtTest" />
       </list>
     </recent_temporary>
   </component>
@@ -349,10 +352,22 @@
       <workItem from="1610580845947" duration="812000" />
       <workItem from="1610581679003" duration="3181000" />
       <workItem from="1613518602175" duration="1985000" />
+      <workItem from="1613604838641" duration="3252000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

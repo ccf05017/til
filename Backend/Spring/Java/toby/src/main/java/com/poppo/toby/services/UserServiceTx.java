@@ -16,6 +16,7 @@ public class UserServiceTx implements UserService {
 
     @Override
     public void add(User user) {
+        // 위임
         userService.add(user);
     }
 
@@ -24,6 +25,7 @@ public class UserServiceTx implements UserService {
         TransactionStatus transactionStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
+            // 위임
             userService.upgradeLevels();
             transactionManager.commit(transactionStatus);
         } catch (RuntimeException e) {
