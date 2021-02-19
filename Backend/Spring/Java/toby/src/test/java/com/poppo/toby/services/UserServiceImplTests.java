@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.List;
 
@@ -138,18 +139,27 @@ class UserServiceImplTests {
     @DisplayName("트랜잭션 원자성 테스트")
     @Test
     void allUpgradeOrNotTest() {
+        // given
         UserServiceImpl testUserServiceImpl = new UserServiceImpl.TestUserServiceImpl(
                 userDao, userLevelUpgradePolicy, mailSender, users.get(3).getId()
         );
-
-        UserService testUserService = new UserServiceTx(testUserServiceImpl, transactionManager);
-
+        // 수동 프록시 방식
+//        UserService testUserService = new UserServiceTx(testUserServiceImpl, transactionManager);
+        // 다이내믹 프록시 방식
+        TransactionHandler transactionHandler =
+                new TransactionHandler(transactionManager, testUserServiceImpl, "upgradeLevels");
+        UserService testUserService = (UserService) Proxy.newProxyInstance(
+                getClass().getClassLoader(),
+                new Class[] { UserService.class },
+                transactionHandler
+        );
+        // 테스트용 fixture 처리
         userDao.deleteAll();
-
         for (User user : users) {
             userDao.add(user);
         }
 
+        // when, then
         assertThatThrownBy(testUserService::upgradeLevels).isInstanceOf(TestUserServiceException.class);
 
         checkLevelUpgraded(users.get(1), false);
