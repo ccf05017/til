@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/poppo/toby/services/TransactionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/learning/factroybean/FactoryBeanExampleConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/learning/factroybean/FactoryBeanTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/learning/factroybean/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/learning/factroybean/MessageFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceImplTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,19 +163,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.FactoryBeanTest">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DynamicProxyTest.simpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
@@ -297,10 +277,10 @@
       <item itemvalue="JUnit.TestAll" />
       <item itemvalue="JUnit.HelloTargetTest.simpleTest" />
       <item itemvalue="JUnit.DynamicProxyTest.simpleTest" />
-      <item itemvalue="Spring Boot.TobyApplication" />
       <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
       <item itemvalue="JUnit.FactoryBeanTest.getMessageTest" />
       <item itemvalue="JUnit.FactoryBeanTest" />
+      <item itemvalue="Spring Boot.TobyApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -359,7 +339,7 @@
       <workItem from="1610581679003" duration="3181000" />
       <workItem from="1613518602175" duration="1985000" />
       <workItem from="1613604838641" duration="3252000" />
-      <workItem from="1613691321883" duration="3028000" />
+      <workItem from="1613691321883" duration="3834000" />
     </task>
     <servers />
   </component>
