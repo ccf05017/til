@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/proxy/DynamicProxyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/proxy/DynamicProxyTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
