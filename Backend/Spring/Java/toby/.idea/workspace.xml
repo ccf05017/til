@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +162,18 @@
       <command value="TestAll" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FactoryBeanTest">
+  <component name="RunManager" selected="JUnit.UserServiceImplTests">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DynamicProxyTest.simpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
@@ -210,22 +221,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HelloTargetTest.simpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="toby.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.poppo.toby.simpleSamples.proxy.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples.proxy" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.proxy.HelloTargetTest" />
-      <option name="METHOD_NAME" value="simpleTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestAll" type="JUnit" factoryName="JUnit">
       <useClassPathOnly />
       <extension name="net.ashald.envfile">
@@ -246,6 +241,21 @@
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="wholeProject" />
       </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImplTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="toby.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.poppo.toby.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.poppo.toby.services" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.services.UserServiceImplTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -275,20 +285,20 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.TestAll" />
-      <item itemvalue="JUnit.HelloTargetTest.simpleTest" />
       <item itemvalue="JUnit.DynamicProxyTest.simpleTest" />
       <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
       <item itemvalue="JUnit.FactoryBeanTest.getMessageTest" />
       <item itemvalue="JUnit.FactoryBeanTest" />
       <item itemvalue="Spring Boot.TobyApplication" />
+      <item itemvalue="JUnit.UserServiceImplTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserServiceImplTests" />
         <item itemvalue="JUnit.FactoryBeanTest" />
         <item itemvalue="JUnit.FactoryBeanTest.getMessageTest" />
         <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
         <item itemvalue="JUnit.DynamicProxyTest.simpleTest" />
-        <item itemvalue="JUnit.HelloTargetTest.simpleTest" />
       </list>
     </recent_temporary>
   </component>
@@ -340,6 +350,7 @@
       <workItem from="1613518602175" duration="1985000" />
       <workItem from="1613604838641" duration="3252000" />
       <workItem from="1613691321883" duration="3834000" />
+      <workItem from="1613997244236" duration="714000" />
     </task>
     <servers />
   </component>
