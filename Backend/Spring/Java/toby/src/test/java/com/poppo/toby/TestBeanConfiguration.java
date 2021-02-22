@@ -14,9 +14,14 @@ import javax.sql.DataSource;
 
 @Configuration
 public class TestBeanConfiguration {
+    @Bean(name = "userService")
+    public TxProxyFactoryBean txProxyFactoryBean() {
+        return new TxProxyFactoryBean(transactionManager(), userServiceImpl(), "upgradeLevels", UserService.class);
+    }
+
     @Bean
-    public UserService userService() {
-        return new UserServiceTx(userServiceImpl(), transactionManager());
+    public Object userService() throws Exception {
+        return txProxyFactoryBean().getObject();
     }
 
     @Bean
