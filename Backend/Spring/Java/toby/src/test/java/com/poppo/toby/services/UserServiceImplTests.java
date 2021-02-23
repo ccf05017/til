@@ -9,14 +9,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mail.MailSender;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,6 +44,9 @@ class UserServiceImplTests {
 
     @Autowired
     private MailSender mailSender;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     private List<User> users;
 
@@ -137,6 +141,7 @@ class UserServiceImplTests {
     }
 
     @DisplayName("트랜잭션 원자성 테스트")
+    @DirtiesContext
     @Test
     void allUpgradeOrNotTest() {
         // given
@@ -146,13 +151,18 @@ class UserServiceImplTests {
         // 수동 프록시 방식
 //        UserService testUserService = new UserServiceTx(testUserServiceImpl, transactionManager);
         // 다이내믹 프록시 방식
-        TransactionHandler transactionHandler =
-                new TransactionHandler(transactionManager, testUserServiceImpl, "upgradeLevels");
-        UserService testUserService = (UserService) Proxy.newProxyInstance(
-                getClass().getClassLoader(),
-                new Class[] { UserService.class },
-                transactionHandler
-        );
+//        TransactionHandler transactionHandler =
+//                new TransactionHandler(transactionManager, testUserServiceImpl, "upgradeLevels");
+//        UserService testUserService = (UserService) Proxy.newProxyInstance(
+//                getClass().getClassLoader(),
+//                new Class[] { UserService.class },
+//                transactionHandler
+//        );
+        // 스프링 다이내믹 프록시 방식
+        ProxyFactoryBean proxyFactoryBean = applicationContext.getBean("&userService", ProxyFactoryBean.class);
+        proxyFactoryBean.setTarget(testUserServiceImpl);
+        UserService testUserService = (UserService) proxyFactoryBean.getObject();
+
         // 테스트용 fixture 처리
         userDao.deleteAll();
         for (User user : users) {
