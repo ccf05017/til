@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/proxy/DynamicProxyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/proxy/DynamicProxyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +162,7 @@
       <command value="TestAll" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DynamicProxyTest">
+  <component name="RunManager" selected="JUnit.TestAll">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -296,9 +295,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserServiceImplTests" />
         <item itemvalue="JUnit.DynamicProxyTest" />
         <item itemvalue="JUnit.DynamicProxyTest.useProxyFactoryBean" />
-        <item itemvalue="JUnit.UserServiceImplTests" />
         <item itemvalue="JUnit.FactoryBeanTest" />
         <item itemvalue="JUnit.FactoryBeanTest.getMessageTest" />
       </list>
@@ -353,7 +352,7 @@
       <workItem from="1613604838641" duration="3252000" />
       <workItem from="1613691321883" duration="3834000" />
       <workItem from="1613997244236" duration="2065000" />
-      <workItem from="1614035225284" duration="423000" />
+      <workItem from="1614035225284" duration="1042000" />
     </task>
     <servers />
   </component>
