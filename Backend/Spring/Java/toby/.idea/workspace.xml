@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="" />
+    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/proxy/DynamicProxyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/simpleSamples/proxy/DynamicProxyTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -161,13 +164,15 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.DynamicProxyTest">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -284,10 +289,10 @@
       <item itemvalue="JUnit.TestAll" />
       <item itemvalue="JUnit.FactoryBeanTest.getMessageTest" />
       <item itemvalue="JUnit.FactoryBeanTest" />
-      <item itemvalue="Spring Boot.TobyApplication" />
       <item itemvalue="JUnit.UserServiceImplTests" />
       <item itemvalue="JUnit.DynamicProxyTest.useProxyFactoryBean" />
       <item itemvalue="JUnit.DynamicProxyTest" />
+      <item itemvalue="Spring Boot.TobyApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -348,6 +353,7 @@
       <workItem from="1613604838641" duration="3252000" />
       <workItem from="1613691321883" duration="3834000" />
       <workItem from="1613997244236" duration="2065000" />
+      <workItem from="1614035225284" duration="423000" />
     </task>
     <servers />
   </component>
