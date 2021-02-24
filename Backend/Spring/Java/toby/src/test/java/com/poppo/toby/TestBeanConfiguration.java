@@ -3,9 +3,8 @@ package com.poppo.toby;
 import com.poppo.toby.services.*;
 import com.poppo.toby.userDao.UserDao;
 import com.poppo.toby.userDao.UserDaoJdbc;
-import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
-import org.springframework.aop.support.NameMatchMethodPointcut;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -17,28 +16,28 @@ import javax.sql.DataSource;
 
 @Configuration
 public class TestBeanConfiguration {
-    @Bean(name = "userService")
-    public ProxyFactoryBean txProxyFactoryBean() {
-        ProxyFactoryBean proxyFactoryBean = new ProxyFactoryBean();
-        proxyFactoryBean.addAdvisor(transactionAdvisor());
-        return proxyFactoryBean;
+    @Bean
+    public NameMatchClassMethodPointcut transactionPointcut() {
+        NameMatchClassMethodPointcut nameMatchClassMethodPointcut = new NameMatchClassMethodPointcut();
+        nameMatchClassMethodPointcut.setMappedClassName("*ServiceImpl");
+        nameMatchClassMethodPointcut.setMappedName("upgrade*");
+
+        return nameMatchClassMethodPointcut;
     }
 
     @Bean
-    public Object userService() throws Exception {
-        return txProxyFactoryBean().getObject();
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        return new DefaultAdvisorAutoProxyCreator();
+    }
+
+    @Bean
+    public UserServiceImpl userService() {
+        return new UserServiceImpl(userDao(), userLevelUpgradePolicy(), mailSender());
     }
 
     @Bean
     public TransactionAdvice transactionAdvice() {
         return new TransactionAdvice(transactionManager());
-    }
-
-    @Bean
-    public NameMatchMethodPointcut transactionPointcut() {
-        NameMatchMethodPointcut nameMatchMethodPointcut = new NameMatchMethodPointcut();
-        nameMatchMethodPointcut.addMethodName("upgrade*");
-        return nameMatchMethodPointcut;
     }
 
     @Bean
