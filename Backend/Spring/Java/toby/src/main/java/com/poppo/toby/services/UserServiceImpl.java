@@ -3,7 +3,6 @@ package com.poppo.toby.services;
 import com.poppo.toby.domain.Level;
 import com.poppo.toby.domain.User;
 import com.poppo.toby.userDao.UserDao;
-import com.poppo.toby.userDao.exceptions.TestUserServiceException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -78,22 +77,4 @@ public class UserServiceImpl implements UserService {
 //            throw new RuntimeException(e);
 //        }
 //    }
-
-    static class TestUserServiceImpl extends UserServiceImpl {
-        private String id;
-
-        public TestUserServiceImpl(UserDao userDao, UserLevelUpgradePolicy userLevelUpgradePolicy,
-                                   MailSender mailSender, String id) {
-            super(userDao, userLevelUpgradePolicy, mailSender);
-            this.id = id;
-        }
-
-        @Override
-        protected void upgradeLevel(User user) {
-            if (user.getId().equals(id)) {
-                throw new TestUserServiceException();
-            }
-            super.upgradeLevel(user);
-        }
-    }
 }

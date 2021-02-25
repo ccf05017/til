@@ -17,6 +17,11 @@ import javax.sql.DataSource;
 @Configuration
 public class TestBeanConfiguration {
     @Bean
+    public UserService testUserServiceImpl() {
+        return new TestUserServiceImpl(userDao(), userLevelUpgradePolicy(), mailSender());
+    }
+
+    @Bean
     public NameMatchClassMethodPointcut transactionPointcut() {
         NameMatchClassMethodPointcut nameMatchClassMethodPointcut = new NameMatchClassMethodPointcut();
         nameMatchClassMethodPointcut.setMappedClassName("*ServiceImpl");
@@ -31,7 +36,7 @@ public class TestBeanConfiguration {
     }
 
     @Bean
-    public UserServiceImpl userService() {
+    public UserService userService() {
         return new UserServiceImpl(userDao(), userLevelUpgradePolicy(), mailSender());
     }
 
