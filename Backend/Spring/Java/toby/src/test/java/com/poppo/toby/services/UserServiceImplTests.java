@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mail.MailSender;
@@ -32,6 +31,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class UserServiceImplTests {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserService testUserServiceImpl;
 
     @Autowired
     private UserDao userDao;
@@ -144,10 +146,6 @@ class UserServiceImplTests {
     @DirtiesContext
     @Test
     void allUpgradeOrNotTest() {
-        // given
-        UserServiceImpl testUserServiceImpl = new UserServiceImpl.TestUserServiceImpl(
-                userDao, userLevelUpgradePolicy, mailSender, users.get(3).getId()
-        );
         // 수동 프록시 방식
 //        UserService testUserService = new UserServiceTx(testUserServiceImpl, transactionManager);
         // 다이내믹 프록시 방식
@@ -159,9 +157,9 @@ class UserServiceImplTests {
 //                transactionHandler
 //        );
         // 스프링 다이내믹 프록시 방식
-        ProxyFactoryBean proxyFactoryBean = applicationContext.getBean("&userService", ProxyFactoryBean.class);
-        proxyFactoryBean.setTarget(testUserServiceImpl);
-        UserService testUserService = (UserService) proxyFactoryBean.getObject();
+//        ProxyFactoryBean proxyFactoryBean = applicationContext.getBean("&userService", ProxyFactoryBean.class);
+//        proxyFactoryBean.setTarget(testUserServiceImpl);
+//        UserService testUserService = (UserService) proxyFactoryBean.getObject();
 
         // 테스트용 fixture 처리
         userDao.deleteAll();
@@ -170,7 +168,7 @@ class UserServiceImplTests {
         }
 
         // when, then
-        assertThatThrownBy(testUserService::upgradeLevels).isInstanceOf(TestUserServiceException.class);
+        assertThatThrownBy(testUserServiceImpl::upgradeLevels).isInstanceOf(TestUserServiceException.class);
 
         checkLevelUpgraded(users.get(1), false);
     }
