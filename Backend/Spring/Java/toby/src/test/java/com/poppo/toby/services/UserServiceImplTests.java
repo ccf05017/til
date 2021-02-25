@@ -10,13 +10,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.mail.MailSender;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.PlatformTransactionManager;
 
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,15 +38,6 @@ class UserServiceImplTests {
 
     @Autowired
     private UserLevelUpgradePolicy userLevelUpgradePolicy;
-
-    @Autowired
-    private PlatformTransactionManager transactionManager;
-
-    @Autowired
-    private MailSender mailSender;
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     private List<User> users;
 
@@ -171,5 +160,11 @@ class UserServiceImplTests {
         assertThatThrownBy(testUserServiceImpl::upgradeLevels).isInstanceOf(TestUserServiceException.class);
 
         checkLevelUpgraded(users.get(1), false);
+    }
+
+    @DisplayName("자동 생성된 프록시 타입 확인")
+    @Test
+    void checkIsProxy() {
+        assertThat(testUserServiceImpl).isInstanceOf(Proxy.class);
     }
 }
