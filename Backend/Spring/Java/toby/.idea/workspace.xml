@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/TestUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/TestUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/services/UserServiceImplTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,19 +163,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.UserServiceImplTests.checkIsProxy">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DynamicProxyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
@@ -294,8 +278,8 @@
       <item itemvalue="JUnit.DynamicProxyTest.useProxyFactoryBean" />
       <item itemvalue="JUnit.DynamicProxyTest" />
       <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
-      <item itemvalue="Spring Boot.TobyApplication" />
       <item itemvalue="JUnit.UserServiceImplTests.checkIsProxy" />
+      <item itemvalue="Spring Boot.TobyApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -359,6 +343,7 @@
       <workItem from="1614035225284" duration="1576000" />
       <workItem from="1614125819166" duration="2835000" />
       <workItem from="1614210067101" duration="3816000" />
+      <workItem from="1614293977278" duration="673000" />
     </task>
     <servers />
   </component>
