@@ -1,4 +1,4 @@
-package com.poppo.toby.simpleSamples.pointcutExrpession;
+package com.poppo.toby.simpleSamples.pointcutExpression;
 
 public interface PointCutTestInterface {
     void hello();
