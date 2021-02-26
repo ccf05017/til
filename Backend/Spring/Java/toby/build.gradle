@@ -31,6 +31,8 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.3.3.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version: '5.2.8.RELEASE'
 
+    // 포인트컷 표현식 테스트를 하기 위해 추가한 의존성
+    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.6'
 }
 
 test {

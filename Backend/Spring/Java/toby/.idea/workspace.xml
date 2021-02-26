@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -162,7 +160,20 @@
       <command value="TestAll" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserServiceImplTests.checkIsProxy">
+  <component name="RunManager" selected="JUnit.PointCutTest.pointCutExpressionTest">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DynamicProxyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
@@ -178,17 +189,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DynamicProxyTest.useProxyFactoryBean" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PointCutTest.pointCutExpressionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.poppo.toby.simpleSamples.proxy.*" />
+          <option name="PATTERN" value="com.poppo.toby.simpleSamples.pointcutExpression.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples.proxy" />
-      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.proxy.DynamicProxyTest" />
-      <option name="METHOD_NAME" value="useProxyFactoryBean" />
+      <option name="PACKAGE_NAME" value="com.poppo.toby.simpleSamples.pointcutExpression" />
+      <option name="MAIN_CLASS_NAME" value="com.poppo.toby.simpleSamples.pointcutExpression.PointCutTest" />
+      <option name="METHOD_NAME" value="pointCutExpressionTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -275,19 +286,19 @@
     <list>
       <item itemvalue="JUnit.TestAll" />
       <item itemvalue="JUnit.UserServiceImplTests" />
-      <item itemvalue="JUnit.DynamicProxyTest.useProxyFactoryBean" />
       <item itemvalue="JUnit.DynamicProxyTest" />
       <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
       <item itemvalue="JUnit.UserServiceImplTests.checkIsProxy" />
+      <item itemvalue="JUnit.PointCutTest.pointCutExpressionTest" />
       <item itemvalue="Spring Boot.TobyApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PointCutTest.pointCutExpressionTest" />
         <item itemvalue="JUnit.UserServiceImplTests.checkIsProxy" />
         <item itemvalue="JUnit.UserServiceImplTests.allUpgradeOrNotTest" />
         <item itemvalue="JUnit.UserServiceImplTests" />
         <item itemvalue="JUnit.DynamicProxyTest" />
-        <item itemvalue="JUnit.DynamicProxyTest.useProxyFactoryBean" />
       </list>
     </recent_temporary>
   </component>
@@ -343,7 +354,9 @@
       <workItem from="1614035225284" duration="1576000" />
       <workItem from="1614125819166" duration="2835000" />
       <workItem from="1614210067101" duration="3816000" />
-      <workItem from="1614293977278" duration="673000" />
+      <workItem from="1614293977278" duration="790000" />
+      <workItem from="1614297241091" duration="1001000" />
+      <workItem from="1614298371710" duration="420000" />
     </task>
     <servers />
   </component>
