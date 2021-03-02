@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/poppo/toby/TestBeanConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,7 +358,7 @@
       <workItem from="1614297241091" duration="1001000" />
       <workItem from="1614298371710" duration="1276000" />
       <workItem from="1614477633041" duration="2924000" />
-      <workItem from="1614641397908" duration="2563000" />
+      <workItem from="1614641397908" duration="2894000" />
     </task>
     <servers />
   </component>
