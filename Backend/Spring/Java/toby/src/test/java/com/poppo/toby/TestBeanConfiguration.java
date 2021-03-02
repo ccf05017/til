@@ -10,7 +10,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.mail.MailSender;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
+import org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 import javax.sql.DataSource;
 
@@ -41,8 +45,26 @@ public class TestBeanConfiguration {
     }
 
     @Bean
-    public TransactionAdvice transactionAdvice() {
-        return new TransactionAdvice(transactionManager());
+    public TransactionInterceptor transactionAdvice() {
+        NameMatchTransactionAttributeSource transactionAttributeSource = new NameMatchTransactionAttributeSource();
+
+        DefaultTransactionAttribute getTransactionAttribute = new DefaultTransactionAttribute();
+        getTransactionAttribute.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        getTransactionAttribute.setReadOnly(true);
+        getTransactionAttribute.setTimeout(30);
+
+        DefaultTransactionAttribute upgradeTransactionAttribute = new DefaultTransactionAttribute();
+        upgradeTransactionAttribute.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        upgradeTransactionAttribute.setIsolationLevel(TransactionDefinition.ISOLATION_SERIALIZABLE);
+
+        DefaultTransactionAttribute defaultTransactionAttribute = new DefaultTransactionAttribute();
+        getTransactionAttribute.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+
+        transactionAttributeSource.addTransactionalMethod("get*", getTransactionAttribute);
+        transactionAttributeSource.addTransactionalMethod("upgrade*", upgradeTransactionAttribute);
+        transactionAttributeSource.addTransactionalMethod("*", defaultTransactionAttribute);
+
+        return new TransactionInterceptor(transactionManager(), transactionAttributeSource);
     }
 
     @Bean
@@ -51,7 +73,7 @@ public class TestBeanConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public TransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 

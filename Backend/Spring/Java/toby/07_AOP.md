@@ -241,3 +241,26 @@ public ProxyFactoryBean txProxyFactoryBean() {
 - 위의 네가지 주요 속성을 조정한 TransactionDefinition을 빈으로 등록하고 Transaction 부가 기능에 적용할 수 있다.
 - 문제는 그렇게 되면 Transaction 부가 기능을 사용하는 모든 코드가 해당 Transaction 설정으로 동작한다.
   - 일부만 따로 설정하고 싶으면 어떡하지?
+- 트랜잭션 인터셉터
+  - 일부 트랜잭션에 대해서만 다른 설정을 적용하고 싶을 때 사용한다.
+  - Transaction Advisor의 기능을 포함하기 때문에 인터셉터 사용 시 굳이 Advisor를 사용할 필요가 없다.
+  - PlatformTransactionManager와 Properties(transactionAttributes)를 프로퍼티로 갖는다. (토비의 스프링 기준)
+    - transactionAttributes 
+      - 트랜잭션 관련 모든 속성과 롤백 방식을 제어할 수 있다.
+      - key, map으로 이루어진 일종의 맵 자료구조
+      - 적용 대상 메서드 패턴을 key로 갖는다.
+      - Propagation Name, Isolation Name, readOnly, timeout_NNNN, -Exception1, -Exception2의 문자열 패턴을 값으로 갖는다.
+      - Propagation Name 외에는 모두 옵션값으로 생략 가능하다.
+  - 문서작성일 기준으로 SpringBoot에서 Properties를 사용하는 방식은 deprecated 됐다.
+    - 현재는 TransactionManager, TransactionAttributeSource를 프로퍼티로 사용하는 걸 권장한다.
+    - 해당 방법 관련 사용법은 예제 코드에 정리되어 있다.
+- 스프링 트랜잭션의 롤백 방식
+  - 스프링은 기본적으로 런타임 예외는 롤백시키지만 체크 예외는 롤백시키지 않는다.
+  - 스프링의 기본 바탕에 체크 예외는 비즈니스적으로 의미가 있는 예외로 취급한다는 생각이 있기 때문이다.
+  - 트랜잭션 인터셉터 설정을 통해 이런 기본 롤백 방식도 변경 가능하다. (체크 예외 중 일부를 롤백시킨다던가 하는 방식으로)
+- Transaction readOnly 속성의 주의사항
+  - readOnly 속성은 트랜잭션이 시작되는 경우에만 적용된다.
+  - 예를 들어 업데이트를 실행하는 transaction 적용 메서드 안에서 readOnly 트랜잭션을 PROPAGATION_REQUIRED로 시작해도 수정 작업이 진행된다.
+    - readOnly 속성으로 트랜잭션이 시작되지 않았기 때문이다.
+  - 반대의 경우는 적용되지 않는다.
+  - 오류가 발생하기 쉬운 매우 중요한 사항이니 꼭 알고 있어야 한다.
