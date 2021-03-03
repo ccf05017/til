@@ -163,17 +163,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.UserServiceImplTests">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DynamicProxyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="toby.test" />
       <extension name="coverage">
@@ -359,6 +348,7 @@
       <workItem from="1614298371710" duration="1276000" />
       <workItem from="1614477633041" duration="2924000" />
       <workItem from="1614641397908" duration="2894000" />
+      <workItem from="1614728417064" duration="566000" />
     </task>
     <servers />
   </component>
