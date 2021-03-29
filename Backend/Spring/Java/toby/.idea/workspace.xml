@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="" />
+    <list default="true" id="38a4e59c-2384-4d0c-8dba-a44f3114bda1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/07_AOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/07_AOP.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,7 +137,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -348,6 +354,7 @@
       <workItem from="1614641397908" duration="2894000" />
       <workItem from="1614728417064" duration="1230000" />
       <workItem from="1616502622556" duration="2095000" />
+      <workItem from="1616976458678" duration="1061000" />
     </task>
     <servers />
   </component>
@@ -365,5 +372,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="469" y="188" key="SettingsEditor" timestamp="1616977283400">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="469" y="188" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1616977283400" />
   </component>
 </project>
